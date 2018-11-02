@@ -5,7 +5,7 @@
 #include <vector>
 #include "Date.h"
 #include "Interval.h"
-//#include "User.h"
+#include "User.h"
 //#include "Player_Session.h"
 
 using namespace std;
@@ -99,6 +99,12 @@ public:
 	*/
 	vector<unsigned int> getPriceHist() const;
 
+	/**
+	* @brief Overload do operador == para jogos
+	* @return Retorna true se o id dos dois jogos for igual e false caso contrario
+	*/
+	bool operator==(Game &game);
+
 };
 
 class Online : public Game
@@ -134,4 +140,5 @@ private:
 public:
 
 };
+
 
