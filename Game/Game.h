@@ -15,13 +15,14 @@ class Game
 private:
 	unsigned int id;						//identificador único
 	string title;							//nome
-	unsigned int price;						//preco de aquisicao
+	double price;							//preco de aquisicao
 	Date release;							//data de lancamento
 	Interval age_range;						//intervalo de idades
 	vector<string> platform;				//plataformas disponiveis
-	char genre;								//genero
+	vector<string> genre;					//genero
 	string developer;						//empresa que o desenvolveu
-	vector<unsigned int> price_history;		//historial de precos de aquisicao
+	vector<double> price_history;			//historial de precos de aquisicao
+	vector<User*> users;
 public:
 
 	/**
@@ -31,10 +32,10 @@ public:
 	* @param release - data de lancamento do jogo
 	* @param age_range - faixa etaria a que se tem de pertencer para se poder jogar 
 	* @param platform - vetor de plataformas para as quais o jogo se encontra disponivel
-	* @param genre - genero (F ou M) ao qual o jogo se destina (preferencialmente)
+	* @param genre - vetor de generos dos jogos
 	* @param developer - empresa respnsavel pela criacao do jogo
 	*/
-	Game(string title, unsigned int price, Date release, Interval age_range, vector<string> platform, char genre, string developer);
+	Game(string title, double price, Date release, Interval age_range, vector<string> platform, vector<string> genre, string developer);
 
 	/**
 	* @brief Membro-funcao que retorna o identificador único de um jogo
@@ -52,7 +53,13 @@ public:
 	* @brief Membro-funcao que retorna o preco de aquisicao de um jogo
 	* @return Retorna o preco de aquisicao de um jogo
 	*/
-	unsigned int getPrice() const;
+	double getPrice() const;
+
+	/**
+	* @brief Membro-funcao que retorna o preco de aquisicao base de um jogo
+	* @return Retorna o preco de aquisicao base de um jogo
+	*/
+	double getBasePrice() const;
 
 	/**
 	* @brief Membro-funcao que retorna a data de lancamento de um jogo
@@ -73,10 +80,10 @@ public:
 	vector<string> getPlatforms() const;
 
 	/**
-	* @brief Membro-funcao que retorna um caracter correspondente ao genero a que o jogo se destina
-	* @return Retorna um caracter corrspondente ao genero
+	* @brief Membro-funcao que retorna um vetor de strings correspondentes aos generos dos jogos
+	* @return Retorna um vetor de strings correspondentes aos generos dos jogos
 	*/
-	char getGenre() const;
+	vector<string> getGenre() const;
 
 	/**
 	* @brief Membro-funcao que retorna uma string correspondente ao nome da empresa que desenvolveu o jogo
@@ -125,3 +132,4 @@ private:
 public:
 
 };
+
