@@ -3,11 +3,13 @@
 
 #define ASCII_0 48 //corresponde ao valor de '0' na tabela ASCII
 
-bool Card::check_validity()
+bool Card::checkValidity()
 /* Esta função utiliza o algoritmo de Luhn para verificar se o número do cartão é válido */
 {
-	if (card_number.length() != 16)
-		return false;
+	if (card_number.length() != 16) {
+		valid = false;
+		return;
+	}
 	int sum = 0;
 	for (int i = card_number.length() - 1; i>=0; i += -2)
 		sum += (int)(card_number[i] - ASCII_0);
@@ -19,29 +21,30 @@ bool Card::check_validity()
 		sum += value;
 	}
 	if (sum % 10)
-		return false;
+		valid = false;
 	else
-		return true;
+		valid = true;
+	return;
 }
 
 Card::Card(string number)
 {
 	card_number = number;
-	valid = check_validity();
+	check_validity();
 	balance = 0;
 }
 
 Card::Card(string number, int bal)
 {
 	card_number = number;
-	valid = check_validity();
+	check_validity();
 	if (valid)
 		balance = bal;
 	else
 		balance = 0;
 }
 
-bool Card::set_balance(int bal)
+bool Card::setBalance(int bal)
 {
 	if (valid)
 	{
@@ -51,17 +54,17 @@ bool Card::set_balance(int bal)
 	else return false;
 }
 
-void Card::set_number(string number)
+void Card::setNumber(string number)
 {
 	card_number = number;
-	valid = check_validity(); //atualizar o valor de valid
+	check_validity(); //atualizar o valor de valid
 	if (!valid)
 		balance = 0;
 }
 
-int Card::get_balance() const {return balance;}
+int Card::getBalance() const {return balance;}
 
-bool Card::get_validity() const {return valid;}
+bool Card::getValidity() const {return valid;}
 
-string Card::get_number() const {return card_number;}
+string Card::getNumber() const {return card_number;}
 
