@@ -33,7 +33,7 @@ public:
 	 * @param age - idade da pessoa
 	 * @return Retorna true se puder jogar, falso se não puder
 	 */
-	bool canPlay(unsigned int age) const;
+	bool contains(unsigned int age) const;
 };
 
 #endif /* INTERVAL_H_ */
