@@ -11,7 +11,7 @@ class Card{
 	 * @brief Função que utiliza o algoritmo de Luhn para verificar a validade do número do cartão
 	 * @return True se o valor de card_number for válido, caso contrário retorna false
 	 */
-	bool check_validity();
+	bool checkValidity();
 	
 public:
 	/**
@@ -32,29 +32,29 @@ public:
 	 * @param bal - valor do saldo do cartão
 	 * @return True se o valor de balance for alterado com sucesso
 	 */
-	bool set_balance(int bal);
+	bool setBalance(int bal);
 	
 	/**
 	 * @brief Função que altera o número do cartão, e de seguida o valor de valid a partir da função check_validity()
 	 * @param number - número do cartão
 	 */
-	void set_number(string number);
+	void setNumber(string number);
 	
 	/**
 	 * @brief Função que retorna o valor do saldo do cartão (balance)
 	 * @return balance - saldo do cartão
 	 */
-	int get_balance() const;
+	int getBalance() const;
 	
 	/**
 	 * @brief Função que retorna se o número do cartão é válido (valid)
 	 * @return valid - True se o número do cartão é válido
 	 */
-	bool get_validity() const;
+	bool getValidity() const;
 	
 	/**
 	 * @brief Função que retorna o número do cartão
 	 * @return card_number - número do cartão
 	 */
-	string get_number() const;
+	string getNumber() const;
 };
