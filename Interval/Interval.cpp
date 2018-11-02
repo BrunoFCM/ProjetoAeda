@@ -11,6 +11,6 @@ unsigned int Interval::getUpper() const {
 	return upper;
 }
 
-bool Interval::canPlay(unsigned int age) const {
-	return (age >= lower && age <= upper);
+bool Interval::contains(unsigned int value) const {
+	return (value >= lower && value <= upper);
 }
