@@ -35,8 +35,20 @@ public:
 	 * @param number - número do cartão
 	 */
 	int get_balance() const;
+	/**
+	 * @brief Função que retorna o valor do saldo do cartão (balance)
+	 * @return balance - saldo do cartão
+	 */
 	bool get_validity() const;
+	/**
+	 * @brief Função que retorna se o número do cartão é válido (valid)
+	 * @return valid - True se o número do cartão é válido
+	 */
 	string get_number() const;
+	/**
+	 * @brief Função que retorna o número do cartão
+	 * @return card_number - número do cartão
+	 */
 };
 
 
