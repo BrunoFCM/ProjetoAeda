@@ -9,9 +9,8 @@ class Card{
 
 	/**
 	 * @brief Função que utiliza o algoritmo de Luhn para verificar a validade do número do cartão
-	 * @return True se o valor de card_number for válido, caso contrário retorna false
 	 */
-	bool checkValidity();
+	void checkValidity();
 	
 public:
 	/**
