@@ -3,7 +3,7 @@
 
 #define ASCII_0 48 //corresponde ao valor de '0' na tabela ASCII
 
-bool Card::checkValidity()
+void Card::checkValidity()
 /* Esta função utiliza o algoritmo de Luhn para verificar se o número do cartão é válido */
 {
 	if (card_number.length() != 16) {
