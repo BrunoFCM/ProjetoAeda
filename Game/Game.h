@@ -5,8 +5,8 @@
 #include <vector>
 #include "Date.h"
 #include "Interval.h"
-#include "User.h"
-#include "Game_history_onl.h"
+//#include "User.h"
+//#include "Player_Session.h"
 
 using namespace std;
 
@@ -16,13 +16,15 @@ private:
 	unsigned int id;						//identificador único
 	string title;							//nome
 	double price;							//preco de aquisicao
+	double base_price;
 	Date release;							//data de lancamento
 	Interval age_range;						//intervalo de idades
 	vector<string> platform;				//plataformas disponiveis
 	vector<string> genre;					//genero
 	string developer;						//empresa que o desenvolveu
 	vector<double> price_history;			//historial de precos de aquisicao
-	vector<User*> users;
+	vector<User*> users;				    //vetor de utilizadores
+	static unsigned int id_seq = 0;
 public:
 
 	/**
@@ -65,7 +67,7 @@ public:
 	* @brief Membro-funcao que retorna a data de lancamento de um jogo
 	* @return Retorna a data de lancamento de um jogo
 	*/
-	Data getRelease() const;
+	Date getRelease() const;
 
 	/**
 	* @brief Membro-funcao que retorna a faixa etaria a que se tem de pertencer para se poder jogar
