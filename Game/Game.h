@@ -33,9 +33,8 @@ public:
 	* @param platform - vetor de plataformas para as quais o jogo se encontra disponivel
 	* @param genre - genero (F ou M) ao qual o jogo se destina (preferencialmente)
 	* @param developer - empresa respnsavel pela criacao do jogo
-	* @param price_history - historial de precos de aquisicao do jogo
 	*/
-	Game(string title, unsigned int price, Date release, Interval age_range, vector<string> platform, char genre, string developer, vector<unsigned int> price_history);
+	Game(string title, unsigned int price, Date release, Interval age_range, vector<string> platform, char genre, string developer);
 
 	/**
 	* @brief Membro-funcao que retorna o identificador único de um jogo
