@@ -106,3 +106,7 @@ void Game::addUser(User* user)
 			throw RepeatedUser();
 	users.push_back(user);
 }
+
+
+Home::Home(string title, double price, Date release, Interval age_range, vector<string> platforms, vector<string> genres, string developer):
+	Game(string title, double price, Date release, Interval age_range, vector<string> platforms, vector<string> genres, string developer){}
