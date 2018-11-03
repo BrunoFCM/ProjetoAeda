@@ -1,11 +1,12 @@
 #include "Game.h"
+#include "Exceptions.h"
 #include <vector>
 #include <string>
 #include <iostream>
 
 using namespace std;
 
-Game::Game(string title, double price, Date release, Interval age_range, vector<string> platform, vector<string> genre, string developer)
+Game::Game(string title, double price, Date release, Interval age_range, vector<string> platforms, vector<string> genres, string developer)
 {
 	id = id_seq;
 	id_seq++;
@@ -74,3 +75,34 @@ bool Game::operator==(Game &game)
 	return (id == game.id);
 }
 
+void Game::changePrice(const double &newPrice)
+{
+	price = newPrice;
+	price_history.push_back(newPrice);
+}
+
+void Game::discountPrice(const unsigned int &percentage)
+{
+	double discount = price*percentage / 100;
+	price = price - discount;
+	price_history.push_back(price);
+}
+
+void Game::changeBasePrice(const double &newPrice)
+{
+	base_price = newPrice;
+}
+
+void Game::revertToPrice(const unsigned int &number)
+{
+	price = base_price;
+	price_history.push_back(price);
+}
+
+void Game::addUser(User* user)
+{
+	for (size_t i = 0; i < users.size(); i++)
+		if (user == users[i])
+			throw RepeatedUser();
+	users.push_back(user);
+}
