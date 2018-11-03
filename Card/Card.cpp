@@ -4,7 +4,7 @@
 #define ASCII_0 48 //corresponde ao valor de '0' na tabela ASCII
 
 void Card::checkValidity()
-/* Esta função utiliza o algoritmo de Luhn para verificar se o número do cartão é válido */
+/* Esta funcao utiliza o algoritmo de Luhn para verificar se o numero do cartao é valido */
 {
 	if (card_number.length() != 16) {
 		valid = false;
@@ -34,7 +34,7 @@ Card::Card(string number)
 	balance = 0;
 }
 
-Card::Card(string number, int bal)
+Card::Card(string number, double bal)
 {
 	card_number = number;
 	check_validity();
@@ -44,7 +44,7 @@ Card::Card(string number, int bal)
 		balance = 0;
 }
 
-bool Card::setBalance(int bal)
+bool Card::setBalance(double bal)
 {
 	if (valid)
 	{
@@ -62,7 +62,7 @@ void Card::setNumber(string number)
 		balance = 0;
 }
 
-int Card::getBalance() const {return balance;}
+double Card::getBalance() const {return balance;}
 
 bool Card::getValidity() const {return valid;}
 
