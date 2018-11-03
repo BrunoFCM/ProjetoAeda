@@ -1,5 +1,6 @@
 #include <iostream>
 #include "User.h"
+#include "Exceptions.h"
 
 using namespace std;
 
@@ -13,7 +14,7 @@ User::User(const string &name, const string &email, const unsigned int &age, con
 
 void User::addToLibrary(Game* game)
 {
-	for (size_t i = 0; i < library.size(); i++) {		//ERRO: Method 'size' could not be resolved
+	for (size_t i = 0; i < library.size(); i++) {	
 		if (*library[i] == *game) {
 			string info = to_string(game->getId());
 			throw RepeatedGame(info);
