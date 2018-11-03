@@ -60,7 +60,7 @@ public:
 
 
 /*
- * Classe que gera exceções de jogos já existentes
+ * Classe que gera exceções de jogos já existentes (em termos de game ID)
  */
 class RepeatedGame: public Exception<unsigned int> {
 public:
@@ -74,9 +74,29 @@ public:
 	 * @brief Membro função que imprime informação relativamente à exceção
 	 */
 	void printInf() const {
-		std::cout << "Jogo Repetido: 'ID " << info << "'" << std::endl;
+		std::cout << "Jogo repetido: 'ID " << info << "'" << std::endl;
 	}
 };
 
+
+
+/*
+ * Classe que gera exceções de utilizadores já existentes (em termos de user ID)
+ */
+class RepeatedUser: public Exception<unsigned int> {
+public:
+	/*
+	 * @brief Construtor da classe RepeatedUser
+	 * @param info - informação relativamente à instrução que gerou uma exceção, do tipo de dados adequado
+	 */
+	RepeatedUser(const unsigned int &info): Exception<unsigned int>(info) {}
+
+	/**
+	 * @brief Membro função que imprime informação relativamente à exceção
+	 */
+	void printInf() const {
+		std::cout << "Utilizador repetido: 'ID " << info << "'" << std::endl;
+	}
+};
 
 #endif /* EXCEPTIONS_H_ */
