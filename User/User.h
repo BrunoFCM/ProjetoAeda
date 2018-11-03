@@ -21,7 +21,7 @@ private:
 	vector<PlaySession*> sessions;
 public:
 	User(const string &name, const string &email, const unsigned int &age, const string &address);
-	bool addToLibrary(Game* game);
+	void addToLibrary(Game* game);
 	string getName() const;
 	string getEmail() const;
 	unsigned int getAge() const;
