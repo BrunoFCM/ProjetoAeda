@@ -49,6 +49,7 @@ public:
 	 * @return Retorna string de uma data no formato DD-MM-AAAA
 	 */
 	std::string getDate() const;
+};
 
 #endif /* DATE_H_ */
 
