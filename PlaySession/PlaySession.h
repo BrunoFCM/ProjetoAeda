@@ -11,12 +11,13 @@ class PlaySession
 {
 private:
 	Date date;
-	int duration;
+	unsigned int duration;
 	string platform;
 	User* user;
 public:
+	PlaySession(Date date, int duration, string platform, User* user);
 	Date getDate() const;
-	int getDuration() const;
+	unsigned int getDuration() const;
 	string getPlatform() const;
 	User* getUser() const;
 };
