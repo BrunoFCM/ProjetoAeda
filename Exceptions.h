@@ -66,7 +66,7 @@ public:
 	 * @brief Construtor da classe RepeatedGame
 	 * @param info - informação relativamente à instrução que gerou uma exceção, do tipo de dados adequado
 	 */
-	RepeatedGame(std::string &info): Exception(info) {}
+	RepeatedGame(const std::string &info): Exception(info) {}
 
 	/**
 	 * @brief Membro função que imprime informação relativamente à exceção
@@ -85,7 +85,7 @@ public:
 	 * @brief Construtor da classe RepeatedUser
 	 * @param info - informação relativamente à instrução que gerou uma exceção, do tipo de dados adequado
 	 */
-	RepeatedUser(std::string &info): Exception(info) {}
+	RepeatedUser(const std::string &info): Exception(info) {}
 
 	/**
 	 * @brief Membro função que imprime informação relativamente à exceção
