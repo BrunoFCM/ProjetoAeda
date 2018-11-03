@@ -104,7 +104,6 @@ public:
 	* @return Retorna true se o id dos dois jogos for igual e false caso contrario
 	*/
 	bool operator==(Game &game);
-
 };
 
 class Online : public Game
