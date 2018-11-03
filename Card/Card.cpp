@@ -30,14 +30,14 @@ void Card::checkValidity()
 Card::Card(string number)
 {
 	card_number = number;
-	check_validity();
+	checkValidity();
 	balance = 0;
 }
 
 Card::Card(string number, double bal)
 {
 	card_number = number;
-	check_validity();
+	checkValidity();
 	if (valid)
 		balance = bal;
 	else
@@ -57,7 +57,7 @@ bool Card::setBalance(double bal)
 void Card::setNumber(string number)
 {
 	card_number = number;
-	check_validity(); //atualizar o valor de valid
+	checkValidity(); //atualizar o valor de valid
 	if (!valid)
 		balance = 0;
 }
