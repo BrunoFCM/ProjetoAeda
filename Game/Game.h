@@ -137,12 +137,19 @@ public:
 class Variable_Subsc : public Online
 {
 private:
-	int price_hour;					 //preÃ§o variÃ¡vel: custo do jogo por hora
+	int price_hour;					 //preco variavel: custo do jogo por hora
 public:
 
 };
 
 class Home : public Game
+{
+private:
+	vector<Date> updates;					 //data das atualizacoes em que o utilizador fez download do respetivo titulo (1 euro cada)
+public:
+	Home(string title, double price, Date release, Interval age_range, vector<string> platforms, vector<string> genres, string developer);
+	vector<Date> getUpdates() const;
+};
 
 
 
