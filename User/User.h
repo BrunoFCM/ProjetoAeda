@@ -5,9 +5,12 @@
 #include <vector>
 #include "Card.h"
 #include "Game.h"
-#include "PLaySession.h"
+#include "PlaySession.h"
 
 using namespace std;
+
+class PlaySession;
+class Game;
 
 class User
 {
