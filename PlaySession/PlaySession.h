@@ -7,6 +7,9 @@
 
 using namespace std;
 
+class Date;
+class User;
+
 class PlaySession
 {
 private:
