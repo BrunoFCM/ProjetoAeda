@@ -1,10 +1,3 @@
-/*
- * User.h
- *
- *  Created on: 02/11/2018
- *      Author: Nuno Cardoso
- */
-
 #ifndef SRC_USER_H_
 #define SRC_USER_H_
 #include <iostream>
@@ -12,6 +5,7 @@
 #include <vector>
 #include "Card.h"
 #include "Game.h"
+#include "PLaySession.h"
 
 using namespace std;
 
@@ -24,7 +18,7 @@ private:
 	string address;
 	vector<Card> cards;
 	vector<Game*> library;
-	vector<PlaySessions*> sessions;
+	vector<PlaySession*> sessions;
 public:
 	User(const string &name, const string &email, const unsigned int &age, const string &address);
 	bool addToLibrary(Game* game);
@@ -34,7 +28,7 @@ public:
 	string getAddress() const;
 	vector<Card> getCards() const;
 	vector<Game*> getLibrary() const;
-	vector<PlaySessions*> getSessions() const;
+	vector<PlaySession*> getSessions() const;
 };
 
 #endif /* SRC_USER_H_ */
