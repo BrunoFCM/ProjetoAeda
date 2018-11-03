@@ -13,8 +13,8 @@ private:
 	vector<Game*> store;
 	vector<User*> user_library;
 public:
-	bool addUser(User* user);
-	bool addGame(Game* game);
+	void addUser(User* user);
+	void addGame(Game* game);
 };
 
-#endif /* SRC_SYSTEM_H_ *
+#endif /* SRC_SYSTEM_H_ */
