@@ -58,3 +58,7 @@ vector<PlaySession*> User::getSessions() const
 	return sessions;
 }
 
+bool User::operator==(User &user) const
+{
+	return (name == user.name && email == user.email && age ==user.age && address == user.address);
+}
