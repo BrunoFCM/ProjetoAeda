@@ -40,8 +40,8 @@ public:
 	Game(string title, double price, Date release, Interval age_range, vector<string> platforms, vector<string> genres, string developer);
 
 	/**
-	* @brief Membro-funcao que retorna o identificador Ãºnico de um jogo
-	* @return Retorna o identificador Ãºnico de um jogo
+	* @brief Membro-funcao que retorna o identificador unico de um jogo
+	* @return Retorna o identificador unico de um jogo
 	*/
 	unsigned int getId() const;
 
