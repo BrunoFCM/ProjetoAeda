@@ -6,7 +6,7 @@
 
 using namespace std;
 
-Game::Game(string title, double price, Date release, Interval age_range, vector<string> platforms, vector<string> genres, string developer)
+Game::Game(const string title,const double price,const Date release,const Interval age_range,const vector<string> platforms,const vector<string> genres,const string developer)
 {
 	id = id_seq;
 	id_seq++;
@@ -65,7 +65,7 @@ string Game::getDeveloper() const
 	return developer;
 }
 
-vector<unsigned int> Game::getPriceHist() const
+vector<double> Game::getPriceHist() const
 {
 	return price_history;
 }
@@ -103,10 +103,11 @@ void Game::addUser(User* user)
 {
 	for (size_t i = 0; i < users.size(); i++)
 		if (user == users[i])
-			throw RepeatedUser();
+			throw; //RepeatedUser();
 	users.push_back(user);
 }
 
-
+/*
 Home::Home(string title, double price, Date release, Interval age_range, vector<string> platforms, vector<string> genres, string developer):
 	Game(string title, double price, Date release, Interval age_range, vector<string> platforms, vector<string> genres, string developer){}
+*/

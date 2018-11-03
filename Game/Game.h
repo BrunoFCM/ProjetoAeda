@@ -10,6 +10,9 @@
 
 using namespace std;
 
+class User;
+
+
 class Game
 {
 private:
@@ -24,7 +27,7 @@ private:
 	string developer;						//empresa que o desenvolveu
 	vector<double> price_history;			//historial de precos de aquisicao
 	vector<User*> users;				    //vetor de utilizadores
-	static unsigned int id_seq = 0;
+	static unsigned int id_seq;
 public:
 
 	/**
@@ -97,7 +100,7 @@ public:
 	* @brief Membro-funcao que retorna o historial de precos de aquisicao do jogo
 	* @return Retorna o historial de precos de aquisicao do jogo
 	*/
-	vector<unsigned int> getPriceHist() const;
+	vector<double> getPriceHist() const;
 
 	/**
 	* @brief Overload do operador == para jogos
@@ -115,6 +118,9 @@ public:
 
 	void addUser(User* user);
 };
+
+
+class PlaySession;
 
 class Online : public Game
 {
