@@ -37,7 +37,7 @@ public:
 	* @param genre - vetor de generos dos jogos
 	* @param developer - empresa respnsavel pela criacao do jogo
 	*/
-	Game(string title, double price, Date release, Interval age_range, vector<string> platform, vector<string> genre, string developer);
+	Game(string title, double price, Date release, Interval age_range, vector<string> platforms, vector<string> genres, string developer);
 
 	/**
 	* @brief Membro-funcao que retorna o identificador Ãºnico de um jogo
@@ -104,6 +104,16 @@ public:
 	* @return Retorna true se o id dos dois jogos for igual e false caso contrario
 	*/
 	bool operator==(Game &game);
+
+	void changePrice(const double &newPrice);
+
+	void discountPrice(const unsigned int &percentage);
+
+	void changeBasePrice(const double &newPrice);
+
+	void revertToPrice(const unsigned int &number);
+
+	void addUser(User* user);
 };
 
 class Online : public Game
@@ -133,13 +143,6 @@ public:
 };
 
 class Home : public Game
-{
-private:
-	Date updates;					 //data das atualizaÃ§Ãµes em que o utilizador fez download do respetivo tÃ­tulo (1â‚¬ cada)
-public:
-
-};
-
 
 
 
