@@ -13,7 +13,7 @@ using namespace std;
 class Game
 {
 private:
-	unsigned int id;						//identificador Ãºnico
+	unsigned int id;						//identificador unico
 	string title;							//nome
 	double price;							//preco de aquisicao
 	double base_price;
