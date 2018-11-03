@@ -1,10 +1,3 @@
-/*
- * User.cpp
- *
- *  Created on: 02/11/2018
- *      Author: Nuno Cardoso
- */
-
 #include <iostream>
 #include "User.h"
 
@@ -30,4 +23,38 @@ bool User::addToLibrary(Game* game)
 	return true;
 }
 
+string User::getName() const
+{
+	return name;
+}
+
+string User::getEmail() const
+{
+	return email;
+}
+
+unsigned int User::getAge() const
+{
+	return age;
+}
+
+string User::getAddress() const
+{
+	return address;
+}
+
+vector<Card> User::getCards() const
+{
+	return cards;
+}
+
+vector<Game*> User::getLibrary() const
+{
+	return library;
+}
+
+vector<PlaySession*> User::getSessions() const
+{
+	return sessions;
+}
 
