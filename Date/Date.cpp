@@ -6,7 +6,7 @@ Date::Date(const std::string &date) {		//input no formato DD-MM-AAAA
 	year = std::stoi(date.substr(5,4));
 }
 
-Date::Date(unsigned int d, unsigned int m, unsigned int y):		//input de números inteiros
+Date::Date(unsigned int d, unsigned int m, unsigned int y):		//input de numeros inteiros
 		day(d), month(m), year(y) {}
 
 unsigned int Date::getDay() const {
