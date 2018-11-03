@@ -2,7 +2,7 @@
 #define INTERVAL_H_
 
 /**
- *  Classe Interval que contém o intervalo de idades sugerido para um certo jogo
+ *  Classe Interval que contem o intervalo de idades sugerido para um certo jogo
  */
 class Interval {
 private:
@@ -17,21 +17,21 @@ public:
 	Interval(unsigned int low, unsigned int up);
 
 	/**
-	 * @brief Membro função que retorna o limite inferior de um intervalo de idades
+	 * @brief Membro funcao que retorna o limite inferior de um intervalo de idades
 	 * @return Retorna o membro inferior de um intervalo de idades
 	 */
 	unsigned int getLower() const;
 
 	/**
-	 * @brief Membro função que retorna o limite superior de um intervalo de idades
+	 * @brief Membro funcao que retorna o limite superior de um intervalo de idades
 	 * @return Retorna o intervalo superior de um intervalo de idades
 	 */
 	unsigned int getUpper() const;
 
 	/**
-	 * @brief Membro função que avalia se uma pessoa de uma certa idade pode jogar o jogo
+	 * @brief Membro funcao que avalia se uma pessoa de uma certa idade pode jogar o jogo
 	 * @param age - idade da pessoa
-	 * @return Retorna true se puder jogar, falso se não puder
+	 * @return Retorna true se puder jogar, falso se nao puder
 	 */
 	bool contains(unsigned int age) const;
 };
