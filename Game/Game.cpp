@@ -7,10 +7,11 @@ using namespace std;
 
 Game::Game(string title, double price, Date release, Interval age_range, vector<string> platform, vector<string> genre, string developer)
 {
-	id = id_Seq;
-	id_Seq++;
+	id = id_seq;
+	id_seq++;
 	this->title = title;
 	this->price = price;
+	base_price = price;
 	this->release = release;
 	this->age_range = age_range;
 	this->platform = platform;
@@ -72,3 +73,4 @@ bool Game::operator==(Game &game)
 {
 	return (id == game.id);
 }
+
