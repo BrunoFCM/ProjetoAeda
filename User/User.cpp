@@ -13,9 +13,12 @@ User::User(const string &name, const string &email, const unsigned int &age, con
 
 void User::addToLibrary(Game* game)
 {
-	for (size_t i = 0; i < library.size(); i++)
-		if (*library[i] == *game)
-			throw RepeatedGame();
+	for (size_t i = 0; i < library.size(); i++) {		//ERRO: Method 'size' could not be resolved
+		if (*library[i] == *game) {
+			string info = to_string(game->getId());
+			throw RepeatedGame(info);
+		}
+	}
 	library.push_back(game);
 }
 
@@ -58,4 +61,3 @@ bool User::operator==(User &user) const
 {
 	return (name == user.name && email == user.email && age ==user.age && address == user.address);
 }
-
