@@ -6,14 +6,14 @@
 #include "Date.h"
 #include "Interval.h"
 #include "User.h"
-//#include "Player_Session.h"
+#include "PlaySession.h"
 
 using namespace std;
 
 class Game
 {
 private:
-	unsigned int id;						//identificador único
+	unsigned int id;						//identificador Ãºnico
 	string title;							//nome
 	double price;							//preco de aquisicao
 	double base_price;
@@ -40,8 +40,8 @@ public:
 	Game(string title, double price, Date release, Interval age_range, vector<string> platform, vector<string> genre, string developer);
 
 	/**
-	* @brief Membro-funcao que retorna o identificador único de um jogo
-	* @return Retorna o identificador único de um jogo
+	* @brief Membro-funcao que retorna o identificador Ãºnico de um jogo
+	* @return Retorna o identificador Ãºnico de um jogo
 	*/
 	unsigned int getId() const;
 
@@ -112,7 +112,7 @@ class Online : public Game
 private:
 	vector<User*> users;			//conjunto de utilizadores
 	int play_time;					//tempo jogado
-	Game_history_onl play_history;	//historial para cada jogo online que inclui: quando foi jogado, por quanto tempo e em que plataforma
+	PlaySession play_history;		//historial para cada jogo online que inclui: quando foi jogado, por quanto tempo e em que plataforma
 public:
 
 };
@@ -120,7 +120,7 @@ public:
 class Fixed_Subsc : public Online
 {
 private:
-	int fixed_price;				 //preço fixo
+	int fixed_price;				 //preÃ§o fixo
 public:
 
 };
@@ -128,7 +128,7 @@ public:
 class Variable_Subsc : public Online
 {
 private:
-	int price_hour;					 //preço variável: custo do jogo por hora
+	int price_hour;					 //preÃ§o variÃ¡vel: custo do jogo por hora
 public:
 
 };
@@ -136,9 +136,11 @@ public:
 class Home : public Game
 {
 private:
-	Date updates;					 //data das atualizações em que o utilizador fez download do respetivo título (1€ cada)
+	Date updates;					 //data das atualizaÃ§Ãµes em que o utilizador fez download do respetivo tÃ­tulo (1â‚¬ cada)
 public:
 
 };
+
+
 
 
