@@ -3,12 +3,7 @@
 
 using namespace std;
 
-PlaySession::PlaySession(Date date, int duration, string platform, User* user)
-{
-	this->date = date;
-	this->duration = duration;
-	this->user = user;
-}
+PlaySession::PlaySession(Date date, int duration, string platform, User* user): date(date), duration(duration), user(user) {}
 
 Date PlaySession::getDate() const
 {
@@ -29,10 +24,3 @@ User* PlaySession::getUser() const
 {
 	return user;
 }
-
-
-
-
-
-
-
