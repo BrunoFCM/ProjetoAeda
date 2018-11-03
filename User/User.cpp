@@ -11,16 +11,12 @@ User::User(const string &name, const string &email, const unsigned int &age, con
 	this->address = address;
 }
 
-bool User::addToLibrary(Game* game)
+void User::addToLibrary(Game* game)
 {
 	for (size_t i = 0; i < library.size(); i++)
 		if (*library[i] == *game)
-		{
 			throw RepeatedGame();
-			return false;
-		}
 	library.push_back(game);
-	return true;
 }
 
 string User::getName() const
@@ -62,3 +58,4 @@ bool User::operator==(User &user) const
 {
 	return (name == user.name && email == user.email && age ==user.age && address == user.address);
 }
+
