@@ -27,7 +27,6 @@ private:
 	string developer;						//empresa que o desenvolveu
 	vector<double> price_history;			//historial de precos de aquisicao
 	vector<User*> users;				    //vetor de utilizadores
-	static unsigned int id_seq;
 public:
 
 	/**
@@ -40,7 +39,7 @@ public:
 	* @param genre - vetor de generos dos jogos
 	* @param developer - empresa respnsavel pela criacao do jogo
 	*/
-	Game(string title, double price, Date release, Interval age_range, vector<string> platforms, vector<string> genres, string developer);
+	Game(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer);
 
 	/**
 	* @brief Membro-funcao que retorna o identificador unico de um jogo
@@ -126,7 +125,7 @@ class Online : public Game
 {
 private:
 	int play_time;					//tempo jogado
-	PlaySession play_history;		//historial para cada jogo online que inclui: quando foi jogado, por quanto tempo e em que plataforma
+	vector <PlaySession *> play_history;		//historial para cada jogo online que inclui: quando foi jogado, por quanto tempo e em que plataforma
 public:
 	Online(string title, double price, Date release, Interval age_range, vector<string> platforms, vector<string> genres, string developer, int play_time, PlaySession play_history);
 	int getPlayTime() const;

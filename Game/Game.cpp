@@ -6,15 +6,19 @@
 
 using namespace std;
 
-Game::Game(const string title,const double price,const Date release,const Interval age_range,const vector<string> platforms,const vector<string> genres,const string developer)
+class Interval;
+class Date;
+
+static unsigned int id_seq = 1;
+
+Game::Game(const string &title,const double &price,const Date &release,const Interval &age_range,const vector<string> &platforms,const vector<string> &genres,const string &developer) :
+		release(release), age_range(age_range)
 {
 	id = id_seq;
 	id_seq++;
 	this->title = title;
 	this->price = price;
 	base_price = price;
-	this->release = release;
-	this->age_range = age_range;
 	this->platform = platform;
 	this->genre = genre;
 	this->developer = developer;
@@ -130,7 +134,7 @@ int Online::getPlayTime() const
 
 vector<PlaySession*> Online::getPlayHistory() const
 {
-	return *play_history;
+	return play_history;
 }
 
 double Online::getPrice() const
