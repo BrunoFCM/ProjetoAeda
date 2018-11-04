@@ -21,7 +21,7 @@ public:
 	 * @brief Membro função que retorna a intrução que gerou uma exceção
 	 * @return Retorna a instrução que gerou uma exceção
 	 */
-	const std::string getInf() const {return info;}
+	std::string getInf() const {return info;}
 
 	/*
 	 * @brief Membro função virtual puro que imprime informação relativamente a uma dada exceção
