@@ -125,11 +125,13 @@ class PlaySession;
 class Online : public Game
 {
 private:
-	vector<User*> users;			//conjunto de utilizadores
 	int play_time;					//tempo jogado
 	PlaySession play_history;		//historial para cada jogo online que inclui: quando foi jogado, por quanto tempo e em que plataforma
 public:
-
+	Online(string title, double price, Date release, Interval age_range, vector<string> platforms, vector<string> genres, string developer, int play_time, PlaySession play_history);
+	int getPlayTime() const;
+	vector<PlaySession*> getPlayHistory() const;
+	virtual double getPrice() const;
 };
 
 class Fixed_Subsc : public Online
