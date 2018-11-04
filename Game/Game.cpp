@@ -138,3 +138,14 @@ double Online::getPrice() const
 	return 0;
 }
 
+double Fixed_Subsc::getPrice() const
+{
+	return fixed_price;
+}
+
+double Variable_Subsc::getPrice() const
+{
+	return price_hour * (double)getPlayTime();
+}
+
+
