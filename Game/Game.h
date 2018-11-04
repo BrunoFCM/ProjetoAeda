@@ -137,9 +137,9 @@ public:
 class Fixed_Subsc : public Online
 {
 private:
-	int fixed_price;				 //preco fixo
+	double fixed_price;				 //preco fixo
 public:
-
+	double getPrice() const;
 };
 
 class Variable_Subsc : public Online
@@ -147,7 +147,7 @@ class Variable_Subsc : public Online
 private:
 	int price_hour;					 //preco variavel: custo do jogo por hora
 public:
-
+	double getPrice() const;
 };
 
 class Home : public Game
@@ -158,6 +158,7 @@ public:
 	Home(string title, double price, Date release, Interval age_range, vector<string> platforms, vector<string> genres, string developer);
 	vector<Date> getUpdates() const;
 };
+
 
 
 
