@@ -135,7 +135,7 @@ public:
 class Fixed_Subsc : public Online
 {
 private:
-	int fixed_price;				 //preÃ§o fixo
+	int fixed_price;				 //preco fixo
 public:
 
 };
