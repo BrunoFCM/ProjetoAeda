@@ -27,14 +27,14 @@ void Card::checkValidity()
 	return;
 }
 
-Card::Card(string number)
+Card::Card(const string &number)
 {
 	card_number = number;
 	checkValidity();
 	balance = 0;
 }
 
-Card::Card(string number, double bal)
+Card::Card(const string &number, const double &bal)
 {
 	card_number = number;
 	checkValidity();
@@ -44,7 +44,7 @@ Card::Card(string number, double bal)
 		balance = 0;
 }
 
-bool Card::setBalance(double bal)
+bool Card::setBalance(const double &bal)
 {
 	if (valid)
 	{
@@ -54,7 +54,7 @@ bool Card::setBalance(double bal)
 	else return false;
 }
 
-void Card::setNumber(string number)
+void Card::setNumber(const string &number)
 {
 	card_number = number;
 	checkValidity(); //atualizar o valor de valid

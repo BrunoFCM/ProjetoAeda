@@ -154,7 +154,7 @@ class Home : public Game
 private:
 	vector<Date> updates;					 //data das atualizacoes em que o utilizador fez download do respetivo titulo (1 euro cada)
 public:
-	Home(string title, double price, Date release, Interval age_range, vector<string> platforms, vector<string> genres, string developer);
+	Home(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> platforms, const vector<string> genres, const string developer);
 	vector<Date> getUpdates() const;
 };
 

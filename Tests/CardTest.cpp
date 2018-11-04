@@ -5,23 +5,23 @@
 
 void thisIsATest() {
 	Card c1("4556322303773830",60); //valid number
-		ASSERT_EQUAL(1,c1.get_validity());
-		ASSERT_EQUAL(60,c1.get_balance());
-		c1.set_balance(70);
-		ASSERT_EQUAL(70,c1.get_balance());
-		c1.set_number("1234567891144557");
-		ASSERT_EQUAL(0,c1.get_balance());
-		ASSERT_EQUAL(0,c1.get_validity());
+		ASSERT_EQUAL(1,c1.getValidity());
+		ASSERT_EQUAL(60,c1.getBalance());
+		c1.setBalance(70);
+		ASSERT_EQUAL(70,c1.getBalance());
+		c1.setNumber("1234567891144557");
+		ASSERT_EQUAL(0,c1.getBalance());
+		ASSERT_EQUAL(0,c1.getValidity());
 
 		Card c2("1234567891144557",60); //invalid number
-		ASSERT_EQUAL(0,c2.get_validity());
-		ASSERT_EQUAL(0,c2.get_balance());
-		c2.set_balance(70);
-		ASSERT_EQUAL(0,c2.get_balance());
-		c2.set_number("4556322303773830");
-		ASSERT_EQUAL(true,c2.get_validity());
-		c2.set_balance(70);
-		ASSERT_EQUAL(70,c2.get_balance());
+		ASSERT_EQUAL(0,c2.getValidity());
+		ASSERT_EQUAL(0,c2.getBalance());
+		c2.setBalance(70);
+		ASSERT_EQUAL(0,c2.getBalance());
+		c2.setNumber("4556322303773830");
+		ASSERT_EQUAL(true,c2.getValidity());
+		c2.setBalance(70);
+		ASSERT_EQUAL(70,c2.getBalance());
 }
 
 void runSuite() {

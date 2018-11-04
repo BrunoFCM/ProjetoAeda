@@ -24,7 +24,7 @@ public:
 	 * @param m - mes de uma data
 	 * @param y - ano de uma data
 	 */
-	Date(unsigned int d, unsigned int m, unsigned int y);
+	Date(const unsigned int &d, const unsigned int &m, const unsigned int &y);
 
 	/**
 	 * @brief Membro funcao que retorna o dia de uma data

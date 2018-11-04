@@ -43,7 +43,7 @@ Date::Date(const std::string &date) {		//input no formato DD-MM-AAAA
 
 }
 
-Date::Date(unsigned int d, unsigned int m, unsigned int y) {//input de numeros inteiros
+Date::Date(const unsigned int &d, const unsigned int &m, const unsigned int &y) {//input de numeros inteiros
 		day = d;
 		month = d;
 		year = y;

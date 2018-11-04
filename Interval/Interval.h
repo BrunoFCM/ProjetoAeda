@@ -14,7 +14,7 @@ public:
 	 * @param low - limite inferior do intervalo de idades(inclusive)
 	 * @param up - limite superior do intervalor de idades(inclusive)
 	 */
-	Interval(unsigned int low, unsigned int up);
+	Interval(const unsigned int &low, const unsigned int &up);
 
 	/**
 	 * @brief Membro funcao que retorna o limite inferior de um intervalo de idades
@@ -33,7 +33,7 @@ public:
 	 * @param age - idade da pessoa
 	 * @return Retorna true se puder jogar, falso se nao puder
 	 */
-	bool contains(unsigned int age) const;
+	bool contains(const unsigned int &value) const;
 };
 
 #endif /* INTERVAL_H_ */

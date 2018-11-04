@@ -32,7 +32,7 @@ public:
 	vector<Card> getCards() const;
 	vector<Game*> getLibrary() const;
 	vector<PlaySession*> getSessions() const;
-	bool operator==(User &user) const;
+	bool operator==(const User &user) const;
 };
 
 #endif /* SRC_USER_H_ */

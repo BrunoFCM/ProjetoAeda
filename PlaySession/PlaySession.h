@@ -18,7 +18,7 @@ private:
 	string platform;
 	User* user;
 public:
-	PlaySession(Date date, int duration, string platform, User* user);
+	PlaySession(const Date date, const int duration, const string platform, User* user);
 	Date getDate() const;
 	unsigned int getDuration() const;
 	string getPlatform() const;
