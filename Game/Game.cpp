@@ -107,13 +107,34 @@ void Game::addUser(User* user)
 	users.push_back(user);
 }
 
-
+/*
 Home::Home(string title, double price, Date release, Interval age_range, vector<string> platforms, vector<string> genres, string developer):
 	Game(string title, double price, Date release, Interval age_range, vector<string> platforms, vector<string> genres, string developer){}
-
+*/
 
 vector<Date> Home::getUpdates() const
 {
 	return updates;
+}
+
+/*
+Online::Online(string title, double price, Date release, Interval age_range, vector<string> platforms, vector<string> genres, string developer, int play_time, PlaySession play_history):
+		Game(string title, double price, Date release, Interval age_range, vector<string> platforms, vector<string> genres, string developer),
+		play_time(play_time), play_history(play_history){}
+*/
+
+int Online::getPlayTime() const
+{
+	return play_time;
+}
+
+vector<PlaySession*> Online::getPlayHistory() const
+{
+	return play_history;
+}
+
+double Online::getPrice() const
+{
+	return 0;
 }
 
