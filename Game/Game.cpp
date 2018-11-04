@@ -130,7 +130,7 @@ int Online::getPlayTime() const
 
 vector<PlaySession*> Online::getPlayHistory() const
 {
-	return play_history;
+	return *play_history;
 }
 
 double Online::getPrice() const
