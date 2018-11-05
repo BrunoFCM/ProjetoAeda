@@ -127,25 +127,28 @@ private:
 	int play_time;					//tempo jogado
 	vector <PlaySession *> play_history;		//historial para cada jogo online que inclui: quando foi jogado, por quanto tempo e em que plataforma
 public:
-	Online(string title, double price, Date release, Interval age_range, vector<string> platforms, vector<string> genres, string developer, int play_time, PlaySession play_history);
+	Online(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer, const int &play_time, const vector<PlaySession*> &play_history);
+	virtual ~Online() {};
 	int getPlayTime() const;
 	vector<PlaySession*> getPlayHistory() const;
 	virtual double getPrice() const;
 };
 
-class Fixed_Subsc : public Online
+class FixedSubsc : public Online
 {
 private:
 	double fixed_price;				 //preco fixo
 public:
+	FixedSubsc(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer, const int &play_time, const vector<PlaySession*> &play_history,const double &fixed_price);
 	double getPrice() const;
 };
 
-class Variable_Subsc : public Online
+class VariableSubsc : public Online
 {
 private:
 	int price_hour;					 //preco variavel: custo do jogo por hora
 public:
+	VariableSubsc(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer, const int &play_time, const vector<PlaySession*> &play_history,const double &price_hour);
 	double getPrice() const;
 };
 
@@ -154,7 +157,7 @@ class Home : public Game
 private:
 	vector<Date> updates;					 //data das atualizacoes em que o utilizador fez download do respetivo titulo (1 euro cada)
 public:
-	Home(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> platforms, const vector<string> genres, const string developer);
+	Home(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer);
 	vector<Date> getUpdates() const;
 };
 

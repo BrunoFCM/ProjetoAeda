@@ -34,6 +34,8 @@ public:
 	 * @return Retorna true se puder jogar, falso se nao puder
 	 */
 	bool contains(const unsigned int &value) const;
+	bool operator<(const Interval &inter2) const;
+	bool operator==(const Interval &inter2) const;
 };
 
 #endif /* INTERVAL_H_ */

@@ -49,6 +49,8 @@ public:
 	 * @return Retorna string de uma data no formato DD-MM-AAAA
 	 */
 	std::string getDate() const;
+	bool operator< (const Date &date2) const;
+	bool operator== (const Date &date2) const;
 };
 
 #endif /* DATE_H_ */

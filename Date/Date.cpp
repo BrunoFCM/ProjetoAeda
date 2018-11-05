@@ -94,3 +94,17 @@ unsigned int Date::getYear() const {
 std::string Date::getDate() const {			//output no formato DD-MM-AAAA
 	return std::to_string(day) + "-" + std::to_string(month) + "-" + std::to_string(year);
 }
+
+bool Date::operator< (const Date &date2) const{
+	if (year == date2.year)
+		if (month == date2.month)
+			return (day < date2.day);
+		else
+			return (month < date2.month);
+	else
+		return (year < date2.year);
+}
+
+bool Date::operator== (const Date &date2) const{
+	return ((year == date2.year) && (month == date2.month) && (day == date2.day));
+}

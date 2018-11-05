@@ -14,3 +14,15 @@ unsigned int Interval::getUpper() const {
 bool Interval::contains(const unsigned int &value) const {
 	return (value >= lower && value <= upper);
 }
+
+bool Interval::operator<(const Interval &inter2) const{
+	if(lower == inter2.lower)
+		return upper < inter2.upper;
+	return lower < inter2.lower;
+}
+
+bool Interval::operator==(const Interval &inter2) const{
+	return (lower == inter2.lower && upper == inter2.upper);
+}
+
+
