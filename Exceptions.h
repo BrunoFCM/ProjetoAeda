@@ -4,27 +4,27 @@
 #include <iostream>
 
 /*
- * Classe abstrata que contém todas as exceções tratadas no programa
+ * Classe abstrata que contﾃｩm todas as exceﾃｧﾃｵes tratadas no programa
  */
 class Exception {
 private:
-	std::string info;			//informação relativamente à instrução que gerou uma exceção
+	std::string info;			//informaﾃｧﾃ｣o relativamente ﾃ� instruﾃｧﾃ｣o que gerou uma exceﾃｧﾃ｣o
 
 public:
 	/**
 	 * @brief Construtor da classe Exception
-	 * @param info - informação relativamente à instrução que gerou uma exceção, do tipo de dados adequado
+	 * @param info - informaﾃｧﾃ｣o relativamente ﾃ� instruﾃｧﾃ｣o que gerou uma exceﾃｧﾃ｣o, do tipo de dados adequado
 	 */
 	Exception(const std::string &info): info(info) {}
 
 	/**
-	 * @brief Membro função que retorna a intrução que gerou uma exceção
-	 * @return Retorna a instrução que gerou uma exceção
+	 * @brief Membro funﾃｧﾃ｣o que retorna a intruﾃｧﾃ｣o que gerou uma exceﾃｧﾃ｣o
+	 * @return Retorna a instruﾃｧﾃ｣o que gerou uma exceﾃｧﾃ｣o
 	 */
 	std::string getInf() const {return info;}
 
 	/*
-	 * @brief Membro função virtual puro que imprime informação relativamente a uma dada exceção
+	 * @brief Membro funﾃｧﾃ｣o virtual puro que imprime informaﾃｧﾃ｣o relativamente a uma dada exceﾃｧﾃ｣o
 	 */
 	virtual void printInf() const = 0;
 
@@ -37,39 +37,39 @@ public:
 
 
 /*
- * Classe que gera exceções de datas inválidas
+ * Classe que gera exceﾃｧﾃｵes de datas invﾃ｡lidas
  */
 class InvalidDate: public Exception {
 public:
 	/*
 	 * @brief Construtor da classe InvalidDate
-	 * @param info - informação relativamente à instrução que gerou uma exceção, do tipo de dados adequado
+	 * @param info - informaﾃｧﾃ｣o relativamente ﾃ� instruﾃｧﾃ｣o que gerou uma exceﾃｧﾃ｣o, do tipo de dados adequado
 	 */
 	InvalidDate(const std::string &info): Exception(info) {}
 
 	/*
-	 * @brief Membro função que imprime informação relativamente à exceção
+	 * @brief Membro funﾃｧﾃ｣o que imprime informaﾃｧﾃ｣o relativamente ﾃ� exceﾃｧﾃ｣o
 	 */
 	void printInf() const {
-		std::cout << "Data inválida : '" << getInf() << "'" << std::endl;
+		std::cout << "Data invﾃ｡lida : '" << getInf() << "'" << std::endl;
 	}
 };
 
 
 
 /*
- * Classe que gera exceções de jogos já existentes
+ * Classe que gera exceﾃｧﾃｵes de jogos jﾃ｡ existentes
  */
 class RepeatedGame: public Exception{
 public:
 	/*
 	 * @brief Construtor da classe RepeatedGame
-	 * @param info - informação relativamente à instrução que gerou uma exceção, do tipo de dados adequado
+	 * @param info - informaﾃｧﾃ｣o relativamente ﾃ� instruﾃｧﾃ｣o que gerou uma exceﾃｧﾃ｣o, do tipo de dados adequado
 	 */
 	RepeatedGame(const std::string &info): Exception(info) {}
 
 	/**
-	 * @brief Membro função que imprime informação relativamente à exceção
+	 * @brief Membro funﾃｧﾃ｣o que imprime informaﾃｧﾃ｣o relativamente ﾃ� exceﾃｧﾃ｣o
 	 */
 	void printInf() const {
 		std::cout << "Jogo Repetido: 'ID " << getInf() << "'" << std::endl;
@@ -77,22 +77,42 @@ public:
 };
 
 /*
- * Classe que gera exceções de utilizadores já existentes (em termos de user ID)
+ * Classe que gera exceﾃｧﾃｵes de utilizadores jﾃ｡ existentes (em termos de user ID)
  */
 class RepeatedUser: public Exception {
 public:
 	/*
 	 * @brief Construtor da classe RepeatedUser
-	 * @param info - informação relativamente à instrução que gerou uma exceção, do tipo de dados adequado
+	 * @param info - informaﾃｧﾃ｣o relativamente ﾃ� instruﾃｧﾃ｣o que gerou uma exceﾃｧﾃ｣o, do tipo de dados adequado
 	 */
 	RepeatedUser(const std::string &info): Exception(info) {}
 
 	/**
-	 * @brief Membro função que imprime informação relativamente à exceção
+	 * @brief Membro funﾃｧﾃ｣o que imprime informaﾃｧﾃ｣o relativamente ﾃ� exceﾃｧﾃ｣o
 	 */
 	void printInf() const {
 		std::cout << "Utilizador repetido: 'ID " << getInf() << "'" << std::endl;
 	}
+};
+
+class InvalidComparer{
+public:
+	void printInf() const {
+		std::cout << "Comparador Inválido" << std::endl;
+	};
+};
+
+class InvalidRestrictor{
+public:
+	void printInf() const {
+		std::cout << "Comparador Inválido" << std::endl;
+	};
+};
+class InvalidArgument{
+public:
+	void printInf() const {
+		std::cout << "Comparador Inválido" << std::endl;
+	};
 };
 
 

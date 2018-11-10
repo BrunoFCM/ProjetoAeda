@@ -25,4 +25,6 @@ bool Interval::operator==(const Interval &inter2) const{
 	return (lower == inter2.lower && upper == inter2.upper);
 }
 
-
+bool Interval::coincide(const Interval &inter2) const{
+	return ((lower < inter2.upper) || (inter2.lower < upper));
+}

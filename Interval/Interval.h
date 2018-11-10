@@ -36,6 +36,7 @@ public:
 	bool contains(const unsigned int &value) const;
 	bool operator<(const Interval &inter2) const;
 	bool operator==(const Interval &inter2) const;
+	bool coincide(const Interval &inter2) const;
 };
 
 #endif /* INTERVAL_H_ */

@@ -2,6 +2,7 @@
 #include "System.h"
 #include "Exceptions.h"
 
+
 using namespace std;
 
 void System::addUser(User* user)
@@ -26,6 +27,17 @@ void System::addGame(Game* game)
 	store.push_back(game);
 }
 
+void System::sortUsers(const UserComparer &comparer){
+	if(!isUserComparer(comparer))
+		throw InvalidComparer();
+	insertionSort(user_library,comparer);
+}
+
+void System::sortGames(const GameComparer &comparer){
+	if(!isGameComparer(comparer))
+		throw InvalidComparer();
+	insertionSort(store,comparer);
+}
 
 
 
