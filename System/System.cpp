@@ -38,7 +38,3 @@ void System::sortGames(const GameComparer &comparer){
 		throw InvalidComparer();
 	insertionSort(store,comparer);
 }
-
-
-
-
