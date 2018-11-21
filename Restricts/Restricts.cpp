@@ -43,3 +43,6 @@ bool userAgeInterval(User* u1, const Interval &inter){
 bool userLibrarySize(User* u1, const Interval &inter){
 	return (inter.contains(u1->getLibrary().size()));
 }
+
+
+

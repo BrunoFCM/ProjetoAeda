@@ -11,19 +11,88 @@
 #define USER_RESTRICTOR true
 #define GAME_RESTRICTOR false
 
+/**
+ * @brief
+ * @param g1 -
+ * @param inter -
+ * @return
+ */
 bool gameIdInterval(Game* g1, const Interval &inter);
+
+/**
+ * @brief
+ * @param g1 -
+ * @param max -
+ * @return
+ */
 bool gamePriceMax(Game* g1, const double &max);
+
+/**
+ * @brief
+ * @param g1 -
+ * @param date -
+ * @return
+ */
 bool gameRelease(Game* g1, const Date &date);
+
+/**
+ * @brief
+ * @param g1 -
+ * @param inter -
+ * @return
+ */
 bool gameAgeRange(Game* g1, const Interval &inter);
+
+/**
+ * @brief
+ * @param g1 -
+ * @param platform -
+ * @return
+ */
 bool gamePlatform(Game* g1, const std::string &platform);
+
+/**
+ * @brief
+ * @param g1 -
+ * @param genre -
+ * @return
+ */
 bool gameGenre(Game* g1, const std::string &genre);
+
+/**
+ * @brief
+ * @param g1 -
+ * @param developer -
+ * @return
+ */
 bool gameDeveloper(Game* g1, const std::string &developer);
 
+
+/**
+ * @brief
+ * @param u1 -
+ * @param inter -
+ * @return
+ */
 bool userAgeInterval(User* u1, const Interval &inter);
+
+/**
+ * @brief
+ * @param u1 -
+ * @param inter -
+ * @return
+ */
 bool userLibrarySize(User* u1, const Interval &inter);
 
 
+
 template <class Restrictor>
+/**
+ * @brief
+ * @param func -
+ * @param is_user_restrictor -
+ * @return
+ */
 bool properRestrictor(Restrictor func, const bool &is_user_restrictor){
 	switch(func){
 	case &gameIdInterval:
@@ -42,7 +111,14 @@ bool properRestrictor(Restrictor func, const bool &is_user_restrictor){
 	}
 }
 
+
 template <class Restrictor, class Argument>
+/**
+ * @brief
+ * @param func -
+ * @param arg -
+ * @return
+ */
 bool properArgument(Restrictor func, Argument arg){
 	switch(func){
 	case &gameIdInterval:
@@ -66,6 +142,13 @@ bool properArgument(Restrictor func, Argument arg){
 
 
 template <class Comparable, class Restrictor, class Argument>
+/**
+ * @brief
+ * @param v -
+ * @param func -
+ * @param arg -
+ * @return
+ */
 vector<Comparable> restrictedVector(const vector<Comparable> &v, Restrictor func, Argument arg)
 {
 	vector <Comparable> out;
@@ -74,4 +157,3 @@ vector<Comparable> restrictedVector(const vector<Comparable> &v, Restrictor func
     		out.push_back(v[i]);
     return out;
 }
-
