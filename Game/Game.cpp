@@ -97,7 +97,7 @@ void Game::changeBasePrice(const double &newPrice)
 	base_price = newPrice;
 }
 
-void Game::revertToPrice(const unsigned int &number)
+void Game::revertToPrice()
 {
 	price = base_price;
 	price_history.push_back(price);
@@ -162,5 +162,3 @@ double VariableSubsc::getPrice() const
 {
 	return price_hour * (double)getPlayTime();
 }
-
-
