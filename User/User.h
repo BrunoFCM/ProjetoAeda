@@ -137,6 +137,13 @@ public:
 	* @return
 	*/
 	void printSessionsUser(int numberOfSessions = 0) const;
+
+	/**
+	* @brief
+	* @param numberOfSessions -
+	* @return
+	*/
+	ostream giveSessionsUser(int numberOfSessions = 0) const;
 };
 
 #endif /* SRC_USER_H_ */
