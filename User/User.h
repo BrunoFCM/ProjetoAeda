@@ -14,134 +14,131 @@ class Game;
 
 
 /**
- * Classe User que contém dados sobre cada utilizador da biblioteca de jogos
+ * Classe User que contem dados sobre cada utilizador da biblioteca de jogos
  */
 class User
 {
 private:
-	string name;						//
-	string email;						//
-	unsigned int age;					//
-	string address;						//
-	vector<Card> cards;					//
-	vector<Game*> library;				//
-	vector<PlaySession*> sessions;		//
+	string name;						//correspondente ao nome do utilizador
+	string email;						//correspondente ao endereco eletronico
+	unsigned int age;					//correspondente a idade do utilizador
+	string address;						//correspondente a morada do utilizador
+	vector<Card> cards;					//correspondente ao conjunto dos cartoes do utilizador
+	vector<Game*> library;				//correspondente ao conjunto dos jogos do utilizador
+	vector<PlaySession*> sessions;		//correspondente ao conjunto dos historiais de cada sessao de jogo
+
 public:
 	/**
-	 * @brief - Construtor da classe User
-	 * @param name -
-	 * @param email -
-	 * @param age -
-	 * @param adress -
+	 * @brief Construtor da classe User
+	 * @param name Nome do jogador
+	 * @param email Endereco eletronico
+	 * @param age Idade do jogador
+	 * @param adress Morada do jogador
 	 */
 	User(const string &name, const string &email, const unsigned int &age, const string &address);
 
 	/**
-	 * @brief
-	 * @param game -
+	 * @brief Funcao que adiciona um jogo a biblioteca de jogos
+	 * @param game Jogo a adicionar
 	 */
 	void addToLibrary(Game* game);
 
 	/**
-	 * @brief
-	 * @return
+	 * @brief Funcao que retorna o nome do utilizador
+	 * @return name Nome do utilizador
 	 */
 	string getName() const;
 
 	/**
-	 * @brief
-	 * @return
+	 * @brief Funcao que retorna o endereco eletronico do utilizador
+	 * @return email Endereco eletronico do utilizador
 	 */
 	string getEmail() const;
 
 	/**
-	 * @brief
-	 * @return
+	 * @brief Funcao que retorna a idade do utilizador
+	 * @return age Idade do utilizador
 	 */
 	unsigned int getAge() const;
 
 	/**
-	 * @brief
-	 * @return
+	 * @brief Funcao que retorna a morada do utilizador
+	 * @return address Morada do utilizador
 	 */
 	string getAddress() const;
 
 	/**
-	 * @brief
-	 * @return
+	 * @brief Funcao que retorna um vetor com o conjunto dos cartoes do utilizador
+	 * @return cards Vetor com o conjunto dos cartoes do utilizador
 	 */
 	vector<Card> getCards() const;
 
 	/**
-	 * @brief
-	 * @return
+	 * @brief Funcao que retorna um vetor com o conjunto dos jogos da biblioteca do utilizador
+	 * @return library Vetor com o conjunto dos jogos da biblioteca do utilizador
 	 */
 	vector<Game*> getLibrary() const;
 
 	/**
-	 * @brief
-	 * @return
+	 * @brief Funcao que retorna um vetor com o conjunto dos historiais de cada sessao de jogo
+	 * @return Vetor com o conjunto dos historiais de cada sessao de jogo
 	 */
 	vector<PlaySession*> getSessions() const;
 
 	/**
-	 * @brief
-	 * @param user -
-	 * @return
+	 * @brief Overload do operador == para igualdade de dois utilizadores
+	 * @param user Utilizador
+	 * @return True se os utilizadores sao iguais, false caso contrario
 	 */
 	bool operator==(const User &user) const;
 
 	/**
-	* @brief
-	* @return
+	* @brief Funcao que imprime no ecra "in a human friendly way" a informacao (membros-dado) de um utilizador
 	*/
 	void printInfoUser() const;
 
 	/**
-	* @brief
-	* @return
+	* @brief Funcao que passa para uma ostream a informacao (membros-dado) de um utilizador
+	* @return info Ostream que contem a informacao (membros-dado) de um utilizador
 	*/
 	ostream giveInfoUser() const;
 
 	/**
-	* @brief
-	* @param numberOfGames -
-	* @return
+	* @brief Funcao que imprime no ecra os titulos dos jogos de um utilizador
+	* @param numberOfGames Numero de titulos a serem impressos
 	*/
 	void printLibraryUser(int numberOfGames = 0) const;
 
 	/**
-	* @brief
-	* @param numberOfGames -
-	* @return
+	* @brief Funcao que passa para uma ostream os titulos dos jogos de um utilizador
+	* @param numberOfGames Numero de titulos a serem passados
+	* @return titles Ostream que contem os titulos dos jogos de um utilizador
 	*/
 	ostream giveLibraryUser(int numberOfGames = 0) const;
 
 	/**
-	* @brief
-	* @param numberOfCards -
-	* @return
+	* @brief Funcao que imprime no ecra os numeros dos cartoes de um utilizador
+	* @param numberOfCards Numero de numeros a serem impressos
 	*/
 	void printCardsUser(int numberOfCards = 0) const;
 
 	/**
-	* @brief
-	* @param numberOfCards -
-	* @return
+	* @brief Funcao que passa para uma ostream os numeros dos cartoes de um utilizador
+	* @param numberOfCards Numero de numeros a serem passados
+	* @return numbers Ostream que contem os numeros dos cartoes de um utilizador
 	*/
 	ostream giveCardsUser(int numberOfCards = 0) const;
 
 	/**
-	* @brief
-	* @param numberOfSessions -
-	* @return
+	* @brief Funcao que imprime no ecra os historiais de cada sessao de jogo
+	* @param numberOfSessions Numero de sessoes a serem impressas
 	*/
 	void printSessionsUser(int numberOfSessions = 0) const;
 
 	/**
-	* @brief
-	* @param numberOfSessions -
-	* @return
+	* @brief Funcao que passa para uma ostream os historiais de cada sessao de jogo
+	* @param numberOfSessions Numero de sessoes a serem passadas
+	* @return sess Ostream que contem as sessoes de um utilizador
 	*/
 	ostream giveSessionsUser(int numberOfSessions = 0) const;
 };
