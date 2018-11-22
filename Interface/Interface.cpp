@@ -145,11 +145,11 @@ Game* add_game_interface(){
 
 	string aux;
 
-	std::cout << endl << "Title: ";
+	std::cout << endl << "Title\nInput: ";
 	string title;
 	getline(cin,title);
 
-	std::cout << endl << "Price: ";
+	std::cout << endl << "Price\n";
 	double price;
 	input_receiver(price);
 	price = (double)((int)(price*100))/100;
@@ -157,7 +157,7 @@ Game* add_game_interface(){
 	Date release(1,1,1901);
 	while(true){
 		try{
-			std::cout << endl << "Release date (in the DD/MM/YYYY format): ";
+			std::cout << endl << "Release date (in the DD/MM/YYYY format)\nInput: ";
 			getline(cin,aux);
 			std::cout << aux;
 			release = Date(aux);
@@ -169,15 +169,15 @@ Game* add_game_interface(){
 	}
 
 	int age_min,age_hi;
-	std::cout << endl << "Minimum age: ";
+	std::cout << endl << "Minimum age\n";
 	input_receiver(age_min);
-	std::cout << "Maximum recommended age: ";
+	std::cout << "Maximum recommended age\n";
 	input_receiver(age_hi);
 	while(age_min > age_hi){
 		std::cout << endl << "Invalid age interval, please input your values again" << std::endl;
-		std::cout << "Minimum age: ";
+		std::cout << "Minimum age\n";
 		input_receiver(age_min);
-		std::cout << "Maximum recommended age: ";
+		std::cout << "Maximum recommended age\n";
 		input_receiver(age_hi);
 	}
 	Interval range(age_min,age_hi);
@@ -200,21 +200,21 @@ Game* add_game_interface(){
 		}
 	}
 
-	std::cout << endl << "Developer: ";
+	std::cout << endl << "Developer\nInput: ";
 	string developer;
 	getline(cin,developer);
 
 	if(type == "Home")
 		return (new Home(title, price, release, range, platforms, genres, developer));
 	else if(type == "Variable Subscription"){
-		std::cout << endl << "Subscription (by the hour): ";
+		std::cout << endl << "Subscription (by the hour)\nInput: ";
 		double sub;
 		input_receiver(sub);
 		sub = (double)((int)(sub*100))/100;
 		return (new VariableSubsc(title, price, release, range, platforms, genres, developer,sub));
 	}
 	else{
-		std::cout << endl << "Subscription: ";
+		std::cout << endl << "Subscription\nInput: ";
 		double sub;
 		input_receiver(sub);
 		sub = (double)((int)(sub*100))/100;
@@ -225,6 +225,28 @@ Game* add_game_interface(){
 
 }
 	
+User* add_user_interface(){
+	std::cout << "Adding a user to the system\nPlease input the following parameters:\n";
+
+	std::cout << endl << "Name\nInput: ";
+	string name;
+	getline(cin,name);
+
+	std::cout << endl << "E-mail\n";
+	string email;
+	input_receiver(email);
+
+	std::cout << endl << "Age\n";
+	unsigned int age;
+	input_receiver(age);
+
+	std::cout << endl << "Address\nInput: ";
+	string address;
+	getline(cin,address);
+
+	return (new User(name,email,age,address));
+
+}
 
 	
 	
