@@ -116,6 +116,20 @@ public:
 	* @return
 	*/
 	ostream giveLibraryUser(int numberOfGames = 0) const;
+
+	/**
+	* @brief
+	* @param numberOfCards -
+	* @return
+	*/
+	void printCardsUser(int numberOfCards = 0) const;
+
+	/**
+	* @brief
+	* @param numberOfCards -
+	* @return
+	*/
+	ostream giveCardsUser(int numberOfCards = 0) const;
 };
 
 #endif /* SRC_USER_H_ */
