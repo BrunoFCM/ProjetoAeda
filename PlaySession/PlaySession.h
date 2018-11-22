@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Date.h"
 #include "User.h"
+#include "Game.h"
 
 using namespace std;
 
@@ -11,7 +12,7 @@ class Date;
 class User;
 
 /**
- * Classe PlaySession que contÈm os dados sobre cada sess„o de jogo realizada
+ * Classe PlaySession que cont√©m os dados sobre cada sess√£o de jogo realizada
  */
 class PlaySession
 {
@@ -20,6 +21,7 @@ private:
 	unsigned int duration;		//
 	string platform;			//
 	User* user;					//
+	Game* game;					//
 public:
 	/**
 	 *@brief - Construtor da classe PlaySession
@@ -28,7 +30,7 @@ public:
 	 *@param platform -
 	 *@param user -
 	 */
-	PlaySession(const Date date, const int duration, const string platform, User* user);
+	PlaySession(const Date date, const int duration, const string platform, User* user, Game* game);
 
 	/**
 	 * @brief
@@ -53,6 +55,18 @@ public:
 	 * @return
 	 */
 	User* getUser() const;
+
+	/**
+	* @brief
+	* @return
+	*/
+	Game* getGame() const;
+
+	/**
+	* @brief
+	* @return
+	*/
+	void printInfoSession() const;
 };
 
 #endif /* SRC_PLAYSESSION_H_ */
