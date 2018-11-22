@@ -155,3 +155,18 @@ void User::printSessionsUser(int numberOfSessions = 0) const
 			sessions[i]->printInfoSession();
 	}
 }
+
+ostream User::giveSessionsUser(int numberOfSessions = 0) const
+{
+	ostream sess;
+	if (numberOfSessions == 0)
+		for (unsigned int i = 0; i < sessions.size(); i++)
+			sess << sessions[i]->giveSessions() << "\n";
+	else
+	{
+		for (unsigned int i = 0; i < sessions.size() && i < numberOfSessions; i++)
+			sess << sessions[i]->giveSessions() << "\n";
+	}
+
+	return sessions;
+}
