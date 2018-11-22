@@ -10,6 +10,7 @@ using namespace std;
 
 class Date;
 class User;
+class Game;
 
 /**
  * Classe PlaySession que contém os dados sobre cada sessão de jogo realizada
@@ -72,7 +73,7 @@ public:
 	* @brief
 	* @return
 	*/
-	ostream giveSessions() const;
+	void giveSessions(ostream &info) const;
 };
 
 #endif /* SRC_PLAYSESSION_H_ */

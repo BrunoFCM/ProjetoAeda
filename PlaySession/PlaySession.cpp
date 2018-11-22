@@ -36,21 +36,19 @@ void PlaySession::printInfoSession() const
 	string date = date.printDate();
 	cout << setiosflags(ios::left);
 	cout << "PlaySession Data" << endl << endl;
-	cout << setw(20) << "User: "; cout << *user << endl;
-	cout << setw(20) << "Game: "; cout << *game << endl;
+	cout << setw(20) << "User: "; cout << user->getName() << endl;
+	cout << setw(20) << "Game: "; cout << game->getTitle() << endl;
 	cout << setw(20) << "Date: "; cout << date << endl;
 	cout << setw(20) << "Duration: "; cout << duration << endl;
 	cout << setw(20) << "Platform: "; cout << platform << endl;
 }
 
-ostream PlaySession::giveSessions() const
+void PlaySession::giveSessions(ostream &info) const
 {
-	ostream info;
-	info << *user << "\n"
-		 << *game << "\n"
+	info << user->getName() << "\n"
+		 << game->getTitle() << "\n"
 		 << date.printDate() << "\n"
 		 << duration << "\n"
 		 << platform << "\n";
-	return info;
 }
 
