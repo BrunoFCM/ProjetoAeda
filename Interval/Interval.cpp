@@ -11,6 +11,10 @@ unsigned int Interval::getUpper() const {
 	return upper;
 }
 
+string Interval::toStr() const {
+	return to_string(lower) + "-" + to_string(upper);
+}
+
 bool Interval::contains(const unsigned int &value) const {
 	return (value >= lower && value <= upper);
 }
