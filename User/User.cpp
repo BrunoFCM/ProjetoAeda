@@ -168,5 +168,5 @@ ostream User::giveSessionsUser(int numberOfSessions = 0) const
 			sess << sessions[i]->giveSessions() << "\n";
 	}
 
-	return sessions;
+	return sess;
 }
