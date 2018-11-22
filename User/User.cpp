@@ -143,3 +143,15 @@ ostream User::giveCardsUser(int numberOfCards = 0) const
 
 	return numbers;
 }
+
+void User::printSessionsUser(int numberOfSessions = 0) const
+{
+	if (numberOfSessions == 0)
+		for (unsigned int i = 0; i < sessions.size(); i++)
+			sessions[i]->printInfoSession();
+	else
+	{
+		for (unsigned int i = 0; i < sessions.size() && i < numberOfSessions; i++)
+			sessions[i]->printInfoSession();
+	}
+}
