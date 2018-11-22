@@ -14,7 +14,7 @@ class Game;
 
 
 /**
- * Classe User que contém dados sobre cada utilizador da biblioteca de jogos
+ * Classe User que contÃ©m dados sobre cada utilizador da biblioteca de jogos
  */
 class User
 {
@@ -90,6 +90,18 @@ public:
 	 * @return
 	 */
 	bool operator==(const User &user) const;
+
+	/**
+	* @brief
+	* @return
+	*/
+	void printInfoUser() const;
+
+	/**
+	* @brief
+	* @return
+	*/
+	ostream giveInfoUser() const;
 };
 
 #endif /* SRC_USER_H_ */
