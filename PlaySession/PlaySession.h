@@ -67,6 +67,13 @@ public:
 	* @return
 	*/
 	void printInfoSession() const;
+
+	/**
+	* @brief
+	* @return
+	*/
+	ostream giveSessions() const;
 };
 
 #endif /* SRC_PLAYSESSION_H_ */
+
