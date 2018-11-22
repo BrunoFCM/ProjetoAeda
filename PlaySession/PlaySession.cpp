@@ -42,3 +42,15 @@ void PlaySession::printInfoSession() const
 	cout << setw(20) << "Duration: "; cout << duration << endl;
 	cout << setw(20) << "Platform: "; cout << platform << endl;
 }
+
+ostream PlaySession::giveSessions() const
+{
+	ostream info;
+	info << *user << "\n"
+		 << *game << "\n"
+		 << date.printDate() << "\n"
+		 << duration << "\n"
+		 << platform << "\n";
+	return info;
+}
+
