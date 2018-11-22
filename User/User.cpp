@@ -90,7 +90,7 @@ ostream User::giveInfoUser() const
 	return info;
 }
 
-void User::printLibraryUser(int numberOfGames) const
+void User::printLibraryUser(int numberOfGames = 0) const
 {
 	if (numberOfGames == 0)
 		for (unsigned int i = 0; i < library.size(); i++)
@@ -115,4 +115,31 @@ ostream User::giveLibraryUser(int numberOfGames = 0) const
 	}
 
 	return titles;
+}
+
+void User::printCardsUser(int numberOfCards = 0) const
+{
+	if (numberOfCards == 0)
+		for (unsigned int i = 0; i < cards.size(); i++)
+			cout << cards[i].getNumber() << "\n";
+	else
+	{
+		for (unsigned int i = 0; i < cards.size() && i < numberOfCards; i++)
+			cout << cards[i].getNumber() << "\n";
+	}
+}
+
+ostream User::giveCardsUser(int numberOfCards = 0) const
+{
+	ostream numbers;
+	if (numberOfCards == 0)
+		for (unsigned int i = 0; i < cards.size(); i++)
+			numbers << cards[i].getNumber() << "\n";
+	else
+	{
+		for (unsigned int i = 0; i < cards.size() && i < numberOfCards; i++)
+			numbers << cards[i].getNumber() << "\n";
+	}
+
+	return numbers;
 }
