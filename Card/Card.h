@@ -15,7 +15,7 @@ class Card{
 public:
 	/**
 	 * @brief Construtor da classe Card usando apenas o numero do cartao
-	 * @param number Numero numero de identificao do cartao
+	 * @param number Numero de identificao do cartao
 	 */
 	Card(const string &number);
 
