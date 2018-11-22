@@ -27,6 +27,27 @@ void System::addGame(Game* game)
 	store.push_back(game);
 }
 
+Game* System::searchGame(unsigned int id){
+	for (unsigned int i = 0; i < store.size(); i++)
+		if (store[i]->getId() == id)
+			return store[i];
+	throw NonExistantGame(to_string(id));
+}
+
+Game* System::searchGame(string title){
+	for (unsigned int i = 0; i < store.size(); i++)
+		if (store[i]->getTitle() == title)
+			return store[i];
+	throw NonExistantGame(title);
+}
+
+User* System::searchUser(string name){
+	for (unsigned int i = 0; i < user_library.size(); i++)
+		if (user_library[i]->getName() == name)
+			return user_library[i];
+	throw NonExistantUser(name);
+}
+
 void System::sortUsers(const UserComparer &comparer){
 	if(!isUserComparer(comparer))
 		throw InvalidComparer();
@@ -38,3 +59,7 @@ void System::sortGames(const GameComparer &comparer){
 		throw InvalidComparer();
 	insertionSort(store,comparer);
 }
+
+
+
+
