@@ -89,3 +89,30 @@ ostream User::giveInfoUser() const
 		 << sessions.size() << "\n";
 	return info;
 }
+
+void User::printLibraryUser(int numberOfGames) const
+{
+	if (numberOfGames == 0)
+		for (unsigned int i = 0; i < library.size(); i++)
+			cout << library[i]->getTitle() << "\n";
+	else
+	{
+		for (unsigned int i = 0; i < library.size() && i < numberOfGames; i++)
+			cout << library[i]->getTitle() << "\n";
+	}
+}
+
+ostream User::giveLibraryUser(int numberOfGames = 0) const
+{
+	ostream titles;
+	if (numberOfGames == 0)
+		for (unsigned int i = 0; i < library.size(); i++)
+			titles << library[i]->getTitle() << "\n";
+	else
+	{
+		for (unsigned int i = 0; i < library.size() && i < numberOfGames; i++)
+			titles << library[i]->getTitle() << "\n";
+	}
+
+	return titles;
+}
