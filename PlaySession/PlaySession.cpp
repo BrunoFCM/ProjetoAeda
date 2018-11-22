@@ -33,7 +33,7 @@ Game* PlaySession::getGame() const
 
 void PlaySession::printInfoSession() const
 {
-	string date = date.printDate();
+	string date = date.toStr();
 	cout << setiosflags(ios::left);
 	cout << "PlaySession Data" << endl << endl;
 	cout << setw(20) << "User: "; cout << user->getName() << endl;
@@ -47,7 +47,7 @@ void PlaySession::giveSessions(ostream &info) const
 {
 	info << user->getName() << "\n"
 		 << game->getTitle() << "\n"
-		 << date.printDate() << "\n"
+		 << date.toStr() << "\n"
 		 << duration << "\n"
 		 << platform << "\n";
 }
