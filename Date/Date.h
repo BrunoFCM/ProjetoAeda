@@ -14,15 +14,15 @@ private:
 public:
 	/**
 	 * @brief Construtor da classe Date usando strings
-	 * @param date - string de uma data no formato DD-MM-AAAA
+	 * @param date String de uma data no formato DD/MM/AAAA
 	 */
 	Date(const std::string &date);
 
 	/**
 	 * @brief Construtor da classe Date usando numeros inteiros
-	 * @param d - dia de uma data
-	 * @param m - mes de uma data
-	 * @param y - ano de uma data
+	 * @param d Dia de uma data
+	 * @param m Mes de uma data
+	 * @param y Ano de uma data
 	 */
 	Date(const unsigned int &d, const unsigned int &m, const unsigned int &y);
 
@@ -45,11 +45,21 @@ public:
 	unsigned int getYear() const;
 
 	/**
-	 * @brief Membro funcao que permite obter uma data no formato DD-MM-AAAA
-	 * @return Retorna string de uma data no formato DD-MM-AAAA
+	 * @brief Membro funcao que permite obter uma data no formato DD/MM/AAAA
+	 * @return Retorna string de uma data no formato DD/MM/AAAA
 	 */
-	std::string getDate() const;
+	std::string toStr() const;
+
+	/**
+	 * @brief Compara se uma data e anterior a outra
+	 * @return True se for anterior, false se for posterior
+	 */
 	bool operator< (const Date &date2) const;
+
+	/**
+	 * @brief Compara se uma data e igual a outra
+	 * @return True se forem iguais, false se nao forem
+	 */
 	bool operator== (const Date &date2) const;
 };
 
