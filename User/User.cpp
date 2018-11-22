@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "User.h"
 #include "Exceptions.h"
 
@@ -61,4 +62,30 @@ vector<PlaySession*> User::getSessions() const
 bool User::operator==(const User &user) const
 {
 	return (name == user.name && email == user.email && age ==user.age && address == user.address);
+}
+
+void User::printInfoUser() const
+{
+	cout << setiosflags(ios::left);
+	cout << "User Data" << endl << endl;
+	cout << setw(20) << "Name: "; cout << name << endl;
+	cout << setw(20) << "Email: "; cout << email << endl;
+	cout << setw(20) << "Age: "; cout << age << endl;
+	cout << setw(20) << "Address: "; cout << address << endl;
+	cout << setw(20) << "Number of cards: "; cout << cards.size() << endl;
+	cout << setw(20) << "Number of games: "; cout << library.size() << endl;
+	cout << setw(20) << "Number of sessions: "; cout << sessions.size() << endl;
+}
+
+ostream User::giveInfo() const
+{
+	ostream info;
+	info << name << "\n"
+		 << email << "\n"
+		 << age << "\n"
+		 << address << "\n"
+		 << cards.size() << "\n"
+		 << library.size() << "\n"
+		 << sessions.size() << "\n";
+	return info;
 }
