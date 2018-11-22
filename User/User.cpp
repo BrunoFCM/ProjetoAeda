@@ -77,9 +77,8 @@ void User::printInfoUser() const
 	cout << setw(20) << "Number of sessions: "; cout << sessions.size() << endl;
 }
 
-ostream User::giveInfoUser() const
+void User::giveInfoUser(ostream &info) const
 {
-	ostream info;
 	info << name << "\n"
 		 << email << "\n"
 		 << age << "\n"
@@ -87,7 +86,6 @@ ostream User::giveInfoUser() const
 		 << cards.size() << "\n"
 		 << library.size() << "\n"
 		 << sessions.size() << "\n";
-	return info;
 }
 
 void User::printLibraryUser(int numberOfGames = 0) const
@@ -104,7 +102,7 @@ void User::printLibraryUser(int numberOfGames = 0) const
 
 ostream User::giveLibraryUser(int numberOfGames = 0) const
 {
-	ostream titles;
+	ostream titles(NULL);
 	if (numberOfGames == 0)
 		for (unsigned int i = 0; i < library.size(); i++)
 			titles << library[i]->getTitle() << "\n";
@@ -131,7 +129,7 @@ void User::printCardsUser(int numberOfCards = 0) const
 
 ostream User::giveCardsUser(int numberOfCards = 0) const
 {
-	ostream numbers;
+	ostream numbers(NULL);
 	if (numberOfCards == 0)
 		for (unsigned int i = 0; i < cards.size(); i++)
 			numbers << cards[i].getNumber() << "\n";
@@ -158,14 +156,18 @@ void User::printSessionsUser(int numberOfSessions = 0) const
 
 ostream User::giveSessionsUser(int numberOfSessions = 0) const
 {
-	ostream sess;
+	ostream sess(NULL);
 	if (numberOfSessions == 0)
-		for (unsigned int i = 0; i < sessions.size(); i++)
-			sess << sessions[i]->giveSessions() << "\n";
+		for (unsigned int i = 0; i < sessions.size(); i++){
+			sessions[i]->giveSessions(sess);
+			sess << "\n";
+		}
 	else
 	{
-		for (unsigned int i = 0; i < sessions.size() && i < numberOfSessions; i++)
-			sess << sessions[i]->giveSessions() << "\n";
+		for (unsigned int i = 0; i < sessions.size() && i < numberOfSessions; i++){
+			sessions[i]->giveSessions(sess);
+			sess << "\n";
+		}
 	}
 
 	return sess;

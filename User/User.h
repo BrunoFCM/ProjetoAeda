@@ -99,9 +99,9 @@ public:
 
 	/**
 	* @brief Funcao que passa para uma ostream a informacao (membros-dado) de um utilizador
-	* @return info Ostream que contem a informacao (membros-dado) de um utilizador
+	* @param info Ostream que ira conter a informacao (membros-dado) de um utilizador
 	*/
-	ostream giveInfoUser() const;
+	void giveInfoUser(ostream &info) const;
 
 	/**
 	* @brief Funcao que imprime no ecra os titulos dos jogos de um utilizador
