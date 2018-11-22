@@ -9,34 +9,34 @@ Date::Date(const std::string &date) {		//input no formato DD-MM-AAAA
 
 	day = std::stoi(date.substr(0,2));
 	month = std::stoi(date.substr(3,2));
-	year = std::stoi(date.substr(5,4));
+	year = std::stoi(date.substr(6,4));
 
 
 	if (year < 1900) {
-		std::string info ="ano " + date.substr(5,4);
+		std::string info ="year " + date.substr(5,4);
 		throw InvalidDate(info);
 	}
 
 	if (month < 1 || month > 12) {
-		std::string info = "mes " + date.substr(3,2);
+		std::string info = "month " + date.substr(3,2);
 		throw InvalidDate(info);
 	}
 
 	if (month == 2) {
 		if (day < 1 || day > 28) {
-			std::string info = "dia " + date.substr(0,2);
+			std::string info = "day " + date.substr(0,2);
 			throw InvalidDate(info);
 		}
 	}
 	else if (month == 1 || month == 3 || month == 5 || month == 7|| month == 8 || month == 10|| month == 12) {
 		if (day < 1 || day > 31) {
-			std::string info = "dia " + date.substr(0,2);
+			std::string info = "day " + date.substr(0,2);
 			throw InvalidDate(info);
 		}
 	}
 	else {
 		if (day < 1 || day > 30) {
-			std::string info = "dia " + date.substr(0,2);
+			std::string info = "day " + date.substr(0,2);
 			throw InvalidDate(info);
 		}
 	}
@@ -49,30 +49,30 @@ Date::Date(const unsigned int &d, const unsigned int &m, const unsigned int &y) 
 		year = y;
 
 		if (year < 1900) {
-			std::string info ="ano " + std::to_string(y);
+			std::string info ="year " + std::to_string(y);
 			throw InvalidDate(info);
 		}
 
 		if (month < 1 || month > 12) {
-			std::string info = "mes " + std::to_string(m);
+			std::string info = "month " + std::to_string(m);
 			throw InvalidDate(info);
 		}
 
 		if (month == 2) {
 			if (day < 1 || day > 28) {
-				std::string info = "dia " + std::to_string(d);
+				std::string info = "day " + std::to_string(d);
 				throw InvalidDate(info);
 			}
 		}
 		else if (month == 1 || month == 3 || month == 5 || month == 7|| month == 8 || month == 10|| month == 12) {
 			if (day < 1 || day > 31) {
-				std::string info = "dia " + std::to_string(d);
+				std::string info = "day " + std::to_string(d);
 				throw InvalidDate(info);
 			}
 		}
 		else {
 			if (day < 1 || day > 30) {
-				std::string info = "dia " + std::to_string(d);
+				std::string info = "day " + std::to_string(d);
 				throw InvalidDate(info);
 			}
 		}
