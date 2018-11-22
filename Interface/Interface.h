@@ -26,6 +26,8 @@ void input_receiver(T &input){
 		std::cout << "Input: ";
 		std::cin >> input;
 	}
+
+	std::cin.ignore(1000, '\n');
 }
 
 void draw_header(std::string message);
@@ -38,7 +40,7 @@ void system_menu_interface();
 void print_system_interface();
 int prompt_system_interface();
 
-void add_game_interface();
+Game * add_game_interface();
 
 void add_user_interface();
 Card add_card_interface();

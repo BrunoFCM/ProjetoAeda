@@ -81,22 +81,29 @@ void system_menu_interface(){
 			add_game_interface();
 			break;
 		case 2:
-			add_user_interface();
+			//add_user_interface();
 			break;
 		case 3:
 			//sorts
+			break;
 		case 4:
 			//sorts
+			break;
 		case 5:
 			//search
+			break;
 		case 6:
 			//search
+			break;
 		case 7:
 			//vector
+			break;
 		case 8:
 			//vector
+			break;
 		case 0:
 			//hol' up
+			break;
 		}
 	}
 }
@@ -125,6 +132,98 @@ int prompt_system_interface(){
 	return input;
 }
 	
+Game* add_game_interface(){
+	std::cout << "Adding a game to the system library\nPlease input the following parameters:\n";
+
+	std::cout << endl << "Game type (Home, Variable Subscription, Fixed Subscription): ";
+	string type;
+	getline(cin,type);
+	while(type != "Home" && type != "Variable Subscription" && type != "Fixed Subscription"){
+		std::cout << "Please insert a correct type" << std::endl;
+		getline(cin,type);
+	}
+
+	string aux;
+
+	std::cout << endl << "Title: ";
+	string title;
+	getline(cin,title);
+
+	std::cout << endl << "Price: ";
+	double price;
+	input_receiver(price);
+	price = (double)((int)(price*100))/100;
+
+	Date release(1,1,1901);
+	while(true){
+		try{
+			std::cout << endl << "Release date (in the DD/MM/YYYY format): ";
+			getline(cin,aux);
+			std::cout << aux;
+			release = Date(aux);
+			break;
+		}
+		catch(InvalidDate &e){
+			e.printInf();
+		}
+	}
+
+	int age_min,age_hi;
+	std::cout << endl << "Minimum age: ";
+	input_receiver(age_min);
+	std::cout << "Maximum recommended age: ";
+	input_receiver(age_hi);
+	while(age_min > age_hi){
+		std::cout << endl << "Invalid age interval, please input your values again" << std::endl;
+		std::cout << "Minimum age: ";
+		input_receiver(age_min);
+		std::cout << "Maximum recommended age: ";
+		input_receiver(age_hi);
+	}
+	Interval range(age_min,age_hi);
+
+	vector<string> platforms;
+	std::cout << endl << "List of platforms (one input per platform, input '.' to end, at least one platform is necessary):\n";
+	while(aux[0] != '.' || (!platforms.size())){
+		getline(cin,aux);
+		if (aux[0] != '.'){
+			platforms.push_back(aux);
+		}
+	}
+
+	vector<string> genres;
+	std::cout << endl << "List of genres (one input per genre, input '.' to end, at least one genre is necessary):\n";
+	while(aux[0] != '.' || (!genres.size())){
+		getline(cin,aux);
+		if (aux[0] != '.'){
+			genres.push_back(aux);
+		}
+	}
+
+	std::cout << endl << "Developer: ";
+	string developer;
+	getline(cin,developer);
+
+	if(type == "Home")
+		return (new Home(title, price, release, range, platforms, genres, developer));
+	else if(type == "Variable Subscription"){
+		std::cout << endl << "Subscription (by the hour): ";
+		double sub;
+		input_receiver(sub);
+		sub = (double)((int)(sub*100))/100;
+		return (new VariableSubsc(title, price, release, range, platforms, genres, developer,sub));
+	}
+	else{
+		std::cout << endl << "Subscription: ";
+		double sub;
+		input_receiver(sub);
+		sub = (double)((int)(sub*100))/100;
+		return (new FixedSubsc(title, price, release, range, platforms, genres, developer,sub));
+	}
+
+	return NULL;
+
+}
 	
 
 	
