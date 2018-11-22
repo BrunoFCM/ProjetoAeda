@@ -102,6 +102,21 @@ public:
 	* @return
 	*/
 	ostream giveInfoUser() const;
+
+	/**
+	* @brief
+	* @param numberOfGames -
+	* @return
+	*/
+	void printLibraryUser(int numberOfGames = 0) const;
+
+	/**
+	* @brief
+	* @param numberOfGames -
+	* @return
+	*/
+	ostream giveLibraryUser(int numberOfGames = 0) const;
 };
 
 #endif /* SRC_USER_H_ */
+
