@@ -97,7 +97,7 @@ void Game::changeBasePrice(const double &newPrice)
 	base_price = newPrice;
 }
 
-void Game::revertToPrice()
+void Game::revertToPrice(const unsigned int &number)
 {
 	price = base_price;
 	price_history.push_back(price);
@@ -122,11 +122,10 @@ vector<Date> Home::getUpdates() const
 }
 
 
-Online::Online(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer, const int &play_time, const vector<PlaySession*> &play_history):
+Online::Online(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer):
 		Game(title,price,release,age_range,platforms,genres,developer){
-	this->play_time = play_time;
-	this->play_history = play_history;
-}
+	play_time = 0;
+};
 
 int Online::getPlayTime() const
 {
@@ -143,8 +142,8 @@ double Online::getPrice() const
 	return 0;
 }
 
-FixedSubsc::FixedSubsc(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer, const int &play_time, const vector<PlaySession*> &play_history,const double &fixed_price) :
-	Online(title,price,release,age_range,platforms,genres,developer,play_time,play_history){
+FixedSubsc::FixedSubsc(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer, const double &fixed_price) :
+	Online(title,price,release,age_range,platforms,genres,developer){
 	this->fixed_price = fixed_price;
 }
 
@@ -153,8 +152,8 @@ double FixedSubsc::getPrice() const
 	return fixed_price;
 }
 
-VariableSubsc::VariableSubsc(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer, const int &play_time, const vector<PlaySession*> &play_history,const double &price_hour) :
-	Online(title,price,release,age_range,platforms,genres,developer,play_time,play_history){
+VariableSubsc::VariableSubsc(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer, const double &price_hour) :
+	Online(title,price,release,age_range,platforms,genres,developer){
 	this->price_hour = price_hour;
 }
 
@@ -162,3 +161,5 @@ double VariableSubsc::getPrice() const
 {
 	return price_hour * (double)getPlayTime();
 }
+
+

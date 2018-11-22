@@ -1,7 +1,5 @@
-#ifndef SRC_GAME_H_
-#define SRC_GAME_H_
-
 #pragma once
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -12,9 +10,8 @@
 
 using namespace std;
 
-class Date;
 class User;
-class Interval;
+
 
 class Game
 {
@@ -30,7 +27,6 @@ private:
 	string developer;						//empresa que o desenvolveu
 	vector<double> price_history;			//historial de precos de aquisicao
 	vector<User*> users;				    //vetor de utilizadores
-	static unsigned int id_seq;
 public:
 
 	/**
@@ -38,12 +34,12 @@ public:
 	* @param title - nome do jogo
 	* @param price - preco de aquisicao do jogo
 	* @param release - data de lancamento do jogo
-	* @param age_range - faixa etaria a que se tem de pertencer para se poder jogar
+	* @param age_range - faixa etaria a que se tem de pertencer para se poder jogar 
 	* @param platform - vetor de plataformas para as quais o jogo se encontra disponivel
 	* @param genre - vetor de generos dos jogos
 	* @param developer - empresa respnsavel pela criacao do jogo
 	*/
-	Game(string title, double price, Date release, Interval age_range, vector<string> platforms, vector<string> genres, string developer);
+	Game(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer);
 
 	/**
 	* @brief Membro-funcao que retorna o identificador unico de um jogo
@@ -103,95 +99,68 @@ public:
 	* @brief Membro-funcao que retorna o historial de precos de aquisicao do jogo
 	* @return Retorna o historial de precos de aquisicao do jogo
 	*/
-	vector<unsigned int> getPriceHist() const;
+	vector<double> getPriceHist() const;
 
 	/**
 	* @brief Overload do operador == para jogos
-	* @param game - jogo com qual é comparado
 	* @return Retorna true se o id dos dois jogos for igual e false caso contrario
 	*/
 	bool operator==(Game &game);
 
-	/**
-	* @brief Altera o preço atual do jogo
-	* @param newPrice - novo preço do jogo
-	*/
 	void changePrice(const double &newPrice);
 
-	/**
-	* @brief Define um desconto para um jogo
-	* @param percentage - desconto a definir
-	*/
 	void discountPrice(const unsigned int &percentage);
 
-	/**
-	* @brief Altera o preço base do jogo
-	* @param newPrice - novo preço base do jogo
-	*/
 	void changeBasePrice(const double &newPrice);
 
-	/**
-	* @brief Altera o preço para o preço base
-	*/
-	void revertToPrice();
+	void revertToPrice(const unsigned int &number);
 
-	/**
-	* @brief Adiciona um utilizador à base de jogadores de jogo
-	* @param user - utilizador a adicionar
-	*/
 	void addUser(User* user);
 };
 
-/**
- * Classe Online derivada da classe Game
- */
+
+class PlaySession;
+
 class Online : public Game
 {
 private:
-	vector<User*> users;			//conjunto de utilizadores
 	int play_time;					//tempo jogado
-	PlaySession play_history;		//historial para cada jogo online que inclui: quando foi jogado, por quanto tempo e em que plataforma
+	vector <PlaySession *> play_history;		//historial para cada jogo online que inclui: quando foi jogado, por quanto tempo e em que plataforma
 public:
-
+	Online(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer);
+	virtual ~Online() {};
+	int getPlayTime() const;
+	vector<PlaySession*> getPlayHistory() const;
+	virtual double getPrice() const;
 };
 
-
-/**
- * Classe Fixed_Subsc derivada da classe Online
- */
-class Fixed_Subsc : public Online
+class FixedSubsc : public Online
 {
 private:
-	int fixed_price;				 //preÃ§o fixo
+	double fixed_price;				 //preco fixo
 public:
-
+	FixedSubsc(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer, const double &fixed_price);
+	double getPrice() const;
 };
 
-/**
- * Classe Variable_Subsc derivada da classe Online
- */
-class Variable_Subsc : public Online
+class VariableSubsc : public Online
 {
 private:
 	int price_hour;					 //preco variavel: custo do jogo por hora
 public:
-
+	VariableSubsc(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer, const double &price_hour);
+	double getPrice() const;
 };
 
-/**
- * Classe Home derivada da classe Game
- */
 class Home : public Game
 {
 private:
 	vector<Date> updates;					 //data das atualizacoes em que o utilizador fez download do respetivo titulo (1 euro cada)
 public:
-	/**
-	 * @brief - construtor da classe Home (derivada da classe Game)
-	 */
-	Home(string title, double price, Date release, Interval age_range, vector<string> platforms, vector<string> genres, string developer);
+	Home(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer);
 	vector<Date> getUpdates() const;
 };
 
 
-#endif /* SRC_GAME_H_ */
+
+
