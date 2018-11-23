@@ -45,13 +45,13 @@ public:
  */
 class InvalidDate: public Exception {
 public:
-	/*
+	/**
 	 * @brief Construtor da classe InvalidDate
 	 * @param info Informacao relativamente a instrucao que gerou uma excecao, do tipo de dados adequado
 	 */
 	InvalidDate(const std::string &info): Exception(info) {}
 
-	/*
+	/**
 	 * @brief Membro funcao que imprime informacao relativamente a excecao
 	 */
 	void printInf() const {
@@ -65,7 +65,7 @@ public:
  */
 class RepeatedGame: public Exception{
 public:
-	/*
+	/**
 	 * @brief Construtor da classe RepeatedGame
 	 * @param info Informacao relativamente a instrucao que gerou uma excecao, do tipo de dados adequado
 	 */
@@ -79,13 +79,29 @@ public:
 	}
 };
 
+/**
+ * Classe que gera excecoes de cartoes ja existentes
+ */
+class RepeatedCard: public Exception {
+	/**
+	 * @brief Construtor da classe RepeatedCard
+	 */
+	RepeatedCard(const std::string &info): Exception(info) {}
 
-/*
+	/**
+	 * @brief Membro funcao que imprime informacao relativamente a excecao
+	 */
+	void printInf() const {
+		std::cout << "Cartao repetido: " << getInf() << "" << std::endl;
+	}
+};
+
+/**
  * Classe que gera excecoes de utilizadores ja existentes (em termos de user ID)
  */
 class RepeatedUser: public Exception {
 public:
-	/*
+	/**
 	 * @brief Construtor da classe RepeatedUser
 	 * @param info Informacao relativamente a instrucao que gerou uma excecao, do tipo de dados adequado
 	 */
