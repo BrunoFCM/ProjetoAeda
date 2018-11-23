@@ -46,19 +46,19 @@ public:
 
 	/**
 	 * @brief Funcao que retorna o valor do saldo do cartao (balance)
-	 * @return balance Saldo do cartao
+	 * @return Retorna o saldo de um cartao
 	 */
 	double getBalance() const;
 
 	/**
 	 * @brief Funcao que retorna true se o numero do cartao for valido (valid)
-	 * @return valid True se o numero do cartao for valido
+	 * @return Retorna true se o numero do cartao for valido
 	 */
 	bool getValidity() const;
 
 	/**
 	 * @brief Funcao que retorna o numero do cartao
-	 * @return card_number Numero do cartao
+	 * @return Retorna o numero de um cartao
 	 */
 	string getNumber() const;
 };
