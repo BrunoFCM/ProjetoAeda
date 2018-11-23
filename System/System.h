@@ -63,26 +63,26 @@ public:
 	 */
 	void sortGames(const GameComparer &comparer);
 
+	template <class Restrictor, class Argument>
 	/**
 	 * @brief
 	 * @param func -
 	 * @param arg -
 	 * @return
 	 */
- 	template <class Restrictor, class Argument>
 	vector<User*> sortUsersRestrict(const Restrictor &func, const Argument &arg){
 		if(!properRestrictor(func, USER_RESTRICTOR)) throw InvalidRestrictor();
 		if(!properArgument(func, arg)) throw InvalidArgument();
 		return restrictedVector(user_library,func,arg);
 	}
 
+	template <class Restrictor, class Argument>
 	/**
 	 * @brief
 	 * @param func -
 	 * @param arg -
 	 * @return
 	 */
-	template <class Restrictor, class Argument>
 	vector<Game*> sortGamesRestrict(const Restrictor &func, const Argument &arg){
 		if(!properRestrictor(func, GAME_RESTRICTOR)) throw InvalidRestrictor();
 		if(!properArgument(func, arg)) throw InvalidArgument();
