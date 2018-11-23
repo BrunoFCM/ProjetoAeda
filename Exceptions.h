@@ -4,11 +4,11 @@
 #include <iostream>
 
 /*
- * Classe abstrata que contém todas as exceções tratadas no programa
+ * Classe abstrata que contem todas as excecoes tratadas no programa
  */
 class Exception {
 private:
-	std::string info;			//informação relativamente à instrução que gerou uma exceção
+	std::string info;			//informaco relativamente a instrucao que gerou uma excecao
 
 public:
 	/**
@@ -18,18 +18,18 @@ public:
 
 	/**
 	 * @brief Construtor da classe Exception
-	 * @param info - informação relativamente à instrução que gerou uma exceção, do tipo de dados adequado
+	 * @param info Informacao relativamente a instrucao que gerou uma excecao, do tipo de dados adequado
 	 */
 	Exception(const std::string &info): info(info) {}
 
 	/**
-	 * @brief Membro função que retorna a intrução que gerou uma exceção
-	 * @return Retorna a instrução que gerou uma exceção
+	 * @brief Membro funcao que retorna a intrucao que gerou uma excecao
+	 * @return Retorna a instrucao que gerou uma excecao
 	 */
 	std::string getInf() const {return info;}
 
 	/*
-	 * @brief Membro função virtual puro que imprime informação relativamente a uma dada exceção
+	 * @brief Membro funcao virtual puro que imprime informacao relativamente a uma dada excecao
 	 */
 	virtual void printInf() const = 0;
 
@@ -40,98 +40,99 @@ public:
 };
 
 
-
 /*
- * Classe que gera exceções de datas inválidas
+ * Classe que gera excecoes de datas invalidas
  */
 class InvalidDate: public Exception {
 public:
 	/*
 	 * @brief Construtor da classe InvalidDate
-	 * @param info - informação relativamente à instrução que gerou uma exceção, do tipo de dados adequado
+	 * @param info Informacao relativamente a instrucao que gerou uma excecao, do tipo de dados adequado
 	 */
 	InvalidDate(const std::string &info): Exception(info) {}
 
 	/*
-	 * @brief Membro função que imprime informação relativamente à exceção
+	 * @brief Membro funcao que imprime informacao relativamente a excecao
 	 */
 	void printInf() const {
-		std::cout << "Data inválida : '" << getInf() << "'" << std::endl;
+		std::cout << "Data invalida : '" << getInf() << "'" << std::endl;
 	}
 };
 
 
-
 /*
- * Classe que gera exceções de jogos já existentes
+ * Classe que gera excecoes de jogos ja existentes
  */
 class RepeatedGame: public Exception{
 public:
 	/*
 	 * @brief Construtor da classe RepeatedGame
-	 * @param info - informação relativamente à instrução que gerou uma exceção, do tipo de dados adequado
+	 * @param info Informacao relativamente a instrucao que gerou uma excecao, do tipo de dados adequado
 	 */
 	RepeatedGame(const std::string &info): Exception(info) {}
 
 	/**
-	 * @brief Membro função que imprime informação relativamente à exceção
+	 * @brief Membro funcao que imprime informacao relativamente a excecao
 	 */
 	void printInf() const {
 		std::cout << "Jogo Repetido: 'ID " << getInf() << "'" << std::endl;
 	}
 };
 
+
 /*
- * Classe que gera exceções de utilizadores já existentes (em termos de user ID)
+ * Classe que gera excecoes de utilizadores ja existentes (em termos de user ID)
  */
 class RepeatedUser: public Exception {
 public:
 	/*
 	 * @brief Construtor da classe RepeatedUser
-	 * @param info - informação relativamente à instrução que gerou uma exceção, do tipo de dados adequado
+	 * @param info Informacao relativamente a instrucao que gerou uma excecao, do tipo de dados adequado
 	 */
 	RepeatedUser(const std::string &info): Exception(info) {}
 
 	/**
-	 * @brief Membro função que imprime informação relativamente à exceção
+	 * @brief Membro funcao que imprime informacao relativamente a excecao
 	 */
 	void printInf() const {
 		std::cout << "Utilizador repetido: 'ID " << getInf() << "'" << std::endl;
 	}
 };
 
+
 /*
- * Classe que gera exceções de jogos inexistentes
+ * Classe que gera excecoes de jogos inexistentes
  */
 class NonExistantGame: public Exception{
 public:
 	/*
 	 * @brief Construtor da classe NonExistantGame
-	 * @param info - informação relativamente à instrução que gerou uma exceção, do tipo de dados adequado
+	 * @param info Informacao relativamente a instrucao que gerou uma excecao, do tipo de dados adequado
 	 */
 	NonExistantGame(const std::string &info): Exception(info) {}
 
 	/**
-	 * @brief Membro função que imprime informação relativamente à exceção
+	 * @brief Membro funcao que imprime informacao relativamente a excecao
 	 */
 	void printInf() const {
 		std::cout << "Jogo inexistente: " << getInf() << "'" << std::endl;
 	}
 };
 
+
 /*
- * Classe que gera exceções de utilizadores inexistentes
+ * Classe que gera excecoes de utilizadores inexistentes
  */
 class NonExistantUser: public Exception {
 public:
 	/*
 	 * @brief Construtor da classe NonExistantGame
-	 * @param info - informação relativamente à instrução que gerou uma exceção, do tipo de dados adequado
+	 * @param info - informacao relativamente a instrucao que gerou uma excecao, do tipo de dados adequado
 	 */
 	NonExistantUser(const std::string &info): Exception(info) {}
 
 	/**
-	 * @brief Membro função que imprime informação relativamente à exceção
+	 * @brief Membro funcao que imprime informacao relativamente a excecao
 	 */
 	void printInf() const {
 		std::cout << "Utilizador inexistente: 'ID " << getInf() << "'" << std::endl;
@@ -139,9 +140,8 @@ public:
 };
 
 
-
 /*
- * Classe que gera exceções de comparadores inválidos
+ * Classe que gera excecoes de comparadores invalidos
  */
 class InvalidComparer: public Exception{
 public:
@@ -151,13 +151,17 @@ public:
 	InvalidComparer() {}
 
 	/**
-	 * @brief Membro função que imprime informação relativamente à exceção
+	 * @brief Membro funcao que imprime informacao relativamente a excecao
 	 */
 	void printInf() const {
-		std::cout << "Comparador Inválido" << std::endl;
+		std::cout << "Comparador Invalido" << std::endl;
 	};
 };
 
+
+/*
+ * Classe que gera excecoes de restritores invalidos
+ */
 class InvalidRestrictor: public Exception{
 public:
 	/*
@@ -166,12 +170,17 @@ public:
 	InvalidRestrictor() {}
 
 	/**
-	 * @brief Membro função que imprime informação relativamente à exceção
+	 * @brief Membro funcao que imprime informacao relativamente a excecao
 	 */
 	void printInf() const {
-		std::cout << "Comparador Inválido" << std::endl;
+		std::cout << "Comparador Invalido" << std::endl;
 	};
 };
+
+
+/*
+ * Classe que gera excecoes de argumentos invalidos
+ */
 class InvalidArgument: public Exception{
 public:
 	/*
@@ -180,13 +189,15 @@ public:
 	InvalidArgument() {}
 
 	/**
-	 * @brief Membro função que imprime informação relativamente à exceção
+	 * @brief Membro funcao que imprime informacao relativamente a excecao
 	 */
 	void printInf() const {
-		std::cout << "Comparador Inválido"<< std::endl;
+		std::cout << "Comparador Invalido"<< std::endl;
 	};
 };
 
 
 #endif /* EXCEPTIONS_H_ */
+
+
 
