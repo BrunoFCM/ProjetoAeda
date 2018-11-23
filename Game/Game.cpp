@@ -19,8 +19,8 @@ Game::Game(const string &title,const double &price,const Date &release,const Int
 	this->title = title;
 	this->price = price;
 	base_price = price;
-	this->platform = platform;
-	this->genre = genre;
+	this->platform = platforms;
+	this->genre = genres;
 	this->developer = developer;
 }
 
@@ -74,6 +74,11 @@ vector<double> Game::getPriceHist() const
 	return price_history;
 }
 
+vector<User*> Game::getPlayerBase() const
+{
+	return users;
+}
+
 bool Game::operator==(Game &game)
 {
 	return (id == game.id);
@@ -111,6 +116,10 @@ void Game::addUser(User* user)
 	users.push_back(user);
 }
 
+void Game::addUpdate(Date date) {}
+
+vector<PlaySession*> Game::getPlayHistory() const {vector<PlaySession*> out; return out;}
+
 
 
 
@@ -130,18 +139,15 @@ void Home::addUpdate(Date date)
 }
 
 void Home::printInfoGame() const {
-	string platforms = "";
-	for (unsigned int i = 0; i < platform.size(); i++) {
-		platforms += platform[i] + ", ";
+	string platforms = platform[0];
+	for (unsigned int i = 1; i < platform.size(); i++) {
+		platforms += ", " + platform[i];
 	}
-	platforms.pop_back();
 
-	string genres = "";
-	for (unsigned int i = 0; i < genre.size(); i++) {
-		genres += genre[i] + ", ";
+	string genres = genre[0];
+	for (unsigned int i = 1; i < genre.size(); i++) {
+		genres += ", " + genre[i];
 	}
-	genres.pop_back();
-
 
 	cout << "Title: " << getTitle() << endl;
 	cout << "ID: " << id << endl;
@@ -179,7 +185,9 @@ double Online::getPrice() const
 	return 0;
 }
 
+bool Online::isHomeTitle() const {return false;}
 
+bool Home::isHomeTitle() const {return true;}
 
 
 

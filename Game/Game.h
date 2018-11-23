@@ -15,6 +15,7 @@ using namespace std;
 class Date;
 class User;
 class Interval;
+class PlaySession;
 
 class Game
 {
@@ -110,6 +111,12 @@ public:
 	vector<double> getPriceHist() const;
 
 	/**
+		* @brief Membro-funcao que retorna um vetor de strings correspondentes à base de jogadores do jogo
+		* @return Retorna um vetor de User* correspondentes aos jogadores do jogo
+		*/
+	vector<User*> getPlayerBase() const;
+
+	/**
 	* @brief Overload do operador == para jogos
 	* @param game Jogo com qual e comparado
 	* @return Retorna true se o id dos dois jogos for igual e false caso contrario
@@ -147,14 +154,30 @@ public:
 
 
 	/**
-	 * @brief Membro puramente virutal que permite obter informacao sobre um determinado jogo. Encontra-se implementado nas classes derivadas Home e Online
+	 * @brief Membro puramente virtual que permite obter informacao sobre um determinado jogo. Encontra-se implementado nas classes derivadas Home e Online
 	 */
 	virtual void printInfoGame() const = 0;
+
+	/**
+	 * @brief Membro puramente virtual que permite obter informacao relativamente ao jogo ser Home ou Online
+	 */
+	virtual bool isHomeTitle() const = 0;
+
+	/**
+	 * @brief Membro virtual utilizavel apenas pela classe derivada Home
+	 */
+	virtual void addUpdate(Date date);
+
+	/**
+	 * @brief Membro puramente virtual utilizavel apenas pela classe derivada Online (e respetivas derivadas), devolvendo um vetor vazio para outras classes
+	 */
+	virtual vector<PlaySession*> getPlayHistory() const;
+
 };
 
 
 
-class PlaySession;
+
 
 /**
  * Classe Online derivada da classe Game
@@ -197,6 +220,12 @@ public:
 	 * @return Vetor apontador para o conjunto de objetos de classe PlaySession
 	 */
 	vector<PlaySession*> getPlayHistory() const;
+
+	/**
+	 * @brief Funcao que permite obter informacao relativamente ao jogo ser Home ou Online
+	 * @return True se o jogo for Home
+	 */
+	bool isHomeTitle() const;
 };
 
 
@@ -313,6 +342,12 @@ public:
 	 * @brief Imprime informacao relativamente ao jogo
 	 */
 	void printInfoGame() const;
+
+	/**
+	 * @brief Funcao que permite obter informacao relativamente ao jogo ser Home ou Online
+	 * @return True se o jogo for Home
+	 */
+	bool isHomeTitle() const;
 };
 
 
