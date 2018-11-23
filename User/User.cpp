@@ -67,6 +67,11 @@ vector<PlaySession*> User::getSessions() const
 	return sessions;
 }
 
+map<unsigned int,vector<Date>> User::getUpdates() const
+{
+	return updates;
+}
+
 bool User::operator==(const User &user) const
 {
 	return (name == user.name && email == user.email && age ==user.age && address == user.address);
@@ -170,4 +175,17 @@ void User::giveSessionsUser(ostream &sess,unsigned int numberOfSessions) const
 			sess << "\n";
 		}
 	}
+}
+
+bool User::installUpdates(Game* game)
+{
+	if (game->getUpdates().size() == 0 || game->getUpdates().size() == updates.size())
+		return false;
+	vector<Date> updatesRequired;
+	for (unsigned int i = updates.size(); i < game->getUpdates().size(); i++)
+	{
+		updatesRequired.push_back(game->getUpdates()[i]);
+	}
+	updates[game->getId()] = updatesRequired;
+	return true;
 }
