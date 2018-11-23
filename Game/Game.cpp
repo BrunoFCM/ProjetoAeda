@@ -79,6 +79,13 @@ vector<User*> Game::getPlayerBase() const
 	return users;
 }
 
+vector<Date> Game::getUpdates() const
+{
+	vector<Date> dates;
+	return dates;
+}
+
+
 bool Game::operator==(Game &game)
 {
 	return (id == game.id);
