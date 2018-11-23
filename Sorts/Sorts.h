@@ -157,21 +157,21 @@ bool gameDeveloperDescend(Game* user1,Game* user2);
 
 template <class T>
 /**
- * @brief
- * @param func -
- * @return
+ * @brief Funcao que verifica se func e uma funcao que serve para comparar utilizadores
+ * @param func Funcao que compara dois elementos
+ * @return Retorna true se func serve para comparar utilizadores, false caso contrario
  */
-static bool isUserComparer(const T &func){
+bool isUserComparer(const T &func){
 	return (std::is_same<T,UserComparer>::value);
 }
 
 template <class T>
 /**
- * @brief
- * @param func -
- * @return
+ * @brief Funcao que verifica se func e uma funcao que serve para comparar jogos
+ * @param func Funcao que compara dois elementos
+ * @return Retorna true se func serve para comparar jogos, false caso contrario
  */
-static bool isGameComparer(const T &func){
+bool isGameComparer(const T &func){
 	return (std::is_same<T,GameComparer>::value);
 }
 
