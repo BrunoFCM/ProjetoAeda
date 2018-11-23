@@ -400,17 +400,90 @@ int prompt_game_interface(){
 }
 
 
+void user_interface(User *user){
+	draw_header("USER");
+
+	user->printInfoUser();
+
+	while(true){
+		print_user_interface();
+		switch(prompt_user_interface()){
+		case 1:{
+			user->printInfoUser();
+			break;
+		}
+		case 2:{
+			string card_number;
+			std::cout << "\n\nInsert the card's identification number\n";
+			input_receiver(card_number);
+			Card card(card_number);
+
+			if(card.getValidity()){
+				std::cout << "\nInsert the card's balance\n";
+				double balance;
+				input_receiver(balance);
+				balance = (double)((int)(balance*100))/100;
+				card.setBalance(balance);
+			}
+			else
+				std::cout << "Warning: the card number is not valid (you can change the number afterwards)" << endl << endl;
+
+			user->addCard(card);
+
+			break;
+		}
+		case 3:{
+			vector<Card> cards(user->getCards());
+			std::cout << "\n\nInsert the number of users to see (0 shows every user)";
+			unsigned int lim_crd;
+			input_receiver(lim_crd);
+			while(lim_crd < 0){
+				std::cout << "\nInsert a non-negative value\n";
+				input_receiver(lim_crd);
+			}
+			user->printCardsUser(lim_crd);
+		}
+		case 4:{/*
+			std::string aux;
+			Date update(1,1,1901);
+			while(true){
+				try{
+					std::cout << "\n\nSession date (in the DD/MM/YYYY format)\nInput: ";
+					getline(cin,aux);
+					update = Date(aux);
+					break;
+				}
+				catch(InvalidDate &e){
+					e.printInf();
+				}
+			}*/
+
+		}
+		case 5:{
+
+		}
+		case 6:{
+
+		}
+		case 7:{
+
+		}
+		case 0:
+			return;
+		}
+	}
+}
+
 void print_user_interface(){
 	std::cout << "Would you like to: " << std::endl << std::endl;
-	std::cout << "\t1: See game info" << std::endl;
-	std::cout << "\t2: See price history" << std::endl;
-	std::cout << "\t3: See player base" << std::endl;
-	std::cout << "\t4: Make a discount" << std::endl;
-	std::cout << "\t5: Change the base price" << std::endl;
-	std::cout << "\t6: Revert price (nullify discounts)" << std::endl;
-	if (home) std::cout << "\t7: Add an update" << std::endl;
-	else std::cout << "\t7: See play history" << std::endl;
-	std::cout << "\t0: Leave the game editor" << std::endl << std::endl;
+	std::cout << "\t1: See the game library" << std::endl;
+	std::cout << "\t2: Add a card" << std::endl;
+	std::cout << "\t3: See cards" << std::endl;
+	std::cout << "\t4: Add a game session" << std::endl;
+	std::cout << "\t5: See game session history" << std::endl;
+	std::cout << "\t6: See installed updates" << std::endl;
+	std::cout << "\t7: Update a game" << std::endl;
+	std::cout << "\t0: Leave the user editor" << std::endl << std::endl;
 }
 
 int prompt_user_interface(){
