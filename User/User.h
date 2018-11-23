@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <map>
 #include "Card.h"
 #include "Game.h"
 #include "PlaySession.h"
@@ -19,13 +20,14 @@ class Game;
 class User
 {
 private:
-	string name;						//correspondente ao nome do utilizador
-	string email;						//correspondente ao endereco eletronico
-	unsigned int age;					//correspondente a idade do utilizador
-	string address;						//correspondente a morada do utilizador
-	vector<Card> cards;					//correspondente ao conjunto dos cartoes do utilizador
-	vector<Game*> library;				//correspondente ao conjunto dos jogos do utilizador
-	vector<PlaySession*> sessions;		//correspondente ao conjunto dos historiais de cada sessao de jogo
+	string name;							//correspondente ao nome do utilizador
+	string email;							//correspondente ao endereco eletronico
+	unsigned int age;						//correspondente a idade do utilizador
+	string address;							//correspondente a morada do utilizador
+	vector<Card> cards;						//correspondente ao conjunto dos cartoes do utilizador
+	vector<Game*> library;					//correspondente ao conjunto dos jogos do utilizador
+	vector<PlaySession*> sessions;			//correspondente ao conjunto dos historiais de cada sessao de jogo
+	map<unsigned int,vector<Date>> updates; //correspondente ao conjunto de conjuntos de updates de cada jogo
 
 public:
 	/**
@@ -81,15 +83,21 @@ public:
 
 	/**
 	 * @brief Funcao que retorna um vetor com o conjunto dos jogos da biblioteca do utilizador
-	 * @return library Vetor com o conjunto dos jogos da biblioteca do utilizador
+	 * @return Retorna um vetor com o conjunto dos jogos da biblioteca do utilizador
 	 */
 	vector<Game*> getLibrary() const;
 
 	/**
 	 * @brief Funcao que retorna um vetor com o conjunto dos historiais de cada sessao de jogo
-	 * @return Vetor com o conjunto dos historiais de cada sessao de jogo
+	 * @return Retorna um vetor com o conjunto dos historiais de cada sessao de jogo
 	 */
 	vector<PlaySession*> getSessions() const;
+
+	/**
+	 * @brief Funcao que retorna um map com o conjunto de conjuntos de updates de cada jogo
+	 * @return Retorna um map com o conjunto de conjuntos de updates de cada jogo
+	 */
+	map<unsigned int,vector<Date>> getUpdates() const;
 
 	/**
 	 * @brief Overload do operador == para igualdade de dois utilizadores
@@ -149,6 +157,13 @@ public:
 	* @param sess Ostream que contem as sessoes de um utilizador
 	*/
 	void giveSessionsUser(ostream &sess, unsigned int numberOfSessions = 0) const;
+
+	/**
+	* @brief Funcao que instala os updates de um jogo para o utilizador
+	* @param game Jogo com updates para instalar
+	*/
+	bool installUpdates(Game* game);
+
 };
 
 #endif /* SRC_USER_H_ */
