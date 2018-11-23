@@ -236,7 +236,7 @@ public:
 class InvalidCard: public Exception {
 public:
 	/**
-	 * @brief Construtor da classe UserTooYoung
+	 * @brief Construtor da classe InvalidCard
 	 */
 	InvalidCard() {}
 
