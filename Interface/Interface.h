@@ -42,17 +42,16 @@ int prompt_system_interface();
 
 Game * add_game_interface();
 
-void add_user_interface();
+User * add_user_interface();
 Card add_card_interface();
 
-void game_library_interface();
-void game_library_interface(vector<Game*> vec);
-void print_game_interface();
-int prompt_game();
+void game_interface(Game *game);
+void print_game_interface(const bool &home);
+int prompt_game_interface();
 
-void user_library_interface(vector<User*> vec);
+void game_interface(User *user);
 void print_user_interface();
-int prompt_user();
+int prompt_user_interface();
 
 
 

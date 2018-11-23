@@ -14,6 +14,8 @@
 #include "User.h"
 #include "Interface.h"
 
+LSystem * lsystem = NULL;
+
 void draw_header(std::string message){
 	for (unsigned int i=0 ; i<HEADER_SIZE ; i++) { std::cout << '*'; }
 	std::cout << std::endl;
@@ -43,6 +45,7 @@ void main_menu_interface(){
 		case 1:
 			//loader
 		case 2:
+			lsystem = new LSystem();
 			system_menu_interface();
 			break;
 		case 3:
@@ -78,7 +81,7 @@ void system_menu_interface(){
 		print_system_interface();
 		switch(prompt_system_interface()){
 		case 1:
-			add_game_interface();
+			game_interface(add_game_interface());
 			break;
 		case 2:
 			//add_user_interface();
@@ -159,7 +162,6 @@ Game* add_game_interface(){
 		try{
 			std::cout << endl << "Release date (in the DD/MM/YYYY format)\nInput: ";
 			getline(cin,aux);
-			std::cout << aux;
 			release = Date(aux);
 			break;
 		}
@@ -204,21 +206,28 @@ Game* add_game_interface(){
 	string developer;
 	getline(cin,developer);
 
-	if(type == "Home")
-		return (new Home(title, price, release, range, platforms, genres, developer));
+	if(type == "Home"){
+		Home *game = new Home(title, price, release, range, platforms, genres, developer);
+		lsystem->addGame(game);
+		return (game);
+	}
 	else if(type == "Variable Subscription"){
 		std::cout << endl << "Subscription (by the hour)\nInput: ";
 		double sub;
 		input_receiver(sub);
 		sub = (double)((int)(sub*100))/100;
-		return (new VariableSubsc(title, price, release, range, platforms, genres, developer,sub));
+		VariableSubsc * game = new VariableSubsc(title, price, release, range, platforms, genres, developer,sub);
+		lsystem->addGame(game);
+		return (game);
 	}
 	else{
 		std::cout << endl << "Subscription\nInput: ";
 		double sub;
 		input_receiver(sub);
 		sub = (double)((int)(sub*100))/100;
-		return (new FixedSubsc(title, price, release, range, platforms, genres, developer,sub));
+		FixedSubsc * game = new FixedSubsc(title, price, release, range, platforms, genres, developer,sub);
+		lsystem->addGame(game);
+		return (game);
 	}
 
 	return NULL;
@@ -244,9 +253,174 @@ User* add_user_interface(){
 	string address;
 	getline(cin,address);
 
-	return (new User(name,email,age,address));
+	User * user = new User(name,email,age,address);
+	lsystem->addUser(user);
+	return (user);
 
 }
 
-	
-	
+void game_interface(Game *game){
+	draw_header("GAME");
+
+	game->printInfoGame();
+
+		while(true){
+			print_game_interface(game->isHomeTitle());
+			switch(prompt_game_interface()){
+			case 1:
+				game->printInfoGame();
+				break;
+			case 2:{
+				vector<double> prc_his(game->getPriceHist());
+				std::cout << "\n\nInsert the number of users to see (0 shows every price)";
+				unsigned int lim_prc;
+				input_receiver(lim_prc);
+				while(lim_prc < 0){
+					std::cout << "\nInsert a non-negative value\n";
+					input_receiver(lim_prc);
+				}
+				if (lim_prc == 0 || lim_prc > prc_his.size())
+					lim_prc = prc_his.size();
+				std::cout << endl << endl;
+				for (unsigned int i = 0; i < lim_prc; ++i){
+					std::cout << setprecision(2) << prc_his[i] << endl;
+				}
+				std::cout << endl << endl;
+				break;
+			}
+			case 3:{
+				vector<User*> player_base(game->getPlayerBase());
+				std::cout << "\n\nInsert the number of users to see (0 shows every user)";
+				unsigned int lim_usr;
+				input_receiver(lim_usr);
+				while(lim_usr < 0){
+					std::cout << "\nInsert a non-negative value\n";
+					input_receiver(lim_usr);
+				}
+				if (lim_usr == 0 || lim_usr > player_base.size())
+					lim_usr = player_base.size();
+				std::cout << endl << endl;
+				for (unsigned int i = 0; i < lim_usr; ++i){
+					std::cout << player_base[i]->getName() << endl;
+				}
+				std::cout << endl << endl;
+				break;
+			}
+			case 4:{
+				std::cout << "\n\nInsert a value (in %) of the discount\n";
+				int input_dis;
+				input_receiver(input_dis);
+				while((input_dis <= 0) || (input_dis >= 100)){
+					std::cout << "\nInsert a positive non-zero value below 100\n";
+					input_receiver(input_dis);
+				}
+				game->discountPrice(input_dis);
+				break;
+			}
+			case 5:{
+				double input_base;
+				std::cout << "\n\nInsert the new value for the base price\n";
+				input_receiver(input_base);
+				while(input_base <= 0){
+					std::cout << "\nInsert a positive non-zero value for the base price\n";
+					input_receiver(input_base);
+				}
+				input_base = (double)((int)(input_base*100))/100;
+				game->changeBasePrice(input_base);
+				break;
+			}
+			case 6:{
+				game->revertToPrice();
+				break;
+			}
+			case 7:{
+				if (game->isHomeTitle()){
+					std::string aux;
+					Date update(1,1,1901);
+					while(true){
+						try{
+							std::cout << endl << "\n\nUpdate date (in the DD/MM/YYYY format)\nInput: ";
+							getline(cin,aux);
+							update = Date(aux);
+							break;
+						}
+						catch(InvalidDate &e){
+							e.printInf();
+						}
+					}
+					game->addUpdate(update);
+				}
+				else {
+					vector<PlaySession*> play_his(game->getPlayHistory());
+					std::cout << "\n\nInsert the number of sessions to see (0 shows every session)";
+					unsigned int lim_ssn;
+					input_receiver(lim_ssn);
+					while(lim_ssn < 0){
+						std::cout << "\nInsert a non-negative value\n";
+						input_receiver(lim_ssn);
+					}
+					if (lim_ssn == 0 || lim_ssn > play_his.size())
+						lim_ssn = play_his.size();
+					std::cout << endl << endl;
+					for (unsigned int i = 0; i < lim_ssn; ++i){
+						play_his[i]->printInfoSession();
+						std::cout << endl;
+					}
+					std::cout << endl << endl;
+				}
+				break;
+			}
+			case 0:
+				return;
+			}
+		}
+}
+
+void print_game_interface(const bool &home){
+	std::cout << "Would you like to: " << std::endl << std::endl;
+	std::cout << "\t1: See game info" << std::endl;
+	std::cout << "\t2: See price history" << std::endl;
+	std::cout << "\t3: See player base" << std::endl;
+	std::cout << "\t4: Make a discount" << std::endl;
+	std::cout << "\t5: Change the base price" << std::endl;
+	std::cout << "\t6: Revert price (nullify discounts)" << std::endl;
+	if (home) std::cout << "\t7: Add an update" << std::endl;
+	else std::cout << "\t7: See play history" << std::endl;
+	std::cout << "\t0: Leave the game editor" << std::endl << std::endl;
+}
+
+int prompt_game_interface(){
+	int input = -1;
+	input_receiver(input);
+	while(input < 0 || input > 7){
+		std::cout << "Please insert an integer between 0 and 7" << std::endl;
+		input_receiver(input);
+	}
+	return input;
+}
+
+
+void print_user_interface(){
+	std::cout << "Would you like to: " << std::endl << std::endl;
+	std::cout << "\t1: See game info" << std::endl;
+	std::cout << "\t2: See price history" << std::endl;
+	std::cout << "\t3: See player base" << std::endl;
+	std::cout << "\t4: Make a discount" << std::endl;
+	std::cout << "\t5: Change the base price" << std::endl;
+	std::cout << "\t6: Revert price (nullify discounts)" << std::endl;
+	if (home) std::cout << "\t7: Add an update" << std::endl;
+	else std::cout << "\t7: See play history" << std::endl;
+	std::cout << "\t0: Leave the game editor" << std::endl << std::endl;
+}
+
+int prompt_user_interface(){
+	int input = -1;
+	input_receiver(input);
+	while(input < 0 || input > 7){
+		std::cout << "Please insert an integer between 0 and 7" << std::endl;
+		input_receiver(input);
+	}
+	return input;
+}
+
+
