@@ -111,10 +111,16 @@ public:
 	vector<double> getPriceHist() const;
 
 	/**
-		* @brief Membro-funcao que retorna um vetor de strings correspondentes à base de jogadores do jogo
-		* @return Retorna um vetor de User* correspondentes aos jogadores do jogo
-		*/
+	* @brief Membro-funcao que retorna um vetor de strings correspondentes Ã  base de jogadores do jogo
+	* @return Retorna um vetor de User* correspondentes aos jogadores do jogo
+	*/
 	vector<User*> getPlayerBase() const;
+
+	/**
+	 * @brief Devolve um vetor com todos os updates feitos ao jogo
+	 * @return Retorna um vetor vazio
+	 */
+	virtual vector<Date> getUpdates() const;
 
 	/**
 	* @brief Overload do operador == para jogos
@@ -124,7 +130,7 @@ public:
 	bool operator==(Game &game);
 
 	/**
-	* @brief Altera o preço atual do jogo
+	* @brief Altera o preÃ§o atual do jogo
 	* @param newPrice Novo preco do jogo
 	*/
 	void changePrice(const double &newPrice);
@@ -136,13 +142,13 @@ public:
 	void discountPrice(const unsigned int &percentage);
 
 	/**
-	* @brief Altera o preço base do jogo
+	* @brief Altera o preÃ§o base do jogo
 	* @param newPrice Novo preco base do jogo
 	*/
 	void changeBasePrice(const double &newPrice);
 
 	/**
-	* @brief Altera o preço para o preco base
+	* @brief Altera o preÃ§o para o preco base
 	*/
 	void revertToPrice();
 
