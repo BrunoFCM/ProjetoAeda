@@ -18,7 +18,7 @@ class Interval;
 
 class Game
 {
-private:
+protected:
 	unsigned int id;						//identificador unico
 	string title;							//nome
 	double price;							//preco de aquisicao
@@ -30,7 +30,6 @@ private:
 	string developer;						//empresa que o desenvolveu
 	vector<double> price_history;			//historial de precos de aquisicao
 	vector<User*> users;				    //vetor de utilizadores
-	static unsigned int id_seq;
 public:
 
 	/**
@@ -48,7 +47,7 @@ public:
 	/**
 	 * @brief Destrutor da classe Game
 	 */
-	~Game();
+	virtual ~Game(){}
 
 	/**
 	* @brief Membro-funcao que retorna o identificador unico de um jogo
@@ -164,7 +163,7 @@ class Online : public Game
 {
 private:
 	int play_time;					//tempo jogado
-	PlaySession play_history;		//historial para cada jogo online que inclui: quando foi jogado, por quanto tempo e em que plataforma
+	vector<PlaySession*> play_history;		//historial para cada jogo online que inclui: quando foi jogado, por quanto tempo e em que plataforma
 public:
 	/**
 	 * @brief Construtor da classe Online
@@ -265,12 +264,12 @@ public:
 	 * @brief Devolve o preco pago atual, dependente do preco por hora e pelo tempo jogado
 	 * @return Preco pago atual
 	 */
-	double getPrice() const;
+	double getPriceHour() const;
 
 	/**
 	 * @brief Imprime informacao relativamente ao jogo
 	 */
-	void printInfoGame() const;
+	void printInfoGame() const ;
 
 };
 
@@ -308,7 +307,7 @@ public:
 	 * @brief Acrescenta um update ao vetor de update
 	 * @param date Data do update a acrescentar
 	 */
-	void addUpdate(Date date) const;
+	void addUpdate(Date date);
 
 	/**
 	 * @brief Imprime informacao relativamente ao jogo
