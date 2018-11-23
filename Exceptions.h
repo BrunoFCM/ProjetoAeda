@@ -55,7 +55,7 @@ public:
 	 * @brief Membro funcao que imprime informacao relativamente a excecao
 	 */
 	void printInf() const {
-		std::cout << "Data invalida : '" << getInf() << "'" << std::endl;
+		std::cout << "Invalid Date: '" << getInf() << "'" << std::endl;
 	}
 };
 
@@ -75,7 +75,7 @@ public:
 	 * @brief Membro funcao que imprime informacao relativamente a excecao
 	 */
 	void printInf() const {
-		std::cout << "Jogo Repetido: 'ID " << getInf() << "'" << std::endl;
+		std::cout << "Repeated game: 'ID " << getInf() << "'" << std::endl;
 	}
 };
 
@@ -92,7 +92,7 @@ class RepeatedCard: public Exception {
 	 * @brief Membro funcao que imprime informacao relativamente a excecao
 	 */
 	void printInf() const {
-		std::cout << "Cartao repetido: " << getInf() << "" << std::endl;
+		std::cout << "Repeated card: '" << getInf() << "'" << std::endl;
 	}
 };
 
@@ -111,57 +111,57 @@ public:
 	 * @brief Membro funcao que imprime informacao relativamente a excecao
 	 */
 	void printInf() const {
-		std::cout << "Utilizador repetido: 'ID " << getInf() << "'" << std::endl;
+		std::cout << "Repeated user: 'ID " << getInf() << "'" << std::endl;
 	}
 };
 
 
-/*
+/**
  * Classe que gera excecoes de jogos inexistentes
  */
-class NonExistantGame: public Exception{
+class NonExistingGame: public Exception{
 public:
-	/*
+	/**
 	 * @brief Construtor da classe NonExistantGame
 	 * @param info Informacao relativamente a instrucao que gerou uma excecao, do tipo de dados adequado
 	 */
-	NonExistantGame(const std::string &info): Exception(info) {}
+	NonExistingGame(const std::string &info): Exception(info) {}
 
 	/**
 	 * @brief Membro funcao que imprime informacao relativamente a excecao
 	 */
 	void printInf() const {
-		std::cout << "Jogo inexistente: " << getInf() << "'" << std::endl;
+		std::cout << "Non-existing game: '" << getInf() << "'" << std::endl;
 	}
 };
 
 
-/*
+/**
  * Classe que gera excecoes de utilizadores inexistentes
  */
-class NonExistantUser: public Exception {
+class NonExistingUser: public Exception {
 public:
-	/*
+	/**
 	 * @brief Construtor da classe NonExistantGame
 	 * @param info - informacao relativamente a instrucao que gerou uma excecao, do tipo de dados adequado
 	 */
-	NonExistantUser(const std::string &info): Exception(info) {}
+	NonExistingUser(const std::string &info): Exception(info) {}
 
 	/**
 	 * @brief Membro funcao que imprime informacao relativamente a excecao
 	 */
 	void printInf() const {
-		std::cout << "Utilizador inexistente: 'ID " << getInf() << "'" << std::endl;
+		std::cout << "Non-existing user: 'ID " << getInf() << "'" << std::endl;
 	}
 };
 
 
-/*
+/**
  * Classe que gera excecoes de comparadores invalidos
  */
 class InvalidComparer: public Exception{
 public:
-	/*
+	/**
 	 * @brief Construtor da classe InvalidComparer
 	 */
 	InvalidComparer() {}
@@ -170,17 +170,17 @@ public:
 	 * @brief Membro funcao que imprime informacao relativamente a excecao
 	 */
 	void printInf() const {
-		std::cout << "Comparador Invalido" << std::endl;
-	};
+		std::cout << "Invalid comparer" << std::endl;
+	}
 };
 
 
-/*
+/**
  * Classe que gera excecoes de restritores invalidos
  */
 class InvalidRestrictor: public Exception{
 public:
-	/*
+	/**
 	 * @brief Construtor da classe InvalidRestrictor
 	 */
 	InvalidRestrictor() {}
@@ -189,17 +189,17 @@ public:
 	 * @brief Membro funcao que imprime informacao relativamente a excecao
 	 */
 	void printInf() const {
-		std::cout << "Comparador Invalido" << std::endl;
-	};
+		std::cout << "Invalid restrictor" << std::endl;
+	}
 };
 
 
-/*
+/**
  * Classe que gera excecoes de argumentos invalidos
  */
 class InvalidArgument: public Exception{
 public:
-	/*
+	/**
 	 * @brief Construtor da classe InvalidArgument
 	 */
 	InvalidArgument() {}
@@ -208,12 +208,45 @@ public:
 	 * @brief Membro funcao que imprime informacao relativamente a excecao
 	 */
 	void printInf() const {
-		std::cout << "Comparador Invalido"<< std::endl;
-	};
+		std::cout << "Invalid argument"<< std::endl;
+	}
+};
+
+/**
+ * Classe que gera excecoes de idades invalidas
+ */
+class UserTooYoung: public Exception {
+public:
+	/**
+	 * @brief Construtor da classe UserTooYoung
+	 */
+	UserTooYoung(const std::string &info): Exception(info) {}
+
+	/**
+	 * @brief Membro funcao que imprime informacao relativamente a excecao
+	 */
+	void printInf() const {
+		std::cout << "User is too young, must be at least " << info << " years old" << std::endl;
+	}
+};
+
+/**
+ * Classe que gera excecoes de cartoes invalidos
+ */
+class InvalidCard: public Exception {
+public:
+	/**
+	 * @brief Construtor da classe UserTooYoung
+	 */
+	InvalidCard() {}
+
+	/**
+	 * @brief Membro funcao que imprime informacao relativamente a excecao
+	 */
+	void printInf() const {
+		std::cout << "Card is not valid" << std::endl;
+	}
 };
 
 
 #endif /* EXCEPTIONS_H_ */
-
-
-
