@@ -88,7 +88,7 @@ void User::giveInfoUser(ostream &info) const
 		 << sessions.size() << "\n";
 }
 
-void User::printLibraryUser(int numberOfGames = 0) const
+void User::printLibraryUser(unsigned int numberOfGames) const
 {
 	if (numberOfGames == 0)
 		for (unsigned int i = 0; i < library.size(); i++)
@@ -100,9 +100,8 @@ void User::printLibraryUser(int numberOfGames = 0) const
 	}
 }
 
-ostream User::giveLibraryUser(int numberOfGames = 0) const
+void User::giveLibraryUser(ostream &titles, unsigned int numberOfGames) const
 {
-	ostream titles(NULL);
 	if (numberOfGames == 0)
 		for (unsigned int i = 0; i < library.size(); i++)
 			titles << library[i]->getTitle() << "\n";
@@ -111,11 +110,9 @@ ostream User::giveLibraryUser(int numberOfGames = 0) const
 		for (unsigned int i = 0; i < library.size() && i < numberOfGames; i++)
 			titles << library[i]->getTitle() << "\n";
 	}
-
-	return titles;
 }
 
-void User::printCardsUser(int numberOfCards = 0) const
+void User::printCardsUser(unsigned int numberOfCards) const
 {
 	if (numberOfCards == 0)
 		for (unsigned int i = 0; i < cards.size(); i++)
@@ -127,9 +124,8 @@ void User::printCardsUser(int numberOfCards = 0) const
 	}
 }
 
-ostream User::giveCardsUser(int numberOfCards = 0) const
+void User::giveCardsUser(ostream &numbers, unsigned int numberOfCards) const
 {
-	ostream numbers(NULL);
 	if (numberOfCards == 0)
 		for (unsigned int i = 0; i < cards.size(); i++)
 			numbers << cards[i].getNumber() << "\n";
@@ -138,11 +134,9 @@ ostream User::giveCardsUser(int numberOfCards = 0) const
 		for (unsigned int i = 0; i < cards.size() && i < numberOfCards; i++)
 			numbers << cards[i].getNumber() << "\n";
 	}
-
-	return numbers;
 }
 
-void User::printSessionsUser(int numberOfSessions = 0) const
+void User::printSessionsUser(unsigned int numberOfSessions) const
 {
 	if (numberOfSessions == 0)
 		for (unsigned int i = 0; i < sessions.size(); i++)
@@ -154,9 +148,8 @@ void User::printSessionsUser(int numberOfSessions = 0) const
 	}
 }
 
-ostream User::giveSessionsUser(int numberOfSessions = 0) const
+void User::giveSessionsUser(ostream &sess,unsigned int numberOfSessions) const
 {
-	ostream sess(NULL);
 	if (numberOfSessions == 0)
 		for (unsigned int i = 0; i < sessions.size(); i++){
 			sessions[i]->giveSessions(sess);
@@ -169,6 +162,4 @@ ostream User::giveSessionsUser(int numberOfSessions = 0) const
 			sess << "\n";
 		}
 	}
-
-	return sess;
 }
