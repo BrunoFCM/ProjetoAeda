@@ -24,6 +24,14 @@ void User::addToLibrary(Game* game)
 	library.push_back(game);
 }
 
+void User::addCard(const Card &card){
+	for(unsigned int i = 0; i < cards.size(); ++i){
+		if (cards[i].getNumber() == card.getNumber())
+			throw (RepeatedCard(card.getNumber()));
+	}
+	cards.push_back(card);
+}
+
 string User::getName() const
 {
 	return name;

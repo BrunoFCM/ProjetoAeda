@@ -44,51 +44,57 @@ public:
 	void addToLibrary(Game* game);
 
 	/**
+	 * @brief Funcao que adiciona um cartao ao vetor de cartoes
+	 * @param card Cartao a adicionar
+	 */
+	void addCard(const Card &card);
+
+	/**
 	 * @brief Funcao que retorna o nome do utilizador
-	 * @return Retorna o nome de um utilizador
+	 * @return name Nome do utilizador
 	 */
 	string getName() const;
 
 	/**
 	 * @brief Funcao que retorna o endereco eletronico do utilizador
-	 * @return Retorna o endereco eletronico do utilizador
+	 * @return email Endereco eletronico do utilizador
 	 */
 	string getEmail() const;
 
 	/**
 	 * @brief Funcao que retorna a idade do utilizador
-	 * @return Retorna a idade do utilizador
+	 * @return age Idade do utilizador
 	 */
 	unsigned int getAge() const;
 
 	/**
 	 * @brief Funcao que retorna a morada do utilizador
-	 * @return Retorna a morada de um utilizador
+	 * @return address Morada do utilizador
 	 */
 	string getAddress() const;
 
 	/**
 	 * @brief Funcao que retorna um vetor com o conjunto dos cartoes do utilizador
-	 * @return Retorna um vetor com o conjunto dos cartoes de um utilizador
+	 * @return cards Vetor com o conjunto dos cartoes do utilizador
 	 */
 	vector<Card> getCards() const;
 
 	/**
 	 * @brief Funcao que retorna um vetor com o conjunto dos jogos da biblioteca do utilizador
-	 * @return Um vetor com o conjunto dos jogos da biblioteca de um utilizador
+	 * @return library Vetor com o conjunto dos jogos da biblioteca do utilizador
 	 */
 	vector<Game*> getLibrary() const;
 
 	/**
 	 * @brief Funcao que retorna um vetor com o conjunto dos historiais de cada sessao de jogo
-	 * @return Retorna um vetor com o conjunto dos historiais de cada sessao de jogo
+	 * @return Vetor com o conjunto dos historiais de cada sessao de jogo
 	 */
 	vector<PlaySession*> getSessions() const;
 
 	/**
 	 * @brief Overload do operador == para igualdade de dois utilizadores
 	 * @param user Utilizador
-	 * @return Retorna true se os utilizadores sao iguais, false caso contrario
+	 * @return True se os utilizadores sao iguais, false caso contrario
 	 */
 	bool operator==(const User &user) const;
 
@@ -112,7 +118,7 @@ public:
 	/**
 	* @brief Funcao que passa para uma ostream os titulos dos jogos de um utilizador
 	* @param numberOfGames Numero de titulos a serem passados
-	* @param titles Ostream que contem os titulos dos jogos de um utilizador
+	* @return titles Ostream que contem os titulos dos jogos de um utilizador
 	*/
 	void giveLibraryUser(ostream &titles, unsigned int numberOfGames = 0) const;
 
@@ -126,7 +132,7 @@ public:
 	/**
 	* @brief Funcao que passa para uma ostream os numeros dos cartoes de um utilizador
 	* @param numberOfCards Numero de numeros a serem passados
-	* @param numbers Um ostream que contem os numeros dos cartoes de um utilizador
+	* @return numbers Ostream que contem os numeros dos cartoes de um utilizador
 	*/
 	void giveCardsUser(ostream &numbers, unsigned int numberOfCards = 0) const;
 
@@ -140,7 +146,7 @@ public:
 	/**
 	* @brief Funcao que passa para uma ostream os historiais de cada sessao de jogo
 	* @param numberOfSessions Numero de sessoes a serem passadas
-	* @param sess Uma ostream que contem as sessoes de um utilizador
+	* @param sess Ostream que contem as sessoes de um utilizador
 	*/
 	void giveSessionsUser(ostream &sess, unsigned int numberOfSessions = 0) const;
 };
