@@ -12,6 +12,11 @@ class Card{
 	string card_number; //correspondente ao numero de identificao do cartao
 	bool valid;		    //indica a validade do numero do cartao
 
+	/**
+	 * @brief Funcao que utiliza o algoritmo de Luhn para verificar a validade do numero do cartao
+	 */
+	void checkValidity();
+
 public:
 	/**
 	 * @brief Construtor da classe Card usando apenas o numero do cartao
@@ -25,11 +30,6 @@ public:
 	 * @param bal Valor do saldo do cartao
 	 */
 	Card(const string &number, const double &bal);
-
-	/**
-	 * @brief Funcao que utiliza o algoritmo de Luhn para verificar a validade do numero do cartao
-	 */
-	void checkValidity();
 
 	/**
 	 * @brief Funcao que altera o valor de balance, caso o numero do cartao seja valido
@@ -46,19 +46,19 @@ public:
 
 	/**
 	 * @brief Funcao que retorna o valor do saldo do cartao (balance)
-	 * @return Retorna o saldo de um cartao
+	 * @return balance Saldo do cartao
 	 */
 	double getBalance() const;
 
 	/**
 	 * @brief Funcao que retorna true se o numero do cartao for valido (valid)
-	 * @return Retorna true se o numero do cartao for valido
+	 * @return valid True se o numero do cartao for valido
 	 */
 	bool getValidity() const;
 
 	/**
 	 * @brief Funcao que retorna o numero do cartao
-	 * @return Retorna o numero de um cartao
+	 * @return card_number Numero do cartao
 	 */
 	string getNumber() const;
 };
