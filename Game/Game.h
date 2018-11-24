@@ -252,7 +252,7 @@ public:
 class FixedSubsc : public Online
 {
 private:
-	int fixed_price;				 //preco fixo
+	double fixed_price;				 //preco fixo
 public:
 
 	/**
@@ -289,7 +289,7 @@ public:
 class VariableSubsc : public Online
 {
 private:
-	int price_hour;					 //preco variavel: custo do jogo por hora
+	double price_hour;					 //preco variavel: custo do jogo por hora
 public:
 
 	/**
