@@ -62,13 +62,14 @@ void System::sortGames(const GameComparer &comparer){
 
 void System::buyGames(User* user, Game* game, unsigned int id)
 {
+	string info = to_string(game->getAge().getLower());
 	if (user->getAge() >= game->getAge().getLower())
 	{
 		for (unsigned int i = 0; i < user->getCards().size(); i++)
 		{
-			if (user->getCards()[i].getNumber() == id)
+			if (user->getCards()[i].getNumber() == to_string(id))
 			{
-				if (user->getCards()[i].getValidity() && user->getCards()[i].getBalance >= game->getPrice())
+				if (user->getCards()[i].getValidity() && user->getCards()[i].getBalance() >= game->getPrice())
 				{
 					double bal = user->getCards()[i].getBalance() - game->getPrice();
 					user->getCards()[i].setBalance(bal);
@@ -79,7 +80,7 @@ void System::buyGames(User* user, Game* game, unsigned int id)
 		}
 		throw InvalidCard();
 	}
-	else throw UserTooYoung();
+	else throw UserTooYoung(*info);
 }
 
 
