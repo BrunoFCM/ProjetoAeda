@@ -63,14 +63,22 @@ public:
 	 */
 	void sortGames(const GameComparer &comparer);
 
+	/**
+	 * @brief Funcao que traduz a compra de um jogo por parte de um utilizador e com um cartao
+	 * @param user Utilizador
+	 * @param game Jogo
+	 * @param card Cartao
+	 */
+	void buyGames(User* user, Game* game, unsigned int id);
+
 	template <class Restrictor, class Argument>
 	/**
-	 * @brief
-	 * @param func -
-	 * @param arg -
-	 * @return
+	 * @brief Funcao template para restricao de procuras de utilizadores
+	 * @param func Funcao de restricao
+	 * @param arg Argumento de restricao
+	 * @return Vetor de utilizadores apos restricao
 	 */
-	vector<User*> sortUsersRestrict(const Restrictor &func, const Argument &arg){
+	vector<User*> restrictUsers(const Restrictor &func, const Argument &arg){
 		if(!properRestrictor(func, USER_RESTRICTOR)) throw InvalidRestrictor();
 		if(!properArgument(func, arg)) throw InvalidArgument();
 		return restrictedVector(user_library,func,arg);
@@ -78,12 +86,12 @@ public:
 
 	template <class Restrictor, class Argument>
 	/**
-	 * @brief
-	 * @param func -
-	 * @param arg -
-	 * @return
+	 * @brief Funcao template para restricao de procuras de jogos
+	 * @param func Funcao de restricao
+	 * @param arg Argumento de restricao
+	 * @return Vetor de jogos apos restricao
 	 */
-	vector<Game*> sortGamesRestrict(const Restrictor &func, const Argument &arg){
+	vector<Game*> restrictGames(const Restrictor &func, const Argument &arg){
 		if(!properRestrictor(func, GAME_RESTRICTOR)) throw InvalidRestrictor();
 		if(!properArgument(func, arg)) throw InvalidArgument();
 		return restrictedVector(user_library,func,arg);
