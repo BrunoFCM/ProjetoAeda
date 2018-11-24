@@ -186,9 +186,9 @@ public:
 
 	/**
 	* @brief Funcao virtual que passa para uma fstream a informacao de um jogo
-	* @param info Ostream para onde e passada a informacao de um jogo
+	* @param info Ofstream para onde e passada a informacao de um jogo
 	*/
-	virtual void giveInfoGame(fstream &info) const;
+	virtual void giveInfoGame(ofstream &info) const;
 
 };
 
@@ -294,9 +294,9 @@ public:
 
 	/**
 	* @brief Funcao virtual que passa para uma fstream a informacao de um jogo online de subscricao fixa
-	* @param info Ostream para onde e passada a informacao de um jogo online de subscricao fixa
+	* @param info Ofstream para onde e passada a informacao de um jogo online de subscricao fixa
 	*/
-	void giveInfoGame(fstream &info) const;
+	void giveInfoGame(ofstream &info) const;
 };
 
 
@@ -336,9 +336,9 @@ public:
 
 	/**
 	* @brief Funcao virtual que passa para uma fstream a informacao de um jogo online de subscricao variavel
-	* @param info Ostream para onde e passada a informacao de um jogo online de subscricao variavel
+	* @param info Ofstream para onde e passada a informacao de um jogo online de subscricao variavel
 	*/
-	void giveInfoGame(fstream &info) const;
+	void giveInfoGame(ofstream &info) const;
 };
 
 
@@ -390,9 +390,9 @@ public:
 
 	/**
 	* @brief Funcao virtual que passa para uma fstream a informacao de um jogo home
-	* @param info Ostream para onde e passada a informacao de um jogo home
+	* @param info Ofstream para onde e passada a informacao de um jogo home
 	*/
-	void giveInfoGame(fstream &info) const;
+	void giveInfoGame(ofstream &info) const;
 };
 
 

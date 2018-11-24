@@ -128,7 +128,7 @@ void Game::addUpdate(Date date) {}
 
 vector<PlaySession*> Game::getPlayHistory() const {vector<PlaySession*> out; return out;}
 
-void Game::giveInfoGame(fstream &info) const
+void Game::giveInfoGame(ofstream &info) const
 {
 	info << id << "\n" << title << "/n" << price << "\n" << base_price << "/n"
 		 << release.toStr() << age_range.getLower() << " " << age_range.getUpper() << "\n";
@@ -188,7 +188,7 @@ void Home::printInfoGame() const {
 	cout << "Number of players: " << player_base << endl;
 }
 
-void Home::giveInfoGame(fstream &info) const
+void Home::giveInfoGame(ofstream &info) const
 {
 	Game::giveInfoGame(info);
 	for (unsigned int i = 0; i < updates.size() - 1; i++)
@@ -268,7 +268,7 @@ void FixedSubsc::printInfoGame() const {
 
 }
 
-void FixedSubsc::giveInfoGame(fstream &info) const
+void FixedSubsc::giveInfoGame(ofstream &info) const
 {
 	Game::giveInfoGame(info);
 	info << fixed_price << "\n";
@@ -314,7 +314,7 @@ void VariableSubsc::printInfoGame() const {
 	cout << "Total play time: " << getPlayTime() << endl;
 }
 
-void VariableSubsc::giveInfoGame(fstream &info) const
+void VariableSubsc::giveInfoGame(ofstream &info) const
 {
 	Game::giveInfoGame(info);
 	info << price_hour << "\n";
