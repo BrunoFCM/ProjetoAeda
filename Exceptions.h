@@ -226,7 +226,7 @@ public:
 	 * @brief Membro funcao que imprime informacao relativamente a excecao
 	 */
 	void printInf() const {
-		std::cout << "User is too young, must be at least " << info << " years old" << std::endl;
+		std::cout << "User is too young, must be at least " << getInf() << " years old" << std::endl;
 	}
 };
 
