@@ -230,7 +230,7 @@ Game* add_game_interface(){
 		lsystem->addGame(game);
 		return (game);
 	}
-
+	std::cout << "you fucked up";
 	return NULL;
 
 }
@@ -626,7 +626,7 @@ void card_interface(Card &card){
 		print_card_interface();
 		switch(prompt_card_interface()){
 		case 1:{
-			std::cout << "Insert the new card number\n";
+			std::cout << "Insert the new card number (16 digits)\n";
 			string new_number;
 			input_receiver(new_number);
 
@@ -673,21 +673,73 @@ void save_interface(){
 	std::string input;
 	getline(cin,input);
 	if(input.length()){
-		fstream file;
+		ofstream file;
 		file.open(input);
 		if (file.fail()){
 			cerr << "Error opening file" << endl;
 		}
 		else{
 			lsystem->giveInfoSystem(file);
+			file << "yaaa";
+			file.flush();
+			file.close();
 		}
 	}
 
 	delete lsystem;
 
 }
+/*
+void sort_game_interface(){
+ 	draw_header("SORT");
+ 	while(true){
+		print_sort_game_interface();
+		switch(prompt_sort_game_interface()){
+		case 1:{
+			std::cout << "Will the insert be in ascending order? (y/n)\n";
+			char input;
+			input_receiver(input);
+			while (input != 'y' || input != 'n'){
+				std::cout << "\nInvalid response\n";
+				char input;
+				input_receiver(input);
+			}
 
+			break;
+		}
+		case 2:{
+			std::cout << "Insert the new card balance: ";
+			double new_balance;
+			input_receiver(new_balance);
 
+ 			break;
+		}
+		case 0:
+			return;
+		}
+	}
+}
 
+void print_sort_game_interface(){
+ 	std::cout << "Would you like to: " << std::endl << std::endl;
+	std::cout << "\t1: Sort by ID (default)" << std::endl;
+	std::cout << "\t2: Sort by title" << std::endl;
+	std::cout << "\t3: Sort by price" << std::endl;
+	std::cout << "\t4: Sort by base price" << std::endl;
+	std::cout << "\t5: Sort by release date" << std::endl;
+	std::cout << "\t6: Sort by age range" << std::endl;
+	std::cout << "\t7: Sort by developer" << std::endl;
+	std::cout << "\t0: Exit the card interface" << std::endl << std::endl;
+}
 
+int prompt_sort_game_interface(){
+	int input = -1;
+	input_receiver(input);
+	while(input < 0 || input > 7){
+		std::cout << "Please insert an integer between 0 and 7" << std::endl;
+		input_receiver(input);
+	}
+	return input;
+}
+*/
 
