@@ -110,7 +110,7 @@ public:
 	vector<double> getPriceHist() const;
 
 	/**
-	* @brief Membro-funcao que retorna um vetor de strings correspondentes Ã  base de jogadores do jogo
+	* @brief Membro-funcao que retorna um vetor de strings correspondentes ÃƒÂ  base de jogadores do jogo
 	* @return Retorna o valor de player_base, correspondente ao numero de jogadores
 	*/
 	unsigned int getPlayerBase() const;
@@ -129,7 +129,7 @@ public:
 	bool operator==(Game &game);
 
 	/**
-	* @brief Altera o preÃ§o atual do jogo
+	* @brief Altera o preco atual do jogo
 	* @param newPrice Novo preco do jogo
 	*/
 	void changePrice(const double &newPrice);
@@ -141,7 +141,7 @@ public:
 	void discountPrice(const unsigned int &percentage);
 
 	/**
-	* @brief Altera o preÃ§o base do jogo
+	* @brief Altera o preÃƒÂ§o base do jogo
 	* @param newPrice Novo preco base do jogo
 	*/
 	void changeBasePrice(const double &newPrice);
@@ -182,6 +182,12 @@ public:
 	 * @param sess Pointer para a PlaySession a adicionar
 	 */
 	virtual void addSession(PlaySession *sess);
+
+	/**
+	* @brief Funcao virtual que passa para uma ostream a informacao de um jogo
+	* @param info Ostream para onde e passada a informacao de um jogo
+	*/
+	virtual void giveInfoGame(ostream &info);
 
 };
 
