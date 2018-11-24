@@ -14,7 +14,7 @@
 #include "User.h"
 #include "Interface.h"
 
-LSystem * lsystem = NULL;
+System * lsystem = NULL;
 
 void draw_header(std::string message){
 	for (unsigned int i=0 ; i<HEADER_SIZE ; i++) { std::cout << '*'; }
@@ -45,7 +45,7 @@ void main_menu_interface(){
 		case 1:
 			//loader
 		case 2:
-			lsystem = new LSystem();
+			lsystem = new System();
 			system_menu_interface();
 			break;
 		case 3:
@@ -84,7 +84,7 @@ void system_menu_interface(){
 			game_interface(add_game_interface());
 			break;
 		case 2:
-			//add_user_interface();
+			user_interface(add_user_interface());
 			break;
 		case 3:
 			//sorts
@@ -275,10 +275,6 @@ void game_interface(Game *game){
 				std::cout << "\n\nInsert the number of users to see (0 shows every price)";
 				unsigned int lim_prc;
 				input_receiver(lim_prc);
-				while(lim_prc < 0){
-					std::cout << "\nInsert a non-negative value\n";
-					input_receiver(lim_prc);
-				}
 				if (lim_prc == 0 || lim_prc > prc_his.size())
 					lim_prc = prc_his.size();
 				std::cout << endl << endl;
@@ -293,10 +289,6 @@ void game_interface(Game *game){
 				std::cout << "\n\nInsert the number of users to see (0 shows every user)";
 				unsigned int lim_usr;
 				input_receiver(lim_usr);
-				while(lim_usr < 0){
-					std::cout << "\nInsert a non-negative value\n";
-					input_receiver(lim_usr);
-				}
 				if (lim_usr == 0 || lim_usr > player_base.size())
 					lim_usr = player_base.size();
 				std::cout << endl << endl;
@@ -308,9 +300,9 @@ void game_interface(Game *game){
 			}
 			case 4:{
 				std::cout << "\n\nInsert a value (in %) of the discount\n";
-				int input_dis;
+				unsigned int input_dis;
 				input_receiver(input_dis);
-				while((input_dis <= 0) || (input_dis >= 100)){
+				while((input_dis == 0) || (input_dis >= 100)){
 					std::cout << "\nInsert a positive non-zero value below 100\n";
 					input_receiver(input_dis);
 				}
@@ -355,10 +347,6 @@ void game_interface(Game *game){
 					std::cout << "\n\nInsert the number of sessions to see (0 shows every session)";
 					unsigned int lim_ssn;
 					input_receiver(lim_ssn);
-					while(lim_ssn < 0){
-						std::cout << "\nInsert a non-negative value\n";
-						input_receiver(lim_ssn);
-					}
 					if (lim_ssn == 0 || lim_ssn > play_his.size())
 						lim_ssn = play_his.size();
 					std::cout << endl << endl;
@@ -422,28 +410,71 @@ void user_interface(User *user){
 				std::cout << "\nInsert the card's balance\n";
 				double balance;
 				input_receiver(balance);
+				while(balance < 0){
+					std::cout << "\nInsert a non-negative value\n";
+					input_receiver(balance);
+				}
 				balance = (double)((int)(balance*100))/100;
 				card.setBalance(balance);
 			}
 			else
 				std::cout << "Warning: the card number is not valid (you can change the number afterwards)" << endl << endl;
 
-			user->addCard(card);
+			try{
+				user->addCard(card);
+			}
+			catch(RepeatedCard &rc){
+				std::cout << "\nThis card has already been added\n";
+			}
 
 			break;
 		}
 		case 3:{
 			vector<Card> cards(user->getCards());
-			std::cout << "\n\nInsert the number of users to see (0 shows every user)";
+			std::cout << "\n\nInsert the number of cards to see (0 shows every card)";
 			unsigned int lim_crd;
 			input_receiver(lim_crd);
-			while(lim_crd < 0){
-				std::cout << "\nInsert a non-negative value\n";
-				input_receiver(lim_crd);
-			}
 			user->printCardsUser(lim_crd);
+			//////////////////////////////////////////////////////////////////////////////////////////////access
+			break;
 		}
-		case 4:{/*
+		case 4:{
+			std::cout << endl << "Input the title of the game\nInput: ";
+			string title;
+			getline(cin,title);
+
+			Game * game;
+
+			while(true){
+				try{
+					game = lsystem->searchGame(title);
+					break;
+				}
+				catch(NonExistingGame &e){
+					e.printInf();
+					std::cout << endl << "Input the title of the game\nInput: ";
+					string title;
+					getline(cin,title);
+				}
+			}
+
+			vector<string> platforms(game->getPlatforms());
+			std::cout << endl << "Input the platform of the game\nInput: ";
+			string platform = "";
+			while (true){
+				getline(cin,platform);
+				for(unsigned int i = 0; i < platforms.size(); ++i){
+					if (platforms[i] == platform)
+						break;
+					if (i == platforms.size() - 1)
+						platform = "";
+				}
+				if (platform == "")
+					std::cout << "\nThe game cannot be played in this platform\nInput again: " ;
+				else
+					break;
+			}
+
 			std::string aux;
 			Date update(1,1,1901);
 			while(true){
@@ -453,19 +484,31 @@ void user_interface(User *user){
 					update = Date(aux);
 					break;
 				}
-				catch(InvalidDate &e){
-					e.printInf();
+				catch(InvalidDate &e_date){
+					e_date.printInf();
 				}
-			}*/
+			}
+			std::cout << "\n\nInsert the session's duration (in hours)\n";
+			unsigned int hours;
+			input_receiver(hours);
 
+			PlaySession *session = new PlaySession(update,hours,platform,user,game);
+			user->addSession(session);
+			game->addSession(session);
+			break;
 		}
 		case 5:{
-
+			vector<PlaySession *> sessions(user->getSessions());
+			std::cout << "\n\nInsert the number of sessions to see (0 shows every session)";
+			unsigned int lim_ssn;
+			input_receiver(lim_ssn);
+			user->printSessionsUser(lim_ssn);
+			break;
 		}
 		case 6:{
-
 		}
 		case 7:{
+
 
 		}
 		case 0:
@@ -495,5 +538,8 @@ int prompt_user_interface(){
 	}
 	return input;
 }
+
+
+
 
 
