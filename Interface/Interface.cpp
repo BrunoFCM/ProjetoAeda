@@ -513,13 +513,61 @@ void user_interface(User *user){
 			break;
 		}
 		case 6:{
+			std::cout << endl << "Input the title of the game to buy\nInput: ";
+			string title;
+			getline(cin,title);
+
+			Game * game;
+
+			while(true){
+				try{
+					game = lsystem->searchGame(title);
+					break;
+				}
+				catch(NonExistingGame &e){
+					e.printInf();
+					std::cout << endl << "Input the title of the game\nInput: ";
+					string title;
+					getline(cin,title);
+				}
+			}
+
+			std::cout << "\n\nInput the index of the card that will be used for the purchase";
+			unsigned int card_ind;
+			input_receiver(card_ind);
+			while(card_ind > user->getCards().size()){
+				std::cout << "\nInvalid Index\n";
+				input_receiver(card_ind);
+			}
+
+			try{
+				lsystem->buyGame(user,game,card_ind - 1);
+			}
+			catch(GameAlreadyOwned &e){
+				e.printInf();
+				std::cout << "\n\n";
+			}
+			catch(UserTooYoung &e){
+				e.printInf();
+				std::cout << "\n\n";
+			}
+			catch(InvalidCard &e){
+				e.printInf();
+				std::cout << "\n\n";
+			}
+			catch(NotEnoughFunds &e){
+				e.printInf();
+				std::cout << "\n\n";
+			}
+		}
+		case 7:{
 			std::cout << "\n\nInsert the number of updates to see (0 shows most recent update for every game)";
 			unsigned int lim_upd;
 			input_receiver(lim_upd);
 			user->printUpdates(lim_upd);
 			break;
 		}
-		case 7:{
+		case 8:{
 			std::cout << endl << "Input the title of the game to update\nInput: ";
 			string title;
 			getline(cin,title);
@@ -565,16 +613,17 @@ void print_user_interface(){
 	std::cout << "\t3: See cards" << std::endl;
 	std::cout << "\t4: Add a game session" << std::endl;
 	std::cout << "\t5: See game session history" << std::endl;
-	std::cout << "\t6: See installed updates" << std::endl;
-	std::cout << "\t7: Update a game" << std::endl;
+	std::cout << "\t6: Buy a game" << std::endl;
+	std::cout << "\t7: See installed updates" << std::endl;
+	std::cout << "\t8: Update a game" << std::endl;
 	std::cout << "\t0: Leave the user editor" << std::endl << std::endl;
 }
 
 int prompt_user_interface(){
 	int input = -1;
 	input_receiver(input);
-	while(input < 0 || input > 7){
-		std::cout << "Please insert an integer between 0 and 7" << std::endl;
+	while(input < 0 || input > 8){
+		std::cout << "Please insert an integer between 0 and 8" << std::endl;
 		input_receiver(input);
 	}
 	return input;
