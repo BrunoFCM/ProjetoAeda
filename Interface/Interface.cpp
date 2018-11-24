@@ -435,7 +435,14 @@ void user_interface(User *user){
 			unsigned int lim_crd;
 			input_receiver(lim_crd);
 			user->printCardsUser(lim_crd);
-			//////////////////////////////////////////////////////////////////////////////////////////////access
+			std::cout << "\n\nWould you like to edit a card? (if yes, input the index of the card, otherwise input 0)";
+			unsigned int card_ind;
+			input_receiver(card_ind);
+			while(card_ind > cards.size()){
+				std::cout << "\nInvalid Index\n";
+				input_receiver(card_ind);
+			}
+			card_interface(cards[card_ind-1]);
 			break;
 		}
 		case 4:{
@@ -506,10 +513,44 @@ void user_interface(User *user){
 			break;
 		}
 		case 6:{
+			std::cout << "\n\nInsert the number of updates to see (0 shows most recent update for every game)";
+			unsigned int lim_upd;
+			input_receiver(lim_upd);
+			user->printUpdates(lim_upd);
+			break;
 		}
 		case 7:{
+			std::cout << endl << "Input the title of the game to update\nInput: ";
+			string title;
+			getline(cin,title);
 
+			Game * game;
 
+			while(true){
+				try{
+					game = lsystem->searchGame(title);
+					break;
+				}
+				catch(NonExistingGame &e){
+					e.printInf();
+					std::cout << endl << "Input the title of the game\nInput: ";
+					string title;
+					getline(cin,title);
+				}
+			}
+
+			try{
+				if(user->installUpdates(game))
+					std::cout << endl << "Game successfully updated\n";
+				else
+					std::cout << endl << "Game successfully updated\n";
+			}
+			catch(GameNotOwned &e){
+				std::cout << "Warning: ";
+				e.printInf();
+				std::cout << "\n\n";
+			}
+			break;
 		}
 		case 0:
 			return;
@@ -540,47 +581,43 @@ int prompt_user_interface(){
 }
 
 void card_interface(Card &card){
-
-	draw_header("CARD");
-
-	while(true){
-		print_card_menu();
-		switch(prompt_card_menu()){
-		case 1:
+ 	draw_header("CARD");
+ 	while(true){
+		print_card_interface();
+		switch(prompt_card_interface()){
+		case 1:{
 			std::cout << "Insert the new card number\n";
 			string new_number;
 			input_receiver(new_number);
-			
+
 			card.setNumber(new_number);
-			
-			if(!card.getValidity()) 
-				std::cout << "Warning: the card number is not valid" << endl << endl;
-			
-			break;
-		case 2:
-			std::cout << "Insert the new card balance: ";
-			double new_balance;
-			input_receiver(new_balance);
-			
-			if (!card.setBalance(new_balance))
+
+			if(!card.getValidity())
 				std::cout << "Warning: the card number is not valid" << endl << endl;
 
 			break;
+		}
+		case 2:{
+			std::cout << "Insert the new card balance: ";
+			double new_balance;
+			input_receiver(new_balance);
+
+			if (!card.setBalance(new_balance))
+				std::cout << "Warning: the card number is not valid" << endl << endl;
+ 			break;
+		}
 		case 0:
 			return;
 		}
 	}
 }
-
-void print_card_menu(){
-
-	std::cout << "Would you like to: " << std::endl << std::endl;
+ void print_card_interface(){
+ 	std::cout << "Would you like to: " << std::endl << std::endl;
 	std::cout << "\t1: Change card number" << std::endl;
 	std::cout << "\t2: Change card balance" << std::endl;
 	std::cout << "\t0: Exit the card interface" << std::endl << std::endl;
 }
-
-int prompt_card_interface(){
+ int prompt_card_interface(){
 	int input = -1;
 	input_receiver(input);
 	while(input < 0 || input > 2){
@@ -589,3 +626,6 @@ int prompt_card_interface(){
 	}
 	return input;
 }
+
+
+

@@ -54,8 +54,9 @@ void print_user_interface();
 int prompt_user_interface();
 
 void card_interface(Card &card);
-void print_card_menu();
-int prompt_card_menu();
+void print_card_interface();
+int prompt_card_interface();
+
 
 
 
