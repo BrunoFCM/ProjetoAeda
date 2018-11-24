@@ -57,7 +57,7 @@ void card_interface(Card &card);
 void print_card_interface();
 int prompt_card_interface();
 
-
+void save_interface();
 
 
 
