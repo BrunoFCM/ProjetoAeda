@@ -127,6 +127,25 @@ void Game::addUpdate(Date date) {}
 
 vector<PlaySession*> Game::getPlayHistory() const {vector<PlaySession*> out; return out;}
 
+void Game::giveInfoGame(ostream &info)
+{
+	info << id << "\n" << title << "/n" << price << "\n" << base_price << "/n"
+		 << release.toStr() << age_range.getLower() << " " << age_range.getUpper() << "\n";
+
+	for (unsigned int i = 0; i < platform.size() - 1; i++)
+		info << platform[i] << ",\n";
+	info << platform[platform.size() - 1] << ".\n";
+
+	for (unsigned int i = 0; i < genre.size() - 1; i++)
+		info << genre[i] << ",\n";
+	info << genre[genre.size() - 1] << ".\n" << developer << "\n";
+
+	for (unsigned int i = 0; i < price_history.size() - 1; i++)
+		info << price_history[i] << ",\n";
+	info << price_history[price_history.size() - 1] << ".\n" << player_base << "\n";
+
+}
+
 
 
 
