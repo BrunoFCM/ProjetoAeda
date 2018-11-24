@@ -5,6 +5,25 @@
 
 using namespace std;
 
+System::~System()
+{
+	for (size_t i = 0; i < user_library.size(); i++) {
+
+		vector<PlaySession*> sessions = user_library.at(i)->getSessions();
+
+		for (size_t j = 0; j < sessions.size(); j++) {
+			delete sessions.at(j);
+		}
+
+		delete user_library.at(i);
+	}
+
+	for (size_t i = 0; i < store.size(); i++) {
+		delete store.at(i);
+	}
+
+}
+
 void System::addUser(User* user)
 {
 	for (size_t i = 0; i < user_library.size(); i++) {

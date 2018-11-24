@@ -18,6 +18,12 @@ class System
 	vector<User*> user_library; //base de dados com o conjunto de todos os utilizadores
 
 public:
+
+	/**
+	 * @brief Destrutor da classe System
+	 */
+	~System();
+
 	/**
 	 * @brief Funcao que adiciona um utilizador ao vetor user_library
 	 * @param user Utilizador a ser adicionado
