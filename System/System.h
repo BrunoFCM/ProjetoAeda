@@ -18,10 +18,9 @@ class System
 	vector<User*> user_library; //base de dados com o conjunto de todos os utilizadores
 
 public:
-
 	/**
-	 * @brief Destrutor da classe System
-	 */
+	* @brief Destrutor da classe System
+	*/
 	~System();
 
 	/**
@@ -75,7 +74,7 @@ public:
 	 * @param game Jogo
 	 * @param card Cartao
 	 */
-	void buyGame(User* user, Game* game, unsigned int id);
+	void buyGames(User* user, Game* game, unsigned int id);
 
 	template <class Restrictor, class Argument>
 	/**
@@ -102,6 +101,11 @@ public:
 		if(!properArgument(func, arg)) throw InvalidArgument();
 		return restrictedVector(user_library,func,arg);
 	}
+
+	/**
+	* @brief Funcao que passa para uma ostream a informacao relativa ao sistema
+	*/
+	void giveInfoSystem(ostream &info) const;
 };
 
 #endif /* SRC_SYSTEM_H_ */
