@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <vector>
+#include <fstream>
 
 #include "Card.h"
 #include "Date.h"
@@ -105,7 +106,7 @@ void system_menu_interface(){
 			//vector
 			break;
 		case 0:
-			//hol' up
+			save_interface();
 			break;
 		}
 	}
@@ -415,7 +416,6 @@ void user_interface(User *user){
 			break;
 		}
 		case 3:{
-			vector<Card> cards(user->getCards());
 			std::cout << "\n\nInsert the number of cards to see (0 shows every card)";
 			unsigned int lim_crd;
 			input_receiver(lim_crd);
@@ -423,14 +423,19 @@ void user_interface(User *user){
 			std::cout << "\n\nWould you like to edit a card? (if yes, input the index of the card, otherwise input 0)";
 			unsigned int card_ind;
 			input_receiver(card_ind);
-			while(card_ind > cards.size()){
+			while(card_ind >= user->getCards().size()){
 				std::cout << "\nInvalid Index\n";
 				input_receiver(card_ind);
 			}
-			card_interface(cards[card_ind-1]);
+			card_interface(user->getCardRef(card_ind));
 			break;
 		}
 		case 4:{
+			if(user->getLibrary().size() == 0){
+				std::cout << std::endl << std::endl << "Warning: this user has no games" << std::endl << std::endl;
+				break;
+			}
+
 			std::cout << endl << "Input the title of the game\nInput: ";
 			string title;
 			getline(cin,title);
@@ -661,6 +666,28 @@ void card_interface(Card &card){
 	}
 	return input;
 }
+
+void save_interface(){
+ 	draw_header("EXPORT");
+ 	std::cout << "To save the system to a file, input the file name (if you don't want to save to a file input an empty string):" << std::endl;
+	std::string input;
+	getline(cin,input);
+	if(input.length()){
+		fstream file;
+		file.open(input);
+		if (file.fail()){
+			cerr << "Error opening file" << endl;
+		}
+		else{
+			lsystem->giveInfoSystem(file);
+		}
+	}
+
+	delete lsystem;
+
+}
+
+
 
 
 
