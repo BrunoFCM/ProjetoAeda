@@ -539,7 +539,53 @@ int prompt_user_interface(){
 	return input;
 }
 
+void card_interface(Card &card){
 
+	draw_header("CARD");
 
+	while(true){
+		print_card_menu();
+		switch(prompt_card_menu()){
+		case 1:
+			std::cout << "Insert the new card number\n";
+			string new_number;
+			input_receiver(new_number);
+			
+			card.setNumber(new_number);
+			
+			if(!card.getValidity()) 
+				std::cout << "Warning: the card number is not valid" << endl << endl;
+			
+			break;
+		case 2:
+			std::cout << "Insert the new card balance: ";
+			double new_balance;
+			input_receiver(new_balance);
+			
+			if (!card.setBalance(new_balance))
+				std::cout << "Warning: the card number is not valid" << endl << endl;
 
+			break;
+		case 0:
+			return;
+		}
+	}
+}
 
+void print_card_menu(){
+
+	std::cout << "Would you like to: " << std::endl << std::endl;
+	std::cout << "\t1: Change card number" << std::endl;
+	std::cout << "\t2: Change card balance" << std::endl;
+	std::cout << "\t0: Exit the card interface" << std::endl << std::endl;
+}
+
+int prompt_card_interface(){
+	int input = -1;
+	input_receiver(input);
+	while(input < 0 || input > 2){
+		std::cout << "Please insert an integer between 0 and 2" << std::endl;
+		input_receiver(input);
+	}
+	return input;
+}
