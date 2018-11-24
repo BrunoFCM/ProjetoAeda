@@ -272,7 +272,7 @@ void game_interface(Game *game){
 				break;
 			case 2:{
 				vector<double> prc_his(game->getPriceHist());
-				std::cout << "\n\nInsert the number of users to see (0 shows every price)";
+				std::cout << "\n\nInsert the number of prices to see (0 shows every price)";
 				unsigned int lim_prc;
 				input_receiver(lim_prc);
 				if (lim_prc == 0 || lim_prc > prc_his.size())
@@ -285,20 +285,6 @@ void game_interface(Game *game){
 				break;
 			}
 			case 3:{
-				vector<User*> player_base(game->getPlayerBase());
-				std::cout << "\n\nInsert the number of users to see (0 shows every user)";
-				unsigned int lim_usr;
-				input_receiver(lim_usr);
-				if (lim_usr == 0 || lim_usr > player_base.size())
-					lim_usr = player_base.size();
-				std::cout << endl << endl;
-				for (unsigned int i = 0; i < lim_usr; ++i){
-					std::cout << player_base[i]->getName() << endl;
-				}
-				std::cout << endl << endl;
-				break;
-			}
-			case 4:{
 				std::cout << "\n\nInsert a value (in %) of the discount\n";
 				unsigned int input_dis;
 				input_receiver(input_dis);
@@ -309,7 +295,7 @@ void game_interface(Game *game){
 				game->discountPrice(input_dis);
 				break;
 			}
-			case 5:{
+			case 4:{
 				double input_base;
 				std::cout << "\n\nInsert the new value for the base price\n";
 				input_receiver(input_base);
@@ -321,11 +307,11 @@ void game_interface(Game *game){
 				game->changeBasePrice(input_base);
 				break;
 			}
-			case 6:{
+			case 5:{
 				game->revertToPrice();
 				break;
 			}
-			case 7:{
+			case 6:{
 				if (game->isHomeTitle()){
 					std::string aux;
 					Date update(1,1,1901);
@@ -368,20 +354,19 @@ void print_game_interface(const bool &home){
 	std::cout << "Would you like to: " << std::endl << std::endl;
 	std::cout << "\t1: See game info" << std::endl;
 	std::cout << "\t2: See price history" << std::endl;
-	std::cout << "\t3: See player base" << std::endl;
-	std::cout << "\t4: Make a discount" << std::endl;
-	std::cout << "\t5: Change the base price" << std::endl;
-	std::cout << "\t6: Revert price (nullify discounts)" << std::endl;
-	if (home) std::cout << "\t7: Add an update" << std::endl;
-	else std::cout << "\t7: See play history" << std::endl;
+	std::cout << "\t3: Make a discount" << std::endl;
+	std::cout << "\t4: Change the base price" << std::endl;
+	std::cout << "\t5: Revert price (nullify discounts)" << std::endl;
+	if (home) std::cout << "\t6: Add an update" << std::endl;
+	else std::cout << "\t6: See play history" << std::endl;
 	std::cout << "\t0: Leave the game editor" << std::endl << std::endl;
 }
 
 int prompt_game_interface(){
 	int input = -1;
 	input_receiver(input);
-	while(input < 0 || input > 7){
-		std::cout << "Please insert an integer between 0 and 7" << std::endl;
+	while(input < 0 || input > 6){
+		std::cout << "Please insert an integer between 0 and 6" << std::endl;
 		input_receiver(input);
 	}
 	return input;
@@ -559,6 +544,7 @@ void user_interface(User *user){
 				e.printInf();
 				std::cout << "\n\n";
 			}
+			break;
 		}
 		case 7:{
 			std::cout << "\n\nInsert the number of updates to see (0 shows most recent update for every game)";
