@@ -121,14 +121,7 @@ void User::giveInfoUser(ostream &info) const
 		 << email << "\n"
 		 << age << "\n"
 		 << address << "\n";
-	for (unsigned int i = 0; i < library.size(); ++i){
-		if(i != (library.size() - 1)){
-			info << library[i]->getTitle() << ",\n";
-		}
-		else{
-			info << library[i]->getTitle() << ".\n";
-		}
-	}
+
 }
 
 void User::printLibraryUser(unsigned int numberOfGames) const
@@ -143,16 +136,16 @@ void User::printLibraryUser(unsigned int numberOfGames) const
 	}
 }
 
-void User::giveLibraryUser(ostream &titles, unsigned int numberOfGames) const
+void User::giveLibraryUser(ostream &titles) const
 {
-	if (numberOfGames == 0)
-		for (unsigned int i = 0; i < library.size(); i++)
-			titles << library[i]->getTitle() << "\n";
-	else
-	{
-		for (unsigned int i = 0; i < library.size() && i < numberOfGames; i++)
-			titles << library[i]->getTitle() << "\n";
+	for (unsigned int i = 0; i < library.size(); ++i){
+	if(i != (library.size() - 1)){
+		titles << library[i]->getTitle() << ",\n";
 	}
+	else{
+		titles << library[i]->getTitle() << ".\n";
+	}
+}
 }
 
 void User::printCardsUser(unsigned int numberOfCards) const
@@ -173,15 +166,15 @@ void User::printCardsUser(unsigned int numberOfCards) const
 	}
 }
 
-void User::giveCardsUser(ostream &numbers, unsigned int numberOfCards) const
+void User::giveCardsUser(ostream &numbers) const
 {
-	if (numberOfCards == 0)
-		for (unsigned int i = 0; i < cards.size(); i++)
-			numbers << cards[i].getNumber() << "\n";
-	else
-	{
-		for (unsigned int i = 0; i < cards.size() && i < numberOfCards; i++)
-			numbers << cards[i].getNumber() << "\n";
+	for (unsigned int i = 0; i < cards.size(); ++i){
+		if(i != (cards.size() - 1)){
+			numbers << cards[i].getNumber() << cards[i].getBalance() << ",\n";
+		}
+		else{
+			numbers << cards[i].getNumber() << cards[i].getBalance() << ".\n";
+		}
 	}
 }
 
@@ -194,22 +187,6 @@ void User::printSessionsUser(unsigned int numberOfSessions) const
 	{
 		for (unsigned int i = 0; i < sessions.size() && i < numberOfSessions; i++)
 			sessions[i]->printInfoSession();
-	}
-}
-
-void User::giveSessionsUser(ostream &sess,unsigned int numberOfSessions) const
-{
-	if (numberOfSessions == 0)
-		for (unsigned int i = 0; i < sessions.size(); i++){
-			sessions[i]->giveSessions(sess);
-			sess << "\n";
-		}
-	else
-	{
-		for (unsigned int i = 0; i < sessions.size() && i < numberOfSessions; i++){
-			sessions[i]->giveSessions(sess);
-			sess << "\n";
-		}
 	}
 }
 

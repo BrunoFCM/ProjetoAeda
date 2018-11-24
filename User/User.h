@@ -27,7 +27,7 @@ private:
 	vector<Card> cards;						//correspondente ao conjunto dos cartoes do utilizador
 	vector<Game*> library;					//correspondente ao conjunto dos jogos do utilizador
 	vector<PlaySession*> sessions;			//correspondente ao conjunto dos historiais de cada sessao de jogo
-	map<string,vector<Date>> updates; //correspondente ao conjunto de conjuntos de updates de cada jogo
+	map<string,vector<Date>> updates; 		//correspondente ao conjunto de conjuntos de updates de cada jogo
 
 public:
 	/**
@@ -144,10 +144,9 @@ public:
 
 	/**
 	* @brief Funcao que passa para uma ostream os titulos dos jogos de um utilizador
-	* @param numberOfGames Numero de titulos a serem passados
-	* @return titles Ostream que contem os titulos dos jogos de um utilizador
+	* @param titles Ostream que contem os titulos dos jogos de um utilizador
 	*/
-	void giveLibraryUser(ostream &titles, unsigned int numberOfGames = 0) const;
+	void giveLibraryUser(ostream &titles) const;
 
 	/**
 	* @brief Funcao que imprime no ecra os numeros dos cartoes de um utilizador
@@ -158,10 +157,9 @@ public:
 
 	/**
 	* @brief Funcao que passa para uma ostream os numeros dos cartoes de um utilizador
-	* @param numberOfCards Numero de numeros a serem passados
-	* @return numbers Ostream que contem os numeros dos cartoes de um utilizador
+	* @param numbers Ostream que contem os numeros dos cartoes de um utilizador
 	*/
-	void giveCardsUser(ostream &numbers, unsigned int numberOfCards = 0) const;
+	void giveCardsUser(ostream &numbers) const;
 
 	/**
 	* @brief Funcao que imprime no ecra os historiais de cada sessao de jogo
@@ -169,13 +167,6 @@ public:
 	* @param numbers Ostream na qual e guardada a informacao
 	*/
 	void printSessionsUser(unsigned int numberOfSessions = 0) const;
-
-	/**
-	* @brief Funcao que passa para uma ostream os historiais de cada sessao de jogo
-	* @param numberOfSessions Numero de sessoes a serem passadas
-	* @param sess Ostream que contem as sessoes de um utilizador
-	*/
-	void giveSessionsUser(ostream &sess, unsigned int numberOfSessions = 0) const;
 
 	/**
 	* @brief Funcao que instala os updates de um jogo para o utilizador
