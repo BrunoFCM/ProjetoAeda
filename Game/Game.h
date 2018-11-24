@@ -1,7 +1,6 @@
 #ifndef SRC_GAME_H_
 #define SRC_GAME_H_
 
-#pragma once
 #include <iostream>
 #include <string>
 #include <vector>
@@ -30,7 +29,7 @@ protected:
 	vector<string> genre;					//genero
 	string developer;						//empresa que o desenvolveu
 	vector<double> price_history;			//historial de precos de aquisicao
-	vector<User*> users;				    //vetor de utilizadores
+	unsigned int player_base; 				//numero de jogadores
 public:
 
 	/**
@@ -112,9 +111,9 @@ public:
 
 	/**
 	* @brief Membro-funcao que retorna um vetor de strings correspondentes Ã  base de jogadores do jogo
-	* @return Retorna um vetor de User* correspondentes aos jogadores do jogo
+	* @return Retorna o valor de player_base, correspondente ao numero de jogadores
 	*/
-	vector<User*> getPlayerBase() const;
+	unsigned int getPlayerBase() const;
 
 	/**
 	 * @brief Devolve um vetor com todos os updates feitos ao jogo
@@ -148,15 +147,14 @@ public:
 	void changeBasePrice(const double &newPrice);
 
 	/**
-	* @brief Altera o preÃ§o para o preco base
+	* @brief Altera o preco para o preco base
 	*/
 	void revertToPrice();
 
 	/**
 	* @brief Adiciona um utilizador a base de jogadores de jogo
-	* @param user Utilizador a adicionar
 	*/
-	void addUser(User* user);
+	void addUser();
 
 
 	/**
@@ -178,6 +176,12 @@ public:
 	 * @brief Membro puramente virtual utilizavel apenas pela classe derivada Online (e respetivas derivadas), devolvendo um vetor vazio para outras classes
 	 */
 	virtual vector<PlaySession*> getPlayHistory() const;
+
+	/**
+	 * @brief Acrescenta uma PlaySession ao vetor de sessoes ao jogo online (nas outras classes, a funcao retorna sem executar nada)
+	 * @param sess Pointer para a PlaySession a adicionar
+	 */
+	virtual void addSession(PlaySession *sess);
 
 };
 
@@ -226,6 +230,12 @@ public:
 	 * @return Vetor apontador para o conjunto de objetos de classe PlaySession
 	 */
 	vector<PlaySession*> getPlayHistory() const;
+
+	/**
+	 * @brief Acrescenta uma PlaySession ao vetor de sessoes ao jogo online (nas outras classes, a funcao retorna sem executar nada)
+	 * @param sess Pointer para a PlaySession a adicionar
+	 */
+	void addSession(PlaySession *sess);
 
 	/**
 	 * @brief Funcao que permite obter informacao relativamente ao jogo ser Home ou Online

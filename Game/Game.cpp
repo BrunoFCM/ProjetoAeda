@@ -22,6 +22,7 @@ Game::Game(const string &title,const double &price,const Date &release,const Int
 	this->platform = platforms;
 	this->genre = genres;
 	this->developer = developer;
+	player_base = 0;
 }
 
 unsigned int Game::getId() const
@@ -74,9 +75,9 @@ vector<double> Game::getPriceHist() const
 	return price_history;
 }
 
-vector<User*> Game::getPlayerBase() const
+unsigned int Game::getPlayerBase() const
 {
-	return users;
+	return player_base;
 }
 
 vector<Date> Game::getUpdates() const
@@ -115,13 +116,12 @@ void Game::revertToPrice()
 	price_history.push_back(price);
 }
 
-void Game::addUser(User* user)
+void Game::addUser()
 {
-	for (size_t i = 0; i < users.size(); i++)
-		if (user == users[i])
-			throw; //RepeatedUser();
-	users.push_back(user);
+	++player_base;
 }
+
+void Game::addSession(PlaySession *sess){}
 
 void Game::addUpdate(Date date) {}
 
@@ -165,7 +165,7 @@ void Home::printInfoGame() const {
 	cout << "Release Date: " << getRelease().toStr() << endl;
 	cout << "Recommended age: " << getAge().toStr() << endl;
 	cout << "Developer: " << getDeveloper() << endl;
-	cout << "Number of players: " << users.size() << endl;
+	cout << "Number of players: " << player_base << endl;
 }
 
 
@@ -190,6 +190,10 @@ vector<PlaySession*> Online::getPlayHistory() const
 double Online::getPrice() const
 {
 	return 0;
+}
+
+void Online::addSession(PlaySession *sess){
+	play_history.push_back(sess);
 }
 
 bool Online::isHomeTitle() const {return false;}
@@ -232,7 +236,7 @@ void FixedSubsc::printInfoGame() const {
 	cout << "Release Date: " << getRelease().toStr() << endl;
 	cout << "Recommended age: " << getAge().toStr() << endl;
 	cout << "Developer: " << getDeveloper() << endl;
-	cout << "Number of players: " << users.size() << endl;
+	cout << "Number of players: " << player_base << endl;
 	cout << "Total play time: " << getPlayTime() << endl;
 
 }
@@ -273,6 +277,6 @@ void VariableSubsc::printInfoGame() const {
 	cout << "Release Date: " << getRelease().toStr() << endl;
 	cout << "Recommended age: " << getAge().toStr() << endl;
 	cout << "Developer: " << getDeveloper() << endl;
-	cout << "Number of players: " << users.size() << endl;
+	cout << "Number of players: " << player_base << endl;
 	cout << "Total play time: " << getPlayTime() << endl;
 }
