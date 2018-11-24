@@ -49,7 +49,7 @@ void game_interface(Game *game);
 void print_game_interface(const bool &home);
 int prompt_game_interface();
 
-void game_interface(User *user);
+void user_interface(User *user);
 void print_user_interface();
 int prompt_user_interface();
 
