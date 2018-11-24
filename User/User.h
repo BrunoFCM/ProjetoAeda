@@ -131,10 +131,10 @@ public:
 	void printInfoUser() const;
 
 	/**
-	* @brief Funcao que passa para uma ostream a informacao (membros-dado) de um utilizador
+	* @brief Funcao que passa para uma fstream a informacao (membros-dado) de um utilizador
 	* @param info Ostream que ira conter a informacao (membros-dado) de um utilizador
 	*/
-	void giveInfoUser(ostream &info) const;
+	void giveInfoUser(fstream &info) const;
 
 	/**
 	* @brief Funcao que imprime no ecra os titulos dos jogos de um utilizador
@@ -143,10 +143,10 @@ public:
 	void printLibraryUser(unsigned int numberOfGames = 0) const;
 
 	/**
-	* @brief Funcao que passa para uma ostream os titulos dos jogos de um utilizador
+	* @brief Funcao que passa para uma fstream os titulos dos jogos de um utilizador
 	* @param titles Ostream que contem os titulos dos jogos de um utilizador
 	*/
-	void giveLibraryUser(ostream &titles) const;
+	void giveLibraryUser(fstream &titles) const;
 
 	/**
 	* @brief Funcao que imprime no ecra os numeros dos cartoes de um utilizador
@@ -156,10 +156,10 @@ public:
 	void printCardsUser (unsigned int numberOfCards = 0) const;
 
 	/**
-	* @brief Funcao que passa para uma ostream os numeros dos cartoes de um utilizador
+	* @brief Funcao que passa para uma fstream os numeros dos cartoes de um utilizador
 	* @param numbers Ostream que contem os numeros dos cartoes de um utilizador
 	*/
-	void giveCardsUser(ostream &numbers) const;
+	void giveCardsUser(fstream &numbers) const;
 
 	/**
 	* @brief Funcao que imprime no ecra os historiais de cada sessao de jogo
@@ -175,6 +175,12 @@ public:
 	*/
 	bool installUpdates(Game* game);
 
+	/**
+	* @brief Funcao que retorna a referencia de um card do utilizador
+	* @param index Indice do card pedido
+	* @return Referencia ao card pedido
+	*/
+	Card & getCardRef(unsigned int index);
 };
 
 #endif /* SRC_USER_H_ */
