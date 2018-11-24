@@ -121,7 +121,8 @@ void User::giveInfoUser(ostream &info) const
 		 << email << "\n"
 		 << age << "\n"
 		 << address << "\n";
-
+	giveLibraryUser(info);
+	giveCardsUser(info);
 }
 
 void User::printLibraryUser(unsigned int numberOfGames) const
