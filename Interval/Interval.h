@@ -33,7 +33,7 @@ public:
 	 * @brief Membro funcao que retorna uma string de um intervalo no formato 'lower-upper'
 	 * @return Intervalo no formato string
 	 */
-	string toStr() const;
+	std::string toStr() const;
 
 	/**
 	 * @brief Membro funcao que avalia se uma pessoa de uma certa idade pode jogar o jogo
