@@ -74,7 +74,7 @@ void System::sortGames(const GameComparer &comparer){
 	insertionSort(store,comparer);
 }
 
-void System::buyGames(User* user, Game* game, unsigned int id)
+void System::buyGame(User* user, Game* game, unsigned int id)
 {
 	string info = to_string(game->getAge().getLower());
 	if (user->getAge() >= game->getAge().getLower())
@@ -94,10 +94,10 @@ void System::buyGames(User* user, Game* game, unsigned int id)
 		}
 		throw InvalidCard();
 	}
-	else throw UserTooYoung(*info);
+	else throw UserTooYoung(info);
 }
 
-void System::giveInfoSystem(ostream &info) const
+void System::giveInfoSystem(fstream &info) const
 {
 	for (unsigned int i = 0; i < store.size() - 1; i++)
 	{
@@ -117,9 +117,17 @@ void System::giveInfoSystem(ostream &info) const
 
 	for (unsigned int j = 0; j < user_library.size(); j++)
 	{
-		user_library[j]->giveSessionsUser(info);
+		vector<PlaySession *> sess (user_library[j]->getSessions());
+		for (unsigned int i = 0; i < sess.size(); i++)
+		{
+			sess[i]->giveSessions(info);
+		}
 	}
-	user_library[store.size() - 1]->giveSessionsUser(info);
+	vector<PlaySession *> sess (user_library[user_library.size() - 1]->getSessions());
+	for (unsigned int i = 0; i < sess.size(); i++)
+	{
+		sess[i]->giveSessions(info);
+	}
 	info << "@" << "\n";
 }
 

@@ -2,6 +2,7 @@
 #define SRC_SYSTEM_H_
 
 #include <iostream>
+#include <fstream>
 #include "Game.h"
 #include "User.h"
 #include "Sorts.h"
@@ -74,7 +75,7 @@ public:
 	 * @param game Jogo
 	 * @param card Cartao
 	 */
-	void buyGames(User* user, Game* game, unsigned int id);
+	void buyGame(User* user, Game* game, unsigned int id);
 
 	template <class Restrictor, class Argument>
 	/**
@@ -103,9 +104,11 @@ public:
 	}
 
 	/**
-	* @brief Funcao que passa para uma ostream a informacao relativa ao sistema
+	* @brief Funcao que passa para uma fstream a informacao relativa ao sistema
 	*/
-	void giveInfoSystem(ostream &info) const;
+	void giveInfoSystem(fstream &info) const;
+
+
 };
 
 #endif /* SRC_SYSTEM_H_ */
