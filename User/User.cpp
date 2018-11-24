@@ -120,10 +120,15 @@ void User::giveInfoUser(ostream &info) const
 	info << name << "\n"
 		 << email << "\n"
 		 << age << "\n"
-		 << address << "\n"
-		 << cards.size() << "\n"
-		 << library.size() << "\n"
-		 << sessions.size() << "\n";
+		 << address << "\n";
+	for (unsigned int i = 0; i < library.size(); ++i){
+		if(i != (library.size() - 1)){
+			info << library[i]->getTitle() << ",\n";
+		}
+		else{
+			info << library[i]->getTitle() << ".\n";
+		}
+	}
 }
 
 void User::printLibraryUser(unsigned int numberOfGames) const
