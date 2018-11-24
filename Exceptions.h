@@ -86,6 +86,7 @@ class RepeatedCard: public Exception {
 	/**
 	 * @brief Construtor da classe RepeatedCard
 	 */
+public:
 	RepeatedCard(const std::string &info): Exception(info) {}
 
 	/**
@@ -248,5 +249,19 @@ public:
 	}
 };
 
+class GameNotOwned: public Exception {
+public:
+	/**
+	 * @brief Construtor da classe GameNotOwned
+	 */
+	GameNotOwned(const std::string &info): Exception(info) {}
+
+	/**
+	 * @brief Membro funcao que imprime informacao relativamente a excecao
+	 */
+	void printInf() const {
+		std::cout << "The user does not own this game: " << getInf() << std::endl;
+	}
+};
 
 #endif /* EXCEPTIONS_H_ */
