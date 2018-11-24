@@ -69,7 +69,7 @@ public:
 	 * @param game Jogo
 	 * @param card Cartao
 	 */
-	void buyGames(User* user, Game* game, unsigned int id);
+	void buyGame(User* user, Game* game, unsigned int id);
 
 	template <class Restrictor, class Argument>
 	/**

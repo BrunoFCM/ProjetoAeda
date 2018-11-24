@@ -60,27 +60,30 @@ void System::sortGames(const GameComparer &comparer){
 	insertionSort(store,comparer);
 }
 
-void System::buyGames(User* user, Game* game, unsigned int id)
+void System::buyGame(User* user, Game* game, unsigned int id)
 {
-	string info = to_string(game->getAge().getLower());
-	if (user->getAge() >= game->getAge().getLower())
-	{
-		for (unsigned int i = 0; i < user->getCards().size(); i++)
-		{
-			if (user->getCards()[i].getNumber() == to_string(id))
-			{
-				if (user->getCards()[i].getValidity() && user->getCards()[i].getBalance() >= game->getPrice())
-				{
-					double bal = user->getCards()[i].getBalance() - game->getPrice();
-					user->getCards()[i].setBalance(bal);
-					user->addToLibrary(game);
-					return;
-				}
-			}
-		}
-		throw InvalidCard();
+	if(user->checkLibraryFor(game))
+		throw (GameAlreadyOwned(game->getTitle()));
+
+	if (user->getAge() < game->getAge().getLower()){
+		string info = to_string(game->getAge().getLower());
+		throw UserTooYoung(info);
 	}
-	else throw UserTooYoung(*info);
+
+	if (id > user->getCards().size())
+		throw InvalidCard();
+
+	const Card card(user->getCards()[id]);
+
+	if (card.getValidity() && card.getBalance() >= game->getPrice())
+	{
+		double bal = card.getBalance() - game->getPrice();
+		user->getCards()[id].setBalance(bal);
+		user->addToLibrary(game);
+		return;
+	}
+	else
+		throw (NotEnoughFunds(to_string(card.getBalance())));
 }
 
 
