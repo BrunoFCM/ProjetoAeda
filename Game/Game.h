@@ -187,7 +187,7 @@ public:
 	* @brief Funcao virtual que passa para uma ostream a informacao de um jogo
 	* @param info Ostream para onde e passada a informacao de um jogo
 	*/
-	virtual void giveInfoGame(ostream &info);
+	virtual void giveInfoGame(ostream &info) const;
 
 };
 
@@ -248,6 +248,12 @@ public:
 	 * @return True se o jogo for Home
 	 */
 	bool isHomeTitle() const;
+
+	/**
+	* @brief Funcao virtual que passa para uma ostream a informacao de um jogo online
+	* @param info Ostream para onde e passada a informacao de um jogo online
+	*/
+	virtual void giveInfoGame(ostream &info) const{};
 };
 
 
@@ -285,6 +291,11 @@ public:
 	 */
 	void printInfoGame() const;
 
+	/**
+	* @brief Funcao virtual que passa para uma ostream a informacao de um jogo online de subscricao fixa
+	* @param info Ostream para onde e passada a informacao de um jogo online de subscricao fixa
+	*/
+	void giveInfoGame(ostream &info) const;
 };
 
 
@@ -322,6 +333,11 @@ public:
 	 */
 	void printInfoGame() const ;
 
+	/**
+	* @brief Funcao virtual que passa para uma ostream a informacao de um jogo online de subscricao variavel
+	* @param info Ostream para onde e passada a informacao de um jogo online de subscricao variavel
+	*/
+	void giveInfoGame(ostream &info) const;
 };
 
 
@@ -370,6 +386,12 @@ public:
 	 * @return True se o jogo for Home
 	 */
 	bool isHomeTitle() const;
+
+	/**
+	* @brief Funcao virtual que passa para uma ostream a informacao de um jogo home
+	* @param info Ostream para onde e passada a informacao de um jogo home
+	*/
+	void giveInfoGame(ostream &info) const;
 };
 
 
