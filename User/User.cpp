@@ -147,12 +147,18 @@ void User::giveLibraryUser(ostream &titles, unsigned int numberOfGames) const
 void User::printCardsUser(unsigned int numberOfCards) const
 {
 	if (numberOfCards == 0)
-		for (unsigned int i = 0; i < cards.size(); i++)
-			cout << cards[i].getNumber() << "\n";
+		for (unsigned int i = 0; i < cards.size(); i++){
+			std::cout << (i+1) << ":\n";
+			cards[i].printCard();
+			std::cout << std::endl << std::endl;
+		}
 	else
 	{
-		for (unsigned int i = 0; i < cards.size() && i < numberOfCards; i++)
-			cout << cards[i].getNumber() << "\n";
+		for (unsigned int i = 0; i < cards.size() && i < numberOfCards; i++){
+			std::cout << (i+1) << ":\n";
+			cards[i].printCard();
+			std::cout << std::endl << std::endl;
+		}
 	}
 }
 
@@ -198,10 +204,17 @@ void User::giveSessionsUser(ostream &sess,unsigned int numberOfSessions) const
 
 bool User::installUpdates(Game* game)
 {
-	if (game->getUpdates().size() == 0 || game->getUpdates().size() == updates.size())
-		return false;
+	unsigned int num_updates = game->getUpdates().size();
+	try{
+		if (num_updates == updates.at(game->getTitle()).size())
+			return false;
+	}
+	catch (std::out_of_range &e){
+		throw GameNotOwned(game->getTitle());
+	}
+
 	vector<Date> updatesRequired;
-	for (unsigned int i = updates.size(); i < game->getUpdates().size(); i++)
+	for (unsigned int i = updates.size(); i < num_updates; i++)
 	{
 		updatesRequired.push_back(game->getUpdates()[i]);
 	}

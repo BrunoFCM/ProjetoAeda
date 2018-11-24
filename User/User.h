@@ -173,6 +173,7 @@ public:
 	/**
 	* @brief Funcao que instala os updates de um jogo para o utilizador
 	* @param game Jogo com updates para instalar
+	* @return True se forem instalados updates no jogo, false se o jogo ja estiver atualizado
 	*/
 	bool installUpdates(Game* game);
 
