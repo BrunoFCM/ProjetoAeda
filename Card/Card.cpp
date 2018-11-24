@@ -1,10 +1,9 @@
 #include "Card.h"
-#include <string>
 
 #define ASCII_0 48 //corresponde ao valor de '0' na tabela ASCII
 
 void Card::checkValidity()
-/* Esta funcao utiliza o algoritmo de Luhn para verificar se o numero do cartao é valido */
+/* Esta funcao utiliza o algoritmo de Luhn para verificar se o numero do cartao Ã© valido */
 {
 	if (card_number.length() != 16) {
 		valid = false;
@@ -27,14 +26,14 @@ void Card::checkValidity()
 	return;
 }
 
-Card::Card(const string &number)
+Card::Card(const std::string &number)
 {
 	card_number = number;
 	checkValidity();
 	balance = 0;
 }
 
-Card::Card(const string &number, const double &bal)
+Card::Card(const std::string &number, const double &bal)
 {
 	card_number = number;
 	checkValidity();
@@ -54,7 +53,7 @@ bool Card::setBalance(const double &bal)
 	else return false;
 }
 
-void Card::setNumber(const string &number)
+void Card::setNumber(const std::string &number)
 {
 	card_number = number;
 	checkValidity(); //atualizar o valor de valid
@@ -66,5 +65,19 @@ double Card::getBalance() const {return balance;}
 
 bool Card::getValidity() const {return valid;}
 
-string Card::getNumber() const {return card_number;}
+std::string Card::getNumber() const {return card_number;}
+
+void Card::printCard() const
+{
+	std::string validity;
+	if (valid)
+		validity = "Yes";
+	else
+		validity = "No";
+
+	std::cout << "Card number: " << getNumber() << std::endl;
+	std::cout << "Balance: " << getBalance() << std::endl;
+	std::cout << "Valid: " << validity << std::endl;
+
+}
 
