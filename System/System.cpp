@@ -8,21 +8,16 @@ using namespace std;
 System::~System()
 {
 	for (size_t i = 0; i < user_library.size(); i++) {
-
-		vector<PlaySession*> sessions = user_library.at(i)->getSessions();
-
-		for (size_t j = 0; j < sessions.size(); j++) {
+ 		vector<PlaySession*> sessions = user_library.at(i)->getSessions();
+ 		for (size_t j = 0; j < sessions.size(); j++) {
 			delete sessions.at(j);
 		}
-
-		delete user_library.at(i);
+ 		delete user_library.at(i);
 	}
-
-	for (size_t i = 0; i < store.size(); i++) {
+ 	for (size_t i = 0; i < store.size(); i++) {
 		delete store.at(i);
 	}
-
-}
+ }
 
 void System::addUser(User* user)
 {
@@ -79,30 +74,53 @@ void System::sortGames(const GameComparer &comparer){
 	insertionSort(store,comparer);
 }
 
-void System::buyGame(User* user, Game* game, unsigned int id)
+void System::buyGames(User* user, Game* game, unsigned int id)
 {
-	if(user->checkLibraryFor(game))
-		throw (GameAlreadyOwned(game->getTitle()));
-
-	if (user->getAge() < game->getAge().getLower()){
-		string info = to_string(game->getAge().getLower());
-		throw UserTooYoung(info);
-	}
-
-	if (id > user->getCards().size())
-		throw InvalidCard();
-
-	const Card card(user->getCards()[id]);
-
-	if (card.getValidity() && card.getBalance() >= game->getPrice())
+	string info = to_string(game->getAge().getLower());
+	if (user->getAge() >= game->getAge().getLower())
 	{
-		double bal = card.getBalance() - game->getPrice();
-		user->getCards()[id].setBalance(bal);
-		user->addToLibrary(game);
-		return;
+		for (unsigned int i = 0; i < user->getCards().size(); i++)
+		{
+			if (user->getCards()[i].getNumber() == to_string(id))
+			{
+				if (user->getCards()[i].getValidity() && user->getCards()[i].getBalance() >= game->getPrice())
+				{
+					double bal = user->getCards()[i].getBalance() - game->getPrice();
+					user->getCards()[i].setBalance(bal);
+					user->addToLibrary(game);
+					return;
+				}
+			}
+		}
+		throw InvalidCard();
 	}
-	else
-		throw (NotEnoughFunds(to_string(card.getBalance())));
+	else throw UserTooYoung(*info);
+}
+
+void System::giveInfoSystem(ostream &info) const
+{
+	for (unsigned int i = 0; i < store.size() - 1; i++)
+	{
+		store[i]->giveInfoGame(info);
+		info << "\n";
+	}
+	store[store.size() - 1]->giveInfoGame(info);
+	info << "@" << "\n";
+
+	for (unsigned int j = 0; j < user_library.size(); j++)
+	{
+		user_library[j]->giveInfoUser(info);
+		info << "\n";
+	}
+	user_library[store.size() - 1]->giveInfoUser(info);
+	info << "@" << "\n";
+
+	for (unsigned int j = 0; j < user_library.size(); j++)
+	{
+		user_library[j]->giveSessionsUser(info);
+	}
+	user_library[store.size() - 1]->giveSessionsUser(info);
+	info << "@" << "\n";
 }
 
 
