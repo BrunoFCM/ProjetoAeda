@@ -106,7 +106,7 @@ public:
 	/**
 	* @brief Funcao que passa para uma fstream a informacao relativa ao sistema
 	*/
-	void giveInfoSystem(fstream &info) const;
+	void giveInfoSystem(ofstream &info) const;
 
 
 };
