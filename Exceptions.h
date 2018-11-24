@@ -249,6 +249,9 @@ public:
 	}
 };
 
+/**
+ * Classe que gera excecoes de jogos nao comprados
+ */
 class GameNotOwned: public Exception {
 public:
 	/**
@@ -261,6 +264,42 @@ public:
 	 */
 	void printInf() const {
 		std::cout << "The user does not own this game: " << getInf() << std::endl;
+	}
+};
+
+/**
+ * Classe que gera excecoes de jogos ja comprados
+ */
+class GameAlreadyOwned: public Exception {
+public:
+	/**
+	 * @brief Construtor da classe GameNotOwned
+	 */
+	GameAlreadyOwned(const std::string &info): Exception(info) {}
+
+	/**
+	 * @brief Membro funcao que imprime informacao relativamente a excecao
+	 */
+	void printInf() const {
+		std::cout << "The user already owns this game: " << getInf() << std::endl;
+	}
+};
+
+/**
+ * Classe que gera excecoes de fundos insuficientes
+ */
+class NotEnoughFunds: public Exception {
+public:
+	/**
+	 * @brief Construtor da classe GameNotOwned
+	 */
+	NotEnoughFunds(const std::string &info): Exception(info) {}
+
+	/**
+	 * @brief Membro funcao que imprime informacao relativamente a excecao
+	 */
+	void printInf() const {
+		std::cout << "The card doesn't have enough money: " << getInf() << std::endl;
 	}
 };
 
