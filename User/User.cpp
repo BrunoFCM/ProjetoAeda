@@ -15,13 +15,19 @@ User::User(const string &name, const string &email, const unsigned int &age, con
 
 void User::addToLibrary(Game* game)
 {
+	if (checkLibraryFor(game))
+		throw (GameAlreadyOwned(game->getTitle()));
+	library.push_back(game);
+}
+
+bool User::checkLibraryFor(Game* game) const{
 	for (size_t i = 0; i < library.size(); i++) {
 		if (*library[i] == *game) {
 			string info = to_string(game->getId());
-			throw RepeatedGame(info);
+			return true;
 		}
 	}
-	library.push_back(game);
+	return false;
 }
 
 void User::addCard(const Card &card){

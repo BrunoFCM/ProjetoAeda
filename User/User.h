@@ -46,6 +46,13 @@ public:
 	void addToLibrary(Game* game);
 
 	/**
+	 * @brief Funcao que verifica se um jogo ja se encotra na biblioteca de jogos
+	 * @param game Jogo a procurar
+	 * @return True se o jogo ja esta na biblioteca do utilizador
+	 */
+	bool checkLibraryFor(Game* game) const;
+
+	/**
 	 * @brief Funcao que adiciona um cartao ao vetor de cartoes
 	 * @param card Cartao a adicionar
 	 */
