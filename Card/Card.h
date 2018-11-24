@@ -1,15 +1,15 @@
 #pragma once
 
 #include <string>
+#include <iostream>
 
-using namespace std;
 
 /**
  *  Classe Card que contem dados sobre cartoes de credito
  */
 class Card{
 	double balance; 	//correspondente ao saldo do cartao
-	string card_number; //correspondente ao numero de identificao do cartao
+	std::string card_number; //correspondente ao numero de identificao do cartao
 	bool valid;		    //indica a validade do numero do cartao
 
 	/**
@@ -22,14 +22,14 @@ public:
 	 * @brief Construtor da classe Card usando apenas o numero do cartao
 	 * @param number Numero de identificao do cartao
 	 */
-	Card(const string &number);
+	Card(const std::string &number);
 
 	/**
 	 * @brief Construtor da classe Card usando o numero do cartao e o respetivo saldo
 	 * @param number Numero do cartao
 	 * @param bal Valor do saldo do cartao
 	 */
-	Card(const string &number, const double &bal);
+	Card(const std::string &number, const double &bal);
 
 	/**
 	 * @brief Funcao que altera o valor de balance, caso o numero do cartao seja valido
@@ -42,7 +42,7 @@ public:
 	 * @brief Funcao que altera o numero do cartao, e de seguida o valor de valid a partir da funcao check_validity()
 	 * @param number Numero do cartao
 	 */
-	void setNumber(const string &number);
+	void setNumber(const std::string &number);
 
 	/**
 	 * @brief Funcao que retorna o valor do saldo do cartao (balance)
@@ -60,5 +60,10 @@ public:
 	 * @brief Funcao que retorna o numero do cartao
 	 * @return card_number Numero do cartao
 	 */
-	string getNumber() const;
+	std::string getNumber() const;
+
+	/**
+	 * @brief Imprime informacao relativamente ao cartao
+	 */
+	void printCard() const;
 };
