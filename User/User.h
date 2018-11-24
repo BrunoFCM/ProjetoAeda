@@ -27,7 +27,7 @@ private:
 	vector<Card> cards;						//correspondente ao conjunto dos cartoes do utilizador
 	vector<Game*> library;					//correspondente ao conjunto dos jogos do utilizador
 	vector<PlaySession*> sessions;			//correspondente ao conjunto dos historiais de cada sessao de jogo
-	map<unsigned int,vector<Date>> updates; //correspondente ao conjunto de conjuntos de updates de cada jogo
+	map<string,vector<Date>> updates; //correspondente ao conjunto de conjuntos de updates de cada jogo
 
 public:
 	/**
@@ -50,6 +50,12 @@ public:
 	 * @param card Cartao a adicionar
 	 */
 	void addCard(const Card &card);
+
+	/**
+	 * @brief Funcao que adiciona uma sessao de jogo ao historico do utilizador
+	 * @param sess Sessao a adicionar
+	 */
+	void addSession(PlaySession *sess);
 
 	/**
 	 * @brief Funcao que retorna o nome do utilizador
@@ -97,7 +103,13 @@ public:
 	 * @brief Funcao que retorna um map com o conjunto de conjuntos de updates de cada jogo
 	 * @return Retorna um map com o conjunto de conjuntos de updates de cada jogo
 	 */
-	map<unsigned int,vector<Date>> getUpdates() const;
+	map<string,vector<Date>> getUpdates() const;
+
+	/**
+	 * @brief Funcao que imprime os conteudos do map dos updates transferidos pelo utilizador
+	 * @param numberOfUpdates Numero de updates a imprimir
+	 */
+	void printUpdates(unsigned int numberOfUpdates = 0) const;
 
 	/**
 	 * @brief Overload do operador == para igualdade de dois utilizadores

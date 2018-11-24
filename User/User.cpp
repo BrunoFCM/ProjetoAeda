@@ -32,6 +32,10 @@ void User::addCard(const Card &card){
 	cards.push_back(card);
 }
 
+void User::addSession(PlaySession *sess){
+	sessions.push_back(sess);
+}
+
 string User::getName() const
 {
 	return name;
@@ -67,9 +71,24 @@ vector<PlaySession*> User::getSessions() const
 	return sessions;
 }
 
-map<unsigned int,vector<Date>> User::getUpdates() const
+map<string,vector<Date>> User::getUpdates() const
 {
 	return updates;
+}
+
+void User::printUpdates(unsigned int numberOfUpdates) const
+{
+	map<string,vector<Date>>::const_iterator it = updates.begin();
+	cout << endl << endl;
+	if (numberOfUpdates)
+		for(;it != updates.end(); ++it){
+			cout << "Game: " << it->first << '\t' << "Date: " << it->second[0].toStr() << endl;
+		}
+	else
+		for(;it != updates.end() && numberOfUpdates != 0; ++it){
+			cout << "Game: " << it->first << '\t' << "Date: " << it->second[0].toStr() << endl;
+			--numberOfUpdates;
+		}
 }
 
 bool User::operator==(const User &user) const
@@ -186,6 +205,6 @@ bool User::installUpdates(Game* game)
 	{
 		updatesRequired.push_back(game->getUpdates()[i]);
 	}
-	updates[game->getId()] = updatesRequired;
+	updates[game->getTitle()] = updatesRequired;
 	return true;
 }
