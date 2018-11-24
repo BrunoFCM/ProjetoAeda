@@ -19,6 +19,7 @@ Game::Game(const string &title,const double &price,const Date &release,const Int
 	this->title = title;
 	this->price = price;
 	base_price = price;
+	price_history.push_back(price);
 	this->platform = platforms;
 	this->genre = genres;
 	this->developer = developer;
