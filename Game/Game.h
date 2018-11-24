@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <fstream>
 #include "Date.h"
 #include "Interval.h"
 #include "User.h"
@@ -184,10 +185,10 @@ public:
 	virtual void addSession(PlaySession *sess);
 
 	/**
-	* @brief Funcao virtual que passa para uma ostream a informacao de um jogo
+	* @brief Funcao virtual que passa para uma fstream a informacao de um jogo
 	* @param info Ostream para onde e passada a informacao de um jogo
 	*/
-	virtual void giveInfoGame(ostream &info) const;
+	virtual void giveInfoGame(fstream &info) const;
 
 };
 
@@ -250,10 +251,10 @@ public:
 	bool isHomeTitle() const;
 
 	/**
-	* @brief Funcao virtual que passa para uma ostream a informacao de um jogo online
+	* @brief Funcao virtual que passa para uma fstream a informacao de um jogo online
 	* @param info Ostream para onde e passada a informacao de um jogo online
 	*/
-	virtual void giveInfoGame(ostream &info) const{};
+	virtual void giveInfoGame(fstream &info) const{};
 };
 
 
@@ -292,10 +293,10 @@ public:
 	void printInfoGame() const;
 
 	/**
-	* @brief Funcao virtual que passa para uma ostream a informacao de um jogo online de subscricao fixa
+	* @brief Funcao virtual que passa para uma fstream a informacao de um jogo online de subscricao fixa
 	* @param info Ostream para onde e passada a informacao de um jogo online de subscricao fixa
 	*/
-	void giveInfoGame(ostream &info) const;
+	void giveInfoGame(fstream &info) const;
 };
 
 
@@ -334,10 +335,10 @@ public:
 	void printInfoGame() const ;
 
 	/**
-	* @brief Funcao virtual que passa para uma ostream a informacao de um jogo online de subscricao variavel
+	* @brief Funcao virtual que passa para uma fstream a informacao de um jogo online de subscricao variavel
 	* @param info Ostream para onde e passada a informacao de um jogo online de subscricao variavel
 	*/
-	void giveInfoGame(ostream &info) const;
+	void giveInfoGame(fstream &info) const;
 };
 
 
@@ -388,10 +389,10 @@ public:
 	bool isHomeTitle() const;
 
 	/**
-	* @brief Funcao virtual que passa para uma ostream a informacao de um jogo home
+	* @brief Funcao virtual que passa para uma fstream a informacao de um jogo home
 	* @param info Ostream para onde e passada a informacao de um jogo home
 	*/
-	void giveInfoGame(ostream &info) const;
+	void giveInfoGame(fstream &info) const;
 };
 
 

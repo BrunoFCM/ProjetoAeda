@@ -42,7 +42,7 @@ void PlaySession::printInfoSession() const
 	cout << setw(20) << "Platform: "; cout << platform << endl;
 }
 
-void PlaySession::giveSessions(ostream &info) const
+void PlaySession::giveSessions(fstream &info) const
 {
 	info << user->getName() << "\n"
 		 << game->getTitle() << "\n"
