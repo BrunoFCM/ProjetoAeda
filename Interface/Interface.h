@@ -185,15 +185,78 @@ void sort_game_vector_interface(vector<Game *> &vec);
  */
 void sort_user_vector_interface(vector<Game *> &vec);
 
+/**
+ * @brief Funcao que permite pesquisar jogos atraves de tags na store
+ * @return Retorna o vetor de jogos resultante da pesquisa
+ */
 vector<Game *> restrict_game_interface();
+
+/**
+ * @brief Funcao que imprime o menu de pesquisas de jogos por tags na store
+ */
 void print_restrict_game_interface();
+
+/**
+ * @brief Funcao que analisa o input do utilizador e o retorna se for valido, ou mostra uma mensagem de erro enquanto for invalido
+ * @return Retorna o input dado pelo utilizador
+ */
 int prompt_restrict_game_interface();
+
+/**
+ * @brief Funcao que permite pesquisar utilizadores atraves de tags na user_library
+ * @return Retorna o vetor de utilizadores resultante da pesquisa
+ */
 vector<User *> restrict_user_interface();
+
+/**
+ * @brief Funcao que imprime o menu de pesquisas de utilizadores por tags na user_library
+ */
 void print_restrict_user_interface();
+
+/**
+ * @brief Funcao que analisa o input do utilizador e o retorna se for valido, ou mostra uma mensagem de erro enquanto for invalido
+ * @return Retorna o input dado pelo utilizador
+ */
 int prompt_restrict_user_interface();
+
+/**
+ * @brief Funcao que permite pesquisar jogos atraves de tags
+ * @param vec Vetor de jogos a ser usado na pesquisa
+ * @return Retorna o vetor de jogos resultante da pesquisa
+ */
 vector<Game*> restrict_game_interface(vector<Game*> vec);
+
+/**
+ * @brief Funcao que permite pesquisar utilizadores atraves de tags
+ * @param vec Vetor de utilizadores a ser usado na pesquisa
+ * @return Retorna o vetor de utilizadores resultante da pesquisa
+ */
 vector<User*> restrict_user_interface(vector<User*> vec);
+
+/**
+ * @brief Funcao que imprime no ecra o menu gestao dos resultados da pesquisa
+ */
 void print_vector_interface();
+
+/**
+ * @brief Funcao que analisa o input do utilizador e o retorna se for valido, ou mostra uma mensagem de erro enquanto for invalido
+ * @return Retorna o input dado pelo utilizador
+ */
 int prompt_vector_interface();
+
+/**
+ * @brief Funcao que gere os resultados de uma pesquisa de jogos
+ * @param vec Vetor resultante da pesquisa de jogos
+ */
 void game_vector_interface(vector<Game*> &vec);
+
+/**
+ * @brief Funcao que gere os resultados de uma pesquisa de utilizadores
+ * @param vec Vetor resultante da pesquisa de utilizadores
+ */
 void user_vector_interface(vector<User*> &vec);
+
+/**
+ * @brief Funcao que importa um sistema de um ficheiro de texto
+ */
+void load_interface();
