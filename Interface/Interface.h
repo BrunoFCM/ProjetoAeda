@@ -59,5 +59,14 @@ int prompt_card_interface();
 
 void save_interface();
 
+void sort_game_interface();
+void print_sort_game_interface();
+int prompt_sort_game_interface();
 
+void sort_user_interface();
+void print_sort_user_interface();
+int prompt_sort_user_interface();
+
+void sort_game_vector_interface(vector<Game *> &vec);
+void sort_user_vector_interface(vector<Game *> &vec);
 
