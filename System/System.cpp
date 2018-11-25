@@ -99,12 +99,11 @@ void System::buyGame(User* user, Game* game, unsigned int id)
 
 void System::giveInfoSystem(ofstream &info) const
 {
-	for (unsigned int i = 0; i < store.size() - 1; i++)
+	for (unsigned int i = 0; i < store.size(); i++)
 	{
 		store[i]->giveInfoGame(info);
 		info << "\n";
 	}
-	store[store.size() - 1]->giveInfoGame(info);
 	info << "@" << "\n";
 
 	for (unsigned int j = 0; j < user_library.size(); j++)
@@ -112,7 +111,6 @@ void System::giveInfoSystem(ofstream &info) const
 		user_library[j]->giveInfoUser(info);
 		info << "\n";
 	}
-	user_library[store.size() - 1]->giveInfoUser(info);
 	info << "@" << "\n";
 
 	for (unsigned int j = 0; j < user_library.size(); j++)
@@ -123,15 +121,8 @@ void System::giveInfoSystem(ofstream &info) const
 			sess[i]->giveSessions(info);
 		}
 	}
-	vector<PlaySession *> sess (user_library[user_library.size() - 1]->getSessions());
-	for (unsigned int i = 0; i < sess.size(); i++)
-	{
-		sess[i]->giveSessions(info);
-	}
 	info << "@" << "\n";
 }
-
-
 
 
 

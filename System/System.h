@@ -104,7 +104,7 @@ public:
 	}
 
 	/**
-	* @brief Funcao que passa para uma ofstream a informacao relativa ao sistema
+	* @brief Funcao que passa para uma fstream a informacao relativa ao sistema
 	*/
 	void giveInfoSystem(ofstream &info) const;
 
@@ -112,4 +112,3 @@ public:
 };
 
 #endif /* SRC_SYSTEM_H_ */
-
