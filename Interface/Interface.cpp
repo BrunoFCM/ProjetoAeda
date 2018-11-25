@@ -44,11 +44,11 @@ void main_menu_interface(){
 		print_main_menu();
 		switch(prompt_main_menu()){
 		case 1:
-			//loader
-		case 2:
 			lsystem = new System();
 			system_menu_interface();
 			break;
+		case 2:
+			//loader
 		case 3:
 			std::cout << "\n\nExiting...\n\n";
 			return;
@@ -58,7 +58,7 @@ void main_menu_interface(){
 
 void print_main_menu(){
 	
-	std::cout << "Would you like to: " << std::endl << std::endl;
+	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: Start a new game library system" << std::endl;
 	std::cout << "\t2: Load a previously made system from a file" << std::endl;
 	std::cout << "\t3: Exit the program" << std::endl << std::endl;
@@ -273,7 +273,7 @@ Game* add_game_interface(){
 		return (game);
 	}
 	else if(type == "Variable Subscription"){
-		std::cout << endl << "Subscription (by the hour)\nInput: ";
+		std::cout << endl << "Subscription (by the hour)\n";
 		double sub;
 		input_receiver(sub);
 		sub = (double)((int)(sub*100))/100;
@@ -336,14 +336,14 @@ void game_interface(Game *game){
 				break;
 			case 2:{
 				vector<double> prc_his(game->getPriceHist());
-				std::cout << "\n\nInsert the number of prices to see (a negative value or 0 will show every price)";
+				std::cout << "\n\nInsert the number of prices to see (a negative value or 0 will show every price)\n";
 				unsigned int lim_prc;
 				input_receiver(lim_prc);
 				if (lim_prc == 0 || lim_prc > prc_his.size())
 					lim_prc = prc_his.size();
 				std::cout << endl << endl;
 				for (unsigned int i = 0; i < lim_prc; ++i){
-					std::cout << setprecision(2) << prc_his[i] << endl;
+					std::cout << setprecision(2) << prc_his[i] << '$' << endl;
 				}
 				std::cout << endl << endl;
 				break;
@@ -394,7 +394,7 @@ void game_interface(Game *game){
 				}
 				else {
 					vector<PlaySession*> play_his(game->getPlayHistory());
-					std::cout << "\n\nInsert the number of sessions to see (a negative value or 0 will show every session)";
+					std::cout << "\n\nInsert the number of sessions to see (a negative value or 0 will show every session)\n";
 					unsigned int lim_ssn;
 					input_receiver(lim_ssn);
 					if (lim_ssn == 0 || lim_ssn > play_his.size())
@@ -415,7 +415,7 @@ void game_interface(Game *game){
 }
 
 void print_game_interface(const bool &home){
-	std::cout << "Would you like to: " << std::endl << std::endl;
+	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: See game info" << std::endl;
 	std::cout << "\t2: See price history" << std::endl;
 	std::cout << "\t3: Make a discount" << std::endl;
@@ -479,14 +479,15 @@ void user_interface(User *user){
 			break;
 		}
 		case 3:{
-			std::cout << "\n\nInsert the number of cards to see (a negative value or 0 will show every card)";
+			std::cout << "\n\nInsert the number of cards to see (a negative value or 0 will show every card)\n";
 			unsigned int lim_crd;
 			input_receiver(lim_crd);
 			user->printCardsUser(lim_crd);
-			std::cout << "\n\nWould you like to edit a card? (if yes, input the index of the card, otherwise input 0)";
+			std::cout << "\n\nWould you like to edit a card? (if yes, input the index of the card, otherwise input 0)\n";
 			unsigned int card_ind;
 			input_receiver(card_ind);
-			while(card_ind >= user->getCards().size()){
+			if(card_ind == 0) break;
+			while(card_ind > user->getCards().size()){
 				std::cout << "\nInvalid Index\n";
 				input_receiver(card_ind);
 			}
@@ -563,7 +564,7 @@ void user_interface(User *user){
 		}
 		case 5:{
 			vector<PlaySession *> sessions(user->getSessions());
-			std::cout << "\n\nInsert the number of sessions to see (a negative value or 0 will show every session)";
+			std::cout << "\n\nInsert the number of sessions to see (a negative value or 0 will show every session)\n";
 			unsigned int lim_ssn;
 			input_receiver(lim_ssn);
 			user->printSessionsUser(lim_ssn);
@@ -619,7 +620,7 @@ void user_interface(User *user){
 			break;
 		}
 		case 7:{
-			std::cout << "\n\nInsert the number of updates to see (a negative value or 0 shows the most recent update for every game)";
+			std::cout << "\n\nInsert the number of updates to see (a negative value or 0 shows the most recent update for every game)\n";
 			unsigned int lim_upd;
 			input_receiver(lim_upd);
 			user->printUpdates(lim_upd);
@@ -665,7 +666,7 @@ void user_interface(User *user){
 }
 
 void print_user_interface(){
-	std::cout << "Would you like to: " << std::endl << std::endl;
+	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: See the game library" << std::endl;
 	std::cout << "\t2: Add a card" << std::endl;
 	std::cout << "\t3: See cards" << std::endl;
@@ -705,7 +706,7 @@ void card_interface(Card &card){
 			break;
 		}
 		case 2:{
-			std::cout << "Insert the new card balance: ";
+			std::cout << "Insert the new card balance:\n";
 			double new_balance;
 			input_receiver(new_balance);
 
@@ -719,7 +720,7 @@ void card_interface(Card &card){
 	}
 }
  void print_card_interface(){
- 	std::cout << "Would you like to: " << std::endl << std::endl;
+ 	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: Change card number" << std::endl;
 	std::cout << "\t2: Change card balance" << std::endl;
 	std::cout << "\t0: Exit the card interface" << std::endl << std::endl;
@@ -760,7 +761,7 @@ void sort_game_interface(){
  	draw_header("SORT");
  	while(true){
 		print_sort_game_interface();
-		std::cout << "Will the insert be in ascending order? (y/n)\n";
+		std::cout << "Will the sort be in ascending order? (y/n)\n";
 		char input;
 		input_receiver(input);
 		while (input != 'y' || input != 'n'){
@@ -844,7 +845,7 @@ void sort_game_interface(){
 }
 
 void print_sort_game_interface(){
- 	std::cout << "Would you like to: " << std::endl << std::endl;
+ 	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: Sort by ID (default)" << std::endl;
 	std::cout << "\t2: Sort by title" << std::endl;
 	std::cout << "\t3: Sort by price" << std::endl;
@@ -868,8 +869,8 @@ int prompt_sort_game_interface(){
 void sort_user_interface(){
  	draw_header("SORT");
  	while(true){
-		print_sort_game_interface();
-		std::cout << "Will the insert be in ascending order? (y/n)\n";
+		print_sort_user_interface();
+		std::cout << "Will the sort be in ascending order? (y/n)\n";
 		char input;
 		input_receiver(input);
 		while (input != 'y' || input != 'n'){
@@ -903,7 +904,7 @@ void sort_user_interface(){
 }
 
 void print_sort_user_interface(){
- 	std::cout << "Would you like to: " << std::endl << std::endl;
+ 	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: Sort by name" << std::endl;
 	std::cout << "\t2: Sort by age" << std::endl;
 	std::cout << "\t0: Exit the card interface" << std::endl << std::endl;
@@ -923,7 +924,7 @@ void sort_game_vector_interface(vector<Game *> &vec){
  	draw_header("SORT");
  	while(true){
 		print_sort_game_interface();
-		std::cout << "Will the insert be in ascending order? (y/n)\n";
+		std::cout << "Will the sort be in ascending order? (y/n)\n";
 		char input;
 		input_receiver(input);
 		while (input != 'y' || input != 'n'){
@@ -1010,6 +1011,43 @@ void sort_game_vector_interface(vector<Game *> &vec){
 void sort_user_vector_interface(vector<User *> &vec){
  	draw_header("SORT");
  	while(true){
+		print_sort_user_interface();
+		std::cout << "Will the sort be in ascending order? (y/n)\n";
+		char input;
+		input_receiver(input);
+		while (input != 'y' || input != 'n'){
+			std::cout << "\nInvalid response\n";
+			char input;
+			input_receiver(input);
+		}
+		switch(prompt_sort_game_interface()){
+			case 1:{
+				if(input == 'y'){
+					insertionSort(vec,&userNameAscend);
+				}
+				else{
+					insertionSort(vec,&userNameDescend);
+				}
+
+				break;
+			}
+			case 2:{
+				if(input == 'y'){
+					insertionSort(vec,&userAgeAscend);
+				}
+				else{
+					insertionSort(vec,&userAgeDescend);
+				}
+
+				break;
+			}
+		}
+ 	}
+}
+
+void user_vector_interface(vector<User *> &vec){
+ 	draw_header("SORT");
+ 	while(true){
 		print_sort_game_interface();
 		std::cout << "Will the insert be in ascending order? (y/n)\n";
 		char input;
@@ -1044,4 +1082,20 @@ void sort_user_vector_interface(vector<User *> &vec){
  	}
 }
 
+void load_interface(){
+ 	draw_header("IMPORT");
+ 	std::cout << "To load the system from a file, input the file name:" << std::endl;
+	std::string input;
+	getline(cin,input);
+	ifstream file;
+	file.open(input);
+	if (file.fail()){
+		cerr << "Error opening file" << endl;
+	}
+	else{
+		lsystem = new System(file);
+		file.close();
+	}
+
+}
 
