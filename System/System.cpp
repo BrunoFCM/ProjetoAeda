@@ -79,31 +79,26 @@ void System::buyGame(User* user, Game* game, unsigned int id)
 	string info = to_string(game->getAge().getLower());
 	if (user->getAge() >= game->getAge().getLower())
 	{
-		for (unsigned int i = 0; i < user->getCards().size(); i++)
+		if (user->getCards()[id].getValidity() && user->getCards()[id].getBalance() >= game->getPrice())
 		{
-			if (user->getCards()[i].getNumber() == to_string(id))
-			{
-				if (user->getCards()[i].getValidity() && user->getCards()[i].getBalance() >= game->getPrice())
-				{
-					double bal = user->getCards()[i].getBalance() - game->getPrice();
-					user->getCards()[i].setBalance(bal);
-					user->addToLibrary(game);
-					return;
-				}
-			}
+			double bal = user->getCards()[id].getBalance() - game->getPrice();
+			user->getCards()[id].setBalance(bal);
+			user->addToLibrary(game);
+			return;
 		}
 		throw InvalidCard();
 	}
 	else throw UserTooYoung(info);
 }
 
-void System::giveInfoSystem(ofstream &info) const
+void System::giveInfoSystem(ostream &info) const
 {
-	for (unsigned int i = 0; i < store.size(); i++)
+	for (unsigned int i = 0; i < store.size() - 1; i++)
 	{
 		store[i]->giveInfoGame(info);
 		info << "\n";
 	}
+	store[store.size() - 1]->giveInfoGame(info);
 	info << "@" << "\n";
 
 	for (unsigned int j = 0; j < user_library.size(); j++)
@@ -111,6 +106,7 @@ void System::giveInfoSystem(ofstream &info) const
 		user_library[j]->giveInfoUser(info);
 		info << "\n";
 	}
+	user_library[store.size() - 1]->giveInfoUser(info);
 	info << "@" << "\n";
 
 	for (unsigned int j = 0; j < user_library.size(); j++)
@@ -121,8 +117,15 @@ void System::giveInfoSystem(ofstream &info) const
 			sess[i]->giveSessions(info);
 		}
 	}
+	vector<PlaySession *> sess (user_library[user_library.size() - 1]->getSessions());
+	for (unsigned int i = 0; i < sess.size(); i++)
+	{
+		sess[i]->giveSessions(info);
+	}
 	info << "@" << "\n";
 }
+
+
 
 
 
