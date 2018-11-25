@@ -91,102 +91,102 @@ User * add_user_interface();
 Card add_card_interface();
 
 /**
- * @brief
- * @param
+ * @brief Funcao que gere o menu de um jogo
+ * @param game Jogo sobre o qual o utilizador vai operar
  */
 void game_interface(Game *game);
 
 /**
- * @brief
- * @param
+ * @brief Funcao que imprime no ecra o menu de um jogo
+ * @param home Variavel boolean que e true se o jogo e Home, false caso seja online
  */
 void print_game_interface(const bool &home);
 
 /**
- * @brief
- * @return
+ * @brief Funcao que analisa o input do utilizador e o retorna se for valido, ou mostra uma mensagem de erro enquanto for invalido
+ * @return Retorna o input dado pelo utilizador
  */
 int prompt_game_interface();
 
 /**
- * @brief
- * @param
+ * @brief Funcao que gere o menu de um utilizador de jogos
+ * @param user Utilizador a ser analisado
  */
 void user_interface(User *user);
 
 /**
- * @brief
+ * @brief Funcao que imprime no ecra o menu de um utilizador
  */
 void print_user_interface();
 
 /**
- * @brief
- * @return
+ * @brief Funcao que analisa o input do utilizador e o retorna se for valido, ou mostra uma mensagem de erro enquanto for invalido
+ * @return Retorna o input dado pelo utilizador
  */
 int prompt_user_interface();
 
 /**
- * @brief
- * @param
+ * @brief Funcao que gere o menu de um cartao bancario
+ * @param card Cartao a ser analisado
  */
 void card_interface(Card &card);
 
 /**
- * @brief
+ * @brief Funcao que imprime no ecra o menu de um cartao bancario
  */
 void print_card_interface();
 
 /**
- * @brief
- * @return
+ * @brief Funcao que analisa o input do utilizador e o retorna se for valido, ou mostra uma mensagem de erro enquanto for invalido
+ * @return Retorna o input dado pelo utilizador
  */
 int prompt_card_interface();
 
 /**
- * @brief
+ * @brief Funcao que guarda o sistema criado num ficheiro de texto
  */
 void save_interface();
 
 /**
- * @brief
+ * @brief Funcao que gere um menu de opcoes, para o utilizador escolher como ordenar o vetor store de jogos
  */
 void sort_game_interface();
 
 /**
- * @brief
+ * @brief Funcao que imprime no ecra o menu de opcoes de ordenacao de store
  */
 void print_sort_game_interface();
 
 /**
- * @brief
- * @return
+ * @brief Funcao que analisa o input do utilizador e o retorna se for valido, ou mostra uma mensagem de erro enquanto for invalido
+ * @return Retorna o input dado pelo utilizador
  */
 int prompt_sort_game_interface();
 
 /**
- * @brief
+ * @brief Funcao que gere um menu de opcoes, para o utilizador escolher como ordenar o vetor user_library
  */
 void sort_user_interface();
 
 /**
- * @brief
+ * @brief Funcao que imprime no ecra o menu de opcoes de ordenacao de user_library
  */
 void print_sort_user_interface();
 
 /**
- * @brief
- * @return
+ * @brief Funcao que analisa o input do utilizador e o retorna se for valido, ou mostra uma mensagem de erro enquanto for invalido
+ * @return Retorna o input dado pelo utilizador
  */
 int prompt_sort_user_interface();
 
 /**
- * @brief
- * @param
+ * @brief Funcao que gere um menu de opcoes, para o utilizador escolher como ordenar um vetor de jogos
+ * @param vec Vetor de jogos a ser ordenado
  */
 void sort_game_vector_interface(vector<Game *> &vec);
 
 /**
- * @brief
- * @param
+ * @brief Funcao que gere um menu de opcoes, para o utilizador escolher como ordenar um vetor de utilizadores
+ * @param vec Vetor de utilizadores a ser ordenado
  */
 void sort_user_vector_interface(vector<Game *> &vec);
