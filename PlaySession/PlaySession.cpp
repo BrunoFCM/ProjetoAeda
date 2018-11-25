@@ -4,7 +4,7 @@
 
 using namespace std;
 
-PlaySession::PlaySession(const Date date, const int duration, const string platform, User* user, Game* game): date(date), duration(duration), user(user), game(game) {}
+PlaySession::PlaySession(const Date date, const int duration, const string platform, User* user, Game* game): date(date), duration(duration), platform(platform), user(user), game(game) {}
 
 Date PlaySession::getDate() const
 {
@@ -42,7 +42,7 @@ void PlaySession::printInfoSession() const
 	cout << setw(20) << "Platform: "; cout << platform << endl;
 }
 
-void PlaySession::giveSessions(ofstream &info) const
+void PlaySession::giveSessions(ostream &info) const
 {
 	info << user->getName() << "\n"
 		 << game->getTitle() << "\n"
@@ -50,3 +50,4 @@ void PlaySession::giveSessions(ofstream &info) const
 		 << duration << "\n"
 		 << platform << "\n";
 }
+

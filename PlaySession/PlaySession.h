@@ -74,7 +74,8 @@ public:
 	* @brief Funcao que passa para uma ostream a informacao de uma sessao
 	* @param info Ostream que recebe a informacao de uma sessao
 	*/
-	void giveSessions(ofstream &info) const;
+	void giveSessions(ostream &info) const;
 };
 
 #endif /* SRC_PLAYSESSION_H_ */
+
