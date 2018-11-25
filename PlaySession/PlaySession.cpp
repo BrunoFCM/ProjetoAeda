@@ -50,4 +50,3 @@ void PlaySession::giveSessions(ofstream &info) const
 		 << duration << "\n"
 		 << platform << "\n";
 }
-
