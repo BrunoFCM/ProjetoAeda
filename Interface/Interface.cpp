@@ -98,7 +98,7 @@ void system_menu_interface(){
 			std::cout << "Will the search be done with the title? (y/n)\n";
 			char input;
 			input_receiver(input);
-			while (input != 'y' || input != 'n'){
+			while (input != 'y' && input != 'n'){
 				std::cout << "\nInvalid response\n";
 				char input;
 				input_receiver(input);
@@ -282,7 +282,7 @@ Game* add_game_interface(){
 		return (game);
 	}
 	else{
-		std::cout << endl << "Subscription\nInput: ";
+		std::cout << endl << "Subscription\n";
 		double sub;
 		input_receiver(sub);
 		sub = (double)((int)(sub*100))/100;
@@ -761,15 +761,16 @@ void sort_game_interface(){
  	draw_header("SORT");
  	while(true){
 		print_sort_game_interface();
+		int prompt = prompt_sort_game_interface();
 		std::cout << "Will the sort be in ascending order? (y/n)\n";
 		char input;
 		input_receiver(input);
-		while (input != 'y' || input != 'n'){
+		while (input != 'y' && input != 'n'){
 			std::cout << "\nInvalid response\n";
 			char input;
 			input_receiver(input);
 		}
-		switch(prompt_sort_game_interface()){
+		switch(prompt){
 			case 1:{
 				if(input == 'y'){
 					lsystem->sortGames(&gameIdAscend);
@@ -870,15 +871,16 @@ void sort_user_interface(){
  	draw_header("SORT");
  	while(true){
 		print_sort_user_interface();
+		int prompt = prompt_sort_game_interface();
 		std::cout << "Will the sort be in ascending order? (y/n)\n";
 		char input;
 		input_receiver(input);
-		while (input != 'y' || input != 'n'){
+		while (input != 'y' && input != 'n'){
 			std::cout << "\nInvalid response\n";
 			char input;
 			input_receiver(input);
 		}
-		switch(prompt_sort_game_interface()){
+		switch(prompt){
 			case 1:{
 				if(input == 'y'){
 					lsystem->sortUsers(&userNameAscend);
@@ -924,15 +926,16 @@ void sort_game_vector_interface(vector<Game *> &vec){
  	draw_header("SORT");
  	while(true){
 		print_sort_game_interface();
+		int prompt = prompt_sort_game_interface();
 		std::cout << "Will the sort be in ascending order? (y/n)\n";
 		char input;
 		input_receiver(input);
-		while (input != 'y' || input != 'n'){
+		while (input != 'y' && input != 'n'){
 			std::cout << "\nInvalid response\n";
 			char input;
 			input_receiver(input);
 		}
-		switch(prompt_sort_game_interface()){
+		switch(prompt){
 			case 1:{
 				if(input == 'y'){
 					insertionSort(vec,&gameIdAscend);
@@ -1012,15 +1015,16 @@ void sort_user_vector_interface(vector<User *> &vec){
  	draw_header("SORT");
  	while(true){
 		print_sort_user_interface();
+		int prompt = prompt_sort_user_interface();
 		std::cout << "Will the sort be in ascending order? (y/n)\n";
 		char input;
 		input_receiver(input);
-		while (input != 'y' || input != 'n'){
+		while (input != 'y' && input != 'n'){
 			std::cout << "\nInvalid response\n";
 			char input;
 			input_receiver(input);
 		}
-		switch(prompt_sort_game_interface()){
+		switch(prompt){
 			case 1:{
 				if(input == 'y'){
 					insertionSort(vec,&userNameAscend);
@@ -1049,15 +1053,16 @@ void user_vector_interface(vector<User *> &vec){
  	draw_header("SORT");
  	while(true){
 		print_sort_game_interface();
+		int prompt = prompt_sort_game_interface();
 		std::cout << "Will the insert be in ascending order? (y/n)\n";
 		char input;
 		input_receiver(input);
-		while (input != 'y' || input != 'n'){
+		while (input != 'y' && input != 'n'){
 			std::cout << "\nInvalid response\n";
 			char input;
 			input_receiver(input);
 		}
-		switch(prompt_sort_game_interface()){
+		switch(prompt){
 			case 1:{
 				if(input == 'y'){
 					insertionSort(vec,&userNameAscend);
