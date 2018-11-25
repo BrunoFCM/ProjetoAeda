@@ -48,7 +48,9 @@ void main_menu_interface(){
 			system_menu_interface();
 			break;
 		case 2:
-			//loader
+			load_interface();
+			system_menu_interface();
+			break;
 		case 0:
 			std::cout << "\n\nExiting...\n\n";
 			return;
@@ -100,7 +102,6 @@ void system_menu_interface(){
 			input_receiver(input);
 			while (input != 'y' && input != 'n'){
 				std::cout << "\nInvalid response\n";
-				char input;
 				input_receiver(input);
 			}
 			if(input == 'y'){
@@ -155,7 +156,7 @@ void system_menu_interface(){
 		}
 		case 0:{
 			save_interface();
-			break;
+			return;
 		}
 		}
 	}
@@ -519,7 +520,6 @@ void user_interface(User *user){
 				catch(NonExistingGame &e){
 					e.printInf();
 					std::cout << endl << "Input the title of the game\nInput: ";
-					string title;
 					getline(cin,title);
 				}
 			}
@@ -590,7 +590,6 @@ void user_interface(User *user){
 				catch(NonExistingGame &e){
 					e.printInf();
 					std::cout << endl << "Input the title of the game\nInput: ";
-					string title;
 					getline(cin,title);
 				}
 			}
@@ -646,7 +645,6 @@ void user_interface(User *user){
 				catch(NonExistingGame &e){
 					e.printInf();
 					std::cout << endl << "Input the title of the game\nInput: ";
-					string title;
 					getline(cin,title);
 				}
 			}
@@ -672,7 +670,7 @@ void user_interface(User *user){
 
 void print_user_interface(){
 	std::cout << "\nWould you like to: " << std::endl << std::endl;
-	std::cout << "\t1: See the game library" << std::endl;
+	std::cout << "\t1: See the user characteristics" << std::endl;
 	std::cout << "\t2: Add a card" << std::endl;
 	std::cout << "\t3: See cards" << std::endl;
 	std::cout << "\t4: Add a game session" << std::endl;
@@ -767,14 +765,16 @@ void sort_game_interface(){
  	while(true){
 		print_sort_game_interface();
 		int prompt = prompt_sort_game_interface();
-		std::cout << "Will the sort be in ascending order? (y/n)\n";
 		char input;
-		input_receiver(input);
-		while (input != 'y' && input != 'n'){
-			std::cout << "\nInvalid response\n";
-			char input;
+		if(prompt){
+			std::cout << "Will the sort be in ascending order? (y/n)\n";
 			input_receiver(input);
-		}
+			while (input != 'y' && input != 'n'){
+				std::cout << "\nInvalid response\n";
+				char input;
+				input_receiver(input);
+			}
+ 		}
 		switch(prompt){
 			case 1:{
 				if(input == 'y'){
@@ -879,9 +879,11 @@ void sort_user_interface(){
  	while(true){
 		print_sort_user_interface();
 		int prompt = prompt_sort_user_interface();
-		std::cout << "Will the sort be in ascending order? (y/n)\n";
 		char input;
-		input_receiver(input);
+		if(prompt){
+			std::cout << "Will the sort be in ascending order? (y/n)\n";
+			input_receiver(input);
+		}
 		while (input != 'y' && input != 'n'){
 			std::cout << "\nInvalid response\n";
 			char input;
@@ -936,9 +938,11 @@ void sort_game_vector_interface(vector<Game *> &vec){
  	while(true){
 		print_sort_game_interface();
 		int prompt = prompt_sort_game_interface();
-		std::cout << "Will the sort be in ascending order? (y/n)\n";
 		char input;
-		input_receiver(input);
+		if(prompt){
+			std::cout << "Will the sort be in ascending order? (y/n)\n";
+			input_receiver(input);
+		}
 		while (input != 'y' && input != 'n'){
 			std::cout << "\nInvalid response\n";
 			char input;
@@ -1027,9 +1031,11 @@ void sort_user_vector_interface(vector<User *> &vec){
  	while(true){
 		print_sort_user_interface();
 		int prompt = prompt_sort_user_interface();
-		std::cout << "Will the sort be in ascending order? (y/n)\n";
 		char input;
-		input_receiver(input);
+		if(prompt){
+			std::cout << "Will the sort be in ascending order? (y/n)\n";
+			input_receiver(input);
+		}
 		while (input != 'y' && input != 'n'){
 			std::cout << "\nInvalid response\n";
 			char input;
@@ -1084,8 +1090,8 @@ void load_interface(){
 vector<Game*> restrict_game_interface(){
  	draw_header("TAG SEARCH");
  	while(true){
-		print_sort_game_interface();
-		int prompt = prompt_sort_game_interface();
+		print_restrict_game_interface();
+		int prompt = prompt_restrict_game_interface();
 		switch(prompt){
 			case 1:{
 				int id_min,id_max;
@@ -1240,8 +1246,8 @@ int prompt_restrict_game_interface(){
 vector<User*> restrict_user_interface(){
  	draw_header("TAG SEARCH");
  	while(true){
-		print_sort_user_interface();
-		int prompt = prompt_sort_user_interface();
+		print_restrict_user_interface();
+		int prompt = prompt_restrict_user_interface();
 		switch(prompt){
 			case 1:{
 				int age_min,age_hi;
@@ -1338,8 +1344,8 @@ int prompt_restrict_user_interface(){
 vector<Game*> restrict_game_interface(vector<Game*> vec){
  	draw_header("TAG SEARCH");
  	while(true){
-		print_sort_game_interface();
-		int prompt = prompt_sort_game_interface();
+		print_restrict_game_interface();
+		int prompt = prompt_restrict_game_interface();
 		switch(prompt){
 			case 1:{
 				int id_min,id_max;
@@ -1471,8 +1477,8 @@ vector<Game*> restrict_game_interface(vector<Game*> vec){
 vector<User*> restrict_user_interface(vector<User*> vec){
  	draw_header("TAG SEARCH");
  	while(true){
-		print_sort_user_interface();
-		int prompt = prompt_sort_user_interface();
+		print_restrict_user_interface();
+		int prompt = prompt_restrict_user_interface();
 		switch(prompt){
 			case 1:{
 				int age_min,age_hi;
