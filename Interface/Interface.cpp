@@ -49,7 +49,7 @@ void main_menu_interface(){
 			break;
 		case 2:
 			//loader
-		case 3:
+		case 0:
 			std::cout << "\n\nExiting...\n\n";
 			return;
 		}
@@ -61,14 +61,14 @@ void print_main_menu(){
 	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: Start a new game library system" << std::endl;
 	std::cout << "\t2: Load a previously made system from a file" << std::endl;
-	std::cout << "\t3: Exit the program" << std::endl << std::endl;
+	std::cout << "\t0: Exit the program" << std::endl << std::endl;
 }
 
 int prompt_main_menu(){
-	int input = 0;
+	int input = -1;
 	input_receiver(input);
-	while(input != 1 && input != 2 && input != 3){
-		std::cout << "Please insert an integer between 1 and 3" << std::endl;
+	while(input < 0 || input > 2){
+		std::cout << "Please insert an integer between 0 and 2" << std::endl;
 		input_receiver(input);
 	}
 	return input;
@@ -143,15 +143,20 @@ void system_menu_interface(){
 			}
 			break;
 		}
-		case 7:
-			//vector
+		case 7:{
+			vector<Game*> v = restrict_game_interface();
+			game_vector_interface(v);
 			break;
-		case 8:
-			//vector
+		}
+		case 8:{
+			vector<User*> v = restrict_user_interface();
+			user_vector_interface(v);
 			break;
-		case 0:
+		}
+		case 0:{
 			save_interface();
 			break;
+		}
 		}
 	}
 }
@@ -873,7 +878,7 @@ void sort_user_interface(){
  	draw_header("SORT");
  	while(true){
 		print_sort_user_interface();
-		int prompt = prompt_sort_game_interface();
+		int prompt = prompt_sort_user_interface();
 		std::cout << "Will the sort be in ascending order? (y/n)\n";
 		char input;
 		input_receiver(input);
@@ -1057,45 +1062,7 @@ void sort_user_vector_interface(vector<User *> &vec){
  	}
 }
 
-void user_vector_interface(vector<User *> &vec){
- 	draw_header("SORT");
- 	while(true){
-		print_sort_game_interface();
-		int prompt = prompt_sort_game_interface();
-		std::cout << "Will the insert be in ascending order? (y/n)\n";
-		char input;
-		input_receiver(input);
-		while (input != 'y' && input != 'n'){
-			std::cout << "\nInvalid response\n";
-			char input;
-			input_receiver(input);
-		}
-		switch(prompt){
-			case 1:{
-				if(input == 'y'){
-					insertionSort(vec,&userNameAscend);
-				}
-				else{
-					insertionSort(vec,&userNameDescend);
-				}
 
-				break;
-			}
-			case 2:{
-				if(input == 'y'){
-					insertionSort(vec,&userAgeAscend);
-				}
-				else{
-					insertionSort(vec,&userAgeDescend);
-				}
-
-				break;
-			}
-			case 0:
-				return;
-		}
- 	}
-}
 
 void load_interface(){
  	draw_header("IMPORT");
@@ -1244,11 +1211,6 @@ vector<Game*> restrict_game_interface(){
 
 				return lsystem->restrictGames(gameDeveloper,developer);
 
-				break;
-			}
-			case 0:{
-				vector<Game*> out;
-				return out;
 			}
 		}
  	}
@@ -1263,14 +1225,13 @@ void print_restrict_game_interface(){
 	std::cout << "\t5: Search by platform" << std::endl;
 	std::cout << "\t6: Search by genre" << std::endl;
 	std::cout << "\t7: Search by developer" << std::endl;
-	std::cout << "\t0: Exit the tag search interface" << std::endl << std::endl;
 }
 
 int prompt_restrict_game_interface(){
 	int input = -1;
 	input_receiver(input);
-	while(input < 0 || input > 7){
-		std::cout << "Please insert an integer between 0 and 7" << std::endl;
+	while(input < 1 || input > 7){
+		std::cout << "Please insert an integer between 1 and 7" << std::endl;
 		input_receiver(input);
 	}
 	return input;
@@ -1353,9 +1314,6 @@ vector<User*> restrict_user_interface(){
 
 				break;
 			}
-			case 0:
-				vector<User*> out;
-				return out;
 		}
 	}
  }
@@ -1365,17 +1323,328 @@ void print_restrict_user_interface(){
  	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: Search by an age interval" << std::endl;
 	std::cout << "\t2: Search by library size" << std::endl;
-	std::cout << "\t0: Exit the tag search interface" << std::endl << std::endl;
 }
 
 int prompt_restrict_user_interface(){
 	int input = -1;
 	input_receiver(input);
-	while(input < 0 || input > 2){
-		std::cout << "Please insert an integer between 0 and 2" << std::endl;
+	while(input < 1 || input > 2){
+		std::cout << "Please insert an integer between 1 and 2" << std::endl;
 		input_receiver(input);
 	}
 	return input;
 }
+
+vector<Game*> restrict_game_interface(vector<Game*> vec){
+ 	draw_header("TAG SEARCH");
+ 	while(true){
+		print_sort_game_interface();
+		int prompt = prompt_sort_game_interface();
+		switch(prompt){
+			case 1:{
+				int id_min,id_max;
+				std::cout << "Minimum ID value\n";
+				input_receiver(id_min);
+				while(id_min <= 0){
+					std::cout << "Insert an non-zero positive value\n";
+					input_receiver(id_min);
+				}
+				std::cout << "Maximum ID value\n";
+				input_receiver(id_max);
+				while(id_max <= 0){
+					std::cout << "Insert an non-zero positive value\n";
+					input_receiver(id_max);
+				}
+				while(id_min > id_max){
+					std::cout << endl << "Invalid interval, please input your values again" << std::endl;
+					std::cout << "Minimum ID\n";
+					input_receiver(id_min);
+					while(id_min <= 0){
+						std::cout << "Insert an non-zero positive value\n";
+						input_receiver(id_min);
+					}
+					std::cout << "Maximum recommended age\n";
+					input_receiver(id_max);
+					while(id_max <= 0){
+						std::cout << "Insert an non-zero positive value\n";
+						input_receiver(id_max);
+					}
+				}
+				Interval range(id_min,id_max);
+
+				return restrictedVector(vec,gameIdInterval,range);
+			}
+			case 2:{
+
+				std::cout << endl << "Price\n";
+				double price;
+				input_receiver(price);
+
+				return restrictedVector(vec,gamePriceMax,price);
+
+				break;
+			}
+			case 3:{
+				Date release(1,1,1901);
+				string aux;
+				while(true){
+					try{
+						std::cout << endl << "Release date (in the DD/MM/YYYY format)\nInput: ";
+						getline(cin,aux);
+						release = Date(aux);
+						break;
+					}
+					catch(InvalidDate &e){
+						e.printInf();
+					}
+				}
+
+				return restrictedVector(vec,gameRelease,release);
+
+				break;
+			}
+			case 4:{
+				int age_min,age_hi;
+				std::cout << endl << "Minimum age\n";
+				input_receiver(age_min);
+				while(age_min <= 0){
+					std::cout << "Insert an non-zero positive value\n";
+					input_receiver(age_min);
+				}
+				std::cout << "Maximum recommended age\n";
+				input_receiver(age_hi);
+				while(age_hi <= 0){
+					std::cout << "Insert an non-zero positive value\n";
+					input_receiver(age_hi);
+				}
+				while(age_min > age_hi){
+					std::cout << endl << "Invalid age interval, please input your values again" << std::endl;
+					std::cout << "Minimum age\n";
+					input_receiver(age_min);
+					while(age_min <= 0){
+						std::cout << "Insert an non-zero positive value\n";
+						input_receiver(age_min);
+					}
+					std::cout << "Maximum recommended age\n";
+					input_receiver(age_hi);
+					while(age_hi <= 0){
+						std::cout << "Insert an non-zero positive value\n";
+						input_receiver(age_hi);
+					}
+				}
+				Interval range(age_min,age_hi);
+
+				return restrictedVector(vec,gameAgeRange,range);
+
+				break;
+			}
+			case 5:{
+				std::string platform;
+				std::cout << endl << "Platform\nInput: ";
+				getline(cin,platform);
+
+				return restrictedVector(vec,gamePlatform,platform);
+
+				break;
+			}
+			case 6:{
+				std::string genre;
+				std::cout << endl << "Genre\nInput: ";
+				getline(cin,genre);
+
+				return restrictedVector(vec,gameGenre,genre);
+
+				break;
+			}
+			case 7:{
+				std::string developer;
+				std::cout << endl << "Developer\nInput: ";
+				getline(cin,developer);
+
+				return restrictedVector(vec,gameDeveloper,developer);
+
+			}
+		}
+ 	}
+}
+
+vector<User*> restrict_user_interface(vector<User*> vec){
+ 	draw_header("TAG SEARCH");
+ 	while(true){
+		print_sort_user_interface();
+		int prompt = prompt_sort_user_interface();
+		switch(prompt){
+			case 1:{
+				int age_min,age_hi;
+				std::cout << endl << "Minimum age\n";
+				input_receiver(age_min);
+				while(age_min <= 0){
+					std::cout << "Insert an non-zero positive value\n";
+					input_receiver(age_min);
+				}
+				std::cout << "Maximum recommended age\n";
+				input_receiver(age_hi);
+				while(age_hi <= 0){
+					std::cout << "Insert an non-zero positive value\n";
+					input_receiver(age_hi);
+				}
+				while(age_min > age_hi){
+					std::cout << endl << "Invalid age interval, please input your values again" << std::endl;
+					std::cout << "Minimum age\n";
+					input_receiver(age_min);
+					while(age_min <= 0){
+						std::cout << "Insert an non-zero positive value\n";
+						input_receiver(age_min);
+					}
+					std::cout << "Maximum recommended age\n";
+					input_receiver(age_hi);
+					while(age_hi <= 0){
+						std::cout << "Insert an non-zero positive value\n";
+						input_receiver(age_hi);
+					}
+				}
+				Interval range(age_min,age_hi);
+
+				return restrictedVector(vec,userAgeInterval,range);
+
+				break;
+			}
+			case 2:{
+
+				int size_min,size_hi;
+				std::cout << endl << "Minimum size\n";
+				input_receiver(size_min);
+				while(size_min <= 0){
+					std::cout << "Insert an non-zero positive value\n";
+					input_receiver(size_min);
+				}
+				std::cout << "Maximum size\n";
+				input_receiver(size_hi);
+				while(size_hi <= 0){
+					std::cout << "Insert an non-zero positive value\n";
+					input_receiver(size_hi);
+				}
+				while(size_min > size_hi){
+					std::cout << endl << "Invalid interval, please input your values again" << std::endl;
+					std::cout << "Minimum size\n";
+					input_receiver(size_min);
+					while(size_min <= 0){
+						std::cout << "Insert an non-zero positive value\n";
+						input_receiver(size_min);
+					}
+					std::cout << "Maximum size\n";
+					input_receiver(size_hi);
+					while(size_hi <= 0){
+						std::cout << "Insert an non-zero positive value\n";
+						input_receiver(size_hi);
+					}
+				}
+				Interval range(size_min,size_hi);
+
+				return restrictedVector(vec,userLibrarySize,range);
+
+				break;
+			}
+		}
+	}
+ }
+
+
+
+
+void print_vector_interface(){
+
+	std::cout << "\nWould you like to: " << std::endl << std::endl;
+	std::cout << "\t1: Add a tag to the search" << std::endl;
+	std::cout << "\t2: Sort the search results" << std::endl;
+	std::cout << "\t3: Access a result" << std::endl;
+	std::cout << "\t0: Exit the result interface" << std::endl << std::endl;
+}
+
+int prompt_vector_interface(){
+	int input = 0;
+	input_receiver(input);
+	while(input < 0 || input > 3){
+		std::cout << "Please insert an integer between 0 and 3" << std::endl;
+		input_receiver(input);
+	}
+	return input;
+}
+
+void game_vector_interface(vector<Game*> &vec){
+
+	while(true){
+		if(vec.size() == 0){
+			std::cout << "\n\n\nNoresults found, exiting the search interface\n\n\n";
+			return;
+		}
+		std::cout << "\n\n\nSearch results (" << vec.size() << ")\n\n";
+		for(unsigned int i = 0; i < vec.size(); ++i){
+			std::cout << i << ": " << vec[i]->getTitle() << '\n';
+		}
+		print_vector_interface();
+		switch(prompt_vector_interface()){
+		case 1:
+			vec = restrict_game_interface(vec);
+			break;
+		case 2:
+			sort_game_vector_interface(vec);
+			break;
+		case 3:{
+			int input;
+			std::cout << "\n\nInput the index of the game you'd like to access\n";
+			input_receiver(input);
+			unsigned int index = abs(input);
+			while (input < 1 || index > vec.size()){
+				std::cout << "Invalid index\n";
+				input_receiver(input);
+			}
+			game_interface(vec[input - 1]);
+			break;
+		}
+		case 0:
+			return;
+		}
+	}
+}
+
+void user_vector_interface(vector<User*> &vec){
+
+	while(true){
+		if(vec.size() == 0){
+			std::cout << "\n\n\nNoresults found, exiting the search interface\n\n\n";
+			return;
+		}
+		std::cout << "\n\n\nSearch results (" << vec.size() << ")\n\n";
+		for(unsigned int i = 0; i < vec.size(); ++i){
+			std::cout << i << ": " << vec[i]->getName() << '\n';
+		}
+		print_vector_interface();
+		switch(prompt_vector_interface()){
+		case 1:
+			vec = restrict_user_interface(vec);
+			break;
+		case 2:
+			sort_user_vector_interface(vec);
+			break;
+		case 3:{
+			int input;
+			std::cout << "\n\nInput the index of the user you'd like to access\n";
+			input_receiver(input);
+			unsigned int index = abs(input);
+			while (input < 1 || index > vec.size()){
+				std::cout << "Invalid index\n";
+				input_receiver(input);
+			}
+			user_interface(vec[input - 1]);
+			break;
+		}
+		case 0:
+			return;
+		}
+	}
+}
+
+
 
 
