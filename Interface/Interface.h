@@ -15,8 +15,8 @@
 #define HEADER_SIZE 80
 
 /**
- * @brief
- * @param
+ * @brief Funcao que passa a informacao introduzida pelo utilizador para uma variavel, depois de verificar se e adequada
+ * @param input Variavel que adota o valor do input dado pelo utilizador
  */
 template<typename T>
 void input_receiver(T &input){
@@ -35,58 +35,58 @@ void input_receiver(T &input){
 }
 
 /**
- * @brief
- * @param
+ * @brief Funcao que imprime no ecra um cabecalho com um titulo
+ * @param message Titulo do cabecalho
  */
 void draw_header(std::string message);
 
 /**
- * @brief
+ * @brief Funcao que gere o menu principal e chama restantes menus
  */
 void main_menu_interface();
 
 /**
- * @brief
+ * @brief Funcao que imprime no ecra o menu principal e suas opcoes
  */
 void print_main_menu();
 
 /**
- * @brief
- * @param
+ * @brief Funcao que analisa o input do utilizador e o retorna se for valido, ou mostra uma mensagem de erro enquanto for invalido
+ * @return Retorna o input dado pelo utilizador
  */
 int prompt_main_menu();
 
 /**
- * @brief
+ * @brief Funcao que gere o menu de um sistema
  */
 void system_menu_interface();
 
 /**
- * @brief
+ * @brief Funcao que imprime no ecra o menu de um sistema
  */
 void print_system_interface();
 
 /**
- * @brief
- * @return
+ * @brief Funcao que analisa o input do utilizador e o retorna se for valido, ou mostra uma mensagem de erro enquanto for invalido
+ * @return Retorna o input dado pelo utilizador
  */
 int prompt_system_interface();
 
 /**
- * @brief
- * @return
+ * @brief Funcao que possibilita a adicao de um jogo a um sistema por parte do utilizador
+ * @return Retorna o jogo adicionado ao sistema
  */
 Game * add_game_interface();
 
 /**
- * @brief
- * @return
+ * @brief Funcao que possibilita a adicao de um usuario a um sistema por parte do utilizador
+ * @return Retorna o usuario adicionado ao sistema
  */
 User * add_user_interface();
 
 /**
- * @brief
- * @return
+ * @brief Funcao que possibilita a adicao de um cartao bancario a um sistema por parte do utilizador
+ * @return Retorna o cartao adicionado ao sistema
  */
 Card add_card_interface();
 
