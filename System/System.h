@@ -19,6 +19,17 @@ class System
 	vector<User*> user_library; //base de dados com o conjunto de todos os utilizadores
 
 public:
+
+	/**
+	* @brief Construtor default de system
+	*/
+	System();
+
+	/**
+	* @brief Construtor de system que importa a informacao a partir de um ficheiro
+	* @param file Referencia a uma stream de ficheiro que contem as informacoes de system
+	*/
+	System(ifstream &file);
 	/**
 	* @brief Destrutor da classe System
 	*/
@@ -104,7 +115,7 @@ public:
 	}
 
 	/**
-	* @brief Funcao que passa para uma fstream a informacao relativa ao sistema
+	* @brief Funcao que passa para uma ofstream a informacao relativa ao sistema
 	*/
 	void giveInfoSystem(ofstream &info) const;
 
@@ -112,3 +123,4 @@ public:
 };
 
 #endif /* SRC_SYSTEM_H_ */
+
