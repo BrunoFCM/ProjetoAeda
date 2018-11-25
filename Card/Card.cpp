@@ -1,3 +1,4 @@
+#include <iomanip>
 #include "Card.h"
 
 #define ASCII_0 48 //corresponde ao valor de '0' na tabela ASCII
@@ -76,7 +77,7 @@ void Card::printCard() const
 		validity = "No";
 
 	std::cout << "Card number: " << getNumber() << std::endl;
-	std::cout << "Balance: " << getBalance() << std::endl;
+	std::cout << "Balance: " << std::setprecision(2) << getBalance() << std::endl;
 	std::cout << "Valid: " << validity << std::endl;
 
 }
