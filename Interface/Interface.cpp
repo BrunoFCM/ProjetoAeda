@@ -88,17 +88,61 @@ void system_menu_interface(){
 			user_interface(add_user_interface());
 			break;
 		case 3:
-			//sorts
+			sort_game_interface();
 			break;
 		case 4:
-			//sorts
+			sort_user_interface();
 			break;
-		case 5:
-			//search
+		case 5:{
+			Game *game;
+			std::cout << "Will the search be done with the title? (y/n)\n";
+			char input;
+			input_receiver(input);
+			while (input != 'y' || input != 'n'){
+				std::cout << "\nInvalid response\n";
+				char input;
+				input_receiver(input);
+			}
+			if(input == 'y'){
+				std::cout << "Input the game's title\n";
+				std::string title;
+				getline(cin,title);
+				try{
+					game = lsystem->searchGame(title);
+					game_interface(game);
+				}
+				catch(NonExistingGame &e){
+					e.printInf();
+				}
+			}
+			else{
+				std::cout << "Input the game's ID\n";
+				unsigned int ID;
+				input_receiver(ID);
+				try{
+					game = lsystem->searchGame(ID);
+					game_interface(game);
+				}
+				catch(NonExistingGame &e){
+					e.printInf();
+				}
+			}
 			break;
-		case 6:
-			//search
+		}
+		case 6:{
+			User * user;
+			std::cout << "Input the user's name\n";
+			std::string name;
+			getline(cin,name);
+			try{
+				user = lsystem->searchUser(name);
+				user_interface(user);
+			}
+			catch(NonExistingUser &e){
+				e.printInf();
+			}
 			break;
+		}
 		case 7:
 			//vector
 			break;
@@ -114,7 +158,7 @@ void system_menu_interface(){
 
 void print_system_interface(){
 
-	std::cout << "Would you like to: " << std::endl << std::endl;
+	std::cout << std::endl << "Would you like to: " << std::endl << std::endl;
 	std::cout << "\t1: Add a new game to the system" << std::endl;
 	std::cout << "\t2: Add a new user to the system" << std::endl;
 	std::cout << "\t3: Sort the game library" << std::endl;
@@ -174,14 +218,30 @@ Game* add_game_interface(){
 	int age_min,age_hi;
 	std::cout << endl << "Minimum age\n";
 	input_receiver(age_min);
+	while(age_min <= 0){
+		std::cout << "Insert an non-zero positive value\n";
+		input_receiver(age_min);
+	}
 	std::cout << "Maximum recommended age\n";
 	input_receiver(age_hi);
+	while(age_hi <= 0){
+		std::cout << "Insert an non-zero positive value\n";
+		input_receiver(age_hi);
+	}
 	while(age_min > age_hi){
 		std::cout << endl << "Invalid age interval, please input your values again" << std::endl;
 		std::cout << "Minimum age\n";
 		input_receiver(age_min);
+		while(age_min <= 0){
+			std::cout << "Insert an non-zero positive value\n";
+			input_receiver(age_min);
+		}
 		std::cout << "Maximum recommended age\n";
 		input_receiver(age_hi);
+		while(age_hi <= 0){
+			std::cout << "Insert an non-zero positive value\n";
+			input_receiver(age_hi);
+		}
 	}
 	Interval range(age_min,age_hi);
 
@@ -230,7 +290,6 @@ Game* add_game_interface(){
 		lsystem->addGame(game);
 		return (game);
 	}
-
 	return NULL;
 
 }
@@ -247,8 +306,12 @@ User* add_user_interface(){
 	input_receiver(email);
 
 	std::cout << endl << "Age\n";
-	unsigned int age;
+	int age;
 	input_receiver(age);
+	while(age <= 0){
+		std::cout << "Insert an non-zero positive value\n";
+		input_receiver(age);
+	}
 
 	std::cout << endl << "Address\nInput: ";
 	string address;
@@ -273,7 +336,7 @@ void game_interface(Game *game){
 				break;
 			case 2:{
 				vector<double> prc_his(game->getPriceHist());
-				std::cout << "\n\nInsert the number of prices to see (0 shows every price)";
+				std::cout << "\n\nInsert the number of prices to see (a negative value or 0 will show every price)";
 				unsigned int lim_prc;
 				input_receiver(lim_prc);
 				if (lim_prc == 0 || lim_prc > prc_his.size())
@@ -331,7 +394,7 @@ void game_interface(Game *game){
 				}
 				else {
 					vector<PlaySession*> play_his(game->getPlayHistory());
-					std::cout << "\n\nInsert the number of sessions to see (0 shows every session)";
+					std::cout << "\n\nInsert the number of sessions to see (a negative value or 0 will show every session)";
 					unsigned int lim_ssn;
 					input_receiver(lim_ssn);
 					if (lim_ssn == 0 || lim_ssn > play_his.size())
@@ -416,7 +479,7 @@ void user_interface(User *user){
 			break;
 		}
 		case 3:{
-			std::cout << "\n\nInsert the number of cards to see (0 shows every card)";
+			std::cout << "\n\nInsert the number of cards to see (a negative value or 0 will show every card)";
 			unsigned int lim_crd;
 			input_receiver(lim_crd);
 			user->printCardsUser(lim_crd);
@@ -427,7 +490,7 @@ void user_interface(User *user){
 				std::cout << "\nInvalid Index\n";
 				input_receiver(card_ind);
 			}
-			card_interface(user->getCardRef(card_ind));
+			card_interface(user->getCardRef(card_ind - 1));
 			break;
 		}
 		case 4:{
@@ -486,8 +549,12 @@ void user_interface(User *user){
 				}
 			}
 			std::cout << "\n\nInsert the session's duration (in hours)\n";
-			unsigned int hours;
+			int hours;
 			input_receiver(hours);
+			while(hours <= 0){
+				std::cout << "Insert an non-zero positive value\n";
+				input_receiver(h);
+			}
 
 			PlaySession *session = new PlaySession(update,hours,platform,user,game);
 			user->addSession(session);
@@ -496,7 +563,7 @@ void user_interface(User *user){
 		}
 		case 5:{
 			vector<PlaySession *> sessions(user->getSessions());
-			std::cout << "\n\nInsert the number of sessions to see (0 shows every session)";
+			std::cout << "\n\nInsert the number of sessions to see (a negative value or 0 will show every session)";
 			unsigned int lim_ssn;
 			input_receiver(lim_ssn);
 			user->printSessionsUser(lim_ssn);
@@ -552,7 +619,7 @@ void user_interface(User *user){
 			break;
 		}
 		case 7:{
-			std::cout << "\n\nInsert the number of updates to see (0 shows most recent update for every game)";
+			std::cout << "\n\nInsert the number of updates to see (a negative value or 0 shows the most recent update for every game)";
 			unsigned int lim_upd;
 			input_receiver(lim_upd);
 			user->printUpdates(lim_upd);
@@ -626,7 +693,7 @@ void card_interface(Card &card){
 		print_card_interface();
 		switch(prompt_card_interface()){
 		case 1:{
-			std::cout << "Insert the new card number\n";
+			std::cout << "Insert the new card number (16 digits)\n";
 			string new_number;
 			input_receiver(new_number);
 
@@ -673,13 +740,15 @@ void save_interface(){
 	std::string input;
 	getline(cin,input);
 	if(input.length()){
-		fstream file;
+		ofstream file;
 		file.open(input);
 		if (file.fail()){
 			cerr << "Error opening file" << endl;
 		}
 		else{
 			lsystem->giveInfoSystem(file);
+			file.flush();
+			file.close();
 		}
 	}
 
@@ -687,7 +756,292 @@ void save_interface(){
 
 }
 
+void sort_game_interface(){
+ 	draw_header("SORT");
+ 	while(true){
+		print_sort_game_interface();
+		std::cout << "Will the insert be in ascending order? (y/n)\n";
+		char input;
+		input_receiver(input);
+		while (input != 'y' || input != 'n'){
+			std::cout << "\nInvalid response\n";
+			char input;
+			input_receiver(input);
+		}
+		switch(prompt_sort_game_interface()){
+			case 1:{
+				if(input == 'y'){
+					lsystem->sortGames(&gameIdAscend);
+				}
+				else{
+					lsystem->sortGames(&gameIdDescend);
+				}
+
+				break;
+			}
+			case 2:{
+				if(input == 'y'){
+					lsystem->sortGames(&gameTitleAscend);
+				}
+				else{
+					lsystem->sortGames(&gameTitleDescend);
+				}
+
+				break;
+			}
+			case 3:{
+				if(input == 'y'){
+					lsystem->sortGames(&gamePriceAscend);
+				}
+				else{
+					lsystem->sortGames(&gamePriceDescend);
+				}
+
+				break;
+			}
+			case 4:{
+				if(input == 'y'){
+					lsystem->sortGames(&gameBasePriceAscend);
+				}
+				else{
+					lsystem->sortGames(&gameBasePriceDescend);
+				}
+
+				break;
+			}
+			case 5:{
+				if(input == 'y'){
+					lsystem->sortGames(&gameReleaseAscend);
+				}
+				else{
+					lsystem->sortGames(&gameReleaseDescend);
+				}
+
+				break;
+			}
+			case 6:{
+				if(input == 'y'){
+					lsystem->sortGames(&gameAgeRangeAscend);
+				}
+				else{
+					lsystem->sortGames(&gameAgeRangeDescend);
+				}
+
+				break;
+			}
+			case 7:{
+				if(input == 'y'){
+					lsystem->sortGames(&gameDeveloperAscend);
+				}
+				else{
+					lsystem->sortGames(&gameDeveloperDescend);
+				}
+
+				break;
+			}
+		}
+ 	}
+}
+
+void print_sort_game_interface(){
+ 	std::cout << "Would you like to: " << std::endl << std::endl;
+	std::cout << "\t1: Sort by ID (default)" << std::endl;
+	std::cout << "\t2: Sort by title" << std::endl;
+	std::cout << "\t3: Sort by price" << std::endl;
+	std::cout << "\t4: Sort by base price" << std::endl;
+	std::cout << "\t5: Sort by release date" << std::endl;
+	std::cout << "\t6: Sort by age range" << std::endl;
+	std::cout << "\t7: Sort by developer" << std::endl;
+	std::cout << "\t0: Exit the card interface" << std::endl << std::endl;
+}
+
+int prompt_sort_game_interface(){
+	int input = -1;
+	input_receiver(input);
+	while(input < 0 || input > 7){
+		std::cout << "Please insert an integer between 0 and 7" << std::endl;
+		input_receiver(input);
+	}
+	return input;
+}
+
+void sort_user_interface(){
+ 	draw_header("SORT");
+ 	while(true){
+		print_sort_game_interface();
+		std::cout << "Will the insert be in ascending order? (y/n)\n";
+		char input;
+		input_receiver(input);
+		while (input != 'y' || input != 'n'){
+			std::cout << "\nInvalid response\n";
+			char input;
+			input_receiver(input);
+		}
+		switch(prompt_sort_game_interface()){
+			case 1:{
+				if(input == 'y'){
+					lsystem->sortUsers(&userNameAscend);
+				}
+				else{
+					lsystem->sortUsers(&userNameDescend);
+				}
+
+				break;
+			}
+			case 2:{
+				if(input == 'y'){
+					lsystem->sortUsers(&userAgeAscend);
+				}
+				else{
+					lsystem->sortUsers(&userAgeDescend);
+				}
+
+				break;
+			}
+		}
+ 	}
+}
+
+void print_sort_user_interface(){
+ 	std::cout << "Would you like to: " << std::endl << std::endl;
+	std::cout << "\t1: Sort by name" << std::endl;
+	std::cout << "\t2: Sort by age" << std::endl;
+	std::cout << "\t0: Exit the card interface" << std::endl << std::endl;
+}
+
+int prompt_sort_user_interface(){
+	int input = -1;
+	input_receiver(input);
+	while(input < 0 || input > 2){
+		std::cout << "Please insert an integer between 0 and 2" << std::endl;
+		input_receiver(input);
+	}
+	return input;
+}
+
+void sort_game_vector_interface(vector<Game *> &vec){
+ 	draw_header("SORT");
+ 	while(true){
+		print_sort_game_interface();
+		std::cout << "Will the insert be in ascending order? (y/n)\n";
+		char input;
+		input_receiver(input);
+		while (input != 'y' || input != 'n'){
+			std::cout << "\nInvalid response\n";
+			char input;
+			input_receiver(input);
+		}
+		switch(prompt_sort_game_interface()){
+			case 1:{
+				if(input == 'y'){
+					insertionSort(vec,&gameIdAscend);
+				}
+				else{
+					insertionSort(vec,&gameIdDescend);
+				}
+
+				break;
+			}
+			case 2:{
+				if(input == 'y'){
+					insertionSort(vec,&gameTitleAscend);
+				}
+				else{
+					insertionSort(vec,&gameTitleDescend);
+				}
+
+				break;
+			}
+			case 3:{
+				if(input == 'y'){
+					insertionSort(vec,&gamePriceAscend);
+				}
+				else{
+					insertionSort(vec,&gamePriceDescend);
+				}
+
+				break;
+			}
+			case 4:{
+				if(input == 'y'){
+					insertionSort(vec,&gameBasePriceAscend);
+				}
+				else{
+					insertionSort(vec,&gameBasePriceDescend);
+				}
+
+				break;
+			}
+			case 5:{
+				if(input == 'y'){
+					insertionSort(vec,&gameReleaseAscend);
+				}
+				else{
+					insertionSort(vec,&gameReleaseDescend);
+				}
+
+				break;
+			}
+			case 6:{
+				if(input == 'y'){
+					insertionSort(vec,&gameAgeRangeAscend);
+				}
+				else{
+					insertionSort(vec,&gameAgeRangeDescend);
+				}
+
+				break;
+			}
+			case 7:{
+				if(input == 'y'){
+					insertionSort(vec,&gameDeveloperAscend);
+				}
+				else{
+					insertionSort(vec,&gameDeveloperDescend);
+				}
+
+				break;
+			}
+		}
+ 	}
+}
 
 
+void sort_user_vector_interface(vector<User *> &vec){
+ 	draw_header("SORT");
+ 	while(true){
+		print_sort_game_interface();
+		std::cout << "Will the insert be in ascending order? (y/n)\n";
+		char input;
+		input_receiver(input);
+		while (input != 'y' || input != 'n'){
+			std::cout << "\nInvalid response\n";
+			char input;
+			input_receiver(input);
+		}
+		switch(prompt_sort_game_interface()){
+			case 1:{
+				if(input == 'y'){
+					insertionSort(vec,&userNameAscend);
+				}
+				else{
+					insertionSort(vec,&userNameDescend);
+				}
+
+				break;
+			}
+			case 2:{
+				if(input == 'y'){
+					insertionSort(vec,&userAgeAscend);
+				}
+				else{
+					insertionSort(vec,&userAgeDescend);
+				}
+
+				break;
+			}
+		}
+ 	}
+}
 
 
