@@ -91,7 +91,7 @@ void System::buyGame(User* user, Game* game, unsigned int id)
 	else throw UserTooYoung(info);
 }
 
-void System::giveInfoSystem(ostream &info) const
+void System::giveInfoSystem(ofstream &info) const
 {
 	for (unsigned int i = 0; i < store.size() - 1; i++)
 	{
