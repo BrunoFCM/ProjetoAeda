@@ -96,8 +96,6 @@ public:
 	 * @return Vetor de utilizadores apos restricao
 	 */
 	vector<User*> restrictUsers(const Restrictor &func, const Argument &arg){
-		if(!properRestrictor(func, USER_RESTRICTOR)) throw InvalidRestrictor();
-		if(!properArgument(func, arg)) throw InvalidArgument();
 		return restrictedVector(user_library,func,arg);
 	}
 
@@ -109,9 +107,7 @@ public:
 	 * @return Vetor de jogos apos restricao
 	 */
 	vector<Game*> restrictGames(const Restrictor &func, const Argument &arg){
-		if(!properRestrictor(func, GAME_RESTRICTOR)) throw InvalidRestrictor();
-		if(!properArgument(func, arg)) throw InvalidArgument();
-		return restrictedVector(user_library,func,arg);
+		return restrictedVector(store,func,arg);
 	}
 
 	/**
