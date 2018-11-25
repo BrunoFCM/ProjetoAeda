@@ -133,17 +133,31 @@ void Game::giveInfoGame(ofstream &info) const
 	info << id << "\n" << title << "/n" << price << "\n" << base_price << "/n"
 		 << release.toStr() << age_range.getLower() << " " << age_range.getUpper() << "\n";
 
-	for (unsigned int i = 0; i < platform.size() - 1; i++)
-		info << platform[i] << ",\n";
-	info << platform[platform.size() - 1] << ".\n";
+	for (unsigned int i = 0; i < platform.size(); i++) {
+		if (i == platform.size() - 1)
+			info << platform[i] << ".\n";
+		else
+			info << platform[i] << ",\n";
+	}
 
-	for (unsigned int i = 0; i < genre.size() - 1; i++)
-		info << genre[i] << ",\n";
-	info << genre[genre.size() - 1] << ".\n" << developer << "\n";
 
-	for (unsigned int i = 0; i < price_history.size() - 1; i++)
-		info << price_history[i] << ",\n";
-	info << price_history[price_history.size() - 1] << ".\n" << player_base << "\n";
+	for (unsigned int i = 0; i < genre.size(); i++) {
+		if(i == platform.size() -1)
+			info << genre[i] << ".\n";
+		else
+			info << genre[i] << ",\n";
+	}
+
+	info << developer << "\n";
+
+	for (unsigned int i = 0; i < price_history.size(); i++) {
+		if(i == price_history.size() -1 )
+			info << price_history[i] << ".\n" ;
+		else
+			info << price_history[i] << ",\n";
+	}
+
+	info << player_base << "\n";
 
 }
 
