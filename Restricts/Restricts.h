@@ -84,63 +84,6 @@ bool userAgeInterval(User* u1, const Interval &inter);
  */
 bool userLibrarySize(User* u1, const Interval &inter);
 
-
-
-template <class Restrictor>
-/**
- * @brief Funcao que verifica se o restritor func e de jogos ou de utilizadores
- * @param func Restritor
- * @param is_user_restrictor Valor booleano que transmite a diferenciacao entre restritores
- * @return Retorna is_user_restrictor se o restritor e de users, !is_user_restrictor se e de games e false caso contrario
- */
-bool properRestrictor(Restrictor func, const bool &is_user_restrictor){
-	switch(func){
-	case &gameIdInterval:
-	case &gameAgeRange:
-	case &gamePlatform:
-	case &gameGenre:
-	case &gameDeveloper:
-	case &gamePriceMax:
-	case &gameRelease:
-		return !is_user_restrictor;
-	case &userAgeInterval:
-	case &userLibrarySize:
-		return is_user_restrictor;
-	default:
-		return false;
-	}
-}
-
-
-template <class Restrictor, class Argument>
-/**
- * @brief Funcao que verifica se o argumento (arg) e do tipo necessario ao restritor (func)
- * @param func Restritor
- * @param arg Argumento
- * @return True se arg e do tipo necessario a func, false caso contrario
- */
-bool properArgument(Restrictor func, Argument arg){
-	switch(func){
-	case &gameIdInterval:
-	case &gameAgeRange:
-	case &userAgeInterval:
-	case &userLibrarySize:
-		return (std::is_same<Argument,Interval>::value);
-	case &gamePriceMax:
-		return (std::is_same<Argument,double>::value);
-	case &gameRelease:
-		return (std::is_same<Argument,Date>::value);
-	case &gamePlatform:
-	case &gameGenre:
-	case &gameDeveloper:
-		return (std::is_same<Argument,std::string>::value);
-	default:
-		return false;
-	}
-}
-
-
-
 template <class Comparable, class Restrictor, class Argument>
 /**
  * @brief Funcao que retorna um vetor mais curto e restrito, extraido de um vetor maior
