@@ -553,7 +553,7 @@ void user_interface(User *user){
 			input_receiver(hours);
 			while(hours <= 0){
 				std::cout << "Insert an non-zero positive value\n";
-				input_receiver(h);
+				input_receiver(hours);
 			}
 
 			PlaySession *session = new PlaySession(update,hours,platform,user,game);
