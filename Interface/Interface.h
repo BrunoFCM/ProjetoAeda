@@ -85,12 +85,6 @@ Game * add_game_interface();
 User * add_user_interface();
 
 /**
- * @brief Funcao que possibilita a adicao de um cartao bancario a um sistema por parte do utilizador
- * @return Retorna o cartao adicionado ao sistema
- */
-Card add_card_interface();
-
-/**
  * @brief Funcao que gere o menu de um jogo
  * @param game Jogo sobre o qual o utilizador vai operar
  */
