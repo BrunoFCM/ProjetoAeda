@@ -5,6 +5,14 @@
 
 using namespace std;
 
+System::System(){}
+
+
+System::System(ifstream &file){
+
+}
+
+
 System::~System()
 {
 	for (size_t i = 0; i < user_library.size(); i++) {
