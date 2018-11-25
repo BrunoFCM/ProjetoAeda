@@ -841,6 +841,8 @@ void sort_game_interface(){
 
 				break;
 			}
+			case 0:
+				return;
 		}
  	}
 }
@@ -854,7 +856,7 @@ void print_sort_game_interface(){
 	std::cout << "\t5: Sort by release date" << std::endl;
 	std::cout << "\t6: Sort by age range" << std::endl;
 	std::cout << "\t7: Sort by developer" << std::endl;
-	std::cout << "\t0: Exit the card interface" << std::endl << std::endl;
+	std::cout << "\t0: Exit the sort interface" << std::endl << std::endl;
 }
 
 int prompt_sort_game_interface(){
@@ -901,6 +903,8 @@ void sort_user_interface(){
 
 				break;
 			}
+			case 0:
+				return;
 		}
  	}
 }
@@ -909,7 +913,7 @@ void print_sort_user_interface(){
  	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: Sort by name" << std::endl;
 	std::cout << "\t2: Sort by age" << std::endl;
-	std::cout << "\t0: Exit the card interface" << std::endl << std::endl;
+	std::cout << "\t0: Exit the sort interface" << std::endl << std::endl;
 }
 
 int prompt_sort_user_interface(){
@@ -1006,6 +1010,8 @@ void sort_game_vector_interface(vector<Game *> &vec){
 
 				break;
 			}
+			case 0:
+				return;
 		}
  	}
 }
@@ -1045,6 +1051,8 @@ void sort_user_vector_interface(vector<User *> &vec){
 
 				break;
 			}
+			case 0:
+				return;
 		}
  	}
 }
@@ -1083,6 +1091,8 @@ void user_vector_interface(vector<User *> &vec){
 
 				break;
 			}
+			case 0:
+				return;
 		}
  	}
 }
@@ -1103,4 +1113,269 @@ void load_interface(){
 	}
 
 }
+
+vector<Game*> restrict_game_interface(){
+ 	draw_header("TAG SEARCH");
+ 	while(true){
+		print_sort_game_interface();
+		int prompt = prompt_sort_game_interface();
+		switch(prompt){
+			case 1:{
+				int id_min,id_max;
+				std::cout << "Minimum ID value\n";
+				input_receiver(id_min);
+				while(id_min <= 0){
+					std::cout << "Insert an non-zero positive value\n";
+					input_receiver(id_min);
+				}
+				std::cout << "Maximum ID value\n";
+				input_receiver(id_max);
+				while(id_max <= 0){
+					std::cout << "Insert an non-zero positive value\n";
+					input_receiver(id_max);
+				}
+				while(id_min > id_max){
+					std::cout << endl << "Invalid interval, please input your values again" << std::endl;
+					std::cout << "Minimum ID\n";
+					input_receiver(id_min);
+					while(id_min <= 0){
+						std::cout << "Insert an non-zero positive value\n";
+						input_receiver(id_min);
+					}
+					std::cout << "Maximum recommended age\n";
+					input_receiver(id_max);
+					while(id_max <= 0){
+						std::cout << "Insert an non-zero positive value\n";
+						input_receiver(id_max);
+					}
+				}
+				Interval range(id_min,id_max);
+
+				return lsystem->restrictGames(gameIdInterval,range);
+
+				break;
+			}
+			case 2:{
+
+				std::cout << endl << "Price\n";
+				double price;
+				input_receiver(price);
+
+				return lsystem->restrictGames(gamePriceMax,price);
+
+				break;
+			}
+			case 3:{
+				Date release(1,1,1901);
+				string aux;
+				while(true){
+					try{
+						std::cout << endl << "Release date (in the DD/MM/YYYY format)\nInput: ";
+						getline(cin,aux);
+						release = Date(aux);
+						break;
+					}
+					catch(InvalidDate &e){
+						e.printInf();
+					}
+				}
+
+				return lsystem->restrictGames(gameRelease,release);
+
+				break;
+			}
+			case 4:{
+				int age_min,age_hi;
+				std::cout << endl << "Minimum age\n";
+				input_receiver(age_min);
+				while(age_min <= 0){
+					std::cout << "Insert an non-zero positive value\n";
+					input_receiver(age_min);
+				}
+				std::cout << "Maximum recommended age\n";
+				input_receiver(age_hi);
+				while(age_hi <= 0){
+					std::cout << "Insert an non-zero positive value\n";
+					input_receiver(age_hi);
+				}
+				while(age_min > age_hi){
+					std::cout << endl << "Invalid age interval, please input your values again" << std::endl;
+					std::cout << "Minimum age\n";
+					input_receiver(age_min);
+					while(age_min <= 0){
+						std::cout << "Insert an non-zero positive value\n";
+						input_receiver(age_min);
+					}
+					std::cout << "Maximum recommended age\n";
+					input_receiver(age_hi);
+					while(age_hi <= 0){
+						std::cout << "Insert an non-zero positive value\n";
+						input_receiver(age_hi);
+					}
+				}
+				Interval range(age_min,age_hi);
+
+				return lsystem->restrictGames(gameAgeRange,range);
+
+				break;
+			}
+			case 5:{
+				std::string platform;
+				std::cout << endl << "Platform\nInput: ";
+				getline(cin,platform);
+
+				return lsystem->restrictGames(gamePlatform,platform);
+
+				break;
+			}
+			case 6:{
+				std::string genre;
+				std::cout << endl << "Genre\nInput: ";
+				getline(cin,genre);
+
+				return lsystem->restrictGames(gameGenre,genre);
+
+				break;
+			}
+			case 7:{
+				std::string developer;
+				std::cout << endl << "Developer\nInput: ";
+				getline(cin,developer);
+
+				return lsystem->restrictGames(gameDeveloper,developer);
+
+				break;
+			}
+			case 0:{
+				vector<Game*> out;
+				return out;
+			}
+		}
+ 	}
+}
+
+void print_restrict_game_interface(){
+ 	std::cout << "\nWould you like to: " << std::endl << std::endl;
+	std::cout << "\t1: Search by an ID interval" << std::endl;
+	std::cout << "\t2: Search by max price" << std::endl;
+	std::cout << "\t3: Search by release date" << std::endl;
+	std::cout << "\t4: Search by an age interval" << std::endl;
+	std::cout << "\t5: Search by platform" << std::endl;
+	std::cout << "\t6: Search by genre" << std::endl;
+	std::cout << "\t7: Search by developer" << std::endl;
+	std::cout << "\t0: Exit the tag search interface" << std::endl << std::endl;
+}
+
+int prompt_restrict_game_interface(){
+	int input = -1;
+	input_receiver(input);
+	while(input < 0 || input > 7){
+		std::cout << "Please insert an integer between 0 and 7" << std::endl;
+		input_receiver(input);
+	}
+	return input;
+}
+
+vector<User*> restrict_user_interface(){
+ 	draw_header("TAG SEARCH");
+ 	while(true){
+		print_sort_user_interface();
+		int prompt = prompt_sort_user_interface();
+		switch(prompt){
+			case 1:{
+				int age_min,age_hi;
+				std::cout << endl << "Minimum age\n";
+				input_receiver(age_min);
+				while(age_min <= 0){
+					std::cout << "Insert an non-zero positive value\n";
+					input_receiver(age_min);
+				}
+				std::cout << "Maximum recommended age\n";
+				input_receiver(age_hi);
+				while(age_hi <= 0){
+					std::cout << "Insert an non-zero positive value\n";
+					input_receiver(age_hi);
+				}
+				while(age_min > age_hi){
+					std::cout << endl << "Invalid age interval, please input your values again" << std::endl;
+					std::cout << "Minimum age\n";
+					input_receiver(age_min);
+					while(age_min <= 0){
+						std::cout << "Insert an non-zero positive value\n";
+						input_receiver(age_min);
+					}
+					std::cout << "Maximum recommended age\n";
+					input_receiver(age_hi);
+					while(age_hi <= 0){
+						std::cout << "Insert an non-zero positive value\n";
+						input_receiver(age_hi);
+					}
+				}
+				Interval range(age_min,age_hi);
+
+				return lsystem->restrictUsers(userAgeInterval,range);
+
+				break;
+			}
+			case 2:{
+
+				int size_min,size_hi;
+				std::cout << endl << "Minimum size\n";
+				input_receiver(size_min);
+				while(size_min <= 0){
+					std::cout << "Insert an non-zero positive value\n";
+					input_receiver(size_min);
+				}
+				std::cout << "Maximum size\n";
+				input_receiver(size_hi);
+				while(size_hi <= 0){
+					std::cout << "Insert an non-zero positive value\n";
+					input_receiver(size_hi);
+				}
+				while(size_min > size_hi){
+					std::cout << endl << "Invalid interval, please input your values again" << std::endl;
+					std::cout << "Minimum size\n";
+					input_receiver(size_min);
+					while(size_min <= 0){
+						std::cout << "Insert an non-zero positive value\n";
+						input_receiver(size_min);
+					}
+					std::cout << "Maximum size\n";
+					input_receiver(size_hi);
+					while(size_hi <= 0){
+						std::cout << "Insert an non-zero positive value\n";
+						input_receiver(size_hi);
+					}
+				}
+				Interval range(size_min,size_hi);
+
+				return lsystem->restrictUsers(userLibrarySize,range);
+
+				break;
+			}
+			case 0:
+				vector<User*> out;
+				return out;
+		}
+	}
+ }
+
+
+void print_restrict_user_interface(){
+ 	std::cout << "\nWould you like to: " << std::endl << std::endl;
+	std::cout << "\t1: Search by an age interval" << std::endl;
+	std::cout << "\t2: Search by library size" << std::endl;
+	std::cout << "\t0: Exit the tag search interface" << std::endl << std::endl;
+}
+
+int prompt_restrict_user_interface(){
+	int input = -1;
+	input_receiver(input);
+	while(input < 0 || input > 2){
+		std::cout << "Please insert an integer between 0 and 2" << std::endl;
+		input_receiver(input);
+	}
+	return input;
+}
+
 

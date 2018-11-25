@@ -184,3 +184,10 @@ void sort_game_vector_interface(vector<Game *> &vec);
  * @param vec Vetor de utilizadores a ser ordenado
  */
 void sort_user_vector_interface(vector<Game *> &vec);
+
+vector<Game *> restrict_game_interface();
+void print_restrict_game_interface();
+int prompt_restrict_game_interface();
+vector<User *> restrict_user_interface();
+void print_restrict_user_interface();
+int prompt_restrict_user_interface();
