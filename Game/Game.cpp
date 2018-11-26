@@ -187,10 +187,11 @@ void Home::printInfoGame() const {
 
 void Home::giveInfoGame(ofstream &info) const
 {
+	int identifier = 0;
 	Game::giveInfoGame(info);
 	for (unsigned int i = 0; i < updates.size() - 1; i++)
 		info << updates[i].toStr() << ",\n";
-	info << updates[updates.size() - 1].toStr() << ".\n";
+	info << updates[updates.size() - 1].toStr() << ".\n" << identifier << identifier << "\n";
 }
 
 
@@ -268,8 +269,9 @@ void FixedSubsc::printInfoGame() const {
 
 void FixedSubsc::giveInfoGame(ofstream &info) const
 {
+	int identifier = 2;
 	Game::giveInfoGame(info);
-	info << fixed_price << "\n";
+	info << fixed_price << "\n" << identifier << "\n";
 }
 
 
@@ -314,6 +316,7 @@ void VariableSubsc::printInfoGame() const {
 
 void VariableSubsc::giveInfoGame(ofstream &info) const
 {
+	int identifier = 1;
 	Game::giveInfoGame(info);
-	info << price_hour << "\n";
+	info << price_hour << "\n" << identifier << "\n";
 }
