@@ -185,7 +185,7 @@ void Home::printInfoGame() const {
 	cout << "Number of players: " << player_base << endl;
 }
 
-void Home::giveInfoGame(ostream &info) const
+void Home::giveInfoGame(ofstream &info) const
 {
 	Game::giveInfoGame(info);
 	for (unsigned int i = 0; i < updates.size() - 1; i++)
@@ -266,7 +266,7 @@ void FixedSubsc::printInfoGame() const {
 
 }
 
-void FixedSubsc::giveInfoGame(ostream &info) const
+void FixedSubsc::giveInfoGame(ofstream &info) const
 {
 	Game::giveInfoGame(info);
 	info << fixed_price << "\n";
@@ -312,7 +312,7 @@ void VariableSubsc::printInfoGame() const {
 	cout << "Total play time: " << getPlayTime() << endl;
 }
 
-void VariableSubsc::giveInfoGame(ostream &info) const
+void VariableSubsc::giveInfoGame(ofstream &info) const
 {
 	Game::giveInfoGame(info);
 	info << price_hour << "\n";
