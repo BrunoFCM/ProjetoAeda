@@ -191,7 +191,7 @@ void Home::giveInfoGame(ofstream &info) const
 	Game::giveInfoGame(info);
 	for (unsigned int i = 0; i < updates.size() - 1; i++)
 		info << updates[i].toStr() << ",\n";
-	info << updates[updates.size() - 1].toStr() << ".\n" << identifier << identifier << "\n";
+	info << updates[updates.size() - 1].toStr() << ".\n" << identifier << "\n";
 }
 
 
