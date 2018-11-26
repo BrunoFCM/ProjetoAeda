@@ -109,4 +109,3 @@ bool Date::operator== (const Date &date2) const{
 	return ((year == date2.year) && (month == date2.month) && (day == date2.day));
 }
 
-
