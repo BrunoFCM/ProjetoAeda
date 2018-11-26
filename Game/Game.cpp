@@ -130,18 +130,26 @@ vector<PlaySession*> Game::getPlayHistory() const {vector<PlaySession*> out; ret
 
 void Game::giveInfoGame(ostream &info) const
 {
-	info << title << "/n" << price << "\n" << base_price << "/n"
-		 << release.toStr() << age_range.getLower() << " " << age_range.getUpper() << "\n";
+	info << title << "\n" << price << "\n" << base_price << "\n"
+		 << release.toStr() << "\n" << age_range.getLower() << " " << age_range.getUpper() << "\n";
 
-	for (unsigned int i = 0; i < platform.size(); i++)
-		info << platform[i] << ",\n";
-
+	for (unsigned int i = 0; i < platform.size(); i++){
+		if(i != platform.size() - 1)
+			info << platform[i] << ",\n";
+		else
+			info << platform[i] << ".\n";
+	}
 	for (unsigned int i = 0; i < genre.size(); i++)
-		info << genre[i] << ",\n";
+		if(i != platform.size() - 1)
+			info << genre[i] << ",\n";
+		else
+			info << genre[i] << ".\n";
 
 	for (unsigned int i = 0; i < price_history.size(); i++)
-		info << price_history[i] << ",\n";
-
+		if(i != platform.size() - 1)
+			info << price_history[i] << ",\n";
+		else
+			info << price_history[i] << ".\n";
 }
 
 
