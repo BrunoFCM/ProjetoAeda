@@ -254,7 +254,7 @@ public:
 	* @brief Funcao virtual que passa para uma fstream a informacao de um jogo online
 	* @param info Ostream para onde e passada a informacao de um jogo online
 	*/
-	virtual void giveInfoGame(fstream &info) const{};
+	virtual void giveInfoGame(ofstream &info) const{};
 };
 
 
