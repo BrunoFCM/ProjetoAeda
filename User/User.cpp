@@ -115,7 +115,7 @@ void User::printInfoUser() const
 	cout << setw(20) << "Number of sessions: "; cout << sessions.size() << endl;
 }
 
-void User::giveInfoUser(ostream &info) const
+void User::giveInfoUser(ofstream &info) const
 {
 	info << name << "\n"
 		 << email << "\n"
@@ -137,7 +137,7 @@ void User::printLibraryUser(unsigned int numberOfGames) const
 	}
 }
 
-void User::giveLibraryUser(ostream &titles) const
+void User::giveLibraryUser(ofstream &titles) const
 {
 	for (unsigned int i = 0; i < library.size(); ++i){
 	if(i != (library.size() - 1)){
@@ -167,7 +167,7 @@ void User::printCardsUser(unsigned int numberOfCards) const
 	}
 }
 
-void User::giveCardsUser(ostream &numbers) const
+void User::giveCardsUser(ofstream &numbers) const
 {
 	for (unsigned int i = 0; i < cards.size(); ++i){
 		if(i != (cards.size() - 1)){
