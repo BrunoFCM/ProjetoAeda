@@ -155,8 +155,8 @@ System::System(ifstream &file){
 		getline(file,input);
 		std::string platform = input;
 
-		PlaySession* session(user_ptr,game_ptr,date,duration,platform);
-		user_ptr->addSession(session);
+		PlaySession session(date,duration,platform,user_ptr,game_ptr);
+		user_ptr->addSession(&session);
 
 		getline(file,input);
 		getline(file,input);
