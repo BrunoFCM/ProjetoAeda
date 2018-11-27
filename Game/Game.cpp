@@ -128,7 +128,7 @@ void Game::addUpdate(Date date) {}
 
 vector<PlaySession*> Game::getPlayHistory() const {vector<PlaySession*> out; return out;}
 
-void Game::giveInfoGame(ofstream &info) const
+void Game::giveInfoGame(ostream &info) const
 {
 	info << title << "\n" << price << "\n" << base_price << "\n"
 		 << release.toStr() << "\n" << age_range.getLower() << " " << age_range.getUpper() << "\n";
