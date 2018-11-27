@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <sstream>
 #include "System.h"
 #include "Exceptions.h"
 
@@ -10,8 +11,156 @@ System::System(){}
 
 
 System::System(ifstream &file){
-	std::string input = "";
+	std::string input;
 
+	getline(file,input);
+	while(input != "@"){
+		int type;
+		file >> type;
+		file.ignore(1,'\n');
+
+		getline(file,input);
+		std::string title = input;
+
+		double base,current;
+		file >> current >> base;
+		file.ignore(1,'\n');
+
+		getline(file,input);
+		Date release(input);
+
+		unsigned int amin, amax;
+		file >> amin >> amax;
+		file.ignore(1,'\n');
+		Interval ages(amin,amax);
+
+		vector<std::string> platforms;
+		while(input.back() != '.'){
+			getline(file,input);
+			std::string platform = input;
+			platform.pop_back();
+			platforms.push_back(platform);
+		}
+
+		vector<std::string> genres;
+		while(input.back() != '.'){
+			getline(file,input);
+			std::string genre = input;
+			genres.pop_back();
+			genres.push_back(genre);
+		}
+
+		vector<double> prices;
+		while(input.back() != '.'){
+			getline(file,input);
+			std::string value = input;
+			value.pop_back();
+			stringstream stream(value);
+			double price;
+			stream >> price;
+			prices.push_back(price);
+		}
+
+		std::string developer;
+		getline(file,developer);
+
+		Game* game;
+
+		switch(type){
+			case 0:
+				game = new Home(title,current,release,ages,platforms,genres,developer);
+				while(input.back() != '.'){
+					getline(file,input);
+					Date update(input);
+					game->addUpdate(update);
+				}
+				break;
+			case 1:{
+				double sub;
+				file >> sub;
+				file.ignore(1,'\n');
+				game = new VariableSubsc(title,current,release,ages,platforms,genres,developer,sub);
+				break;
+			}
+			case 2:{
+				double sub;
+				file >> sub;
+				file.ignore(1,'\n');
+				game = new FixedSubsc(title,current,release,ages,platforms,genres,developer,sub);
+				break;
+			}
+		}
+
+		store.push_back(game);
+
+		//addpricehist
+
+		getline(file,input);
+		getline(file,input);
+	}
+
+	getline(file,input);
+	while(input != "@"){
+
+		getline(file,input);
+		std::string name = input;
+
+		getline(file,input);
+		std::string email = input;
+
+		int age;
+		file >> age;
+		file.ignore(1,'\n');
+
+		getline(file,input);
+		std::string address = input;
+
+		User* user = new User(name,email,age,address);
+
+		while(input.back() != '.'){
+			getline(file,input);
+			std::string game = input;
+			Game* game_ptr = searchGame(game);
+			user->addToLibrary(game_ptr);
+		}
+
+		while(input.back() != '.'){
+			getline(file,input);
+			std::string value = input;
+			value.pop_back();
+			stringstream stream(value);
+			std::string number;
+			double price;
+			stream >> number >> price;
+			Card card(number,price);
+			user->addCard(card);
+		}
+
+		getline(file,input);
+		getline(file,input);
+	}
+
+	getline(file,input);
+	while(input != "@"){
+
+		getline(file,input);
+		User* user_ptr = searchUser(input);
+		getline(file,input);
+		Game* game_ptr = searchGame(input);
+		getline(file,input);
+		Date date(input);
+		int duration;
+		file >> duration;
+		file.ignore(1,'\n');
+		getline(file,input);
+		std::string platform = input;
+
+		PlaySession* session(user_ptr,game_ptr,date,duration,platform);
+		user_ptr->addSession(session);
+
+		getline(file,input);
+		getline(file,input);
+	}
 }
 
 
