@@ -128,30 +128,30 @@ void Game::addUpdate(Date date) {}
 
 vector<PlaySession*> Game::getPlayHistory() const {vector<PlaySession*> out; return out;}
 
-void Game::giveInfoGame(ostream &info) const
+void Game::giveInfoGame(ofstream &info) const
 {
 	info << title << "\n" << price << "\n" << base_price << "\n"
-		<< release.toStr() << "\n" << age_range.getLower() << " " << age_range.getUpper() << "\n";
+		 << release.toStr() << "\n" << age_range.getLower() << " " << age_range.getUpper() << "\n";
+
 	for (unsigned int i = 0; i < platform.size(); i++){
 		if(i != platform.size() - 1)
 			info << platform[i] << ",\n";
 		else
 			info << platform[i] << ".\n";
 	}
-
 	for (unsigned int i = 0; i < genre.size(); i++)
-		if(i != platform.size() - 1)
+		if(i != genre.size() - 1)
 			info << genre[i] << ",\n";
 		else
 			info << genre[i] << ".\n";
 
-
 	for (unsigned int i = 0; i < price_history.size(); i++)
-		if(i != platform.size() - 1)
+		if(i != price_history.size() - 1)
 			info << price_history[i] << ",\n";
 		else
 			info << price_history[i] << ".\n";
 
+	info << developer << "\n";
 }
 
 
@@ -200,8 +200,10 @@ void Home::giveInfoGame(ofstream &info) const
 	info << 0 << "\n";
 	Game::giveInfoGame(info);
 	for (unsigned int i = 0; i < updates.size() - 1; i++)
-		info << updates[i].toStr() << ",\n";
-	info << updates[updates.size() - 1].toStr() << ".\n";
+		if(i != updates.size() - 1)
+			info << updates[i].toStr() << ",\n";
+		else
+			info << updates[i].toStr() << ".\n";
 }
 
 

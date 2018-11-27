@@ -111,7 +111,7 @@ public:
 	vector<double> getPriceHist() const;
 
 	/**
-	* @brief Membro-funcao que retorna um vetor de strings correspondentes ÃƒÆ’Ã‚Â  base de jogadores do jogo
+	* @brief Membro-funcao que retorna um vetor de strings correspondentes ÃƒÂ  base de jogadores do jogo
 	* @return Retorna o valor de player_base, correspondente ao numero de jogadores
 	*/
 	unsigned int getPlayerBase() const;
@@ -142,7 +142,7 @@ public:
 	void discountPrice(const unsigned int &percentage);
 
 	/**
-	* @brief Altera o preÃƒÆ’Ã‚Â§o base do jogo
+	* @brief Altera o preÃƒÂ§o base do jogo
 	* @param newPrice Novo preco base do jogo
 	*/
 	void changeBasePrice(const double &newPrice);
@@ -188,7 +188,7 @@ public:
 	* @brief Funcao virtual que passa para uma fstream a informacao de um jogo
 	* @param info Ofstream para onde e passada a informacao de um jogo
 	*/
-	virtual void giveInfoGame(ostream &info) const;
+	virtual void giveInfoGame(ofstream &info) const;
 
 };
 
