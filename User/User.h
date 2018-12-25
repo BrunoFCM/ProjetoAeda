@@ -4,9 +4,9 @@
 #include <string>
 #include <vector>
 #include <map>
-#include "Card.h"
-#include "Game.h"
-#include "PlaySession.h"
+#include "../Card/Card.h"
+#include "../Game/Game.h"
+#include "../PlaySession/PlaySession.h"
 
 using namespace std;
 

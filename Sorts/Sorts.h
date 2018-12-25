@@ -1,8 +1,8 @@
 #pragma once
 
-#include "Game.h"
-#include "User.h"
-#include "Exceptions.h"
+#include "../Game/Game.h"
+#include "../User/User.h"
+#include "../Exceptions.h"
 #include <type_traits>
 
 typedef bool (*GameComparer)(Game*,Game*);

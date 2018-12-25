@@ -3,10 +3,10 @@
 
 #include <iostream>
 #include <fstream>
-#include "Game.h"
-#include "User.h"
-#include "Sorts.h"
-#include "Restricts.h"
+#include "../Game/Game.h"
+#include "../User/User.h"
+#include "../Sorts/Sorts.h"
+#include "../Restricts/Restricts.h"
 
 using namespace std;
 

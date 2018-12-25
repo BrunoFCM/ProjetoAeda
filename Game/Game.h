@@ -5,10 +5,10 @@
 #include <string>
 #include <vector>
 #include <fstream>
-#include "Date.h"
-#include "Interval.h"
-#include "User.h"
-#include "PlaySession.h"
+#include "../Date/Date.h"
+#include "../Interval/Interval.h"
+#include "../User/User.h"
+#include "../PlaySession/PlaySession.h"
 
 using namespace std;
 

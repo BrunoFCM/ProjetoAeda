@@ -3,16 +3,17 @@
 #include <vector>
 #include <fstream>
 
-#include "Card.h"
-#include "Date.h"
-#include "Exceptions.h"
-#include "Game.h"
-#include "Interval.h"
-#include "PlaySession.h"
-#include "Restricts.h"
-#include "Sorts.h"
-#include "System.h"
-#include "User.h"
+#include "../Card/Card.h"
+#include "../Date/Date.h"
+#include "../Exceptions.h"
+#include "../Game/Game.h"
+#include "../Interval/Interval.h"
+#include "../PlaySession/PlaySession.h"
+#include "../Restricts/Restricts.h"
+#include "../Sorts/Sorts.h"
+#include "../System/System.h"
+#include "../User/User.h"
+
 #include "Interface.h"
 
 System * lsystem = NULL;

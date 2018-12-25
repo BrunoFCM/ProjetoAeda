@@ -1,7 +1,7 @@
 #include <iostream>
 #include <iomanip>
-#include "User.h"
-#include "Exceptions.h"
+#include "../User/User.h"
+#include "../Exceptions.h"
 
 using namespace std;
 

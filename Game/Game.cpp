@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "Exceptions.h"
+#include "../Exceptions.h"
 #include <vector>
 #include <string>
 #include <iostream>

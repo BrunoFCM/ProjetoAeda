@@ -2,9 +2,9 @@
 #define SRC_PLAYSESSION_H_
 
 #include <iostream>
-#include "Date.h"
-#include "User.h"
-#include "Game.h"
+#include "../Date/Date.h"
+#include "../User/User.h"
+#include "../Game/Game.h"
 
 using namespace std;
 

@@ -1,10 +1,10 @@
 #pragma once
 
-#include "Game.h"
-#include "User.h"
-#include "Interval.h"
-#include "Date.h"
-#include "Exceptions.h"
+#include "../Game/Game.h"
+#include "../User/User.h"
+#include "../Interval/Interval.h"
+#include "../Date/Date.h"
+#include "../Exceptions.h"
 #include <string>
 #include <type_traits>
 
