@@ -334,7 +334,7 @@ public:
 	/**
 	 * @brief Membro funcao que imprime informacao relativamente a excecao
 	 */
-	void printInf() {
+	void printInf() const {
 		std::cout << "This developer does not exist" << std::endl;
 	}
 };
