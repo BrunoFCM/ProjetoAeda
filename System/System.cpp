@@ -4,13 +4,9 @@
 #include "System.h"
 #include "../Exceptions.h"
 
-
 using namespace std;
 
-System::System(){}
-
-
-System::System(ifstream &file){
+System::System(ifstream &file) : developers(Developer("",0,"")) {
 	std::string input;
 
 	getline(file,input);
@@ -163,7 +159,6 @@ System::System(ifstream &file){
 	}
 }
 
-
 System::~System()
 {
 	for (size_t i = 0; i < user_library.size(); i++) {
@@ -276,6 +271,50 @@ void System::giveInfoSystem(ofstream &info) const
 	}
 	info << "@" << "\n";
 }
+
+void System::addDeveloper(Developer developer)
+{
+	if (developers.isEmpty())
+		throw RepeatedDeveloper(developer.getName());
+
+	Developer search = developers.find(developer);
+	if (search.getEMail() == "")
+		developers.insert(developer);
+	else throw RepeatedDeveloper(developer.getName());
+}
+
+Developer System::searchDeveloper(long unsigned nif)
+{
+	if (developers.isEmpty())
+		throw NonExistingDeveloper();
+
+	BSTItrIn<Developer> it (developers);
+	while (!it.isAtEnd())
+	{
+		if (it.retrieve().getNif() == nif)
+			return it.retrieve();
+		it.advance();
+	}
+
+	throw NonExistingDeveloper();
+}
+
+Developer System::searchDeveloper(string name)
+{
+	if (developers.isEmpty())
+		throw NonExistingDeveloper();
+
+	BSTItrIn<Developer> it (developers);
+	while (!it.isAtEnd())
+	{
+		if (it.retrieve().getName() == name)
+			return it.retrieve();
+		it.advance();
+	}
+
+		throw NonExistingDeveloper();
+}
+
 
 
 
