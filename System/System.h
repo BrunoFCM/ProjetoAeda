@@ -3,10 +3,11 @@
 
 #include <iostream>
 #include <fstream>
+#include "../BST.h"
 #include "../Game/Game.h"
 #include "../User/User.h"
 #include "../Sorts/Sorts.h"
-#include "../Restricts/Restricts.h"
+#include "../Developer/Developer.h"
 
 using namespace std;
 
@@ -24,13 +25,14 @@ public:
 	/**
 	* @brief Construtor default de system
 	*/
-	System();
+	System() : developers(Developer("",0,"")) {};
 
 	/**
 	* @brief Construtor de system que importa a informacao a partir de um ficheiro
 	* @param file Referencia a uma stream de ficheiro que contem as informacoes de system
 	*/
 	System(ifstream &file);
+
 	/**
 	* @brief Destrutor da classe System
 	*/
@@ -116,7 +118,23 @@ public:
 	*/
 	void giveInfoSystem(ofstream &info) const;
 
+	/**
+	* @brief Funcao adiciona uma empresa a BST de empresas
+	* @param developer Empresa a adicionar
+	*/
+	void addDeveloper(Developer developer);
 
+	/**
+	* @brief Funcao que pesquisa uma empresa na BST de empresas a partir do nif
+	* @param nif NIF da empresa
+	*/
+	Developer searchDeveloper(long unsigned nif);
+
+	/**
+	* @brief Funcao que pesquisa uma empresa na BST de empresas a partir do nome da empresa
+	* @param name Nome de uma empresa
+	*/
+	Developer searchDeveloper(string name);
 };
 
 #endif /* SRC_SYSTEM_H_ */
