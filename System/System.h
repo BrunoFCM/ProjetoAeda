@@ -17,6 +17,7 @@ class System
 {
 	vector<Game*> store;		//base de dados com o conjunto de todos os jogos
 	vector<User*> user_library; //base de dados com o conjunto de todos os utilizadores
+	BST<Developer> developers;	//arvore binaria de pesquisa com as empresas criadoras de jogos
 
 public:
 
