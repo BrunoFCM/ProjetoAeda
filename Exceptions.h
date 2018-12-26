@@ -321,4 +321,22 @@ public:
 	}
 };
 
+/**
+ * Classe que gera excecoes de empresas inexistentes
+ */
+class NonExistingDeveloper: public Exception {
+public:
+	/**
+	 * brief Construtor da classe NonExistingDeveloper
+	 */
+	NonExistingDeveloper() {}
+
+	/**
+	 * @brief Membro funcao que imprime informacao relativamente a excecao
+	 */
+	void printInf() {
+		std::cout << "This developer does not exist" << std::endl;
+	}
+};
+
 #endif /* EXCEPTIONS_H_ */
