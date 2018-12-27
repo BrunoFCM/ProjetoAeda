@@ -275,7 +275,10 @@ void System::giveInfoSystem(ofstream &info) const
 void System::addDeveloper(Developer developer)
 {
 	if (developers.isEmpty())
-		throw RepeatedDeveloper(developer.getName());
+	{
+		developers.insert(developer);
+		return;
+	}
 
 	Developer search = developers.find(developer);
 	if (search.getEMail() == "")
@@ -314,6 +317,9 @@ Developer System::searchDeveloper(string name)
 
 		throw NonExistingDeveloper();
 }
+
+
+
 
 
 
