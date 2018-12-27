@@ -1,4 +1,4 @@
-#include "Developer.h"
+#include "../Developer/Developer.h"
 
 Developer::Developer(const std::string &name, const long int &nif, const std::string &eMail) {
 	this->name = name;
@@ -37,8 +37,17 @@ bool Developer::operator< (const Developer &dev2) const {
 	return numGames < dev2.numGames;
 }
 
-//TO DO LATER
 void Developer::printDeveloper() const {
-	return;
+	cout << "Name: " << name << endl;
+	cout << "NIF: " << nif << endl;
+	cout << "Email " << eMail << endl;
+	cout << "Number of games created: " << numGames << endl;
+}
+
+void Developer::giveInfoDeveloper(ofstream &info) const {
+	info << name << "\n";
+	info << nif << "\n";
+	info << eMail << "\n";
+	info << numGames << "\n";
 }
 
