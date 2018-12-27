@@ -3,6 +3,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <queue>
 #include <map>
 #include "../Card/Card.h"
 #include "../Game/Game.h"
@@ -13,6 +14,12 @@ using namespace std;
 class PlaySession;
 class Game;
 
+typedef struct {
+	Game* item;
+	int interest;
+} Wanted_item;
+
+bool operator<(const Wanted_item &i1, const Wanted_item &i2);
 
 /**
  * Classe User que contem dados sobre cada utilizador da biblioteca de jogos
@@ -28,6 +35,8 @@ private:
 	vector<Game*> library;					//correspondente ao conjunto dos jogos do utilizador
 	vector<PlaySession*> sessions;			//correspondente ao conjunto dos historiais de cada sessao de jogo
 	map<string,vector<Date>> updates; 		//correspondente ao conjunto de conjuntos de updates de cada jogo
+	Date last_purchase;						//correspondente a ultima compra feita pelo utilizador
+	priority_queue<Wanted_item> Wishlist;	//correspondente ao conjunto de jogos nos quais o utilizador esta interessado
 
 public:
 	/**
@@ -181,6 +190,39 @@ public:
 	* @return Referencia ao card pedido
 	*/
 	Card & getCardRef(unsigned int index);
+
+	/**
+	* @brief Funcao que retorna a wishlist do utilizador
+	* @return Fila de prioridade correspondente a wishlist
+	*/
+	priority_queue<Wanted_item> getWishlist();
+
+	/**
+	* @brief Funcao que adiciona um jogo a wishlist
+	* @param game Apontador para o jogo adicionado
+	* @param interest Valor simbolico para o interesse do utilizador
+	*/
+	void addToWishlist(Game *game, int interest);
+
+	/**
+	* @brief Funcao que remove um jogo da wishlist
+	* @param game Apontador para o jogo a ser removido
+	*/
+	void removeFromWishlist(Game *game);
+
+	/**
+	* @brief Funcao que procura por um jogo na wishlist
+	* @param game Apontador para o jogo a ser encontrado
+	* @return True se for encontrado o jogo, caso contrário retorna um false
+	*/
+	Wanted_item searchWishlist(Game *game);
+
+	/**
+	* @brief Funcao que altera o nivel de interesse por um jogo na Wish list
+	* @param game Apontador para o jogo a ser encontrado
+	* @param interest Novo valor de interesse para o jogo
+	*/
+	void changeInterestLevel(Game *game, int interest);
 };
 
 #endif /* SRC_USER_H_ */

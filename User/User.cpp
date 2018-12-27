@@ -1,11 +1,22 @@
 #include <iostream>
 #include <iomanip>
+#include "../Date/Date.h"
 #include "../User/User.h"
 #include "../Exceptions.h"
 
 using namespace std;
 
-User::User(const string &name, const string &email, const unsigned int &age, const string &address)
+
+bool operator<(const Wanted_item &i1, const Wanted_item &i2){
+	if (i1.interest == i2.interest){
+		return i1.item->getTitle() < i2.item->getTitle();
+	}
+	else{
+		return i1.interest < i2.interest;
+	}
+}
+
+User::User(const string &name, const string &email, const unsigned int &age, const string &address) : last_purchase("01/01/1900")
 {
 	this->name = name;
 	this->email = email;
@@ -219,4 +230,75 @@ Card & User::getCardRef(unsigned int index){
 		throw e;
 	}
 }
+
+priority_queue<Wanted_item> User::getWishlist(){
+	return Wishlist;
+}
+
+void User::addToWishlist(Game *game, int interest){
+	try{
+		searchWishlist(game);
+	}
+	catch(NonExistingGame &e){
+		Wanted_item aux = {game,interest};
+		Wishlist.push(aux);
+		return;
+	}
+
+	throw (RepeatedGame(game->getTitle()));
+}
+
+void User::removeFromWishlist(Game *game){
+	try{
+		searchWishlist(game);
+	}
+	catch(NonExistingGame &e){
+		throw (NonExistingGame(game->getTitle()));
+	}
+
+	vector<Wanted_item> aux;
+	while (!Wishlist.empty()){
+		if (Wishlist.top().item->getTitle() != game->getTitle())
+			aux.push_back(Wishlist.top());
+		Wishlist.pop();
+	}
+	for(unsigned int i = 0; i < aux.size(); ++i){
+		Wishlist.push(aux[i]);
+	}
+}
+
+Wanted_item User::searchWishlist(Game *game){
+	Wanted_item out = {NULL,-1};
+	vector<Wanted_item> aux;
+	while (!Wishlist.empty()){
+		if (Wishlist.top().item->getTitle() == game->getTitle())
+			out = Wishlist.top();
+		aux.push_back(Wishlist.top());
+		Wishlist.pop();
+	}
+	for(unsigned int i = 0; i < aux.size(); ++i){
+		Wishlist.push(aux[i]);
+	}
+
+	if (out.item == NULL){
+		throw (NonExistingGame(game->getTitle()));
+	}
+
+	return out;
+}
+
+void User::changeInterestLevel(Game *game, int interest){
+	try{
+		searchWishlist(game);
+	}
+	catch(NonExistingGame &e){
+		throw (NonExistingGame(game->getTitle()));
+	}
+
+	removeFromWishlist(game);
+	addToWishlist(game,interest);
+}
+
+
+
 
