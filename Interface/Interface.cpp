@@ -13,6 +13,7 @@
 #include "../Sorts/Sorts.h"
 #include "../System/System.h"
 #include "../User/User.h"
+#include "../Developer/Developer.h"
 
 #include "Interface.h"
 
@@ -155,6 +156,40 @@ void system_menu_interface(){
 			user_vector_interface(v);
 			break;
 		}
+		case 9:{
+			developer_interface(add_developer_interface());
+			break;
+		}/*
+		case 10:{
+			Developer* developer;
+			std::cout << "Input the developer's name\n";
+			std::string name;
+			getline(cin,name);
+			try{
+					developer = lsystem->searchDeveloper(name);
+					developer_interface(developer);
+				}
+			catch(NonExistingDeveloper &e){
+				e.printInf();
+			}
+			break;
+		}
+		case 11:{
+			Developer* developer;
+			std::cout << "Input the developer's NIF\n";
+			std::string nif;
+			getline(cin,nif);
+			std::string::size_type sz;
+			long unsigned nifint = stoi(nif,&sz);
+			try{
+					developer = lsystem->searchDeveloper(nif);
+					developer_interface(developer);
+				}
+			catch(NonExistingDeveloper &e){
+				e.printInf();
+			}
+			break;
+		}*/
 		case 0:{
 			save_interface();
 			return;
@@ -174,14 +209,17 @@ void print_system_interface(){
 	std::cout << "\t6: Search for a user (direct)" << std::endl;
 	std::cout << "\t7: Search for a game (tag search)" << std::endl;
 	std::cout << "\t8: Search for a user (tag search)" << std::endl;
+	std::cout << "\t9: Add a new developer to the system" << std::endl;
+	std::cout << "\t10: Search for a developer (by name)" << std::endl;
+	std::cout << "\t11: Search for a developer (by NIF)" << std::endl;
 	std::cout << "\t0: Leave the system editor" << std::endl << std::endl;
 }
 
 int prompt_system_interface(){
 	int input = -1;
 	input_receiver(input);
-	while(input < 0 || input > 8){
-		std::cout << "Please insert an integer between 0 and 8" << std::endl;
+	while(input < 0 || input > 11){
+		std::cout << "Please insert an integer between 0 and 11" << std::endl;
 		input_receiver(input);
 	}
 	return input;
@@ -298,7 +336,6 @@ Game* add_game_interface(){
 		return (game);
 	}
 	return NULL;
-
 }
 	
 User* add_user_interface(){
@@ -335,7 +372,7 @@ void game_interface(Game *game){
 
 	game->printInfoGame();
 
-		while(true){
+	while(true){
 			print_game_interface(game->isHomeTitle());
 			switch(prompt_game_interface()){
 			case 1:
@@ -442,7 +479,6 @@ int prompt_game_interface(){
 	}
 	return input;
 }
-
 
 void user_interface(User *user){
 	draw_header("USER");
@@ -723,12 +759,14 @@ void card_interface(Card &card){
 		}
 	}
 }
- void print_card_interface(){
+
+void print_card_interface(){
  	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: Change card number" << std::endl;
 	std::cout << "\t2: Change card balance" << std::endl;
 	std::cout << "\t0: Exit the card interface" << std::endl << std::endl;
 }
+
  int prompt_card_interface(){
 	int input = -1;
 	input_receiver(input);
@@ -1026,7 +1064,6 @@ void sort_game_vector_interface(vector<Game *> &vec){
  	}
 }
 
-
 void sort_user_vector_interface(vector<User *> &vec){
  	draw_header("SORT");
  	while(true){
@@ -1068,8 +1105,6 @@ void sort_user_vector_interface(vector<User *> &vec){
 		}
  	}
 }
-
-
 
 void load_interface(){
  	draw_header("IMPORT");
@@ -1325,7 +1360,6 @@ vector<User*> restrict_user_interface(){
 	}
  }
 
-
 void print_restrict_user_interface(){
  	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: Search by an age interval" << std::endl;
@@ -1556,9 +1590,6 @@ vector<User*> restrict_user_interface(vector<User*> vec){
 	}
  }
 
-
-
-
 void print_vector_interface(){
 
 	std::cout << "\nWould you like to: " << std::endl << std::endl;
@@ -1646,6 +1677,62 @@ void user_vector_interface(vector<User*> &vec){
 			user_interface(vec[input - 1]);
 			break;
 		}
+		case 0:
+			return;
+		}
+	}
+}
+
+Developer add_developer_interface()
+{
+	std::cout << "Adding a developer to the system library\nPlease input the following parameters:\n";
+
+	std::cout << endl << "Name of the developer\nInput: ";
+	string name;
+	getline(cin,name);
+
+	std::cout << endl << "NIF\n";
+	long unsigned nif;
+	input_receiver(nif);
+
+	std::cout << endl << "Email\nInput: ";
+	string eMail;
+	getline(cin,eMail);
+
+	Developer developer(name, nif, eMail);
+	lsystem->addDeveloper(developer);
+	return developer;
+
+}
+
+void print_developer_interface()
+{
+	std::cout << "\nWould you like to: " << std::endl << std::endl;
+	std::cout << "\t1: See developer info" << std::endl;
+	std::cout << "\t0: Leave the game editor" << std::endl << std::endl;
+}
+
+int prompt_developer_interface(){
+	int input = -1;
+	input_receiver(input);
+	while(input < 0 || input > 1){
+		std::cout << "Please insert an integer between 0 and 1" << std::endl;
+		input_receiver(input);
+	}
+	return input;
+}
+
+void developer_interface(Developer developer) {
+	draw_header("DEVELOPER");
+
+	developer.printDeveloper();
+
+	while(true){
+		print_developer_interface();
+		switch(prompt_developer_interface()){
+		case 1:
+			developer.printDeveloper();
+			break;
 		case 0:
 			return;
 		}
