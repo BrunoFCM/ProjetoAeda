@@ -260,3 +260,26 @@ void user_vector_interface(vector<User*> &vec);
  * @brief Funcao que importa um sistema de um ficheiro de texto
  */
 void load_interface();
+
+/**
+ * @brief Funcao que possibilita a adicao de uma empresa a um sistema por parte do utilizador
+ * @return Retorna a empresa adicionada ao sistema
+ */
+Developer add_developer_interface();
+
+/**
+ * @brief Funcao que imprime no ecra o menu de uma empresa
+ */
+void print_developer_interface();
+
+/**
+ * @brief Funcao que analisa o input do utilizador e o retorna se for valido, ou mostra uma mensagem de erro enquanto for invalido
+ * @return Retorna o input dado pelo utilizador
+ */
+int prompt_developer_interface();
+
+/**
+ * @brief Funcao que gere o menu de uma empresa
+ * @param developer Empresa sobre a qual o utilizador vai operar
+ */
+void developer_interface(Developer developer);
