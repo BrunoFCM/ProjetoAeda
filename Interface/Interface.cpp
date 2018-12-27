@@ -159,9 +159,9 @@ void system_menu_interface(){
 		case 9:{
 			developer_interface(add_developer_interface());
 			break;
-		}/*
+		}
 		case 10:{
-			Developer* developer;
+			Developer developer;
 			std::cout << "Input the developer's name\n";
 			std::string name;
 			getline(cin,name);
@@ -175,7 +175,7 @@ void system_menu_interface(){
 			break;
 		}
 		case 11:{
-			Developer* developer;
+			Developer developer;
 			std::cout << "Input the developer's NIF\n";
 			std::string nif;
 			getline(cin,nif);
@@ -189,7 +189,7 @@ void system_menu_interface(){
 				e.printInf();
 			}
 			break;
-		}*/
+		}
 		case 0:{
 			save_interface();
 			return;
@@ -308,9 +308,16 @@ Game* add_game_interface(){
 		}
 	}
 
-	std::cout << endl << "Developer\nInput: ";
-	string developer;
-	getline(cin,developer);
+	std::cout << endl << "Developer name\nInput: ";
+	string name;
+	getline(cin,name);
+	Developer developer;
+	try {
+		developer = lsystem->searchDeveloper(name);
+	}
+	catch (NonExistingDeveloper &e) {
+		e.printInf();
+	}
 
 	if(type == "Home"){
 		Home *game = new Home(title, price, release, range, platforms, genres, developer);
@@ -366,6 +373,7 @@ User* add_user_interface(){
 	return (user);
 
 }
+
 
 void game_interface(Game *game){
 	draw_header("GAME");
@@ -458,6 +466,7 @@ void game_interface(Game *game){
 		}
 }
 
+
 void print_game_interface(const bool &home){
 	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: See game info" << std::endl;
@@ -470,6 +479,7 @@ void print_game_interface(const bool &home){
 	std::cout << "\t0: Leave the game editor" << std::endl << std::endl;
 }
 
+
 int prompt_game_interface(){
 	int input = -1;
 	input_receiver(input);
@@ -479,6 +489,7 @@ int prompt_game_interface(){
 	}
 	return input;
 }
+
 
 void user_interface(User *user){
 	draw_header("USER");
@@ -705,6 +716,7 @@ void user_interface(User *user){
 	}
 }
 
+
 void print_user_interface(){
 	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: See the user characteristics" << std::endl;
@@ -718,6 +730,7 @@ void print_user_interface(){
 	std::cout << "\t0: Leave the user editor" << std::endl << std::endl;
 }
 
+
 int prompt_user_interface(){
 	int input = -1;
 	input_receiver(input);
@@ -727,6 +740,7 @@ int prompt_user_interface(){
 	}
 	return input;
 }
+
 
 void card_interface(Card &card){
  	draw_header("CARD");
@@ -760,12 +774,14 @@ void card_interface(Card &card){
 	}
 }
 
+
 void print_card_interface(){
  	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: Change card number" << std::endl;
 	std::cout << "\t2: Change card balance" << std::endl;
 	std::cout << "\t0: Exit the card interface" << std::endl << std::endl;
 }
+
 
  int prompt_card_interface(){
 	int input = -1;
@@ -776,6 +792,7 @@ void print_card_interface(){
 	}
 	return input;
 }
+
 
 void save_interface(){
  	draw_header("EXPORT");
@@ -798,6 +815,7 @@ void save_interface(){
 	delete lsystem;
 
 }
+
 
 void sort_game_interface(){
  	draw_header("SORT");
@@ -891,6 +909,7 @@ void sort_game_interface(){
  	}
 }
 
+
 void print_sort_game_interface(){
  	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: Sort by ID (default)" << std::endl;
@@ -903,6 +922,7 @@ void print_sort_game_interface(){
 	std::cout << "\t0: Exit the sort interface" << std::endl << std::endl;
 }
 
+
 int prompt_sort_game_interface(){
 	int input = -1;
 	input_receiver(input);
@@ -912,6 +932,7 @@ int prompt_sort_game_interface(){
 	}
 	return input;
 }
+
 
 void sort_user_interface(){
  	draw_header("SORT");
@@ -955,12 +976,14 @@ void sort_user_interface(){
  	}
 }
 
+
 void print_sort_user_interface(){
  	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: Sort by name" << std::endl;
 	std::cout << "\t2: Sort by age" << std::endl;
 	std::cout << "\t0: Exit the sort interface" << std::endl << std::endl;
 }
+
 
 int prompt_sort_user_interface(){
 	int input = -1;
@@ -971,6 +994,7 @@ int prompt_sort_user_interface(){
 	}
 	return input;
 }
+
 
 void sort_game_vector_interface(vector<Game *> &vec){
  	draw_header("SORT");
@@ -1064,6 +1088,7 @@ void sort_game_vector_interface(vector<Game *> &vec){
  	}
 }
 
+
 void sort_user_vector_interface(vector<User *> &vec){
  	draw_header("SORT");
  	while(true){
@@ -1106,6 +1131,7 @@ void sort_user_vector_interface(vector<User *> &vec){
  	}
 }
 
+
 void load_interface(){
  	draw_header("IMPORT");
  	std::cout << "To load the system from a file, input the file name:" << std::endl;
@@ -1122,6 +1148,7 @@ void load_interface(){
 	}
 
 }
+
 
 vector<Game*> restrict_game_interface(){
  	draw_header("TAG SEARCH");
@@ -1258,6 +1285,7 @@ vector<Game*> restrict_game_interface(){
  	}
 }
 
+
 void print_restrict_game_interface(){
  	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: Search by an ID interval" << std::endl;
@@ -1269,6 +1297,7 @@ void print_restrict_game_interface(){
 	std::cout << "\t7: Search by developer" << std::endl;
 }
 
+
 int prompt_restrict_game_interface(){
 	int input = -1;
 	input_receiver(input);
@@ -1278,6 +1307,7 @@ int prompt_restrict_game_interface(){
 	}
 	return input;
 }
+
 
 vector<User*> restrict_user_interface(){
  	draw_header("TAG SEARCH");
@@ -1360,11 +1390,13 @@ vector<User*> restrict_user_interface(){
 	}
  }
 
+
 void print_restrict_user_interface(){
  	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: Search by an age interval" << std::endl;
 	std::cout << "\t2: Search by library size" << std::endl;
 }
+
 
 int prompt_restrict_user_interface(){
 	int input = -1;
@@ -1375,6 +1407,7 @@ int prompt_restrict_user_interface(){
 	}
 	return input;
 }
+
 
 vector<Game*> restrict_game_interface(vector<Game*> vec){
  	draw_header("TAG SEARCH");
@@ -1509,6 +1542,7 @@ vector<Game*> restrict_game_interface(vector<Game*> vec){
  	}
 }
 
+
 vector<User*> restrict_user_interface(vector<User*> vec){
  	draw_header("TAG SEARCH");
  	while(true){
@@ -1590,6 +1624,7 @@ vector<User*> restrict_user_interface(vector<User*> vec){
 	}
  }
 
+
 void print_vector_interface(){
 
 	std::cout << "\nWould you like to: " << std::endl << std::endl;
@@ -1598,6 +1633,7 @@ void print_vector_interface(){
 	std::cout << "\t3: Access a result" << std::endl;
 	std::cout << "\t0: Exit the result interface" << std::endl << std::endl;
 }
+
 
 int prompt_vector_interface(){
 	int input = 0;
@@ -1608,6 +1644,7 @@ int prompt_vector_interface(){
 	}
 	return input;
 }
+
 
 void game_vector_interface(vector<Game*> &vec){
 
@@ -1646,6 +1683,7 @@ void game_vector_interface(vector<Game*> &vec){
 	}
 }
 
+
 void user_vector_interface(vector<User*> &vec){
 
 	while(true){
@@ -1683,6 +1721,7 @@ void user_vector_interface(vector<User*> &vec){
 	}
 }
 
+
 Developer add_developer_interface()
 {
 	std::cout << "Adding a developer to the system library\nPlease input the following parameters:\n";
@@ -1705,12 +1744,14 @@ Developer add_developer_interface()
 
 }
 
+
 void print_developer_interface()
 {
 	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: See developer info" << std::endl;
 	std::cout << "\t0: Leave the game editor" << std::endl << std::endl;
 }
+
 
 int prompt_developer_interface(){
 	int input = -1;
@@ -1721,6 +1762,7 @@ int prompt_developer_interface(){
 	}
 	return input;
 }
+
 
 void developer_interface(Developer developer) {
 	draw_header("DEVELOPER");
