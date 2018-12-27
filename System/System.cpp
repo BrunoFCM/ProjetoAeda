@@ -270,6 +270,15 @@ void System::giveInfoSystem(ofstream &info) const
 		}
 	}
 	info << "@" << "\n";
+
+	BSTItrIn<Developer> it (developers);
+	while (!it.isAtEnd())
+	{
+		it.retrieve().giveInfoDeveloper(info);
+		info << ",\n";
+		it.advance();
+	}
+	info << "@" << "\n";
 }
 
 void System::addDeveloper(Developer developer)
@@ -317,12 +326,3 @@ Developer System::searchDeveloper(string name)
 
 		throw NonExistingDeveloper();
 }
-
-
-
-
-
-
-
-
-
