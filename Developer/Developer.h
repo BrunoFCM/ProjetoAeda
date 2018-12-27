@@ -1,6 +1,10 @@
 #ifndef DEVELOPER_H_
 #define DEVELOPER_H_
 #include <string>
+#include <fstream>
+#include <iostream>
+
+using namespace std;
 
 /**
  * Classe Developer que contem informacao sobre as empresas criadores de jogos de videos
@@ -58,6 +62,12 @@ public:
 	 * @brief Imprime informacao relativamente a empresa
 	 */
 	void printDeveloper() const;
+
+	/**
+	* @brief Funcao que passa para uma ofstream a informacao de uma empresa
+	* @param info Ofstream para onde e passada a informacao de uma empresa
+	*/
+	void giveInfoDeveloper(ofstream &info) const;
 };
 
 
