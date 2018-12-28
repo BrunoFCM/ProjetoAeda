@@ -69,5 +69,5 @@ bool gameDeveloperAscend(Game* user1,Game* user2){
 }
 
 bool gameDeveloperDescend(Game* user1,Game* user2){
-	return user1->getDeveloper() > user2->getDeveloper();
+	return user1->getDeveloper().getNumGames() > user2->getDeveloper().getNumGames();
 }
