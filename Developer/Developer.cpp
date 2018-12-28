@@ -41,10 +41,14 @@ bool Developer::operator< (const Developer &dev2) const {
 	return numGames < dev2.numGames;
 }
 
+bool Developer::operator== (const Developer &dev2) const {
+	return (name == dev2.getName() || nif == dev2.getNif() || eMail == dev2.getEMail());
+}
+
 void Developer::printDeveloper() const {
 	cout << "Name: " << name << endl;
 	cout << "NIF: " << nif << endl;
-	cout << "Email " << eMail << endl;
+	cout << "Email: " << eMail << endl;
 	cout << "Number of games created: " << numGames << endl;
 }
 
