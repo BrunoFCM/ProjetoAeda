@@ -9,7 +9,6 @@
 #include "../Interval/Interval.h"
 #include "../User/User.h"
 #include "../PlaySession/PlaySession.h"
-#include "../Developer/Developer.h"
 
 using namespace std;
 
@@ -32,7 +31,7 @@ protected:
 	Interval age_range;						//intervalo de idades
 	vector<string> platform;				//plataformas disponiveis
 	vector<string> genre;					//genero
-	Developer developer;					//empresa que o desenvolveu
+	string developer;					//empresa que o desenvolveu
 	vector<double> price_history;			//historial de precos de aquisicao
 	unsigned int player_base; 				//numero de jogadores
 public:
@@ -47,7 +46,7 @@ public:
 	 * @param genres Vetor de generos dos jogos
 	 * @param developer Empresa responsavel pela criacao do jogo
 	 */
-	Game(const string &title,const double &price,const Date &release,const Interval &age_range,const vector<string> &platforms,const vector<string> &genres,const Developer &developer);
+	Game(const string &title,const double &price,const Date &release,const Interval &age_range,const vector<string> &platforms,const vector<string> &genres,const string &developer);
 
 	/**
 	 * @brief Destrutor da classe Game
@@ -106,7 +105,7 @@ public:
 	* @brief Membro-funcao que retorna uma string correspondente ao nome da empresa que desenvolveu o jogo
 	* @return Retorna o nome da empresa
 	*/
-	Developer getDeveloper() const;
+	string getDeveloper() const;
 
 	/**
 	* @brief Membro-funcao que retorna o historial de precos de aquisicao do jogo
@@ -218,7 +217,7 @@ public:
 	 * @param genres Vetor de generos dos jogos
 	 * @param developer Empresa responsavel pela criacao do jogo
 	 */
-	Online(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const Developer &developer);
+	Online(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer);
 
 	/**
 	 * @brief Destrutor da classe Online
@@ -282,7 +281,7 @@ public:
 	 * @param developer Empresa responsavel pela criacao do jogo
 	 * @param fixed_price Preco de subscricao fixa
 	 */
-	FixedSubsc(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const Developer &developer, const double &fixed_price);
+	FixedSubsc(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer, const double &fixed_price);
 
 	/**
 	 * @brief Devolve o preco da subscricao fixa
@@ -324,7 +323,7 @@ public:
 	 * @param developer Empresa responsavel pela criacao do jogo
 	 * @param price_hour Preco pago por cada hora jogada
 	 */
-	VariableSubsc(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const Developer &developer, const double &price_hour);
+	VariableSubsc(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer, const double &price_hour);
 
 	/**
 	 * @brief Devolve o preco pago atual, dependente do preco por hora e pelo tempo jogado
@@ -366,7 +365,7 @@ public:
 	 * @param genres Vetor de generos dos jogos
 	 * @param developer Empresa responsavel pela criacao do jogo
 	 */
-	Home(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const Developer &developer);
+	Home(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer);
 
 	/**
 	 * @brief Devolve um vetor com todos os updates feitos ao jogo
