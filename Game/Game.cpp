@@ -11,7 +11,7 @@ class Date;
 
 static unsigned int id_seq = 1;
 
-Game::Game(const string &title,const double &price,const Date &release,const Interval &age_range,const vector<string> &platforms,const vector<string> &genres,const string &developer) :
+Game::Game(const string &title,const double &price,const Date &release,const Interval &age_range,const vector<string> &platforms,const vector<string> &genres,const Developer &developer) :
 		release(release), age_range(age_range)
 {
 	id = id_seq;
@@ -66,7 +66,7 @@ vector<string> Game::getGenre() const
 	return genre;
 }
 
-string Game::getDeveloper() const
+Developer Game::getDeveloper() const
 {
 	return developer;
 }
@@ -86,7 +86,6 @@ vector<Date> Game::getUpdates() const
 	vector<Date> dates;
 	return dates;
 }
-
 
 bool Game::operator==(Game &game)
 {
@@ -151,16 +150,15 @@ void Game::giveInfoGame(ostream &info) const
 		else
 			info << price_history[i] << ".\n";
 
-	info << developer << "\n";
+	info << developer.getName() << "\n" << developer.getNif() << "\n" << developer.getEMail() << "\n";
 }
 
 
 
 
 
-Home::Home(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer):
+Home::Home(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const Developer &developer):
 	Game(title,price,release,age_range,platforms,genres,developer){}
-
 
 vector<Date> Home::getUpdates() const
 {
@@ -191,7 +189,12 @@ void Home::printInfoGame() const {
 	cout << "Base Price: " << getBasePrice() << endl;
 	cout << "Release Date: " << getRelease().toStr() << endl;
 	cout << "Recommended age: " << getAge().toStr() << endl;
-	cout << "Developer: " << getDeveloper() << endl;
+
+	cout << "Developer: " << endl;
+	cout << "Name: " << getDeveloper().getName() << endl;
+	cout << "NIF: " << getDeveloper().getNif() << endl;
+	cout << "Contact: " << getDeveloper().getEMail() << endl << endl;
+
 	cout << "Number of players: " << player_base << endl;
 }
 
@@ -210,7 +213,7 @@ void Home::giveInfoGame(ofstream &info) const
 
 
 
-Online::Online(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer):
+Online::Online(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const Developer &developer):
 		Game(title,price,release,age_range,platforms,genres,developer){
 	play_time = 0;
 };
@@ -240,7 +243,7 @@ bool Home::isHomeTitle() const {return true;}
 
 
 
-FixedSubsc::FixedSubsc(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer, const double &fixed_price) :
+FixedSubsc::FixedSubsc(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const Developer &developer, const double &fixed_price) :
 	Online(title,price,release,age_range,platforms,genres,developer){
 	this->fixed_price = fixed_price;
 }
@@ -272,8 +275,13 @@ void FixedSubsc::printInfoGame() const {
 	cout << "Genres: " << genres << endl;
 	cout << "Fixed subscription price: " << getPrice() << endl;
 	cout << "Release Date: " << getRelease().toStr() << endl;
-	cout << "Recommended age: " << getAge().toStr() << endl;
-	cout << "Developer: " << getDeveloper() << endl;
+	cout << "Recommended age: " << getAge().toStr() << endl << endl;
+
+	cout << "Developer: " << endl;
+	cout << "Name: " << getDeveloper().getName() << endl;
+	cout << "NIF: " << getDeveloper().getNif() << endl;
+	cout << "Contact: " << getDeveloper().getEMail() << endl << endl;
+
 	cout << "Number of players: " << player_base << endl;
 	cout << "Total play time: " << getPlayTime() << endl;
 
@@ -290,7 +298,7 @@ void FixedSubsc::giveInfoGame(ofstream &info) const
 
 
 
-VariableSubsc::VariableSubsc(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const string &developer, const double &price_hour) :
+VariableSubsc::VariableSubsc(const string &title, const double &price, const Date &release, const Interval &age_range, const vector<string> &platforms, const vector<string> &genres, const Developer &developer, const double &price_hour) :
 	Online(title,price,release,age_range,platforms,genres,developer){
 	this->price_hour = price_hour;
 }
@@ -321,7 +329,12 @@ void VariableSubsc::printInfoGame() const {
 	cout << "Price per hour: " << getPriceHour() << endl;
 	cout << "Release Date: " << getRelease().toStr() << endl;
 	cout << "Recommended age: " << getAge().toStr() << endl;
-	cout << "Developer: " << getDeveloper() << endl;
+
+	cout << "Developer: " << endl;
+	cout << "Name: " << getDeveloper().getName() << endl;
+	cout << "NIF: " << getDeveloper().getNif() << endl;
+	cout << "Contact: " << getDeveloper().getEMail() << endl << endl;
+
 	cout << "Number of players: " << player_base << endl;
 	cout << "Total play time: " << getPlayTime() << endl;
 }
