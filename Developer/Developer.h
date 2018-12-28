@@ -3,6 +3,8 @@
 #include <string>
 #include <fstream>
 #include <iostream>
+#include <vector>
+#include "../Game/Game.h"
 
 using namespace std;
 
@@ -13,7 +15,8 @@ class Developer{
 	std::string name;	//corresponde ao nome da empresa
 	long unsigned nif;	//corresponde ao NIF da empresa
 	std::string eMail;	//corresponde ao contacto da empresa (nesta caso, eMail)
-	unsigned numGames; //corresponde ao numero de jogos criados por cada empresa
+	vector<Game*> games;//corresponde aos  jogos criados pela empresa
+	unsigned numGames;  //corresponde ao numero de jogos criados pela empresa
 
 public:
 	/**
@@ -48,6 +51,18 @@ public:
 	std::string getEMail() const;
 
 	/**
+	* @brief Funcao que retorna o vetor de jogos da empresa
+	* @return Vetor de jogos da empresa
+	*/
+	vector<Game*> getGames() const;
+
+	/**
+	* @brief Funcao que associa um jogo a empresa
+	* @param game Jogo associado a empresa
+	*/
+	void addGame(Game* game);
+
+	/**
 	* @brief Funcao que retorna o numero de jogos criados pela empresa
 	* @return numGames Numero de jogos criados pela empresa
 	*/
@@ -79,7 +94,12 @@ public:
 	* @brief Funcao que passa para uma ofstream a informacao de uma empresa
 	* @param info Ofstream para onde e passada a informacao de uma empresa
 	*/
-	void giveInfoDeveloper(ofstream &info) const;
+	void giveInfoDeveloper(ostream &info) const;
+
+	/**
+	* @brief Imprime jogos criados por uma empresa
+	*/
+	void printDevGames() const;
 };
 
 
