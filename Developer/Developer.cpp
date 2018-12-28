@@ -26,6 +26,14 @@ std::string Developer::getEMail() const {
 	return eMail;
 }
 
+vector<Game*> Developer::getGames() const {
+	return games;
+}
+
+void Developer::addGame(Game* game) {
+	games.push_back(game);
+}
+
 unsigned Developer::getNumGames() const {
 	return numGames;
 }
@@ -52,9 +60,27 @@ void Developer::printDeveloper() const {
 	cout << "Number of games created: " << numGames << endl;
 }
 
-void Developer::giveInfoDeveloper(ofstream &info) const {
+void Developer::giveInfoDeveloper(ostream &info) const {
 	info << name << "\n";
 	info << nif << "\n";
 	info << eMail << "\n";
 	info << numGames << "\n";
+
+	for (unsigned int i = 0; i < games.size(); i++)
+		if(i != games.size() - 1)
+		{
+			games[i]->giveInfoGame(info);
+			info << ",\n";
+		}
+		else {
+			games[i]->giveInfoGame(info);
+			info << ".\n";
+		}
+}
+
+void Developer::printDevGames() const {
+	for (unsigned int i = 0; i < games.size(); i++)
+	{
+		games[i]->printInfoGame();
+	}
 }
