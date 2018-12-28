@@ -188,12 +188,13 @@ void Home::printInfoGame() const {
 	cout << "Current Price: " << getPrice() << endl;
 	cout << "Base Price: " << getBasePrice() << endl;
 	cout << "Release Date: " << getRelease().toStr() << endl;
-	cout << "Recommended age: " << getAge().toStr() << endl;
+	cout << "Recommended age: " << getAge().toStr() << endl << endl;
 
 	cout << "Developer: " << endl;
 	cout << "Name: " << getDeveloper().getName() << endl;
 	cout << "NIF: " << getDeveloper().getNif() << endl;
-	cout << "Contact: " << getDeveloper().getEMail() << endl << endl;
+	cout << "Contact: " << getDeveloper().getEMail() << endl;
+	cout << "Number of games created: " << getDeveloper().getNumGames() << endl << endl;
 
 	cout << "Number of players: " << player_base << endl;
 }
@@ -280,7 +281,8 @@ void FixedSubsc::printInfoGame() const {
 	cout << "Developer: " << endl;
 	cout << "Name: " << getDeveloper().getName() << endl;
 	cout << "NIF: " << getDeveloper().getNif() << endl;
-	cout << "Contact: " << getDeveloper().getEMail() << endl << endl;
+	cout << "Contact: " << getDeveloper().getEMail() << endl;
+	cout << "Number of games created: " << getDeveloper().getNumGames() << endl << endl;
 
 	cout << "Number of players: " << player_base << endl;
 	cout << "Total play time: " << getPlayTime() << endl;
@@ -328,12 +330,13 @@ void VariableSubsc::printInfoGame() const {
 	cout << "Genres: " << genres << endl;
 	cout << "Price per hour: " << getPriceHour() << endl;
 	cout << "Release Date: " << getRelease().toStr() << endl;
-	cout << "Recommended age: " << getAge().toStr() << endl;
+	cout << "Recommended age: " << getAge().toStr() << endl << endl;
 
 	cout << "Developer: " << endl;
 	cout << "Name: " << getDeveloper().getName() << endl;
 	cout << "NIF: " << getDeveloper().getNif() << endl;
-	cout << "Contact: " << getDeveloper().getEMail() << endl << endl;
+	cout << "Contact: " << getDeveloper().getEMail() << endl;
+	cout << "Number of games created: " << getDeveloper().getNumGames() << endl << endl;
 
 	cout << "Number of players: " << player_base << endl;
 	cout << "Total play time: " << getPlayTime() << endl;
