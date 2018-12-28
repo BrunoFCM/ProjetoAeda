@@ -313,17 +313,21 @@ Game* add_game_interface(){
 		}
 	}
 
-	std::cout << endl << "Developer name\nInput: ";
-	string name;
-	getline(cin,name);
 	Developer* developer;
-	try {
-		developer = lsystem->searchDeveloper(name);
-		developer->incrementNumGames();
-	}
-	catch (NonExistingDeveloper &e) {
-		e.printInf();
-		return NULL;
+	string name;
+	while (true)
+	{
+		std::cout << endl << "Developer name\nInput: ";
+		getline(cin,name);
+		try {
+			developer = lsystem->searchDeveloper(name);
+			developer->incrementNumGames();
+		}
+		catch (NonExistingDeveloper &e) {
+			e.printInf();
+			continue;
+		}
+		break;
 	}
 
 	if(type == "Home"){
