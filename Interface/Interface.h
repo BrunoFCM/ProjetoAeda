@@ -265,7 +265,7 @@ void load_interface();
  * @brief Funcao que possibilita a adicao de uma empresa a um sistema por parte do utilizador
  * @return Retorna a empresa adicionada ao sistema
  */
-Developer add_developer_interface();
+Developer* add_developer_interface();
 
 /**
  * @brief Funcao que imprime no ecra o menu de uma empresa
@@ -282,4 +282,4 @@ int prompt_developer_interface();
  * @brief Funcao que gere o menu de uma empresa
  * @param developer Empresa sobre a qual o utilizador vai operar
  */
-void developer_interface(Developer developer);
+void developer_interface(Developer* developer);
