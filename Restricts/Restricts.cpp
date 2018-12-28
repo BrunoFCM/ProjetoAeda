@@ -30,7 +30,7 @@ bool gameGenre(Game* g1, const std::string &genre){
 }
 
 bool gameDeveloper(Game* g1, const std::string &developer){
-	return (g1->getDeveloper() == developer);
+	return (g1->getDeveloper().getName() == developer);
 }
 
 
@@ -43,6 +43,3 @@ bool userAgeInterval(User* u1, const Interval &inter){
 bool userLibrarySize(User* u1, const Interval &inter){
 	return (inter.contains(u1->getLibrary().size()));
 }
-
-
-
