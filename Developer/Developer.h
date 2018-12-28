@@ -65,6 +65,12 @@ public:
 	bool operator< (const Developer &dev2) const;
 
 	/**
+	* @brief Overload do operador == para duas empresas
+	* @return True se um dos dados membro das empresas for igual ao da segunda empresa (exceto numGames)
+	*/
+	bool operator== (const Developer &dev2) const;
+
+	/**
 	 * @brief Imprime informacao relativamente a empresa
 	 */
 	void printDeveloper() const;
