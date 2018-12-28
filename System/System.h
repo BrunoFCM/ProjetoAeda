@@ -119,6 +119,12 @@ public:
 	void giveInfoSystem(ofstream &info) const;
 
 	/**
+	* @brief Funcao que retorna o conjunto de empresas criadoras de jogos de um sistema
+	* @return developers Conjunto de empresas criadoras de jogos de um sistema
+	*/
+	BST<Developer> getDevelopers() const;
+
+	/**
 	* @brief Funcao adiciona uma empresa a BST de empresas
 	* @param developer Empresa a adicionar
 	*/
