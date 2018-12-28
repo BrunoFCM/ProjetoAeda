@@ -57,15 +57,8 @@ System::System(ifstream &file) : developers(new Developer("",0,"")) {
 			prices.push_back(price);
 		}
 
-		std::string name;
-		std::string nif;
-		std::string email;
-		std::string::size_type sz;
-		getline(file,name);
-		getline(file, nif);
-		getline(file,email);
-		long unsigned nifint = stoi(nif, &sz);
-		Developer developer(name, nifint, email);
+		std::string developer;
+		getline(file, developer);
 
 		Game* game;
 
