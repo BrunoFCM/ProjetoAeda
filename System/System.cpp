@@ -57,8 +57,15 @@ System::System(ifstream &file) : developers(Developer("",0,"")) {
 			prices.push_back(price);
 		}
 
-		std::string developer;
-		getline(file,developer);
+		std::string name;
+		std::string nif;
+		std::string email;
+		std::string::size_type sz;
+		getline(file,name);
+		getline(file, nif);
+		getline(file,email);
+		long unsigned nifint = stoi(nif, &sz);
+		Developer developer(name, nifint, email);
 
 		Game* game;
 
@@ -270,6 +277,15 @@ void System::giveInfoSystem(ofstream &info) const
 		}
 	}
 	info << "@" << "\n";
+
+	BSTItrIn<Developer> it (developers);
+	while (!it.isAtEnd())
+	{
+		it.retrieve().giveInfoDeveloper(info);
+		info << ",\n";
+		it.advance();
+	}
+	info << "@" << "\n";
 }
 
 void System::addDeveloper(Developer developer)
@@ -317,12 +333,3 @@ Developer System::searchDeveloper(string name)
 
 		throw NonExistingDeveloper();
 }
-
-
-
-
-
-
-
-
-
