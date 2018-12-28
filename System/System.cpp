@@ -301,10 +301,14 @@ void System::addDeveloper(Developer* developer)
 		return;
 	}
 
-	Developer* search = developers.find(developer);
-	if (search->getEMail() == "")
-		developers.insert(developer);
-	else throw RepeatedDeveloper(developer->getName());
+	BSTItrIn<Developer*> it (developers);
+	while (!it.isAtEnd())
+	{
+		if (*it.retrieve() == *developer)
+			throw RepeatedDeveloper(developer->getName());
+		it.advance();
+	}
+	developers.insert(developer);
 }
 
 Developer* System::searchDeveloper(long unsigned nif)
@@ -338,9 +342,3 @@ Developer* System::searchDeveloper(string name)
 
 	throw NonExistingDeveloper();
 }
-
-
-
-
-
-
