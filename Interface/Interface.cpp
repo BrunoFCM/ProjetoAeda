@@ -1275,7 +1275,7 @@ vector<Game*> restrict_game_interface(){
 			}
 			case 7:{
 				std::string developer;
-				std::cout << endl << "Developer\nInput: ";
+				std::cout << endl << "Developer\nName: ";
 				getline(cin,developer);
 
 				return lsystem->restrictGames(gameDeveloper,developer);
@@ -1532,7 +1532,7 @@ vector<Game*> restrict_game_interface(vector<Game*> vec){
 			}
 			case 7:{
 				std::string developer;
-				std::cout << endl << "Developer\nInput: ";
+				std::cout << endl << "Developer\nName: ";
 				getline(cin,developer);
 
 				return restrictedVector(vec,gameDeveloper,developer);
@@ -1780,7 +1780,3 @@ void developer_interface(Developer developer) {
 		}
 	}
 }
-
-
-
-
