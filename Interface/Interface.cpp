@@ -161,7 +161,7 @@ void system_menu_interface(){
 			break;
 		}
 		case 10:{
-			Developer developer;
+			Developer* developer;
 			std::cout << "Input the developer's name\n";
 			std::string name;
 			getline(cin,name);
@@ -175,7 +175,7 @@ void system_menu_interface(){
 			break;
 		}
 		case 11:{
-			Developer developer;
+			Developer* developer;
 			std::cout << "Input the developer's NIF\n";
 			std::string nif;
 			getline(cin,nif);
@@ -316,9 +316,10 @@ Game* add_game_interface(){
 	std::cout << endl << "Developer name\nInput: ";
 	string name;
 	getline(cin,name);
-	Developer developer;
+	Developer* developer;
 	try {
 		developer = lsystem->searchDeveloper(name);
+		developer->incrementNumGames();
 	}
 	catch (NonExistingDeveloper &e) {
 		e.printInf();
@@ -326,7 +327,7 @@ Game* add_game_interface(){
 	}
 
 	if(type == "Home"){
-		Home *game = new Home(title, price, release, range, platforms, genres, developer);
+		Home *game = new Home(title, price, release, range, platforms, genres, *developer);
 		lsystem->addGame(game);
 		return (game);
 	}
@@ -335,7 +336,7 @@ Game* add_game_interface(){
 		double sub;
 		input_receiver(sub);
 		sub = (double)((int)(sub*100))/100;
-		VariableSubsc * game = new VariableSubsc(title, price, release, range, platforms, genres, developer,sub);
+		VariableSubsc * game = new VariableSubsc(title, price, release, range, platforms, genres, *developer,sub);
 		lsystem->addGame(game);
 		return (game);
 	}
@@ -344,7 +345,7 @@ Game* add_game_interface(){
 		double sub;
 		input_receiver(sub);
 		sub = (double)((int)(sub*100))/100;
-		FixedSubsc * game = new FixedSubsc(title, price, release, range, platforms, genres, developer,sub);
+		FixedSubsc * game = new FixedSubsc(title, price, release, range, platforms, genres, *developer,sub);
 		lsystem->addGame(game);
 		return (game);
 	}
@@ -1704,7 +1705,7 @@ void user_vector_interface(vector<User*> &vec){
 	}
 }
 
-Developer add_developer_interface()
+Developer* add_developer_interface()
 {
 	std::cout << "Adding a developer to the system library\nPlease input the following parameters:\n";
 
@@ -1720,7 +1721,7 @@ Developer add_developer_interface()
 	string eMail;
 	getline(cin,eMail);
 
-	Developer developer(name, nif, eMail);
+	Developer* developer = new Developer(name, nif, eMail);
 	lsystem->addDeveloper(developer);
 	return developer;
 
@@ -1743,16 +1744,16 @@ int prompt_developer_interface(){
 	return input;
 }
 
-void developer_interface(Developer developer) {
+void developer_interface(Developer* developer) {
 	draw_header("DEVELOPER ");
 
-	developer.printDeveloper();
+	developer->printDeveloper();
 
 	while(true){
 		print_developer_interface();
 		switch(prompt_developer_interface()){
 		case 1:
-			developer.printDeveloper();
+			developer->printDeveloper();
 			break;
 		case 0:
 			return;
