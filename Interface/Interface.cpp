@@ -331,8 +331,9 @@ Game* add_game_interface(){
 	}
 
 	if(type == "Home"){
-		Home *game = new Home(title, price, release, range, platforms, genres, *developer);
+		Home *game = new Home(title, price, release, range, platforms, genres, name);
 		lsystem->addGame(game);
+		developer->addGame(game);
 		return (game);
 	}
 	else if(type == "Variable Subscription"){
@@ -340,8 +341,9 @@ Game* add_game_interface(){
 		double sub;
 		input_receiver(sub);
 		sub = (double)((int)(sub*100))/100;
-		VariableSubsc * game = new VariableSubsc(title, price, release, range, platforms, genres, *developer,sub);
+		VariableSubsc * game = new VariableSubsc(title, price, release, range, platforms, genres, name,sub);
 		lsystem->addGame(game);
+		developer->addGame(game);
 		return (game);
 	}
 	else{
@@ -349,8 +351,9 @@ Game* add_game_interface(){
 		double sub;
 		input_receiver(sub);
 		sub = (double)((int)(sub*100))/100;
-		FixedSubsc * game = new FixedSubsc(title, price, release, range, platforms, genres, *developer,sub);
+		FixedSubsc * game = new FixedSubsc(title, price, release, range, platforms, genres, name,sub);
 		lsystem->addGame(game);
+		developer->addGame(game);
 		return (game);
 	}
 	return NULL;
@@ -1742,14 +1745,15 @@ void print_developer_interface()
 {
 	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: See developer info" << std::endl;
+	std::cout << "\t2: See created games" << std::endl;
 	std::cout << "\t0: Leave the developer editor" << std::endl << std::endl;
 }
 
 int prompt_developer_interface(){
 	int input = -1;
 	input_receiver(input);
-	while(input < 0 || input > 1){
-		std::cout << "Please insert an integer between 0 and 1" << std::endl;
+	while(input < 0 || input > 2){
+		std::cout << "Please insert an integer between 0 and 2" << std::endl;
 		input_receiver(input);
 	}
 	return input;
@@ -1771,6 +1775,9 @@ void developer_interface(Developer* developer) {
 		switch(prompt_developer_interface()){
 		case 1:
 			developer->printDeveloper();
+			break;
+		case 2:
+			developer->printDevGames();
 			break;
 		case 0:
 			return;
