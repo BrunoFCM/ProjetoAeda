@@ -1722,7 +1722,14 @@ Developer* add_developer_interface()
 	getline(cin,eMail);
 
 	Developer* developer = new Developer(name, nif, eMail);
-	lsystem->addDeveloper(developer);
+
+	try {
+		lsystem->addDeveloper(developer);
+	}
+	catch (RepeatedDeveloper &e) {
+		e.printInf();
+		return NULL;
+	}
 	return developer;
 
 }
@@ -1745,6 +1752,12 @@ int prompt_developer_interface(){
 }
 
 void developer_interface(Developer* developer) {
+	while (developer == NULL)
+	{
+		std::cout << "Try another\n\n";
+		developer = add_developer_interface();
+	}
+
 	draw_header("DEVELOPER ");
 
 	developer->printDeveloper();
