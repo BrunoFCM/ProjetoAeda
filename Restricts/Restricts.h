@@ -65,7 +65,7 @@ bool gameGenre(Game* g1, const std::string &genre);
  * @param developer Nome do criador do jogo para a comparacao equalitaria
  * @return Retorna true se o criador de g1 e igual a developer, false caso contrario
  */
-bool gameDeveloper(Game* g1, const std::string &developer);
+bool gameDeveloper(Game* g1, const string &developer);
 
 
 /**
