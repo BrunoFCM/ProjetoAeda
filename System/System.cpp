@@ -288,6 +288,11 @@ void System::giveInfoSystem(ofstream &info) const
 	info << "@" << "\n";
 }
 
+BST<Developer> System::getDevelopers() const
+{
+	return developers;
+}
+
 void System::addDeveloper(Developer developer)
 {
 	if (developers.isEmpty())
@@ -331,5 +336,5 @@ Developer System::searchDeveloper(string name)
 		it.advance();
 	}
 
-		throw NonExistingDeveloper();
+	throw NonExistingDeveloper();
 }
