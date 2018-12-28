@@ -48,6 +48,12 @@ public:
 	std::string getEMail() const;
 
 	/**
+	* @brief Funcao que retorna o numero de jogos criados pela empresa
+	* @return numGames Numero de jogos criados pela empresa
+	*/
+	unsigned getNumGames() const;
+
+	/**
 	 * @brief Funcao que incrementa o numero de jogos criados pela empresa
 	 */
 	void incrementNumGames();
