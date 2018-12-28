@@ -18,14 +18,14 @@ class System
 {
 	vector<Game*> store;		//base de dados com o conjunto de todos os jogos
 	vector<User*> user_library; //base de dados com o conjunto de todos os utilizadores
-	BST<Developer> developers;	//arvore binaria de pesquisa com as empresas criadoras de jogos
+	BST<Developer*> developers;	//arvore binaria de pesquisa com as empresas criadoras de jogos
 
 public:
 
 	/**
 	* @brief Construtor default de system
 	*/
-	System() : developers(Developer("",0,"")) {};
+	System() :  developers(new Developer("",0,"")) {};
 
 	/**
 	* @brief Construtor de system que importa a informacao a partir de um ficheiro
@@ -122,25 +122,25 @@ public:
 	* @brief Funcao que retorna o conjunto de empresas criadoras de jogos de um sistema
 	* @return developers Conjunto de empresas criadoras de jogos de um sistema
 	*/
-	BST<Developer> getDevelopers() const;
+	BST<Developer*> getDevelopers() const;
 
 	/**
 	* @brief Funcao adiciona uma empresa a BST de empresas
 	* @param developer Empresa a adicionar
 	*/
-	void addDeveloper(Developer developer);
+	void addDeveloper(Developer* developer);
 
 	/**
 	* @brief Funcao que pesquisa uma empresa na BST de empresas a partir do nif
 	* @param nif NIF da empresa
 	*/
-	Developer searchDeveloper(long unsigned nif);
+	Developer* searchDeveloper(long unsigned nif);
 
 	/**
 	* @brief Funcao que pesquisa uma empresa na BST de empresas a partir do nome da empresa
 	* @param name Nome de uma empresa
 	*/
-	Developer searchDeveloper(string name);
+	Developer* searchDeveloper(string name);
 };
 
 #endif /* SRC_SYSTEM_H_ */
