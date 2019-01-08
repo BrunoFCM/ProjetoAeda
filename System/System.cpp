@@ -6,7 +6,7 @@
 
 using namespace std;
 
-System::System(ifstream &file) : developers(new Developer("",0,"")) {
+System::System(ifstream &file) : developers(new Developer("",0,"")), current_date(Date("01/01/2019")) {
 	std::string input;
 
 	getline(file,input);
@@ -336,7 +336,45 @@ Developer* System::searchDeveloper(string name)
 	throw NonExistingDeveloper();
 }
 
+void System::addDays(unsigned int days) {
+	if ((current_date.getMonth() == 1) ||
+		(current_date.getMonth() == 3) ||
+		(current_date.getMonth() == 5) ||
+		(current_date.getMonth() == 7) ||
+		(current_date.getMonth() == 8) ||
+		(current_date.getMonth() == 10)) {
+		if (current_date.getDay() + days > 31)
+			current_date.setDate(days - (31 - current_date.getDay()), current_date.getMonth() + 1, current_date.getYear());
+		else current_date.setDays(current_date.getDay() + days);
+	}
 
+	if ((current_date.getMonth() == 4) ||
+		(current_date.getMonth() == 6) ||
+		(current_date.getMonth() == 9) ||
+		(current_date.getMonth() == 11)) {
+		if (current_date.getDay() + days > 30)
+			current_date.setDate(days - (30 - current_date.getDay()), current_date.getMonth() + 1, current_date.getYear());
+		else current_date.setDays(current_date.getDay() + days);
+	}
+
+	if (current_date.getMonth() == 2) {
+		if (current_date.getDay() + days > 28)
+			current_date.setDate(days - (28 - current_date.getDay()), current_date.getMonth() + 1, current_date.getYear());
+		else current_date.setDays(current_date.getDay() + days);
+	}
+
+	if (current_date.getMonth() == 12) {
+		if (current_date.getDay() + days > 31)
+			current_date.setDate(days - (31 - current_date.getDay()), current_date.getMonth() + 1, current_date.getYear() + 1);
+		else current_date.setDays(current_date.getDay() + days);
+	}
+}
+
+void System::addMonths(unsigned int months) {
+	if (current_date.getMonth() + months > 12)
+		current_date.setDate(current_date.getDay(), months - (12 - current_date.getMonth()), current_date.getYear() + 1);
+	else current_date.setMonths(current_date.getMonth() + months);
+}
 
 
 
