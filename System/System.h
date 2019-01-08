@@ -19,13 +19,14 @@ class System
 	vector<Game*> store;		//base de dados com o conjunto de todos os jogos
 	vector<User*> user_library; //base de dados com o conjunto de todos os utilizadores
 	BST<Developer*> developers;	//arvore binaria de pesquisa com as empresas criadoras de jogos
+	Date current_date;			//data atual do sistema
 
 public:
 
 	/**
 	* @brief Construtor default de system
 	*/
-	System() :  developers(new Developer("",0,"")) {};
+	System() :  developers(new Developer("",0,"")), current_date(Date("01/01/2019")) {};
 
 	/**
 	* @brief Construtor de system que importa a informacao a partir de um ficheiro
@@ -141,6 +142,20 @@ public:
 	* @param name Nome de uma empresa
 	*/
 	Developer* searchDeveloper(string name);
+
+	/**
+	* @brief Funcao que adiciona dias a data atual do sistema
+	* @param days Dias a adicionar
+	*/
+	void addDays(unsigned int days);
+
+	/**
+	* @brief Funcao que adiciona meses a data atual do sistema
+	* @param months Meses a adicionar
+	*/
+	void addMonths(unsigned int months);
+
+
 };
 
 #endif /* SRC_SYSTEM_H_ */
