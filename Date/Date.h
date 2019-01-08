@@ -61,6 +61,26 @@ public:
 	 * @return True se forem iguais, false se nao forem
 	 */
 	bool operator== (const Date &date2) const;
+
+	/**
+	* @brief Função que altera o dia de uma data
+	* @param days Novo dia da data
+	*/
+	void setDays(unsigned int days);
+
+	/**
+	* @brief Função que altera o mes de uma data
+	* @param months Novo mes da data
+	*/
+	void setMonths(unsigned int months);
+
+	/**
+	* @brief Funcao que altera uma data
+	* @param day 	Novo dia
+	* @param month 	Novo mes
+	* @param year 	Novo ano
+	*/
+	void setDate(unsigned int day, unsigned int month, unsigned int year);
 };
 
 #endif /* DATE_H_ */
