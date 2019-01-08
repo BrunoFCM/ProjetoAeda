@@ -109,3 +109,16 @@ bool Date::operator== (const Date &date2) const{
 	return ((year == date2.year) && (month == date2.month) && (day == date2.day));
 }
 
+void Date::setDays(unsigned int days) {
+	day = days;
+}
+
+void Date::setMonths(unsigned int months) {
+	month = months;
+}
+
+void Date::setDate(unsigned int day, unsigned int month, unsigned int year) {
+	setDays(day);
+	setMonths(month);
+	this->year = year;
+}
