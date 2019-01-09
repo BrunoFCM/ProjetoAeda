@@ -1,6 +1,8 @@
 #include <iostream>
 #include <iomanip>
 #include "PlaySession.h"
+#include "../User/User.h"
+#include "../Game/Game.h"
 
 using namespace std;
 
