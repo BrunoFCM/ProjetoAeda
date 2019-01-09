@@ -135,21 +135,21 @@ void Game::giveInfoGame(ostream &info) const
 
 	for (unsigned int i = 0; i < platform.size(); i++){
 		if(i != platform.size() - 1)
-			info << platform[i] << ",\n";
+			info << platform[i] << "\n";
 		else
-			info << platform[i] << ".\n";
+			info << platform[i] << "\n.\n";
 	}
 	for (unsigned int i = 0; i < genre.size(); i++)
 		if(i != genre.size() - 1)
-			info << genre[i] << ",\n";
+			info << genre[i] << "\n";
 		else
-			info << genre[i] << ".\n";
+			info << genre[i] << "\n.\n";
 
 	for (unsigned int i = 0; i < price_history.size(); i++)
 		if(i != price_history.size() - 1)
-			info << price_history[i] << ",\n";
+			info << price_history[i] << "\n";
 		else
-			info << price_history[i] << ".\n";
+			info << price_history[i] << "\n.\n";
 
 	info << developer << "\n";
 }
@@ -180,24 +180,6 @@ void Game::removeSleepingUser(string em) {
 
 void Game::deleteSleepingUsers() {
 	sleepingUsers.clear();
-}
-
-void Game::printSleepingUsers() {
-	HashTabUser::iterator it = sleepingUsers.begin();
-
-	while(it != sleepingUsers.end()) {
-		cout << *it << "\n";
-		it++;
-	}
-}
-
-void Game::giveInfoSleepingUsers(ostream &info) {
-	HashTabUser::iterator it = sleepingUsers.begin();
-
-	while(it != sleepingUsers.end()) {
-		info << *it << "\n";
-		it++;
-	}
 }
 
 
@@ -243,11 +225,14 @@ void Home::giveInfoGame(ofstream &info) const
 {
 	info << 0 << "\n";
 	Game::giveInfoGame(info);
+	if(updates.size() == 0){
+		cout << ".\n";
+	}
 	for (unsigned int i = 0; i < updates.size() - 1; i++)
 		if(i != updates.size() - 1)
-			info << updates[i].toStr() << ",\n";
+			info << updates[i].toStr() << "\n";
 		else
-			info << updates[i].toStr() << ".\n";
+			info << updates[i].toStr() << "\n.\n";
 }
 
 

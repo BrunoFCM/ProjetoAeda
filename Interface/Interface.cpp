@@ -192,18 +192,6 @@ void system_menu_interface(){
 			date_interface();
 			break;
 		}
-		case 13:{
-			if (lsystem->getStore().size() == 0) {
-				cout << "\nFirst you need to add games to the system\n";
-				break;
-			}
-			sleeping_interface();
-			break;
-		}
-		case 14:{
-			lsystem->printDevelopers();
-			break;
-		}
 		case 0:{
 			save_interface();
 			return;
@@ -227,16 +215,14 @@ void print_system_interface(){
 	std::cout << "\t10: Search for a developer (by name)" << std::endl;
 	std::cout << "\t11: Search for a developer (by NIF)" << std::endl;
 	std::cout << "\t12: Update system date" << std::endl;
-	std::cout << "\t13: See sleeping users for certain game" << std::endl;
-	std::cout << "\t14: See all developers" << std::endl;
 	std::cout << "\t0: Leave the system editor" << std::endl << std::endl;
 }
 
 int prompt_system_interface(){
 	int input = -1;
 	input_receiver(input);
-	while(input < 0 || input > 14){
-		std::cout << "Please insert an integer between 0 and 14" << std::endl;
+	while(input < 0 || input > 12){
+		std::cout << "Please insert an integer between 0 and 12" << std::endl;
 		input_receiver(input);
 	}
 	return input;
@@ -263,6 +249,12 @@ Game* add_game_interface(){
 	std::cout << endl << "Title\nInput: ";
 	string title;
 	getline(cin,title);
+
+	try{
+		lsystem->searchGame(title);
+		std::cout << "That game already exists\n\n";
+		return NULL;
+	}catch(NonExistingGame &e){}
 
 	std::cout << endl << "Price\n";
 	double price;
@@ -759,25 +751,6 @@ void user_interface(User *user){
 			}
 			break;
 		}
-		case 10:{
-			priority_queue<Wanted_item> list = user->getWishlist();
-
-			while(list.size()) {
-				std::cout << list.top().item << "\t" << list.top().interest << "\n";
-				list.pop();
-			}
-			break;
-		}
-		case 11:{
-			HashTabGames probGames = user->getProbabilityGames();
-			HashTabGames::iterator it = probGames.begin();
-
-			while(it != probGames.end()) {
-				cout << it->item->getTitle()<<endl;
-				cout << "Probability: " << it->probability << endl << endl;
-			}
-			break;
-		}
 		case 0:
 			return;
 		}
@@ -796,15 +769,14 @@ void print_user_interface(){
 	std::cout << "\t8: See installed updates" << std::endl;
 	std::cout << "\t9: Update a game" << std::endl;
 	std::cout << "\t10: See the user's Wish list" << std::endl;
-	std::cout << "\t11: See the user's buying probability for each game" << std::endl;
 	std::cout << "\t0: Leave the user editor" << std::endl << std::endl;
 }
 
 int prompt_user_interface(){
 	int input = -1;
 	input_receiver(input);
-	while(input < 0 || input > 11){
-		std::cout << "Please insert an integer between 0 and 11" << std::endl;
+	while(input < 0 || input > 10){
+		std::cout << "Please insert an integer between 0 and 10" << std::endl;
 		input_receiver(input);
 	}
 	return input;
@@ -1198,7 +1170,7 @@ void load_interface(){
 		cerr << "Error opening file" << endl;
 	}
 	else{
-		lsystem = new System(file);
+		lsystem = importSystem(file);
 		file.close();
 	}
 
@@ -2087,20 +2059,5 @@ int prompt_date_interface(){
 	return input;
 }
 
-void sleeping_interface(){
-	Game *game;
-	std::cout << "Input the game's title\n";
-	std::string title;
-	getline(cin,title);
-	while(true){
-		try{
-			game = lsystem->searchGame(title);
-			break;
-		}
-		catch(NonExistingGame &e){
-			e.printInf();
-		}
-	}
-	game->printSleepingUsers();
-}
+
 

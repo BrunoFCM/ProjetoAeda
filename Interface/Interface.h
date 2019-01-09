@@ -317,8 +317,3 @@ void print_date_interface();
  */
 int prompt_date_interface();
 
-/**
- * @brief Funcao que gere o menu de utilizadores adormecidos de um jogo do sistema
- */
-void sleeping_interface();
-

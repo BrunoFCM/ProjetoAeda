@@ -32,27 +32,27 @@ bool operator<(const Wanted_item &i1, const Wanted_item &i2);
 typedef struct {
 	Game* item;
 	double probability;
-} Probability_item;
+} Interesting_item;
 
 /**
  * @brief Struct auxiliar para a hash table
  */
 struct GameHash{
-	int operator() (const Probability_item &prob) const {
+	int operator() (const Interesting_item &inter) const {
 		int hash = 0;
-		string name = prob.item->getTitle();
+		string name = inter.item->getTitle();
 		for(auto c : name) {
 			hash += 37*c;
 		}
 		return hash;
 	}
 
-	bool operator() (const Probability_item &prob1, const Probability_item &prob2) const {
-		return prob1.item->getTitle() == prob2.item->getTitle();
+	bool operator() (const Interesting_item &inter1, const Interesting_item &inter2) const {
+		return inter1.item->getTitle() == inter2.item->getTitle();
 	}
 };
 
-typedef unordered_set<Probability_item, GameHash, GameHash> HashTabGames;
+typedef unordered_set<Interesting_item, GameHash, GameHash> HashTabGames;
 
 
 /**
@@ -76,7 +76,7 @@ private:
 
 	Date last_purchase;				//correspondente a ultima compra feita pelo utilizador
 	priority_queue<Wanted_item> Wishlist;		//correspondente ao conjunto de jogos nos quais o utilizador esta interessado	
-	HashTabGames probabilityGames;			//tabela de hash da probabilidad de compra dos jogos
+	HashTabGames interestingGames;			//tabela de hash de jogos interessantes ao utilizador
 
 public:
 	/**
@@ -271,22 +271,22 @@ public:
 	void changeInterestLevel(Game *game, int interest);
 	
 	 /**
-	 * @brief Funcao que adiciona a probilidade de compra de um jogo a hash
-	 * @param prob Probability_item a ser adicionado
+	 * @brief Funcao que adiciona um jogo interessante ao utilizador a hash
+	 * @param w Wanted_item a ser adicionado
 	 */
-	void addProbabilityGame(const Probability_item &prob);
+	void addInterestingGame(const Interesting_item &inter);
 
 	 /**
-	 * @brief Funcao que remove a probabilidade de compra de um jogo a hash
-	 * @param prob Probability_item a ser removido
+	 * @brief Funcao que remove um jogo interessante ao utilizador a hash
+	 * @param w Wanted_item a ser adicionado
 	 */
-	void removeProbabilityGame(const Probability_item &prob);
+	void removeInterestingGame(const Interesting_item &inter);
 	
 	/**
-	 * @brief Funcao que retorna a hash table da probabilidade de compra dos jogos
-	 * @return HashTabGames hash table da probabilidade de compra dos jogos
+	 * @brief Funcao que retorna a hash table de jogos interessantes
+	 * @return HashTabGames hash table de jogos interessantes
 	 */
-	HashTabGames getProbabilityGames();
+	HashTabGames getInterestingGames();
 
 	/**
 	* @brief Funcao que retorna a data da ultima compra de um utilizador

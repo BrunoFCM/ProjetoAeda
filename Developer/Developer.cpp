@@ -64,7 +64,6 @@ void Developer::giveInfoDeveloper(ostream &info) const {
 	info << name << "\n";
 	info << nif << "\n";
 	info << eMail << "\n";
-	info << numGames << "\n";
 }
 
 void Developer::printDevGames() const {
