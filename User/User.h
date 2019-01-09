@@ -5,6 +5,7 @@
 #include <vector>
 #include <map>
 #include <queue>
+#include <unordered_set>
 #include "../Card/Card.h"
 #include "../Game/Game.h"
 #include "../PlaySession/PlaySession.h"
@@ -20,6 +21,27 @@ typedef struct {
 } Wanted_item;
 
 bool operator<(const Wanted_item &i1, const Wanted_item &i2);
+
+/**
+ * @brief Struct auxiliar para a tabela hash
+ */
+struct GameHash{
+	int operator() (const Wanted_item &w) const {
+		int hash = 0;
+		string name = w.item->getTitle();
+		for(auto c : name) {
+			hash += 37*c;
+		}
+		return hash;
+	}
+
+	bool operator() (const Wanted_item &w1, const Wanted_item &w2) const {
+		return w1.item->getTitle() == w2.item->getTitle();
+	}
+};
+
+typedef unordered_set<Wanted_item, GameHash, GameHash> HashTabGames;
+
 
 /**
  * Classe User que contem dados sobre cada utilizador da biblioteca de jogos
