@@ -7,15 +7,36 @@
 #include <fstream>
 #include "../Date/Date.h"
 #include "../Interval/Interval.h"
-#include "../User/User.h"
 #include "../PlaySession/PlaySession.h"
 
 using namespace std;
 
 class Date;
-class User;
 class Interval;
 class PlaySession;
+
+
+/**
+ * @brief Struct auxiliar para a tabela de hash
+ */
+struct UserHash {
+	int operator() (const string &em) const		//temporary hash function
+	{
+		int hash = 0;
+		for(auto c : em) {
+			hash += 37*c;
+		}
+		return hash;
+	}
+
+	bool operator() (const string &em1, const string &em2) const
+	{
+		return em1 == em2;
+	}
+};
+
+typedef unordered_set<string, UserHash, UserHash> HashTabUser;
+
 
 /**
  * Classe base Game
@@ -23,17 +44,24 @@ class PlaySession;
 class Game
 {
 protected:
-	unsigned int id;						//identificador unico
-	string title;							//nome
-	double price;							//preco de aquisicao
-	double base_price;						//preco de aquisicao base
-	Date release;							//data de lancamento
-	Interval age_range;						//intervalo de idades
-	vector<string> platform;				//plataformas disponiveis
-	vector<string> genre;					//genero
-	string developer;					//empresa que o desenvolveu
+	unsigned int id;				//identificador unico
+	string title;					//nome
+	double price;					//preco de aquisicao
+	double base_price;				//preco de aquisicao base
+	Date release;					//data de lancamento
+	Interval age_range;				//intervalo de idades
+	vector<string> platform;			//plataformas disponiveis
+	vector<string> genre;				//genero
+	string developer;				//empresa que o desenvolveu
 	vector<double> price_history;			//historial de precos de aquisicao
-	unsigned int player_base; 				//numero de jogadores
+	unsigned int player_base; 			//numero de jogadores
+	
+	/********				  ********/
+	/********            PARTE 2              ********/
+	/********				  ********/
+
+	HashTabUser sleepingUsers;			//tabela de hash de utilizadores adormecidos
+	
 public:
 
 	/**
@@ -191,6 +219,23 @@ public:
 	* @param info Ofstream para onde e passada a informacao de um jogo
 	*/
 	virtual void giveInfoGame(ostream &info) const;
+
+	
+/********				  ********/
+/********     	   PARTE 2     		  ********/
+/********				  ********/
+
+	/**
+	 * @brief Funcao que adiciona um jogador adormecido a hash
+	 * @param em String do email do utilizador
+	 */
+	void addSleepingUser(string em);
+
+	/**
+	 * @brief Funcao que remove um jogador adormecido da hash
+	 * @param em String do email do utilizador
+	 */
+	void removeSleepingUser(string em);
 
 };
 
