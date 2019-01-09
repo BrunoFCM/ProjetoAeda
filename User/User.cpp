@@ -133,6 +133,12 @@ void User::giveInfoUser(ofstream &info) const
 		 << address << "\n";
 	giveLibraryUser(info);
 	giveCardsUser(info);
+	priority_queue<Wanted_item> aux;
+	while (!Wishlist.empty()){
+		cout << Wishlist.top().item->getTitle();
+		aux.push(Wishlist.top());
+		Wishlist.pop();
+	}
 }
 
 void User::printLibraryUser(unsigned int numberOfGames) const
