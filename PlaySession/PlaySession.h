@@ -3,8 +3,6 @@
 
 #include <iostream>
 #include "../Date/Date.h"
-#include "../User/User.h"
-#include "../Game/Game.h"
 
 using namespace std;
 
