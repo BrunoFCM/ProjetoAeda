@@ -264,6 +264,12 @@ Game* add_game_interface(){
 	string title;
 	getline(cin,title);
 
+	try{
+		lsystem->searchGame(title);
+		std::cout << "That game already exists\n\n";
+		return NULL;
+	}catch(NonExistingGame &e){}
+	
 	std::cout << endl << "Price\n";
 	double price;
 	input_receiver(price);
@@ -1198,7 +1204,7 @@ void load_interface(){
 		cerr << "Error opening file" << endl;
 	}
 	else{
-		lsystem = new System(file);
+		lsystem = importSystem(file);
 		file.close();
 	}
 
