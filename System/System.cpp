@@ -443,6 +443,15 @@ vector<Game*> System::getStore() {
 	return store;
 }
 
+void System::printDevelopers() {
+	BSTItrIn<Developer*> it (developers);
+
+	while (!it.isAtEnd()) {
+		it.retrieve()->printDeveloper();
+		cout << "\n";
+		it.advance();
+	}
+}
 
 
 
