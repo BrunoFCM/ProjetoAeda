@@ -195,6 +195,10 @@ void System::addGame(Game* game)
 	store.push_back(game);
 }
 
+Date System::getCurrentDate() {
+	return current_date;
+}
+
 Game* System::searchGame(unsigned int id){
 	for (unsigned int i = 0; i < store.size(); i++)
 		if (store[i]->getId() == id)
