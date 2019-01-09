@@ -280,13 +280,17 @@ void FixedSubsc::printInfoGame() const {
 	string platforms = "";
 	vector<string> p = getPlatforms();
 	for (unsigned int i = 0; i < p.size(); i++) {
-		platforms += p[i] + ", ";
+		if (i == p.size() - 1)
+			platforms += p[i];
+		else platforms += p[i] + ", ";
 	}
 	platforms.pop_back();
 	platforms.pop_back();
 
 	string genres = "";
 	for (unsigned int i = 0; i < genre.size(); i++) {
+		if (i == genres.size() - 1)
+			genres += genre[i];
 		genres += genre[i] + ", ";
 	}
 	genres.pop_back();
@@ -296,6 +300,7 @@ void FixedSubsc::printInfoGame() const {
 	cout << "ID: " << id << endl;
 	cout << "Platforms: " << platforms << endl;
 	cout << "Genres: " << genres << endl;
+	cout << "Price: " << price << endl;
 	cout << "Fixed subscription price: " << getPrice() << endl;
 	cout << "Release Date: " << getRelease().toStr() << endl;
 	cout << "Recommended age: " << getAge().toStr() << endl;
@@ -329,12 +334,16 @@ double VariableSubsc::getPriceHour() const
 void VariableSubsc::printInfoGame() const {
 	string platforms = "";
 	for (unsigned int i = 0; i < platform.size(); i++) {
-		platforms += platform[i] + ", ";
+		if (i == platform.size() - 1)
+			platforms += platform[i];
+		else platforms += platform[i] + ", ";
 	}
 	platforms.pop_back();
 
 	string genres = "";
 	for (unsigned int i = 0; i < genre.size(); i++) {
+		if (i == genres.size() - 1)
+			genres += genre[i];
 		genres += genre[i] + ", ";
 	}
 	genres.pop_back();
@@ -344,6 +353,7 @@ void VariableSubsc::printInfoGame() const {
 	cout << "ID: " << id << endl;
 	cout << "Platforms: " << platforms << endl;
 	cout << "Genres: " << genres << endl;
+	cout << "Price: " << price << endl;
 	cout << "Price per hour: " << getPriceHour() << endl;
 	cout << "Release Date: " << getRelease().toStr() << endl;
 	cout << "Recommended age: " << getAge().toStr() << endl;
