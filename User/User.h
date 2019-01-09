@@ -15,6 +15,9 @@ using namespace std;
 class PlaySession;
 class Game;
 
+/**
+ * @brief Struct auxiliar para a priority queue
+ */
 typedef struct {
 	Game* item;
 	int interest;
@@ -22,25 +25,34 @@ typedef struct {
 
 bool operator<(const Wanted_item &i1, const Wanted_item &i2);
 
+
 /**
- * @brief Struct auxiliar para a tabela hash
+ * @brief Struct auxiliar para a hash table
+ */
+typedef struct {
+	Game* item;
+	double probability;
+} Interesting_item;
+
+/**
+ * @brief Struct auxiliar para a hash table
  */
 struct GameHash{
-	int operator() (const Wanted_item &w) const {
+	int operator() (const Interesting_item &inter) const {
 		int hash = 0;
-		string name = w.item->getTitle();
+		string name = inter.item->getTitle();
 		for(auto c : name) {
 			hash += 37*c;
 		}
 		return hash;
 	}
 
-	bool operator() (const Wanted_item &w1, const Wanted_item &w2) const {
-		return w1.item->getTitle() == w2.item->getTitle();
+	bool operator() (const Interesting_item &inter1, const Interesting_item &inter2) const {
+		return inter1.item->getTitle() == inter2.item->getTitle();
 	}
 };
 
-typedef unordered_set<Wanted_item, GameHash, GameHash> HashTabGames;
+typedef unordered_set<Interesting_item, GameHash, GameHash> HashTabGames;
 
 
 /**
@@ -59,7 +71,7 @@ private:
 	map<string,vector<Date>> updates; 		//correspondente ao conjunto de conjuntos de updates de cada jogo
 	
 	/********				  ********/
-	/********     PARTE 2                     ********/
+	/********     PARTE 2     ********/
 	/********				  ********/
 
 	Date last_purchase;				//correspondente a ultima compra feita pelo utilizador
@@ -262,14 +274,20 @@ public:
 	 * @brief Funcao que adiciona um jogo interessante ao utilizador a hash
 	 * @param w Wanted_item a ser adicionado
 	 */
-	void addInterestingGame(const Wanted_item &w);
+	void addInterestingGame(const Interesting_item &inter);
 
 	 /**
 	 * @brief Funcao que remove um jogo interessante ao utilizador a hash
 	 * @param w Wanted_item a ser adicionado
 	 */
-	void removeInterestingGame(const Wanted_item &w);
+	void removeInterestingGame(const Interesting_item &inter);
 	
+	/**
+	 * @brief Funcao que retorna a hash table de jogos interessantes
+	 * @return HashTabGames hash table de jogos interessantes
+	 */
+	HashTabGames getInterestingGames();
+
 	/**
 	* @brief Funcao que retorna a data da ultima compra de um utilizador
 	* @return Data da ultima compra de um utilizador

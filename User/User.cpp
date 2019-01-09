@@ -303,21 +303,25 @@ void User::changeInterestLevel(Game *game, int interest){
 	addToWishlist(game,interest);
 }
 
-void User::addInterestingGame(const Wanted_item &w){
-	interestingGames.insert(w);
+void User::addInterestingGame(const Interesting_item &inter){
+	interestingGames.insert(inter);
 }
 
-void User::removeInterestingGame(const Wanted_item &w){
+void User::removeInterestingGame(const Interesting_item &inter){
 	HashTabGames::iterator it = interestingGames.begin();
 
 	while(it != interestingGames.end()) {
-		if ((*it).item->getTitle() == w.item->getTitle()) {
+		if ((*it).item->getTitle() == inter.item->getTitle()) {
 			interestingGames.erase(it);
 			return;
 		}
 		it++;
 	}
-	throw NonExistingGame(w.item->getTitle());
+	throw NonExistingGame(inter.item->getTitle());
+}
+
+HashTabGames User::getInterestingGames() {
+	return interestingGames;
 }
 
 Date User::getLastPurchase() {
