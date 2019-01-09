@@ -177,10 +177,8 @@ void system_menu_interface(){
 		case 11:{
 			Developer* developer;
 			std::cout << "Input the developer's NIF\n";
-			std::string nif;
-			getline(cin,nif);
-			std::string::size_type sz;
-			long unsigned nifint = stoi(nif,&sz);
+			long unsigned nifint;
+			input_receiver(nifint);
 			try{
 					developer = lsystem->searchDeveloper(nifint);
 					developer_interface(developer);
