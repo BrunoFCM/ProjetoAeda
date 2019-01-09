@@ -190,14 +190,13 @@ public:
 	*/
 	Date getCurrentDate();
 
-};
-
-/**
-	* @brief Funcao que importa a informacao a partir de um ficheiro para construir um System
-	* @param file Referencia a uma stream de ficheiro que contem as informacoes de system
-	* @return Pointer para o System criado
+	/**
+	* @brief Funcao que retorna a store do sistema
+	* @return Retorna a store do sistema
 	*/
-System * importSystem(ifstream &file);
+	vector<Game*> getStore();
+
+};
 
 #endif /* SRC_SYSTEM_H_ */
 
