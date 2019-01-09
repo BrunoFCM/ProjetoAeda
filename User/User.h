@@ -76,7 +76,7 @@ private:
 
 	Date last_purchase;				//correspondente a ultima compra feita pelo utilizador
 	priority_queue<Wanted_item> Wishlist;		//correspondente ao conjunto de jogos nos quais o utilizador esta interessado	
-	HashTabGames probabilityGames;			//tabela de hash de jogos interessantes ao utilizador
+	HashTabGames probabilityGames;			//tabela de hash da probabilidad de compra dos jogos
 
 public:
 	/**
