@@ -193,6 +193,12 @@ void System::addGame(Game* game)
 		}
 	}
 	store.push_back(game);
+
+	for (unsigned i = 0; i < user_library.size(); i++){
+		double rdm = (rand()%1001) / 1000;
+		Probability_item prob = {game, rdm};
+		user_library[i]->addProbabilityGame(prob);
+	}
 }
 
 Game* System::searchGame(unsigned int id){
@@ -238,6 +244,8 @@ void System::buyGame(User* user, Game* game, unsigned int id)
 			double bal = user->getCards()[id].getBalance() - game->getPrice();
 			user->getCards()[id].setBalance(bal);
 			user->addToLibrary(game);
+
+			user->removeProbabilityGame(Probability_item{game,0});
 			return;
 		}
 		throw InvalidCard();
