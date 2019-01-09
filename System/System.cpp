@@ -5,7 +5,7 @@
 #include "../Exceptions.h"
 
 using namespace std;
-/*
+
 System::System(ifstream &file) : developers(new Developer("",0,"")), current_date(Date("01/01/2019")) {
 	std::string input;
 
@@ -158,7 +158,7 @@ System::System(ifstream &file) : developers(new Developer("",0,"")), current_dat
 		getline(file,input);
 	}
 }
-*/
+
 System::~System()
 {
 	for (size_t i = 0; i < user_library.size(); i++) {
@@ -247,29 +247,19 @@ void System::buyGame(User* user, Game* game, unsigned int id)
 
 void System::giveInfoSystem(ofstream &info) const
 {
-	info << current_date.toStr() << "\n";
-
- 	BSTItrIn<Developer*> it (developers);
-	while (!it.isAtEnd())
-	{
-		it.retrieve()->giveInfoDeveloper(info);
-		it.advance();
-	}
-	info << "\n";
-	
 	for (unsigned int i = 0; i < store.size(); i++)
 	{
 		store[i]->giveInfoGame(info);
 		info << "\n";
 	}
-	info << "\n";
+	info << "@" << "\n";
 
 	for (unsigned int j = 0; j < user_library.size(); j++)
 	{
 		user_library[j]->giveInfoUser(info);
 		info << "\n";
 	}
-	info << "\n";
+	info << "@" << "\n";
 
 	for (unsigned int j = 0; j < user_library.size(); j++)
 	{
@@ -279,6 +269,16 @@ void System::giveInfoSystem(ofstream &info) const
 			sess[i]->giveSessions(info);
 		}
 	}
+	info << "@" << "\n";
+
+	BSTItrIn<Developer*> it (developers);
+	while (!it.isAtEnd())
+	{
+		it.retrieve()->giveInfoDeveloper(info);
+		info << ",\n";
+		it.advance();
+	}
+	info << "@" << "\n";
 }
 
 
@@ -431,16 +431,10 @@ Date System::getCurrentDate() {
 	return current_date;
 }
 
-System * importSystem(ifstream &file){
-	System *out = new System;
-	string aux;
-
-	getline(file,aux);
-
-	cout << aux;
-	out->setCurrentDate(aux);
-
-	return out;
+vector<Game*> System::getStore() {
+	return store;
 }
+
+
 
 
