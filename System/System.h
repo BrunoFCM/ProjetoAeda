@@ -177,6 +177,12 @@ public:
 	 * @brief Funcao que atualiza as hash tables de sleeping users de todos os jogos
 	 */
 	void updateSleepingUsers();
+	
+	/**
+	 * @brief Funcao que muda a data atual
+	 * @param date Data atual no formato DD/MM/YYYY
+	 */
+	void setCurrentDate(const std::string &date);
 
 };
 
