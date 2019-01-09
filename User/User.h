@@ -27,16 +27,22 @@ bool operator<(const Wanted_item &i1, const Wanted_item &i2);
 class User
 {
 private:
-	string name;							//correspondente ao nome do utilizador
-	string email;							//correspondente ao endereco eletronico
-	unsigned int age;						//correspondente a idade do utilizador
-	string address;							//correspondente a morada do utilizador
-	vector<Card> cards;						//correspondente ao conjunto dos cartoes do utilizador
-	vector<Game*> library;					//correspondente ao conjunto dos jogos do utilizador
+	string name;					//correspondente ao nome do utilizador
+	string email;					//correspondente ao endereco eletronico
+	unsigned int age;				//correspondente a idade do utilizador
+	string address;					//correspondente a morada do utilizador
+	vector<Card> cards;				//correspondente ao conjunto dos cartoes do utilizador
+	vector<Game*> library;				//correspondente ao conjunto dos jogos do utilizador
 	vector<PlaySession*> sessions;			//correspondente ao conjunto dos historiais de cada sessao de jogo
 	map<string,vector<Date>> updates; 		//correspondente ao conjunto de conjuntos de updates de cada jogo
-	Date last_purchase;						//correspondente a ultima compra feita pelo utilizador
-	priority_queue<Wanted_item> Wishlist;	//correspondente ao conjunto de jogos nos quais o utilizador esta interessado
+	
+	/********				  ********/
+	/********     PARTE 2                     ********/
+	/********				  ********/
+
+	Date last_purchase;				//correspondente a ultima compra feita pelo utilizador
+	priority_queue<Wanted_item> Wishlist;		//correspondente ao conjunto de jogos nos quais o utilizador esta interessado	
+	HashTabGames interestingGames;			//tabela de hash de jogos interessantes ao utilizador
 
 public:
 	/**
@@ -190,6 +196,12 @@ public:
 	* @return Referencia ao card pedido
 	*/
 	Card & getCardRef(unsigned int index);
+	
+	
+	
+	/********				  ********/
+	/********     PARTE 2    		  ********/
+	/********				  ********/
 
 	/**
 	* @brief Funcao que retorna a wishlist do utilizador
@@ -223,6 +235,18 @@ public:
 	* @param interest Novo valor de interesse para o jogo
 	*/
 	void changeInterestLevel(Game *game, int interest);
+	
+	 /**
+	 * @brief Funcao que adiciona um jogo interessante ao utilizador a hash
+	 * @param w Wanted_item a ser adicionado
+	 */
+	void addInterestingGame(const Wanted_item &w);
+
+	 /**
+	 * @brief Funcao que remove um jogo interessante ao utilizador a hash
+	 * @param w Wanted_item a ser adicionado
+	 */
+	void removeInterestingGame(const Wanted_item &w);
 };
 
 
