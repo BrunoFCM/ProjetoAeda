@@ -431,6 +431,16 @@ Date System::getCurrentDate() {
 	return current_date;
 }
 
+System * importSystem(ifstream &file){
+	System *out = new System;
+	string aux;
 
+	getline(file,aux);
+
+	cout << aux;
+	out->setCurrentDate(aux);
+
+	return out;
+}
 
 
