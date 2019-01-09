@@ -155,12 +155,15 @@ void User::printLibraryUser(unsigned int numberOfGames) const
 
 void User::giveLibraryUser(ofstream &titles) const
 {
+	if(library.size() == 0){
+		titles << ".\n";
+	}
 	for (unsigned int i = 0; i < library.size(); ++i){
 	if(i != (library.size() - 1)){
-		titles << library[i]->getTitle() << ",\n";
+		titles << library[i]->getTitle() << "\n";
 	}
 	else{
-		titles << library[i]->getTitle() << ".\n";
+		titles << library[i]->getTitle() << "\n.\n";
 	}
 }
 }
@@ -185,12 +188,15 @@ void User::printCardsUser(unsigned int numberOfCards) const
 
 void User::giveCardsUser(ofstream &numbers) const
 {
+	if(cards.size() == 0){
+		numbers << ".\n";
+	}
 	for (unsigned int i = 0; i < cards.size(); ++i){
 		if(i != (cards.size() - 1)){
-			numbers << cards[i].getNumber() << cards[i].getBalance() << ",\n";
+			numbers << cards[i].getNumber() << cards[i].getBalance() << "\n";
 		}
 		else{
-			numbers << cards[i].getNumber() << cards[i].getBalance() << ".\n";
+			numbers << cards[i].getNumber() << cards[i].getBalance() << "\n.\n";
 		}
 	}
 }
