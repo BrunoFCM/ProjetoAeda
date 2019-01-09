@@ -406,13 +406,13 @@ void System::updateSleepingUsers() {
 	//De seguida, encontrar os utilizadores adormecidos
 	for(unsigned int j = 0; j < user_library.size(); j++) {
 
-		//Se o utilizador esta adormecido, percorre a hash table dos jogos interessantes e adiciona o user a hash de utilizadores adormecidos dos jogos
+		//Se o utilizador esta adormecido, percorre a hash table da probabilidade dos jogos e adiciona o user a hash de utilizadores adormecidos dos jogos
 		if (checkAsleep(user_library[j])) {
 
-			HashTabGames intGames = user_library[j]->getInterestingGames();
-			HashTabGames::iterator it = intGames.begin();
+			HashTabGames probGames = user_library[j]->getProbabilityGames();
+			HashTabGames::iterator it = probGames.begin();
 
-			while(it != intGames.end()) {
+			while(it != probGames.end()) {
 
 				//Se o valor da probabilidade de compra for superior a 50%, adiciona-se o utilizador a hash do jogo
 				if(it->probability >= 0.5)
