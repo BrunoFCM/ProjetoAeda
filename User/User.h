@@ -183,7 +183,7 @@ public:
 	* @brief Funcao que passa para uma fstream a informacao (membros-dado) de um utilizador
 	* @param info Ofstream que ira conter a informacao (membros-dado) de um utilizador
 	*/
-	void giveInfoUser(ofstream &info) const;
+	void giveInfoUser(ofstream &info);
 
 	/**
 	* @brief Funcao que imprime no ecra os titulos dos jogos de um utilizador
