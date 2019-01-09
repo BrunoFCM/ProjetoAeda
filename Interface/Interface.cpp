@@ -1164,7 +1164,7 @@ void load_interface(){
 		cerr << "Error opening file" << endl;
 	}
 	else{
-		lsystem = new System(file);
+		lsystem = importSystem(file);
 		file.close();
 	}
 
