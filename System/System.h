@@ -196,6 +196,11 @@ public:
 	*/
 	vector<Game*> getStore();
 
+	/**
+	* @brief Funcao que imprime as empresas da BST de empresas
+	*/
+	void printDevelopers();
+
 };
 
 #endif /* SRC_SYSTEM_H_ */
