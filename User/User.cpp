@@ -335,6 +335,7 @@ void User::removeProbabilityGame(const Probability_item &prob){
 
 HashTabGames User::getProbabilityGames() {
 	return probabilityGames;
+}
 
 Date User::getLastPurchase() {
 	return last_purchase;
