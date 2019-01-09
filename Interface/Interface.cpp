@@ -192,6 +192,10 @@ void system_menu_interface(){
 			date_interface();
 			break;
 		}
+		case 13:{
+			sleeping_interface();
+			break;
+		}
 		case 0:{
 			save_interface();
 			return;
@@ -215,14 +219,15 @@ void print_system_interface(){
 	std::cout << "\t10: Search for a developer (by name)" << std::endl;
 	std::cout << "\t11: Search for a developer (by NIF)" << std::endl;
 	std::cout << "\t12: Update system date" << std::endl;
+	std::cout << "\t13: See sleeping users for certain game" << std::endl;
 	std::cout << "\t0: Leave the system editor" << std::endl << std::endl;
 }
 
 int prompt_system_interface(){
 	int input = -1;
 	input_receiver(input);
-	while(input < 0 || input > 12){
-		std::cout << "Please insert an integer between 0 and 12" << std::endl;
+	while(input < 0 || input > 13){
+		std::cout << "Please insert an integer between 0 and 13" << std::endl;
 		input_receiver(input);
 	}
 	return input;
@@ -1164,7 +1169,7 @@ void load_interface(){
 		cerr << "Error opening file" << endl;
 	}
 	else{
-		lsystem = importSystem(file);
+		lsystem = new System(file);
 		file.close();
 	}
 
@@ -2053,5 +2058,20 @@ int prompt_date_interface(){
 	return input;
 }
 
-
+void sleeping_interface(){
+	Game *game;
+	std::cout << "Input the game's title\n";
+	std::string title;
+	getline(cin,title);
+	while(true){
+		try{
+			game = lsystem->searchGame(title);
+			break;
+		}
+		catch(NonExistingGame &e){
+			e.printInf();
+		}
+	}
+	game->printSleepingUsers();
+}
 
