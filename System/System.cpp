@@ -427,4 +427,10 @@ void System::setCurrentDate(const std::string &date){
 	current_date = aux;
 }
 
+Date System::getCurrentDate() {
+	return current_date;
+}
+
+
+
 
