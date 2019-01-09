@@ -195,10 +195,6 @@ void System::addGame(Game* game)
 	store.push_back(game);
 }
 
-Date System::getCurrentDate() {
-	return current_date;
-}
-
 Game* System::searchGame(unsigned int id){
 	for (unsigned int i = 0; i < store.size(); i++)
 		if (store[i]->getId() == id)
@@ -251,21 +247,19 @@ void System::buyGame(User* user, Game* game, unsigned int id)
 
 void System::giveInfoSystem(ofstream &info) const
 {
-	info << current_date.toStr() << "\n";
-
 	for (unsigned int i = 0; i < store.size(); i++)
 	{
 		store[i]->giveInfoGame(info);
 		info << "\n";
 	}
-	info << "\n";
+	info << "@" << "\n";
 
 	for (unsigned int j = 0; j < user_library.size(); j++)
 	{
 		user_library[j]->giveInfoUser(info);
 		info << "\n";
 	}
-	info << "\n";
+	info << "@" << "\n";
 
 	for (unsigned int j = 0; j < user_library.size(); j++)
 	{
@@ -286,6 +280,11 @@ void System::giveInfoSystem(ofstream &info) const
 	}
 	info << "@" << "\n";
 }
+
+
+/********				  ********/
+/********     PARTE 2     ********/
+/********				  ********/
 
 BST<Developer*> System::getDevelopers() const
 {
@@ -382,25 +381,47 @@ void System::addMonths(unsigned int months) {
 	else current_date.setMonths(current_date.getMonth() + months);
 }
 
-bool System::checkAsleep(User user) {
-	if (current_date < user.getLastPurchase())
+bool System::checkAsleep(User* user) {
+	if (current_date < user->getLastPurchase())
 		return false;
 
-	if (current_date.getYear() - user.getLastPurchase().getYear() >= 2)
+	if (current_date.getYear() - user->getLastPurchase().getYear() >= 2)
 		return true;
-	if ((current_date.getYear() - user.getLastPurchase().getYear() == 1) && (current_date.getMonth() + 12 - user.getLastPurchase().getMonth() >= 3))
+	if ((current_date.getYear() - user->getLastPurchase().getYear() == 1) && (current_date.getMonth() + 12 - user->getLastPurchase().getMonth() >= 3))
 		return true;
 
-	if (current_date.getMonth() - user.getLastPurchase().getMonth() >= 3)
+	if (current_date.getMonth() - user->getLastPurchase().getMonth() >= 3)
 		return true;
 
 	return false;
 }
 
-void System::setCurrentDate(const std::string &date){
-	Date aux(date);
-	current_date = aux;
+void System::updateSleepingUsers() {
+
+	//Em primeiro lugar, apagar as hash tables de jogadores adormecidos todos os jogos
+	for(unsigned int i = 0; i < store.size(); i++)
+		store[i]->deleteSleepingUsers();
+
+
+	//De seguida, encontrar os utilizadores adormecidos
+	for(unsigned int j = 0; j < user_library.size(); j++) {
+
+		//Se o utilizador esta adormecido, percorre a hash table dos jogos interessantes e adiciona o user a hash de utilizadores adormecidos dos jogos
+		if (checkAsleep(user_library[j])) {
+
+			HashTabGames intGames = user_library[j]->getInterestingGames();
+			HashTabGames::iterator it = intGames.begin();
+
+			while(it != intGames.end()) {
+
+				//Se o valor da probabilidade de compra for superior a 50%, adiciona-se o utilizador a hash do jogo
+				if(it->probability >= 0.5)
+					it->item->addSleepingUser(user_library[j]->getEmail());
+			}
+		}
+	}
 }
+
 
 
 

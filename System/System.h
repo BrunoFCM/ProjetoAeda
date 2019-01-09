@@ -20,6 +20,11 @@ class System
 	vector<Game*> store;		//base de dados com o conjunto de todos os jogos
 	vector<User*> user_library; //base de dados com o conjunto de todos os utilizadores
 	BST<Developer*> developers;	//arvore binaria de pesquisa com as empresas criadoras de jogos
+
+	/********				  ********/
+	/********     PARTE 2     ********/
+	/********				  ********/
+
 	Date current_date;			//data atual do sistema
 
 public:
@@ -51,12 +56,6 @@ public:
 	 * @param game Jogo a ser adicionado
 	 */
 	void addGame(Game* game);
-	
-	/**
-	* @brief Funcao que retorna a data atual do sistema
-	* @return Retorna a data atual do sistema
-	*/
-	Date getCurrentDate();
 
  	/**
 	 * @brief Funcao que pesquisa um jogo atraves do seu id (passado como argumento)
@@ -126,6 +125,11 @@ public:
 	*/
 	void giveInfoSystem(ofstream &info) const;
 
+
+	/********				  ********/
+	/********     PARTE 2     ********/
+	/********				  ********/
+
 	/**
 	* @brief Funcao que retorna o conjunto de empresas criadoras de jogos de um sistema
 	* @return developers Conjunto de empresas criadoras de jogos de um sistema
@@ -167,13 +171,12 @@ public:
 	* @param user Utilizador a verificar
 	* @return Retorna true se o utilizador estiver adormecido, false caso contrario
 	*/
-	bool checkAsleep(User user);
+	bool checkAsleep(User* user);
 
 	/**
-	 * @brief Funcao que muda a data atual
-	 * @param date Data atual no formato DD/MM/YYYY
+	 * @brief Funcao que atualiza as hash tables de sleeping users de todos os jogos
 	 */
-	void setCurrentDate(const std::string &date);
+	void updateSleepingUsers();
 
 };
 
