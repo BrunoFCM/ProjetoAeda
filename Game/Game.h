@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <unordered_set>
 #include "../Date/Date.h"
 #include "../Interval/Interval.h"
 #include "../PlaySession/PlaySession.h"
