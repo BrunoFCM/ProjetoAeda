@@ -192,5 +192,12 @@ public:
 
 };
 
+/**
+	* @brief Funcao que importa a informacao a partir de um ficheiro para construir um System
+	* @param file Referencia a uma stream de ficheiro que contem as informacoes de system
+	* @return Pointer para o System criado
+	*/
+System * importSystem(ifstream &file);
+
 #endif /* SRC_SYSTEM_H_ */
 
