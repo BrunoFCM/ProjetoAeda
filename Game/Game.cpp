@@ -155,9 +155,9 @@ void Game::giveInfoGame(ostream &info) const
 }
 
 
-/********		   ********/
+/********		   		   ********/
 /********     PARTE 2      ********/
-/********		   ********/
+/********		  		   ********/
 
 
 void Game::addSleepingUser(string em) {
@@ -178,6 +178,9 @@ void Game::removeSleepingUser(string em) {
 	throw NonExistingUser(em);	//ALTERAR PARA ID DEPOIS OU ALTERAR EXCECAO
 }
 
+void Game::deleteSleepingUsers() {
+	sleepingUsers.clear();
+}
 
 
 

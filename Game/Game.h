@@ -223,7 +223,7 @@ public:
 
 	
 /********				  ********/
-/********     	   PARTE 2     		  ********/
+/********     PARTE 2     ********/
 /********				  ********/
 
 	/**
@@ -237,6 +237,11 @@ public:
 	 * @param em String do email do utilizador
 	 */
 	void removeSleepingUser(string em);
+
+	/**
+	 * @brief Apaga a hash table de jogadores adormecidos
+	 */
+	void deleteSleepingUsers();
 
 };
 
