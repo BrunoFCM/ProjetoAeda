@@ -5,7 +5,7 @@
 #include "../Exceptions.h"
 
 using namespace std;
-
+/*
 System::System(ifstream &file) : developers(new Developer("",0,"")), current_date(Date("01/01/2019")) {
 	std::string input;
 
@@ -158,7 +158,7 @@ System::System(ifstream &file) : developers(new Developer("",0,"")), current_dat
 		getline(file,input);
 	}
 }
-
+*/
 System::~System()
 {
 	for (size_t i = 0; i < user_library.size(); i++) {
