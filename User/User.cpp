@@ -320,4 +320,9 @@ void User::removeInterestingGame(const Wanted_item &w){
 	throw NonExistingGame(w.item->getTitle());
 }
 
+Date User::getLastPurchase() {
+	return last_purchase;
+}
+
+
 
