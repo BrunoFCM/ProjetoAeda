@@ -51,6 +51,12 @@ public:
 	 * @param game Jogo a ser adicionado
 	 */
 	void addGame(Game* game);
+	
+	/**
+	* @brief Funcao que retorna a data atual do sistema
+	* @return Retorna a data atual do sistema
+	*/
+	Date getCurrentDate();
 
  	/**
 	 * @brief Funcao que pesquisa um jogo atraves do seu id (passado como argumento)
