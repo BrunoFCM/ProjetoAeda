@@ -92,7 +92,13 @@ unsigned int Date::getYear() const {
 }
 
 std::string Date::toStr() const {			//output no formato DD/MM/AAAA
-	return std::to_string(day) + "/" + std::to_string(month) + "/" + std::to_string(year);
+	std::string aux1 = "";
+	std::string aux2 = "";
+	if(day < 10)
+		aux1 = "0";
+	if(month < 10)
+		aux2 = "0";
+	return aux1 + std::to_string(day) + "/" + aux2 + std::to_string(month) + "/" + std::to_string(year);
 }
 
 bool Date::operator< (const Date &date2) const{
