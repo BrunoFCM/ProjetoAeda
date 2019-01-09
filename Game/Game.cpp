@@ -3,6 +3,7 @@
 #include <vector>
 #include <string>
 #include <iostream>
+#include <iomanip>
 
 using namespace std;
 
@@ -185,8 +186,8 @@ void Home::printInfoGame() const {
 	cout << "ID: " << id << endl;
 	cout << "Platforms: " << platforms << endl;
 	cout << "Genres: " << genres << endl;
-	cout << "Current Price: " << getPrice() << endl;
-	cout << "Base Price: " << getBasePrice() << endl;
+	cout << "Current Price: " << fixed << setprecision(2) << getPrice() << endl;
+	cout << "Base Price: " << fixed << setprecision(2) << getBasePrice() << endl;
 	cout << "Release Date: " << getRelease().toStr() << endl;
 	cout << "Recommended age: " << getAge().toStr() << endl;
 	cout << "Developer: " << getDeveloper() << endl;

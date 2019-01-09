@@ -218,8 +218,8 @@ void print_system_interface(){
 int prompt_system_interface(){
 	int input = -1;
 	input_receiver(input);
-	while(input < 0 || input > 11){
-		std::cout << "Please insert an integer between 0 and 11" << std::endl;
+	while(input < 0 || input > 8){
+		std::cout << "Please insert an integer between 0 and 8" << std::endl;
 		input_receiver(input);
 	}
 	return input;
@@ -522,6 +522,20 @@ void user_interface(User *user){
 			break;
 		}
 		case 2:{
+			vector<Game *> vec (user->getLibrary());
+			std::cout << "\n\nInsert the number of games to show (a negative value or 0 will show every game)\n";
+			unsigned int lim_elements;
+			input_receiver(lim_elements);
+			if (lim_elements == 0 || lim_elements > vec.size())
+				lim_elements = vec.size();
+			std::cout << endl << endl;
+			for (unsigned int i = 0; i < lim_elements; ++i){
+				std::cout << vec[i]->getId() << ": " << vec[i]->getTitle() << endl;
+			}
+			std::cout << endl << endl;
+			break;
+		}
+		case 3:{
 			string card_number;
 			std::cout << "\n\nInsert the card's identification number\n";
 			input_receiver(card_number);
@@ -550,7 +564,7 @@ void user_interface(User *user){
 
 			break;
 		}
-		case 3:{
+		case 4:{
 			std::cout << "\n\nInsert the number of cards to see (a negative value or 0 will show every card)\n";
 			unsigned int lim_crd;
 			input_receiver(lim_crd);
@@ -566,7 +580,7 @@ void user_interface(User *user){
 			card_interface(user->getCardRef(card_ind - 1));
 			break;
 		}
-		case 4:{
+		case 5:{
 			if(user->getLibrary().size() == 0){
 				std::cout << std::endl << std::endl << "Warning: this user has no games" << std::endl << std::endl;
 				break;
@@ -633,7 +647,7 @@ void user_interface(User *user){
 			game->addSession(session);
 			break;
 		}
-		case 5:{
+		case 6:{
 			vector<PlaySession *> sessions(user->getSessions());
 			std::cout << "\n\nInsert the number of sessions to see (a negative value or 0 will show every session)\n";
 			unsigned int lim_ssn;
@@ -641,7 +655,7 @@ void user_interface(User *user){
 			user->printSessionsUser(lim_ssn);
 			break;
 		}
-		case 6:{
+		case 7:{
 			std::cout << endl << "Input the title of the game to buy\nInput: ";
 			string title;
 			getline(cin,title);
@@ -689,14 +703,14 @@ void user_interface(User *user){
 			}
 			break;
 		}
-		case 7:{
+		case 8:{
 			std::cout << "\n\nInsert the number of updates to see (a negative value or 0 shows the most recent update for every game)\n";
 			unsigned int lim_upd;
 			input_receiver(lim_upd);
 			user->printUpdates(lim_upd);
 			break;
 		}
-		case 8:{
+		case 9:{
 			std::cout << endl << "Input the title of the game to update\nInput: ";
 			string title;
 			getline(cin,title);
@@ -719,7 +733,7 @@ void user_interface(User *user){
 				if(user->installUpdates(game))
 					std::cout << endl << "Game successfully updated\n";
 				else
-					std::cout << endl << "Game successfully updated\n";
+					std::cout << endl << "Game already updated\n";
 			}
 			catch(GameNotOwned &e){
 				std::cout << "Warning: ";
@@ -737,21 +751,23 @@ void user_interface(User *user){
 void print_user_interface(){
 	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: See the user characteristics" << std::endl;
-	std::cout << "\t2: Add a card" << std::endl;
-	std::cout << "\t3: See cards" << std::endl;
-	std::cout << "\t4: Add a game session" << std::endl;
-	std::cout << "\t5: See game session history" << std::endl;
-	std::cout << "\t6: Buy a game" << std::endl;
-	std::cout << "\t7: See installed updates" << std::endl;
-	std::cout << "\t8: Update a game" << std::endl;
+	std::cout << "\t2: See the user's games" << std::endl;
+	std::cout << "\t3: Add a card" << std::endl;
+	std::cout << "\t4: See cards" << std::endl;
+	std::cout << "\t5: Add a game session" << std::endl;
+	std::cout << "\t6: See game session history" << std::endl;
+	std::cout << "\t7: Buy a game" << std::endl;
+	std::cout << "\t8: See installed updates" << std::endl;
+	std::cout << "\t9: Update a game" << std::endl;
+	std::cout << "\t10: See the user's Wish list" << std::endl;
 	std::cout << "\t0: Leave the user editor" << std::endl << std::endl;
 }
 
 int prompt_user_interface(){
 	int input = -1;
 	input_receiver(input);
-	while(input < 0 || input > 8){
-		std::cout << "Please insert an integer between 0 and 8" << std::endl;
+	while(input < 0 || input > 10){
+		std::cout << "Please insert an integer between 0 and 10" << std::endl;
 		input_receiver(input);
 	}
 	return input;
@@ -954,7 +970,6 @@ void sort_user_interface(){
 		}
 		while (input != 'y' && input != 'n'){
 			std::cout << "\nInvalid response\n";
-			char input;
 			input_receiver(input);
 		}
 		switch(prompt){
@@ -1623,16 +1638,17 @@ void print_vector_interface(){
 
 	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: Add a tag to the search" << std::endl;
-	std::cout << "\t2: Sort the search results" << std::endl;
+	std::cout << "\t2: Sort the vector" << std::endl;
 	std::cout << "\t3: Access a result" << std::endl;
+	std::cout << "\t4: See the first n results" << std::endl;
 	std::cout << "\t0: Exit the result interface" << std::endl << std::endl;
 }
 
 int prompt_vector_interface(){
 	int input = 0;
 	input_receiver(input);
-	while(input < 0 || input > 3){
-		std::cout << "Please insert an integer between 0 and 3" << std::endl;
+	while(input < 0 || input > 4){
+		std::cout << "Please insert an integer between 0 and 4" << std::endl;
 		input_receiver(input);
 	}
 	return input;
@@ -1642,7 +1658,7 @@ void game_vector_interface(vector<Game*> &vec){
 
 	while(true){
 		if(vec.size() == 0){
-			std::cout << "\n\n\nNoresults found, exiting the search interface\n\n\n";
+			std::cout << "\n\n\nNo results found, exiting the vector interface\n\n\n";
 			return;
 		}
 		std::cout << "\n\n\nSearch results (" << vec.size() << ")\n\n";
@@ -1669,6 +1685,19 @@ void game_vector_interface(vector<Game*> &vec){
 			game_interface(vec[input - 1]);
 			break;
 		}
+		case 4:{
+			std::cout << "\n\nInsert the number of games (a negative value or 0 will show every game)\n";
+			unsigned int lim_elements;
+			input_receiver(lim_elements);
+			if (lim_elements == 0 || lim_elements > vec.size())
+				lim_elements = vec.size();
+			std::cout << endl << endl;
+			for (unsigned int i = 0; i < lim_elements; ++i){
+				std::cout << vec[i]->getId() << ": " << vec[i]->getTitle() << endl;
+			}
+			std::cout << endl << endl;
+			break;
+		}
 		case 0:
 			return;
 		}
@@ -1679,7 +1708,7 @@ void user_vector_interface(vector<User*> &vec){
 
 	while(true){
 		if(vec.size() == 0){
-			std::cout << "\n\n\nNoresults found, exiting the search interface\n\n\n";
+			std::cout << "\n\n\nNo results found, exiting the vector interface\n\n\n";
 			return;
 		}
 		std::cout << "\n\n\nSearch results (" << vec.size() << ")\n\n";
@@ -1704,6 +1733,19 @@ void user_vector_interface(vector<User*> &vec){
 				input_receiver(input);
 			}
 			user_interface(vec[input - 1]);
+			break;
+		}
+		case 4:{
+			std::cout << "\n\nInsert the number of users (a negative value or 0 will show every user)\n";
+			unsigned int lim_elements;
+			input_receiver(lim_elements);
+			if (lim_elements == 0 || lim_elements > vec.size())
+				lim_elements = vec.size();
+			std::cout << endl << endl;
+			for (unsigned int i = 0; i < lim_elements; ++i){
+				std::cout << vec[i]->getName() << endl;
+			}
+			std::cout << endl << endl;
 			break;
 		}
 		case 0:
@@ -1783,6 +1825,159 @@ void developer_interface(Developer* developer) {
 			return;
 		}
 	}
+}
+
+void wishlist_interface(User *user){
+ 	draw_header("WISH LIST");
+ 	while(true){
+		print_wishlist_interface();
+		switch(prompt_wishlist_interface()){
+		case 1:{
+			std::cout << "\n\nInsert the number of games to see (a negative value or 0 will show every game)\n";
+			unsigned int lim_element;
+			input_receiver(lim_element);
+
+			priority_queue<Wanted_item> aux(user->getWishlist());
+
+			if (aux.empty()){
+				std::cout << "The list is empty\n\n";
+				break;
+			}
+
+			vector<Game *> wish;
+
+			if(lim_element > aux.size() || lim_element <= 0){
+				lim_element = aux.size();
+			}
+
+			for(unsigned int i = 0; i < lim_element; ++i){
+				std::cout << (i + 1) << ": " << aux.top().item->getTitle() << " (interest: " << aux.top().interest << ")\n";
+				aux.pop();
+			}
+
+			break;
+		}
+		case 2:{
+			std::cout << std::endl << "Input the title of the game to add\nInput: ";
+			string title;
+			getline(cin,title);
+
+			Game * game;
+
+			while(true){
+				try{
+					game = lsystem->searchGame(title);
+					break;
+				}
+				catch(NonExistingGame &e){
+					e.printInf();
+					std::cout << endl << "Input the title of the game\nInput: ";
+					getline(cin,title);
+				}
+			}
+
+			std::cout << std::endl << "Input the level of interest in the game (from 0 to 10)\n";
+			int interest;
+			input_receiver(interest);
+			while(interest < 0 && interest > 10){
+				std::cout << "Invalid value\n";
+				input_receiver(interest);
+			}
+
+			try{
+				user->addToWishlist(game,interest);
+			}
+			catch(RepeatedGame &e){
+				std::cout << "This game is already in the Wish list\n\n";
+			}
+
+			break;
+		}
+		case 3:{
+			std::cout << std::endl << "Input the title of the game to remove\nInput: ";
+			string title;
+			getline(cin,title);
+
+			Game * game;
+
+			while(true){
+				try{
+					game = lsystem->searchGame(title);
+					break;
+				}
+				catch(NonExistingGame &e){
+					e.printInf();
+					std::cout << endl << "Input the title of the game\nInput: ";
+					getline(cin,title);
+				}
+			}
+
+			try{
+				user->removeFromWishlist(game);
+			}
+			catch(NonExistingGame &e){
+				std::cout << "This game isn't in the Wish list\n\n";
+			}
+
+			break;
+		}
+		case 4:{
+			std::cout << std::endl << "Input the title of the game to change its interest level\nInput: ";
+			string title;
+			getline(cin,title);
+
+			Game * game;
+
+			while(true){
+				try{
+					game = lsystem->searchGame(title);
+					break;
+				}
+				catch(NonExistingGame &e){
+					e.printInf();
+					std::cout << endl << "Input the title of the game\nInput: ";
+					getline(cin,title);
+				}
+			}
+
+			std::cout << std::endl << "Input the level of interest in the game (from 0 to 10)\n";
+			int interest;
+			input_receiver(interest);
+			while(interest < 0 && interest > 10){
+				std::cout << "Invalid value\n";
+				input_receiver(interest);
+			}
+
+			try{
+				user->changeInterestLevel(game,interest);
+			}
+			catch(NonExistingGame &e){
+				std::cout << "This game isn't in the Wish list\n\n";
+			}
+
+			break;
+		}
+		case 0:
+			return;
+		}
+	}
+}
+ void print_wishlist_interface(){
+ 	std::cout << "\nWould you like to: " << std::endl << std::endl;
+	std::cout << "\t1: See the Wish list" << std::endl;
+	std::cout << "\t2: Add a game to the Wish list" << std::endl;
+	std::cout << "\t3: Remove a game from the Wish list" << std::endl;
+	std::cout << "\t4: Change a game's interest level" << std::endl;
+	std::cout << "\t0: Exit the card interface" << std::endl << std::endl;
+}
+ int prompt_wishlist_interface(){
+	int input = -1;
+	input_receiver(input);
+	while(input < 0 || input > 4){
+		std::cout << "Please insert an integer between 0 and 4" << std::endl;
+		input_receiver(input);
+	}
+	return input;
 }
 
 

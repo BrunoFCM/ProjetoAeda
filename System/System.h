@@ -8,6 +8,7 @@
 #include "../User/User.h"
 #include "../Sorts/Sorts.h"
 #include "../Developer/Developer.h"
+#include "../Restricts/Restricts.h"
 
 using namespace std;
 

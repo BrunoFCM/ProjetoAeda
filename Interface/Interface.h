@@ -283,3 +283,21 @@ int prompt_developer_interface();
  * @param developer Empresa sobre a qual o utilizador vai operar
  */
 void developer_interface(Developer* developer);
+
+/**
+ * @brief Funcao que gere o menu da Wish list de um utilizador
+ * @param user Utilizador a ser analisado
+ */
+void wishlist_interface(User *user);
+
+/**
+ * @brief Funcao que imprime no ecra o menu da Wish list de um utilizador
+ */
+void print_wishlist_interface();
+
+/**
+ * @brief Funcao que analisa o input do utilizador e o retorna se for valido, ou mostra uma mensagem de erro enquanto for invalido
+ * @return Retorna o input dado pelo utilizador
+ */
+int prompt_wishlist_interface();
+
