@@ -234,6 +234,11 @@ priority_queue<Wanted_item> User::getWishlist(){
 	return Wishlist;
 }
 
+
+	/********				  ********/
+	/********     PARTE 2     		  ********/
+	/********				  ********/
+
 void User::addToWishlist(Game *game, int interest){
 	try{
 		searchWishlist(game);
@@ -296,6 +301,23 @@ void User::changeInterestLevel(Game *game, int interest){
 
 	removeFromWishlist(game);
 	addToWishlist(game,interest);
+}
+
+void User::addInterestingGame(const Wanted_item &w){
+	interestingGames.insert(w);
+}
+
+void User::removeInterestingGame(const Wanted_item &w){
+	HashTabGames::iterator it = interestingGames.begin();
+
+	while(it != interestingGames.end()) {
+		if ((*it).item->getTitle() == w.item->getTitle()) {
+			interestingGames.erase(it);
+			return;
+		}
+		it++;
+	}
+	throw NonExistingGame(w.item->getTitle());
 }
 
 
