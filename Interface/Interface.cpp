@@ -188,6 +188,10 @@ void system_menu_interface(){
 			}
 			break;
 		}
+		case 12:{
+			date_interface();
+			break;
+		}
 		case 0:{
 			save_interface();
 			return;
@@ -210,14 +214,15 @@ void print_system_interface(){
 	std::cout << "\t9: Add a new developer to the system" << std::endl;
 	std::cout << "\t10: Search for a developer (by name)" << std::endl;
 	std::cout << "\t11: Search for a developer (by NIF)" << std::endl;
+	std::cout << "\t12: Update system date" << std::endl;
 	std::cout << "\t0: Leave the system editor" << std::endl << std::endl;
 }
 
 int prompt_system_interface(){
 	int input = -1;
 	input_receiver(input);
-	while(input < 0 || input > 11){
-		std::cout << "Please insert an integer between 0 and 11" << std::endl;
+	while(input < 0 || input > 12){
+		std::cout << "Please insert an integer between 0 and 12" << std::endl;
 		input_receiver(input);
 	}
 	return input;
@@ -1980,6 +1985,74 @@ int prompt_wishlist_interface(){
 	return input;
 }
 
+void date_interface(){
+	draw_header("UPDATE DATE");
+	while(true){
+			print_date_interface();
+			switch(prompt_date_interface()){
+			case 1:{
+				std::cout << "\n\nInsert the number of days to add\n";
+				std::cout << "Input: ";
+				unsigned int days;
+				input_receiver(days);
+				lsystem->addDays(days);
+				break;
+			}
+			case 2:{
+				std::cout << "\n\nInsert the number of months to add\n";
+				std::cout << "Input: ";
+				unsigned int months;
+				input_receiver(months);
+				lsystem->addMonths(months);
+				break;
+			}
+			case 3:{
+				std::cout << "\n\nInsert the new data to the system (after the last one and in format dd/mm/yyyy)\n";
+				std::cout << "Input: ";
+				std::string date;
+				Date release = lsystem->getCurrentDate();
+				Date actual = lsystem->getCurrentDate();
+				while(true){
+					try{
+						getline(cin, date);
+						release = Date(date);
+						if (release < actual) {
+							std::cout << "\nInput a date that is more recent than the last one\n";
+							continue;
+						}
+						break;
+					}
+					catch(InvalidDate &e){
+						e.printInf();
+					}
+				}
+				lsystem->setCurrentDate(date);
+				break;
+			}
+			case 0:
+				return;
+			}
+	}
+}
+
+void print_date_interface(){
+	std::cout << "\nSystem date: " << lsystem->getCurrentDate().toStr() << "\n";
+	std::cout << "\nWould you like to: " << std::endl << std::endl;
+	std::cout << "\t1: Add days" << std::endl;
+	std::cout << "\t2: Add months" << std::endl;
+	std::cout << "\t3: Set a completely different date" << std::endl;
+	std::cout << "\t0: Exit the date interface" << std::endl << std::endl;
+}
+
+int prompt_date_interface(){
+	int input = -1;
+	input_receiver(input);
+	while(input < 0 || input > 3){
+		std::cout << "Please insert an integer between 0 and 3" << std::endl;
+		input_receiver(input);
+	}
+	return input;
+}
 
 
 
