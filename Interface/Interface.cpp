@@ -218,8 +218,8 @@ void print_system_interface(){
 int prompt_system_interface(){
 	int input = -1;
 	input_receiver(input);
-	while(input < 0 || input > 8){
-		std::cout << "Please insert an integer between 0 and 8" << std::endl;
+	while(input < 0 || input > 11){
+		std::cout << "Please insert an integer between 0 and 11" << std::endl;
 		input_receiver(input);
 	}
 	return input;
@@ -1962,7 +1962,8 @@ void wishlist_interface(User *user){
 		}
 	}
 }
- void print_wishlist_interface(){
+
+void print_wishlist_interface(){
  	std::cout << "\nWould you like to: " << std::endl << std::endl;
 	std::cout << "\t1: See the Wish list" << std::endl;
 	std::cout << "\t2: Add a game to the Wish list" << std::endl;
@@ -1970,7 +1971,8 @@ void wishlist_interface(User *user){
 	std::cout << "\t4: Change a game's interest level" << std::endl;
 	std::cout << "\t0: Exit the card interface" << std::endl << std::endl;
 }
- int prompt_wishlist_interface(){
+
+int prompt_wishlist_interface(){
 	int input = -1;
 	input_receiver(input);
 	while(input < 0 || input > 4){
