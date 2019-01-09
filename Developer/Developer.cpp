@@ -65,17 +65,6 @@ void Developer::giveInfoDeveloper(ostream &info) const {
 	info << nif << "\n";
 	info << eMail << "\n";
 	info << numGames << "\n";
-
-	for (unsigned int i = 0; i < games.size(); i++)
-		if(i != games.size() - 1)
-		{
-			games[i]->giveInfoGame(info);
-			info << ",\n";
-		}
-		else {
-			games[i]->giveInfoGame(info);
-			info << ".\n";
-		}
 }
 
 void Developer::printDevGames() const {
