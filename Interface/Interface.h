@@ -301,3 +301,19 @@ void print_wishlist_interface();
  */
 int prompt_wishlist_interface();
 
+/**
+ * @brief Funcao que gere o menu da data atual do sistema
+ */
+void date_interface();
+
+/**
+ * @brief Funcao que imprime no ecra o menu da data atual do sistema
+ */
+void print_date_interface();
+
+/**
+ * @brief Funcao que analisa o input do utilizador e o retorna se for valido, ou mostra uma mensagem de erro enquanto for invalido
+ * @return Retorna o input dado pelo utilizador
+ */
+int prompt_date_interface();
+
