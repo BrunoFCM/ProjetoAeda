@@ -2027,6 +2027,7 @@ void date_interface(){
 					}
 				}
 				lsystem->setCurrentDate(date);
+				lsystem->updateSleepingUsers();
 				break;
 			}
 			case 0:
