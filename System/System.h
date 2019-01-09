@@ -156,6 +156,12 @@ public:
 	*/
 	void addMonths(unsigned int months);
 
+	/**
+	* @brief Funcao que verifica se um utilizador esta adormecido
+	* @param user Utilizador a verificar
+	* @return Retorna true se o utilizador estiver adormecido, false caso contrario
+	*/
+	bool checkAsleep(User user);
 
 };
 
