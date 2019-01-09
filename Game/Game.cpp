@@ -155,6 +155,30 @@ void Game::giveInfoGame(ostream &info) const
 }
 
 
+/********		   ********/
+/********     PARTE 2      ********/
+/********		   ********/
+
+
+void Game::addSleepingUser(string em) {
+	sleepingUsers.insert(em);
+}
+
+void Game::removeSleepingUser(string em) {
+	HashTabUser::iterator it = sleepingUsers.begin();
+
+	while(it != sleepingUsers.end()) {
+		if (*it == em) {
+			sleepingUsers.erase(it);
+			return;
+		}
+		it++;
+	}
+
+	throw NonExistingUser(em);	//ALTERAR PARA ID DEPOIS OU ALTERAR EXCECAO
+}
+
+
 
 
 
