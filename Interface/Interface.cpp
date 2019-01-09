@@ -1992,7 +1992,6 @@ void date_interface(){
 			switch(prompt_date_interface()){
 			case 1:{
 				std::cout << "\n\nInsert the number of days to add\n";
-				std::cout << "Input: ";
 				unsigned int days;
 				input_receiver(days);
 				lsystem->addDays(days);
@@ -2000,7 +1999,6 @@ void date_interface(){
 			}
 			case 2:{
 				std::cout << "\n\nInsert the number of months to add\n";
-				std::cout << "Input: ";
 				unsigned int months;
 				input_receiver(months);
 				lsystem->addMonths(months);
