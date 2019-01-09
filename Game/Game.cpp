@@ -182,6 +182,24 @@ void Game::deleteSleepingUsers() {
 	sleepingUsers.clear();
 }
 
+void Game::printSleepingUsers() {
+	HashTabUser::iterator it = sleepingUsers.begin();
+
+	while(it != sleepingUsers.end()) {
+		cout << *it << "\n";
+		it++;
+	}
+}
+
+void Game::giveInfoSleepingUsers(ostream &info) {
+	HashTabUser::iterator it = sleepingUsers.begin();
+
+	while(it != sleepingUsers.end()) {
+		info << *it << "\n";
+		it++;
+	}
+}
+
 
 
 
