@@ -143,7 +143,7 @@ public:
 	vector<double> getPriceHist() const;
 
 	/**
-	* @brief Membro-funcao que retorna um vetor de strings correspondentes ÃƒÆ’Ã‚Â  base de jogadores do jogo
+	* @brief Membro-funcao que retorna um vetor de strings correspondentes ÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â  base de jogadores do jogo
 	* @return Retorna o valor de player_base, correspondente ao numero de jogadores
 	*/
 	unsigned int getPlayerBase() const;
@@ -174,7 +174,7 @@ public:
 	void discountPrice(const unsigned int &percentage);
 
 	/**
-	* @brief Altera o preÃƒÆ’Ã‚Â§o base do jogo
+	* @brief Altera o preÃƒÆ’Ã†â€™Ãƒâ€šÃ‚Â§o base do jogo
 	* @param newPrice Novo preco base do jogo
 	*/
 	void changeBasePrice(const double &newPrice);
@@ -216,8 +216,8 @@ public:
 	virtual void addSession(PlaySession *sess);
 
 	/**
-	* @brief Funcao virtual que passa para uma fstream a informacao de um jogo
-	* @param info Ofstream para onde e passada a informacao de um jogo
+	* @brief Funcao virtual que passa para uma ostream a informacao de um jogo
+	* @param info Ostream para onde e passada a informacao de um jogo
 	*/
 	virtual void giveInfoGame(ostream &info) const;
 
@@ -242,6 +242,17 @@ public:
 	 * @brief Apaga a hash table de jogadores adormecidos
 	 */
 	void deleteSleepingUsers();
+
+	/**
+	* @brief Função que imprime os utilizadores adormecidos no ecra
+	*/
+	void printSleepingUsers();
+
+	/**
+	* @brief Funcao que passa para uma ostream os utilizadores adormecidos
+	* @param info Ofstream para onde sao passados os utilizadores adormecidos
+	*/
+	void giveInfoSleepingUsers(ostream &info);
 
 };
 
