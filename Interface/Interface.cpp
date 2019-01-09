@@ -193,6 +193,10 @@ void system_menu_interface(){
 			break;
 		}
 		case 13:{
+			if (lsystem->getStore().size() == 0) {
+				cout << "\nFirst you need to add games to the system\n";
+				break;
+			}
 			sleeping_interface();
 			break;
 		}
