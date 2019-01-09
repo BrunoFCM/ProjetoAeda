@@ -376,6 +376,21 @@ void System::addMonths(unsigned int months) {
 	else current_date.setMonths(current_date.getMonth() + months);
 }
 
+bool System::checkAsleep(User user) {
+	if (current_date < user.getLastPurchase())
+		return false;
+
+	if (current_date.getYear() - user.getLastPurchase().getYear() >= 2)
+		return true;
+	if ((current_date.getYear() - user.getLastPurchase().getYear() == 1) && (current_date.getMonth() + 12 - user.getLastPurchase().getMonth() >= 3))
+		return true;
+
+	if (current_date.getMonth() - user.getLastPurchase().getMonth() >= 3)
+		return true;
+
+	return false;
+}
+
 
 
 
