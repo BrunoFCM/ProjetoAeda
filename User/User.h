@@ -247,6 +247,12 @@ public:
 	 * @param w Wanted_item a ser adicionado
 	 */
 	void removeInterestingGame(const Wanted_item &w);
+	
+	/**
+	* @brief Funcao que retorna a data da ultima compra de um utilizador
+	* @return Data da ultima compra de um utilizador
+	*/
+	Date getLastPurchase();
 };
 
 
