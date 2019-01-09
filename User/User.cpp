@@ -125,7 +125,7 @@ void User::printInfoUser() const
 	cout << setw(20) << "Number of sessions: "; cout << sessions.size() << endl;
 }
 
-void User::giveInfoUser(ofstream &info) const
+void User::giveInfoUser(ofstream &info)
 {
 	info << name << "\n"
 		 << email << "\n"
