@@ -255,19 +255,29 @@ void System::buyGame(User* user, Game* game, unsigned int id)
 
 void System::giveInfoSystem(ofstream &info) const
 {
+	info << current_date.toStr() << "\n";
+
+  	BSTItrIn<Developer*> it (developers);
+	while (!it.isAtEnd())
+	{
+		it.retrieve()->giveInfoDeveloper(info);
+		it.advance();
+	}
+	info << "\n";
+
 	for (unsigned int i = 0; i < store.size(); i++)
 	{
 		store[i]->giveInfoGame(info);
 		info << "\n";
 	}
-	info << "@" << "\n";
+	info << "\n";
 
 	for (unsigned int j = 0; j < user_library.size(); j++)
 	{
 		user_library[j]->giveInfoUser(info);
 		info << "\n";
 	}
-	info << "@" << "\n";
+	info << "\n";
 
 	for (unsigned int j = 0; j < user_library.size(); j++)
 	{
@@ -277,7 +287,7 @@ void System::giveInfoSystem(ofstream &info) const
 			sess[i]->giveSessions(info);
 		}
 	}
-	info << "@" << "\n";
+	info << "\n";
 
 	BSTItrIn<Developer*> it (developers);
 	while (!it.isAtEnd())
@@ -286,7 +296,7 @@ void System::giveInfoSystem(ofstream &info) const
 		info << ",\n";
 		it.advance();
 	}
-	info << "@" << "\n";
+	info << "\n";
 }
 
 
@@ -453,5 +463,101 @@ void System::printDevelopers() {
 	}
 }
 
+System * importSystem(ifstream &file){
+	System *out = new System;
+	string aux;
+	getline(file,aux);
+	out->setCurrentDate(aux);
 
+	getline(file,aux);
+	while(aux.length() != 0){
+		string company_name = aux;
+		unsigned long nif;
+		file >> nif;
+		file.ignore(1,'\n');
+		getline(file,aux);
+		string mail = aux;
+cout << company_name << " " << nif << " " << mail << endl;
+		Developer *company = new Developer(company_name, nif, aux);
+		out->addDeveloper(company);
+		getline(file,aux);
+		}
+	getline(file,aux);
+	while(aux.length() != 0){
+		stringstream aux_stream(aux);
+		int type;
+		aux_stream >> type;
+
+		getline(file,aux);
+		string game_title = aux;
+
+		double price, base_price;
+		file >> price;
+		file.ignore(5,'\n');
+		file >> base_price;
+		file.ignore(5,'\n');
+
+		getline(file,aux);
+		Date release(aux);
+
+		int min_age, max_age;
+		file >> min_age >> max_age;
+		file.ignore(1,'\n');
+		Interval range(min_age,max_age);
+
+		vector<string> platforms;
+		getline(file,aux);
+		while(aux[0] != '.'){
+			platforms.push_back(aux);
+			getline(file,aux);
+		}
+
+		vector<string> genres;
+		getline(file,aux);
+		while(aux[0] != '.'){
+			genres.push_back(aux);
+			getline(file,aux);
+		}
+
+		vector<double> prices;
+		getline(file,aux);
+		while(aux[0] != '.'){
+			stringstream auxStream(aux);
+			double aux_price;
+
+			auxStream >> aux_price;
+			prices.push_back(aux_price);
+
+			getline(file,aux);
+		}
+
+		getline(file,aux);
+		string company_name = aux;
+
+		if(type == 0){
+			getline(file,aux);
+			vector<Date> updates;
+			while(aux[0] != '.'){
+				Date extra_date(aux);
+				updates.push_back(extra_date);
+			}
+
+			Home *new_game = new Home(game_title,prices[0],release,range,platforms,genres,company_name);
+			cout << new_game->getAge().toStr() << " " << new_game->getBasePrice() << " " << new_game->getPlatforms().size() << " " << new_game->getGenre().size();
+			out->addGame(new_game);
+			out->searchDeveloper(company_name)->incrementNumGames();
+			out->searchDeveloper(company_name)->addGame(new_game);
+
+		}
+
+
+
+
+
+
+		getline(file,aux);
+	}
+
+	return out;
+}
 
