@@ -169,6 +169,12 @@ public:
 	*/
 	bool checkAsleep(User user);
 
+	/**
+	 * @brief Funcao que muda a data atual
+	 * @param date Data atual no formato DD/MM/YYYY
+	 */
+	void setCurrentDate(const std::string &date);
+
 };
 
 #endif /* SRC_SYSTEM_H_ */

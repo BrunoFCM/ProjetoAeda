@@ -251,19 +251,21 @@ void System::buyGame(User* user, Game* game, unsigned int id)
 
 void System::giveInfoSystem(ofstream &info) const
 {
+	info << current_date.toStr() << "\n";
+
 	for (unsigned int i = 0; i < store.size(); i++)
 	{
 		store[i]->giveInfoGame(info);
 		info << "\n";
 	}
-	info << "@" << "\n";
+	info << "\n";
 
 	for (unsigned int j = 0; j < user_library.size(); j++)
 	{
 		user_library[j]->giveInfoUser(info);
 		info << "\n";
 	}
-	info << "@" << "\n";
+	info << "\n";
 
 	for (unsigned int j = 0; j < user_library.size(); j++)
 	{
@@ -395,6 +397,10 @@ bool System::checkAsleep(User user) {
 	return false;
 }
 
+void System::setCurrentDate(const std::string &date){
+	Date aux(date);
+	current_date = aux;
+}
 
 
 
