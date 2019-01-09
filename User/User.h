@@ -271,20 +271,20 @@ public:
 	void changeInterestLevel(Game *game, int interest);
 	
 	 /**
-	 * @brief Funcao que adiciona um jogo interessante ao utilizador a hash
-	 * @param w Wanted_item a ser adicionado
+	 * @brief Funcao que adiciona a probilidade de compra de um jogo a hash
+	 * @param prob Probability_item a ser adicionado
 	 */
 	void addProbabilityGame(const Probability_item &prob);
 
 	 /**
-	 * @brief Funcao que remove um jogo interessante ao utilizador a hash
-	 * @param w Wanted_item a ser adicionado
+	 * @brief Funcao que remove a probabilidade de compra de um jogo a hash
+	 * @param prob Probability_item a ser removido
 	 */
 	void removeProbabilityGame(const Probability_item &prob);
 	
 	/**
-	 * @brief Funcao que retorna a hash table de jogos interessantes
-	 * @return HashTabGames hash table de jogos interessantes
+	 * @brief Funcao que retorna a hash table da probabilidade de compra dos jogos
+	 * @return HashTabGames hash table da probabilidade de compra dos jogos
 	 */
 	HashTabGames getProbabilityGames();
 
