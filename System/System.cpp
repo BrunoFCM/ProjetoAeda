@@ -422,6 +422,9 @@ void System::updateSleepingUsers() {
 	}
 }
 
-
+void System::setCurrentDate(const std::string &date){
+	Date aux(date);
+	current_date = aux;
+}
 
 
