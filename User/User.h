@@ -259,7 +259,7 @@ public:
 	/**
 	* @brief Funcao que procura por um jogo na wishlist
 	* @param game Apontador para o jogo a ser encontrado
-	* @return True se for encontrado o jogo, caso contrário retorna um false
+	* @return True se for encontrado o jogo, caso contrÃ¡rio retorna um false
 	*/
 	Wanted_item searchWishlist(Game *game);
 
