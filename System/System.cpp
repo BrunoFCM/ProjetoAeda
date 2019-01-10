@@ -245,7 +245,7 @@ void System::buyGame(User* user, Game* game, unsigned int id)
 			user->getCards()[id].setBalance(bal);
 			user->addToLibrary(game);
 
-			user->removeProbabilityGame(Probability_item{game,0});
+			//user->removeProbabilityGame(Probability_item{game,0});
 			return;
 		}
 		throw InvalidCard();
