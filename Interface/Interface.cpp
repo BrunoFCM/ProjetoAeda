@@ -766,12 +766,13 @@ void user_interface(User *user){
 			break;
 		}
 		case 10:{
-			priority_queue<Wanted_item> list = user->getWishlist();
+			/*priority_queue<Wanted_item> list = user->getWishlist();
 
 			while(list.size()) {
 				std::cout << list.top().item << "\t" << list.top().interest << "\n";
 				list.pop();
-			}
+			}*/
+			wishlist_interface(user);
 			break;
 		}
 		case 11:{
@@ -2012,7 +2013,7 @@ void print_wishlist_interface(){
 	std::cout << "\t2: Add a game to the Wish list" << std::endl;
 	std::cout << "\t3: Remove a game from the Wish list" << std::endl;
 	std::cout << "\t4: Change a game's interest level" << std::endl;
-	std::cout << "\t0: Exit the card interface" << std::endl << std::endl;
+	std::cout << "\t0: Exit the wishlist interface" << std::endl << std::endl;
 }
 
 int prompt_wishlist_interface(){
